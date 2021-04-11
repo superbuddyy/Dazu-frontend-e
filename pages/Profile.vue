@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="user-data">
       <div v-if="user.company" class="avatar">
-        <div v-if="user.company.avatar" class="avatar-img" :style="{backgroundImage: 'url(' + user.company.avatar.url + ')'}"></div>
+        <div v-if="user.company.avatar" class="avatar-img" :style="{backgroundImage: 'url(' + user.company.avatar.url + ')'}" />
       </div>
       <div class="details">
         <div class="stats">

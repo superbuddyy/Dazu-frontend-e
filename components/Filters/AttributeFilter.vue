@@ -65,14 +65,14 @@ export default {
       }
     }
   },
+  data: () => ({
+    value: ''
+  }),
   watch: {
     value () {
       this.$emit('change', this.value)
     }
-  },
-  data: () => ({
-    value: ''
-  })
+  }
 }
 </script>
 

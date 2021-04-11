@@ -19,7 +19,7 @@
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
-              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
+              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
             </el-select>
           </el-form-item>
           <el-form-item label="Lokalizacja" prop="location">

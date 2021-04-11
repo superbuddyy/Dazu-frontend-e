@@ -4,7 +4,9 @@
       <h1>{{ post.title }}</h1>
     </div>
     <div class="container">
-      <p v-html="post.content"></p>
+      <p
+        v-html-safe="post.content"
+      />
       <OtherPosts
         :posts="posts"
       />

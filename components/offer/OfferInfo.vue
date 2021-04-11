@@ -37,19 +37,19 @@
             class="avatar-img"
             :style="{backgroundImage: 'url(' + offer.company.avatar + ')'}"
             @click="openPhotoDialog(offer.company.avatar, offer.company.video_avatar)"
-          >
-          </div>
+          />
           <div
             v-if="offer.company === null"
             class="avatar-img"
             :style="{backgroundImage: 'url(' + offer.user.avatar + ')'}"
             @click="openPhotoDialog(offer.user.avatar)"
-          >
-          </div>
+          />
         </div>
         <div v-if="offer.user" class="right-data">
           <div v-if="offer.company !== null" class="company-name">
-            <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.company.name }}</nuxt-link>
+            <nuxt-link :to="'/profil/' + offer.user.id">
+              {{ offer.company.name }}
+            </nuxt-link>
           </div>
           <div
             v-if="offer.user.type === 'agent' || offer.user.type === 'user'"
@@ -60,8 +60,7 @@
               class="agent-avatar-img"
               :style="{backgroundImage: 'url(' + offer.user.avatar + ')'}"
               @click="openPhotoDialog(offer.user.avatar, offer.user.video_avatar)"
-            >
-            </div>
+            />
             <b class="agent-name">
               <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
             </b>

@@ -101,7 +101,6 @@ function isTrue (value) {
 
 export function buildSearchQuery (searchParams) {
   const params = {}
-
   for (const searchParam in searchParams) {
     if (Object.prototype.hasOwnProperty.call(searchParams, searchParam)) {
       if (searchParams[searchParam] instanceof Object) {

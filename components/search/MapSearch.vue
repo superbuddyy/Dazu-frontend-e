@@ -146,7 +146,7 @@
     <div v-if="!offersVisible" class="show-offers" @click="offersVisible = !offersVisible">
       <i class="el-icon-s-unfold" />
     </div>
-    <div v-if="offers && offersVisible" v-infinite-scroll="loadOffers" infinite-scroll-delay="500" class="map-offers" >
+    <div v-if="offers && offersVisible" v-infinite-scroll="loadOffers" infinite-scroll-delay="500" class="map-offers">
       <div class="close" @click="closeOffers">
         <span>
           Zamknij

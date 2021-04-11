@@ -16,9 +16,9 @@
             <b>na {{ item.duration / 24 }} dni</b>
           </div>
           <div class="list">
-            <div v-for="item in item.description.split(';')" :key="item" class="list-item">
+            <div v-for="descItem in item.description.split(';')" :key="descItem" class="list-item">
               <i class="el-icon-arrow-down" />
-              {{ item }}
+              {{ descItem }}
             </div>
           </div>
         </div>

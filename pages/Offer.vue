@@ -9,8 +9,7 @@
       type="warning"
       show-icon
       center
-    >
-    </el-alert>
+    />
     <div class="container">
       <Gallery
         v-if="offer.main_photo"

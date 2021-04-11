@@ -45,8 +45,7 @@
               :active-value="true"
               :inactive-value="false"
               @change="updateNotifications($event, favorite.slug)"
-            >
-            </el-switch>
+            />
           </el-tooltip>
         </div>
       </div>

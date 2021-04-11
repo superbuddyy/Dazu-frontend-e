@@ -13,13 +13,13 @@
         <el-form-item label="Imię" prop="name">
           <el-input v-model="form.name" placeholder="Imię" />
         </el-form-item>
-<!--        <vue-recaptcha-->
-<!--          ref="recaptcha"-->
-<!--          size="invisible"-->
-<!--          sitekey="6Lc8SP0ZAAAAAOzDeYO-wDnJxQZDkJ_lC0Bp-iUp"-->
-<!--          @verify="onCaptchaVerified"-->
-<!--          @expired="resetCaptcha"-->
-<!--        />-->
+        <!--        <vue-recaptcha-->
+        <!--          ref="recaptcha"-->
+        <!--          size="invisible"-->
+        <!--          sitekey="6Lc8SP0ZAAAAAOzDeYO-wDnJxQZDkJ_lC0Bp-iUp"-->
+        <!--          @verify="onCaptchaVerified"-->
+        <!--          @expired="resetCaptcha"-->
+        <!--        />-->
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>

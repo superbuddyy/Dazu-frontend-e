@@ -1,6 +1,8 @@
 <template>
   <div :class="[fullScreen ? 'gallery full-screen' : 'gallery' ]">
-    <div v-if="fullScreen" class="close" @click="fullScreen = false"><i class="el-icon-circle-close"></i></div>
+    <div v-if="fullScreen" class="close" @click="fullScreen = false">
+      <i class="el-icon-circle-close" />
+    </div>
     <VueSlickCarousel
       ref="main"
       :as-nav-for="$refs.subGallery"
