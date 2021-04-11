@@ -296,7 +296,6 @@ export default {
       }
     },
     onSearch () {
-      buildSearchQuery(this.search)
       this.$router.push({ path: 'szukaj', query: buildSearchQuery(this.search) })
       this.$emit('close')
     }

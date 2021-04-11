@@ -116,6 +116,7 @@ export function buildSearchQuery (searchParams) {
           searchParams[searchParam][searchParams[searchParam].length - 1] !== undefined
         ) {
           params[searchParam] = searchParams[searchParam][searchParams[searchParam].length - 1]
+          continue
         }
 
         if (
@@ -126,6 +127,7 @@ export function buildSearchQuery (searchParams) {
           params[searchParam + '[lat]'] = searchParams[searchParam].lat
           params[searchParam + '[lon]'] = searchParams[searchParam].lon
           params[searchParam + '[display_name]'] = searchParams[searchParam].display_name
+          continue
         }
 
         if (searchParams[searchParam].length > 0) {
@@ -138,7 +140,6 @@ export function buildSearchQuery (searchParams) {
       }
     }
   }
-
   return params
 }
 
