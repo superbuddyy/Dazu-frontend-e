@@ -6,13 +6,13 @@
       :before-close="close"
     >
       <el-form :label-position="'left'" :model="form" class="form">
-        <el-row span="24">
-          <el-col span="12">
+        <el-row :span="24">
+          <el-col :span="12">
             <el-form-item label="Imię">
               <el-input v-model="form.name" placeholder="Imię" />
             </el-form-item>
           </el-col>
-          <el-col span="12">
+          <el-col :span="12">
             <el-form-item label="Email">
               <el-input v-model="form.email" placeholder="Email" />
             </el-form-item>

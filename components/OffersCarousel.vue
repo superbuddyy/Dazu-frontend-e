@@ -60,7 +60,7 @@ export default {
   },
   data () {
     return {
-      isPaused: false,
+      isPaused: true,
       flickityOptions: {
         prevNextButtons: true,
         pageDots: true,
@@ -85,7 +85,7 @@ export default {
       element.addEventListener('mouseleave', this.play, false)
     },
     play () {
-      this.isPaused = false
+      this.isPaused = true
       window.requestAnimationFrame(this.update)
     },
     pause () {
@@ -135,10 +135,15 @@ export default {
   height: 340px;
   margin: 80px 6vw 80px 6vw;
 
+  .flickity-page-dots .dot {
+    width: 4px;
+    height: 4px;
+  }
+
   .carousel-cell {
     height: 320px;
     width: 300px;
-    margin-right: 10px;
+    padding: 14px;
     max-width: 300px;
     display: flex;
     flex-direction: column;
@@ -158,6 +163,7 @@ export default {
       height: 200px;
       width: 100%;
       background-size: cover;
+      background-position: center;
       position: relative;
       overflow: hidden;
 
@@ -221,7 +227,7 @@ export default {
       align-items: center;
       margin-top: 10px;
       text-align: left;
-      width: 300px;
+      width: 100%;
       .location {
         font-weight: bold;
         font-size: 13px;

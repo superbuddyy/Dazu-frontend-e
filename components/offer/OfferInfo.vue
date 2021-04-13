@@ -323,7 +323,7 @@ export default {
           justify-content: flex-start;
           .avatar-img {
             cursor: pointer;
-            height: 90px;
+            height: 80px;
             width: 80px;
             background-position: center;
             background-size: cover;

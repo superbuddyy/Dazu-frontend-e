@@ -3,6 +3,7 @@
     <div class="user-data">
       <div v-if="user.company" class="avatar">
         <div v-if="user.company.avatar" class="avatar-img" :style="{backgroundImage: 'url(' + user.company.avatar.url + ')'}" />
+        <div v-if="user.avatar" class="avatar-img" :style="{backgroundImage: 'url(' + user.avatar + ')'}" />
       </div>
       <div class="details">
         <div class="stats">
@@ -49,7 +50,6 @@
       title="Zweryfikuj, że nie jesteś robotem, aby zobaczyć numer telefonu"
       :visible.sync="recaptchaVisible"
       width="500px"
-      :before-close="close"
     >
       <div class="captcha">
         <vue-recaptcha
@@ -77,9 +77,10 @@ export default {
     SearchOffers
   },
   data: () => ({
+    loading: false,
     recaptchaVisible: false,
     user: {},
-    offers: {},
+    offers: [],
     emailVisible: false,
     phone: null,
     recaptcha: null

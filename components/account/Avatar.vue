@@ -51,7 +51,12 @@ export default {
   }),
   computed: {
     avatarUrl () {
-      return this.$store.state.user.avatar
+      const user = this.$store.state.user
+      const defaultAvatar = this.$config.assetsUrl + '/images/avatar.svg'
+      if (user == null) {
+        return defaultAvatar
+      }
+      return user.avatar ? user.avatar : defaultAvatar
     }
   },
   methods: {

@@ -14,7 +14,7 @@
           />
           <el-option
             label="Deweloperem"
-            value="company2"
+            value="developer"
           />
         </el-select>
       </el-form-item>

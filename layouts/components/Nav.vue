@@ -98,7 +98,7 @@
               Moje Ogłoszenia
             </el-dropdown-item>
             <el-dropdown-item
-              v-if="$store.state.user.roles.includes('user')"
+              v-if="$store.state.user.roles.includes('company')"
               command="agents"
             >
               Agenci
