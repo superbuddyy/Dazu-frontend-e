@@ -135,9 +135,11 @@ export default {
   height: 340px;
   margin: 80px 6vw 80px 6vw;
 
-  .flickity-page-dots .dot {
-    width: 4px;
-    height: 4px;
+  .flickity-page-dots {
+    .dot {
+      width: 4px;
+      height: 4px;
+    }
   }
 
   .carousel-cell {

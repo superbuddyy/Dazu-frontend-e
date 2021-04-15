@@ -596,11 +596,10 @@ export default {
         category: { required: true, message: 'Kategoria jest wymagana', trigger: 'change' },
         price: [
           { required: true, message: 'Cena jest wymagana', trigger: 'change' }
-          // { type: 'number', message: 'Cena musi być liczbą', trigger: 'blur' }
         ],
         title: [
           { required: true, message: 'Tytuł jest wymagany', trigger: 'change' },
-          { max: 80, message: 'Tytuł może miec maksymalie 80 znaków', trigger: 'change' }
+          { max: 70, message: 'Tytuł może miec maksymalie 70 znaków', trigger: 'change' }
         ],
         location: { required: true, message: 'Lokacja jest wymagana', trigger: 'change' },
         description: { required: true, message: 'Opis jest wymagany', trigger: 'change' },
