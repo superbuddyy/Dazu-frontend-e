@@ -43,7 +43,7 @@
               Moje Ogłoszenia
             </div>
           </nuxt-link>
-          <nuxt-link v-if="$store.state.user.roles.includes('user')" to="/agenci">
+          <nuxt-link v-if="$store.state.user.roles.includes('company')" to="/agenci">
             <div class="nav-menu-item">
               Agenci
             </div>
