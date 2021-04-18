@@ -27,6 +27,11 @@
         label="Data dodania"
       />
       <el-table-column
+        fixed
+        prop="status"
+        label="Status"
+      />
+      <el-table-column
         fixed="right"
         label="Akcje"
       >

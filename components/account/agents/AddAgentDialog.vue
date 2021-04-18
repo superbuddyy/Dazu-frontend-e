@@ -1,5 +1,5 @@
 <template>
-  <div class="report-dialog">
+  <div v-loading="loading" class="report-dialog">
     <el-dialog
       title="Dodaj agenta"
       :visible.sync="dialogVisible"
@@ -42,6 +42,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       form: {
         name: '',
         email: ''
@@ -56,6 +57,7 @@ export default {
       this.$emit('close-dialog')
     },
     async add () {
+      this.loading = true
       const result = await storeAgent(this.form)
       if (result.status === 200) {
         this.$message({
@@ -65,6 +67,7 @@ export default {
         })
       }
 
+      this.loading = false
       this.$emit('add-agent', result.data)
       this.$emit('close-dialog')
     }

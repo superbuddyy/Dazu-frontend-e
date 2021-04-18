@@ -13,7 +13,7 @@ import AccountMenu from '@/components/account/AccountMenu'
 import AgentsList from '@/components/account/agents/AgentsList'
 
 export default {
-  middleware: 'authenticated',
+  middleware: ['authenticated', 'company'],
   name: 'Agents',
   components: {
     AccountMenu,
