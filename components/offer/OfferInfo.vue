@@ -59,7 +59,7 @@
               v-if="offer.user.avatar !== null"
               class="agent-avatar-img"
               :style="{backgroundImage: 'url(' + offer.user.avatar + ')'}"
-              @click="openPhotoDialog(offer.user.avatar, offer.user.video_avatar)"
+              @click="openPhotoDialog(offer.user.avatar)"
             />
             <b class="agent-name">
               <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
