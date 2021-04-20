@@ -33,7 +33,7 @@
         </el-button>
       </div>
       <el-button slot="reference" type="primary" plain>
-        Zmień avatar
+        Zmień
       </el-button>
     </el-popover>
   </div>
@@ -64,6 +64,7 @@ export default {
       this.loading = true
       const formData = new FormData()
       formData.append('avatar', file.raw)
+      formData.append('avatar_type', 'photo')
       const result = await storeAvatar(formData)
       if (result.status === 200) {
         window.location.href = result.data.links[1].href
@@ -73,7 +74,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .avatar {
     width: 10%;
     display: flex;

@@ -12,6 +12,7 @@ const state = {
   email: '',
   nip: '',
   avatar: '',
+  videoAvatar: '',
   city: '',
   street: '',
   zip_code: '',
@@ -51,6 +52,9 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
   },
+  SET_VIDEO_AVATAR: (state, avatar) => {
+    state.videoAvatar = avatar
+  },
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
@@ -86,6 +90,7 @@ const actions = {
           commit('SET_EMAIL', response.data.email)
           commit('SET_PHONE', response.data.phone)
           commit('SET_AVATAR', response.data.avatar)
+          commit('SET_VIDEO_AVATAR', response.data.video_avatar)
           commit('SET_ID', response.data.id)
           commit('SET_IS_LOGGED', true)
           resolve()
@@ -106,6 +111,10 @@ const actions = {
 
   setAvatar ({ commit }, data) {
     commit('SET_AVATAR', data)
+  },
+
+  setVideoAvatar ({ commit }, data) {
+    commit('SET_VIDEO_AVATAR', data)
   },
 
   setNewsletter ({ commit }, data) {

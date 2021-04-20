@@ -2,7 +2,12 @@
   <div class="account-settings">
     <AccountMenu />
     <div class="container">
-      <Avatar />
+      <div class="avatars">
+        <Avatar />
+        <VideoAvatar
+          v-if="$store.state.user.roles.includes('company')"
+        />
+      </div>
       <EditAccountForm />
       <ResetPasswordForm
         @toggle-delete-account="deleteAccountVisible = !deleteAccountVisible"
@@ -17,6 +22,7 @@
 <script>
 import AccountMenu from '@/components/account/AccountMenu'
 import Avatar from '@/components/account/Avatar'
+import VideoAvatar from '@/components/account/VideoAvatar'
 import EditAccountForm from '@/components/account/EditAccountForm'
 import ResetPasswordForm from '@/components/account/ResetPasswordForm'
 import DeleteAccount from '@/components/account/DeleteAccount'
@@ -27,6 +33,7 @@ export default {
   components: {
     AccountMenu,
     Avatar,
+    VideoAvatar,
     EditAccountForm,
     ResetPasswordForm,
     DeleteAccount
@@ -41,8 +48,10 @@ export default {
         type: 'success',
         duration: 3000
       })
-      if (this.$route.query.avatar) {
-        this.$store.dispatch('user/setAvatar', this.$route.query.avatar)
+      if (this.$route.query.avatar_photo) {
+        this.$store.dispatch('user/setAvatar', this.$route.query.avatar_photo)
+      } else if (this.$route.query.avatar_video_url) {
+        this.$store.dispatch('user/setVideoAvatar', this.$route.query.avatar_video_url)
       }
       this.$router.push(this.$route.path)
     }
@@ -61,11 +70,15 @@ export default {
       position: relative;
       justify-content: center;
 
-      .avatar {
-        width: 120px;
-        @media only screen and (max-width: 700px) {
-          //justify-content: center;
-          align-items: center;
+      .avatars {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .avatar {
+          width: 120px;
+          @media only screen and (max-width: 700px) {
+            align-items: center;
+          }
         }
       }
 
