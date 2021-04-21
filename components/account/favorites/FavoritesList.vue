@@ -40,10 +40,11 @@
         <div class="notifications">
           <p>chcę otrzymywać email ze zmianą ceny</p>
           <el-tooltip content="Wyłącz/Włącz powiadomienia" placement="top">
-            <el-switch
+            <toggle-button
               v-model="favorite.allow_notifications"
-              :active-value="true"
-              :inactive-value="false"
+              color="#009E79"
+              :sync="true"
+              :labels="{checked: 'Tak', unchecked: 'Nie'}"
               @change="updateNotifications($event, favorite.slug)"
             />
           </el-tooltip>
@@ -102,7 +103,7 @@ export default {
       })
     },
     async updateNotifications (e, offerSlug) {
-      if (e) {
+      if (e.value) {
         const result = await activateNotifications(offerSlug)
         if (result.status === 204) {
           this.$message({

@@ -1,17 +1,30 @@
 <template>
   <div>
-    <div v-if="!isFavorite" class="favorites" @click="addFavorite">
-      <HeartIcon
-        class="favourite-icon"
-        :size="size"
-      />
-    </div>
-    <div v-if="isFavorite" class="favorites fill" @click="deleteFavorite">
-      <HeartIcon
-        class="favourite-icon"
-        :size="size"
-      />
-    </div>
+    <el-popover
+      v-model="loginRequiredPopup"
+      placement="bottom"
+      width="200"
+      trigger="manual"
+    >
+      <div class="login-required-popup">
+        <p>Musisz się zalogować aby dodać do ulubuinych</p>
+        <el-button type="primary" @click="openLoginPopup">
+          zaloguj się
+        </el-button>
+      </div>
+      <div v-if="!isFavorite" slot="reference" class="favorites" @click="addFavorite">
+        <HeartIcon
+          class="favourite-icon"
+          :size="size"
+        />
+      </div>
+      <div v-if="isFavorite" slot="reference" class="favorites fill" @click="deleteFavorite">
+        <HeartIcon
+          class="favourite-icon"
+          :size="size"
+        />
+      </div>
+    </el-popover>
   </div>
 </template>
 
@@ -44,10 +57,19 @@ export default {
       }
     }
   },
+  data () {
+    return {
+      loginRequiredPopup: false
+    }
+  },
   methods: {
+    async openLoginPopup () {
+      await this.$store.dispatch('user/setLoginFirst', true)
+      this.loginRequiredPopup = false
+    },
     async addFavorite () {
       if (!this.$store.state.user.isLogged) {
-        await this.$store.dispatch('user/setLoginFirst', true)
+        this.loginRequiredPopup = true
       } else {
         const result = await store(this.offerSlug)
         if (result.status === 200) {
@@ -75,7 +97,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.login-required-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .el-button {
+    margin-top: 6px;
+  }
+}
 .fill {
   .favourite-icon {
     fill: #eb5a28;

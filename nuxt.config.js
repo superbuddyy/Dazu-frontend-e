@@ -30,7 +30,8 @@ export default {
     '@/plugins/axios',
     '~/plugins/storage.js',
     '@/plugins/click-outside.js',
-    { src: '~/plugins/flickity', ssr: false }
+    { src: '~/plugins/flickity', ssr: false },
+    { src: '~/plugins/toggle-btn.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

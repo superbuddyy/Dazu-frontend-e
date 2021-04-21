@@ -353,8 +353,11 @@
         <div class="argent-text">
           Spieszysz się? Aktywuj "<span>Pilne</span>"
         </div>
-        <el-switch
+        <toggle-button
           v-model="form.attributes[20]"
+          color="#009E79"
+          :sync="true"
+          :labels="{checked: 'Tak', unchecked: 'Nie'}"
         />
       </div>
       <div v-if="!$store.state.user.isLogged" class="contact-form">
