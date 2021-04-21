@@ -378,6 +378,8 @@ export default {
         width: 90%;
         .cell {
           color: #000000!important;
+          white-space:pre-wrap;
+          word-break:break-word;
         }
       }
 

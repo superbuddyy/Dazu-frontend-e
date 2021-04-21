@@ -406,7 +406,7 @@ a {
     }
 
     .login {
-      font-family: Lato-Regular;
+      font-family: Mulish-Regular;
       color: #000000;
       cursor: pointer;
       padding: 13px 4px;
@@ -420,7 +420,7 @@ a {
     }
 
     .add-offer {
-      font-family: Lato-Regular;
+      font-family: Mulish-Regular;
       background: #009E79;
       border-color: #009E79;
     }

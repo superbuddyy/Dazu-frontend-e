@@ -105,6 +105,7 @@ export default {
   }
 }
 .help-link {
+  font-size: 15px;
   border-radius: 4px;
   position: fixed;
   top: 50%;
