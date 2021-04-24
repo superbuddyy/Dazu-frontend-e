@@ -243,6 +243,7 @@ export default {
     },
     async getLocationsReverse (lat, lon) {
       const locationsNames = await getLocationReverse(lat, lon)
+      console.log(locationsNames)
       let city = ''
       // eslint-disable-next-line no-prototype-builtins
       if (locationsNames.data.address.hasOwnProperty('city')) {
@@ -250,8 +251,11 @@ export default {
         // eslint-disable-next-line no-prototype-builtins
       } else if (locationsNames.data.address.hasOwnProperty('town')) {
         city = locationsNames.data.address.town
-      } else {
+        // eslint-disable-next-line no-prototype-builtins
+      } else if (locationsNames.data.address.hasOwnProperty('village')) {
         city = locationsNames.data.address.village
+      } else {
+        city = locationsNames.data.address.country
       }
 
       this.locations = [{ lat, lon, display_name: city }]

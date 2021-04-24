@@ -32,20 +32,41 @@
           Innym razem
         </el-button>
       </div>
-      <el-button slot="reference" type="primary" plain>
+      <el-button slot="reference" type="primary" plain class="avatar-btn">
         Zmień
+      </el-button>
+    </el-popover>
+    <el-popover
+      v-model="deleteAvatarVisible"
+      placement="top"
+      width="300px"
+    >
+      <div style="text-align: center; margin: 0">
+        <p style="margin: 14px">
+          Czy na pewno chcesz usunąć avatar?
+        </p>
+        <el-button type="primary" size="mini" plain @click="deleteAvatarVisible = false">
+          Anuluj
+        </el-button>
+        <el-button type="danger" size="mini" plain @click="removeAvatar()">
+          Usuń
+        </el-button>
+      </div>
+      <el-button v-if="$store.state.user.avatar !== null" slot="reference" type="danger" plain class="avatar-btn">
+        Usuń
       </el-button>
     </el-popover>
   </div>
 </template>
 
 <script>
-import { storeAvatar } from '@/api/user'
+import { storeAvatar, deleteAvatar } from '@/api/user'
 
 export default {
   name: 'Avatar',
   data: () => ({
     buyVisible: false,
+    deleteAvatarVisible: false,
     avatar: [],
     loading: false
   }),
@@ -69,6 +90,18 @@ export default {
       if (result.status === 200) {
         window.location.href = result.data.links[1].href
       }
+    },
+    async removeAvatar () {
+      const result = await deleteAvatar()
+      if (result.status === 204) {
+        this.deleteAvatarVisible = false
+        await this.$store.dispatch('user/setAvatar', null)
+        this.$message({
+          message: 'Usunięto avatar',
+          type: 'success',
+          duration: 3000
+        })
+      }
     }
   }
 }
@@ -81,8 +114,14 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .avatar-btn {
+      width: 80px;
+      margin-bottom: 4px;
+    }
+
     .img {
-      margin: 20px 0;
+      margin: 14px 0;
     }
   }
 </style>

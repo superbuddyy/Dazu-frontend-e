@@ -32,6 +32,10 @@ export function storeAvatar (data) {
   return apiClient.post('/api/user/avatar', data, { headers: { 'Content-Type': 'multipart/form-data' } })
 }
 
+export function deleteAvatar (type) {
+  return apiClient.delete('/api/user/avatar?avatar_type=' + type)
+}
+
 export function getAgents () {
   return apiClient.get('/api/user/agents')
 }
