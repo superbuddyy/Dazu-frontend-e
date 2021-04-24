@@ -243,7 +243,6 @@ export default {
     },
     async getLocationsReverse (lat, lon) {
       const locationsNames = await getLocationReverse(lat, lon)
-      console.log(locationsNames)
       let city = ''
       // eslint-disable-next-line no-prototype-builtins
       if (locationsNames.data.address.hasOwnProperty('city')) {
