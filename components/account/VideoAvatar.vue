@@ -28,7 +28,11 @@
         Dodanie lub zmiana avatara jest płatna - 5zł na 30dni
       </p>
       <div style="text-align: center; margin: 0">
-        <el-input v-model="videoLink" placeholder="Link do filmu na youtube (https://youtu.be/...)" class="link-input"/>
+        <el-input
+          v-model="videoLink"
+          placeholder="Link do filmu na youtube (https://youtu.be/...)"
+          class="link-input"
+        />
         <el-button type="primary" size="mini" @click="addAvatar()">
           Zapisz i zapłać
         </el-button>
@@ -65,6 +69,7 @@
 
 <script>
 import { storeAvatar, deleteAvatar } from '@/api/user'
+import { generatePhotoFromYoutubeLink } from '@/helpers'
 
 export default {
   name: 'VideoAvatar',
@@ -82,7 +87,7 @@ export default {
         const url = new URL(avatarLink)
         const hostname = url.hostname
         if (hostname === 'youtu.be') {
-          return this.videoYT(avatarLink)
+          return generatePhotoFromYoutubeLink(avatarLink)
         }
       }
 
@@ -90,10 +95,6 @@ export default {
     }
   },
   methods: {
-    videoYT (videoLink) {
-      const parts = videoLink.split('/')
-      return 'https://img.youtube.com/vi/' + parts[parts.length - 1] + '/0.jpg'
-    },
     async addAvatar () {
       this.buyVisible = false
       this.loading = true
@@ -131,7 +132,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
-  i {
+  .video-icon {
     background: #000000;
     border-radius: 50%;
     color: #009e79;

@@ -33,17 +33,12 @@
       <div class="personal-data">
         <div v-if="offer.company" class="avatar">
           <div
-            v-if="offer.company !== null"
-            class="avatar-img"
-            :style="{backgroundImage: 'url(' + offer.company.avatar + ')'}"
+            class="avatar-img company-avatar"
+            :style="{backgroundImage: 'url(' + companyAvatar + ')'}"
             @click="openPhotoDialog(offer.company.avatar, offer.company.video_avatar)"
-          />
-          <div
-            v-if="offer.company === null"
-            class="avatar-img"
-            :style="{backgroundImage: 'url(' + offer.user.avatar + ')'}"
-            @click="openPhotoDialog(offer.user.avatar)"
-          />
+          >
+            <i v-if="videoAvatarAvailable" class="el-icon-video-play video-icon" />
+          </div>
         </div>
         <div v-if="offer.user" class="right-data">
           <div v-if="offer.company !== null" class="company-name">
@@ -58,7 +53,7 @@
             <div
               v-if="offer.user.avatar !== null"
               class="agent-avatar-img"
-              :style="{backgroundImage: 'url(' + offer.user.avatar + ')'}"
+              :style="{backgroundImage: 'url(' + userAvatar + ')'}"
               @click="openPhotoDialog(offer.user.avatar)"
             />
             <b class="agent-name">
@@ -168,14 +163,15 @@
 </template>
 
 <script>
-import ReportDialog from '@/components/offer/ReportDialog'
-import EmailDialog from '@/components/offer/EmailDialog'
-import Favorite from '@/components/Favorite'
-import Money from '@/components/Money'
-import SubscriptionsDialog from '@/components/SubscriptionsDialog'
-import { getPhone } from '@/api/user'
 import VueRecaptcha from 'vue-recaptcha'
-import PhotoDialog from '@/components/PhotoDialog'
+import ReportDialog from '~/components/offer/ReportDialog'
+import EmailDialog from '~/components/offer/EmailDialog'
+import Favorite from '~/components/Favorite'
+import Money from '~/components/Money'
+import SubscriptionsDialog from '~/components/SubscriptionsDialog'
+import { getPhone } from '~/api/user'
+import PhotoDialog from '~/components/PhotoDialog'
+import { generatePhotoFromYoutubeLink } from '~/helpers'
 
 export default {
   name: 'OfferInfo',
@@ -216,7 +212,23 @@ export default {
       subscriptionsDialogVisible: false,
       recaptchaVisible: false,
       recaptcha: null,
-      phone: null
+      phone: null,
+      videoAvatarAvailable: false
+    }
+  },
+  computed: {
+    userAvatar () {
+      return this.offer.user.avatar
+    },
+    companyAvatar () {
+      if (this.offer.company.avatar === null && this.offer.company.video_avatar !== null) {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.videoAvatarAvailable = true
+        return generatePhotoFromYoutubeLink(this.offer.company.video_avatar)
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.videoAvatarAvailable = false
+      return this.offer.company.avatar
     }
   },
   watch: {
@@ -330,6 +342,22 @@ export default {
             background-repeat: no-repeat;
           }
         }
+
+        .company-avatar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          .video-icon {
+            position: absolute;
+            background: #000000;
+            border-radius: 50%;
+            color: #009e79;
+            font-size: 20px;
+            font-weight: bold;
+          }
+        }
+
         .right-data {
           width: 80%;
           display: flex;

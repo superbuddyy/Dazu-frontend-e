@@ -211,3 +211,8 @@ export function fromSearchQueryStringToFromData (query) {
 
   return search
 }
+
+export function generatePhotoFromYoutubeLink (videoLink) {
+  const parts = videoLink.split('/')
+  return 'https://img.youtube.com/vi/' + parts[parts.length - 1] + '/0.jpg'
+}
