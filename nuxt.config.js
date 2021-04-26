@@ -8,7 +8,7 @@ export default {
       { hid: 'description', name: 'description', content: 'Serwis nieruchomosci online - mieszkania, domy, działki, lokale użytkowe, magazyny, kampingi, domy modularowe na sprzedaż, wynajem, zamianę » Dazu.pl' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
       {
@@ -20,17 +20,17 @@ export default {
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     // 'element-ui/lib/theme-chalk/index.css'
-    '@/assets/index.css',
-    '@/assets/fonts.css'
+    '~/assets/index.css',
+    '~/assets/fonts.css'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/element-ui',
-    '@/plugins/axios',
+    '~/plugins/element-ui',
+    '~/plugins/axios',
+    '~/plugins/click-outside.js',
     '~/plugins/storage.js',
-    '@/plugins/click-outside.js',
-    { src: '~/plugins/flickity', ssr: false },
+    { src: '~/plugins/flickity.js', ssr: false },
     { src: '~/plugins/toggle-btn.js', ssr: false }
   ],
 
@@ -58,7 +58,7 @@ export default {
 
   publicRuntimeConfig: {
     assetsUrl: process.env.VUE_APP_ASSETS_BASE_URL,
-    baseUrl: process.env.VUE_APP_BASE_URL
+    baseUrl: process.env.VUE_APP_BASE_API
   },
 
   proxy: {
