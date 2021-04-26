@@ -29,9 +29,9 @@ export default {
     '~/plugins/element-ui',
     '~/plugins/axios',
     '~/plugins/click-outside.js',
-    '~/plugins/storage.js',
-    { src: '~/plugins/flickity.js', ssr: false },
-    { src: '~/plugins/toggle-btn.js', ssr: false }
+    '~/plugins/storage',
+    { src: '~/plugins/flickity', ssr: false },
+    { src: '~/plugins/toggle-btn', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
