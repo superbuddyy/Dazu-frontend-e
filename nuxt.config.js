@@ -57,7 +57,8 @@ export default {
   },
 
   publicRuntimeConfig: {
-    assetsUrl: process.env.VUE_APP_ASSETS_BASE_URL
+    assetsUrl: process.env.VUE_APP_ASSETS_BASE_URL,
+    baseUrl: process.env.VUE_APP_BASE_URL
   },
 
   proxy: {
