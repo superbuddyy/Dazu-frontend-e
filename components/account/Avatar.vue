@@ -73,7 +73,7 @@ export default {
   computed: {
     avatarUrl () {
       const user = this.$store.state.user
-      const defaultAvatar = this.$config.assetsUrl + '/images/avatar.svg'
+      const defaultAvatar = this.$config.assetsUrl + '/svg/avatar.svg'
       if (user == null) {
         return defaultAvatar
       }

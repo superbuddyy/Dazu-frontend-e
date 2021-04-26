@@ -62,19 +62,12 @@ export default {
     }
   },
   methods: {
-    login () {
-      csrf().then(() => {
-        this.$store.dispatch('user/login', this.loginForm).then(() => {
-          this.$emit('toggle-popup')
-          this.clearForm()
-          this.$store.dispatch('user/setLoginFirst', false)
-        }).catch(() => {
-          this.failed = true
-          setTimeout(() => {
-            this.failed = false
-          }, 1000)
-        })
-      })
+    async login () {
+      await csrf()
+      await this.$store.dispatch('user/login', this.loginForm)
+      this.$emit('toggle-popup')
+      this.clearForm()
+      await this.$store.dispatch('user/setLoginFirst', false)
     },
     clearForm () {
       this.loginForm = {

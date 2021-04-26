@@ -365,7 +365,7 @@
           <el-button type="plain" :class="[ form.user.account_type === 'private' ? 'active' : '' ]" @click="setUserType('private')">
             Osobą prywatną
           </el-button>
-          <el-button type="plain" :class="[ form.user.account_type === 'company' ? 'active' : '' ]" @click="setUserType('company')">
+          <el-button type="plain" :class="[ form.user.account_type === 'agency' ? 'active' : '' ]" @click="setUserType('agency')">
             Agencją nieruchomości
           </el-button>
           <el-button type="plain" :class="[ form.user.account_type === 'developer' ? 'active' : '' ]" @click="setUserType('developer')">

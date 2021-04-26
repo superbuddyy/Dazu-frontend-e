@@ -10,7 +10,7 @@
           />
           <el-option
             label="Agencją nieruchomości"
-            value="company"
+            value="agency"
           />
           <el-option
             label="Deweloperem"
