@@ -60,7 +60,7 @@ export default {
   },
   data () {
     return {
-      isPaused: true,
+      isPaused: false,
       flickityOptions: {
         prevNextButtons: true,
         pageDots: true,
@@ -74,18 +74,28 @@ export default {
       loading: true
     }
   },
-  mounted () {
-    this.getOffers()
+  computed: {
+    isCarouselActive () {
+      return !(this.offers.length < 6)
+    }
+  },
+  async mounted () {
+    await this.getOffers()
+    if (!this.isCarouselActive) {
+      this.isPaused = true
+    }
   },
   methods: {
     onInit () {
       this.update()
       const element = this.$refs.flickity.$el
-      element.addEventListener('mouseenter', this.pause, false)
-      element.addEventListener('mouseleave', this.play, false)
+      if (this.isCarouselActive) {
+        element.addEventListener('mouseenter', this.pause, false)
+        element.addEventListener('mouseleave', this.play, false)
+      }
     },
     play () {
-      this.isPaused = true
+      this.isPaused = false
       window.requestAnimationFrame(this.update)
     },
     pause () {
