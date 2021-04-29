@@ -33,7 +33,7 @@
         :total="total"
         :page-size="pageSize"
         :current-page="currentPage"
-        @fetch-offers="searchOffers"
+        @fetch-offers="searchOffers($event, $route.query)"
       />
       <MapSearch
         v-if="mapVisible"

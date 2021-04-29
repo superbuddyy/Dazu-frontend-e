@@ -404,7 +404,7 @@
             </div>
           </el-upload>
         </el-form-item>
-        <el-form-item v-if="['company', 'developer'].includes(form.user.account_type)" label="Wideo avatar">
+        <el-form-item v-if="['agency', 'developer'].includes(form.user.account_type)" label="Wideo avatar">
           <el-input v-model="form.user.videoAvatar" type="text" placeholder="Link do filmu na YouTube" />
         </el-form-item>
         <el-row>

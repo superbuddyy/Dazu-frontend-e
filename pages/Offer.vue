@@ -11,14 +11,9 @@
       center
     />
     <div class="container">
-      <Gallery
-        v-if="offer.main_photo"
-        :main-photo="offer.main_photo"
-        :photos="offer.photos"
-      />
-      <Map
-        v-if="!offer.main_photo"
-        :location="offer.location"
+      <OfferDetails
+        :offer="offer"
+        :attributes="attributes"
       />
       <OfferInfo
         :offer="offer"
@@ -26,16 +21,10 @@
         @set-favorite="setFavorite"
       />
     </div>
-    <OfferDetails
-      :offer="offer"
-      :attributes="attributes"
-    />
     <OffersCarousel />
   </div>
 </template>
 <script>
-import Gallery from '@/components/offer/Gallery'
-import Map from '@/components/offer/Map'
 import Breadcrumbs from '@/components/offer/Breadcrumbs'
 import OfferInfo from '@/components/offer/OfferInfo'
 import OfferDetails from '@/components/offer/OfferDetails'
@@ -45,12 +34,10 @@ import { show } from '@/api/offer'
 export default {
   name: 'Offer',
   components: {
-    Gallery,
     Breadcrumbs,
     OfferInfo,
     OfferDetails,
-    OffersCarousel,
-    Map
+    OffersCarousel
   },
   data: () => ({
     offer: {},
@@ -106,17 +93,6 @@ export default {
     flex-wrap: wrap;
     margin: 0 6vw;
     padding: 40px 0;
-
-    .gallery, .offer-map {
-      width: 60%;
-      height: 710px;
-      min-width: 720px;
-
-      @media only screen and (max-width: 1366px) {
-        width: 100%;
-        min-width: unset;
-      }
-    }
 
     .offer-info {
       width: 40%;

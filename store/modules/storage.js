@@ -23,7 +23,6 @@ const actions = {
   setFilters ({ commit }, data) {
     commit('SET_FILTERS', data)
   }
-
 }
 
 export default {

@@ -39,7 +39,7 @@
                 v-for="loc in locations"
                 :key="loc.osm_id"
                 :label="loc.display_name"
-                :value="loc.lat + '-' + loc.lon"
+                :value="loc.lat + '-' + loc.lon + '-' + loc.display_name"
               />
             </el-select>
           </el-form-item>
@@ -158,7 +158,8 @@ export default {
         typ: '',
         location: {
           lat: null,
-          lon: null
+          lon: null,
+          display_name: null
         }
       }
     }
@@ -207,10 +208,16 @@ export default {
       }
     },
     setLocation (e) {
+      this.search.location = {}
       if (e) {
         const coords = e.split('-')
         this.search.location.lat = coords[0]
         this.search.location.lon = coords[1]
+        this.search.location.display_name = coords[2]
+      } else {
+        this.search.location.lat = null
+        this.search.location.lon = null
+        this.search.location.display_name = null
       }
     }
   }

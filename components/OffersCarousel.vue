@@ -38,6 +38,7 @@
             :is-favorite="offer.is_favorite"
             @add-favorite="setFavorite"
             @remove-favorite="removeFavorite"
+            @refresh="update"
           />
         </div>
       </div>
@@ -60,7 +61,7 @@ export default {
   },
   data () {
     return {
-      isPaused: false,
+      isPausedForced: false,
       flickityOptions: {
         prevNextButtons: true,
         pageDots: true,
@@ -77,12 +78,18 @@ export default {
   computed: {
     isCarouselActive () {
       return !(this.offers.length < 6)
+    },
+    isPaused () {
+      if (this.isPausedForced) {
+        return true
+      }
+      return this.$store.state.settings.carouselPause
     }
   },
   async mounted () {
     await this.getOffers()
     if (!this.isCarouselActive) {
-      this.isPaused = true
+      await this.$store.dispatch('settings/setCarouselPause', true)
     }
   },
   methods: {
@@ -95,11 +102,11 @@ export default {
       }
     },
     play () {
-      this.isPaused = false
+      this.isPausedForced = false
       window.requestAnimationFrame(this.update)
     },
     pause () {
-      this.isPaused = true
+      this.isPausedForced = true
     },
     update () {
       if (this.isPaused) {

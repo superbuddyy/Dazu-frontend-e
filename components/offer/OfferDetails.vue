@@ -1,11 +1,21 @@
 <template>
   <div v-if="offer.links" class="offers-details">
-    <div class="l-box">
+    <div class="gallery">
+      <Gallery
+        v-if="offer.main_photo"
+        :main-photo="offer.main_photo"
+        :photos="offer.photos"
+      />
+      <Map
+        v-if="!offer.main_photo"
+        :location="offer.location"
+      />
+    </div>
+    <div class="box">
       <iframe
         v-if="offer.links.video && offer.links.video !== 'null'"
         class="link-box"
         :src="detectUrl(offer.links.video)"
-        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       />
@@ -13,21 +23,13 @@
         v-if="offer.links.video_2 && offer.links.video_2 !== 'null'"
         class="link-box"
         :src="detectUrl(offer.links.video_2)"
-        frameborder="0"
         allowfullscreen
       />
       <iframe
         v-if="offer.links.walk_video && offer.links.walk_video !== 'null'"
         class="link-box"
         :src="detectUrl(offer.links.walk_video)"
-        frameborder="0"
         allowfullscreen
-      />
-    </div>
-    <div class="r-box">
-      <Map
-        v-if="offer.main_photo"
-        :location="offer.location"
       />
     </div>
   </div>
@@ -35,11 +37,13 @@
 
 <script>
 import Map from '@/components/offer/Map'
+import Gallery from '@/components/offer/Gallery'
 
 export default {
   name: 'OfferDetails',
   components: {
-    Map
+    Map,
+    Gallery
   },
   props: {
     offer: {
@@ -96,7 +100,8 @@ export default {
 <style lang="scss">
 .offers-details {
   display: flex;
-  margin: 0 6vw 20px 6vw;
+  width: 60%;
+  flex-direction: column;
 
   @media only screen and (max-width: 1366px) {
     width: 90%;
@@ -104,12 +109,15 @@ export default {
     align-items: center;
   }
 
-  .l-box {
-    width: 60%;
+  .offer-map {
+    height: 600px;
+  }
+
+  .box {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
+    padding: 24px 10px 0 10px;
     @media only screen and (max-width: 1366px) {
       width: 100%;
       align-items: center;
@@ -122,18 +130,6 @@ export default {
 
     iframe {
       margin-bottom: 10px;
-    }
-  }
-
-  .r-box {
-    width: 40%;
-    margin: 0 40px;
-    @media only screen and (max-width: 1366px) {
-      width: 100%;
-    }
-
-    .map {
-      height: 340px;
     }
   }
 }

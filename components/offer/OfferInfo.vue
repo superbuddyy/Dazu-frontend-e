@@ -124,6 +124,10 @@
           <i class="el-icon-warning-outline" />
         </el-button>
       </div>
+      <Map
+        v-if="offer.main_photo"
+        :location="offer.location"
+      />
     </div>
     <ReportDialog
       :dialog-visible="reportVisible"
@@ -168,6 +172,7 @@ import ReportDialog from '~/components/offer/ReportDialog'
 import EmailDialog from '~/components/offer/EmailDialog'
 import Favorite from '~/components/Favorite'
 import Money from '~/components/Money'
+import Map from '~/components/offer/Map'
 import SubscriptionsDialog from '~/components/SubscriptionsDialog'
 import { getPhone } from '~/api/user'
 import PhotoDialog from '~/components/PhotoDialog'
@@ -182,7 +187,8 @@ export default {
     Favorite,
     SubscriptionsDialog,
     VueRecaptcha,
-    PhotoDialog
+    PhotoDialog,
+    Map
   },
   props: {
     offer: {
@@ -413,6 +419,10 @@ export default {
 
       .report {
         text-align: right;
+      }
+
+      .offer-map {
+        height: 300px;
       }
     }
   }
