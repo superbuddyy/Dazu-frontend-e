@@ -4,20 +4,20 @@
       active="favorites"
     />
     <div class="favorite-submenu">
-      <div
+      <el-button
         :class="[ activePage === 'search' ? 'active sub-item' : 'sub-item' ]"
         :to="'/ogloszenia/'"
         @click="activePage = 'search'"
       >
         Zapisane wyszukania
-      </div>
-      <div
+      </el-button>
+      <el-button
         :class="[ activePage === 'offers' ? 'active sub-item' : 'sub-item' ]"
         :to="'/ogloszenia/'"
         @click="activePage = 'offers'"
       >
         Ulubione
-      </div>
+      </el-button>
     </div>
     <div class="container">
       <FavoritesList
@@ -59,20 +59,16 @@ export default {
 
     .favorite-submenu {
       display: flex;
+      justify-content: center;
       margin: 10px 6vw;
 
       .active {
-        color: #009E79;
-        text-decoration: underline;
+        background: #009E79;
+        color: #ffffff;
       }
 
       .sub-item {
         margin-right: 10px;
-        cursor: pointer;
-
-        &:hover {
-          color: #009E79;
-        }
       }
     }
 
