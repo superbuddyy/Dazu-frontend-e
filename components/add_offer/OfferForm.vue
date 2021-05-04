@@ -349,8 +349,12 @@
           </div>
         </div>
       </el-form-item>
-      <div class="argent">
-        <div class="argent-text">
+      <div class="urgent">
+        <div class="urgent-img">
+          <img v-if="!form.attributes[20]" src="~/assets/house.svg" alt="">
+          <img v-if="form.attributes[20]" src="~/assets/house_urgent.svg" alt="">
+        </div>
+        <div class="urgent-text">
           Spieszysz się? Aktywuj "<span>Pilne</span>"
         </div>
         <toggle-button
@@ -907,7 +911,8 @@ export default {
     flex-direction: column;
   }
 
-  .argent {
+  .urgent {
+    min-height: 160px;
     padding: 40px 0;
     background: #000;
     display: flex;
@@ -916,8 +921,13 @@ export default {
     color: #fff;
     margin-bottom: 20px;
 
-    .argent-text {
-      margin-right: 20px;
+    .urgent-img {
+      width: 137px;
+      height: 100px;
+    }
+
+    .urgent-text {
+      margin: 0 20px;
       span {
         color: red;
         font-weight: bold;
