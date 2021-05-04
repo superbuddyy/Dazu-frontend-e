@@ -366,7 +366,7 @@
       </div>
       <div v-if="!$store.state.user.isLogged" class="contact-form">
         <el-form-item label="Jestem">
-          <el-button type="plain" :class="[ form.user.account_type === 'private' ? 'active' : '' ]" @click="setUserType('private')">
+          <el-button type="plain" :class="[ form.user.account_type === 'user' ? 'active' : '' ]" @click="setUserType('user')">
             Osobą prywatną
           </el-button>
           <el-button type="plain" :class="[ form.user.account_type === 'agency' ? 'active' : '' ]" @click="setUserType('agency')">
@@ -376,8 +376,11 @@
             Deweloperem
           </el-button>
         </el-form-item>
-        <el-form-item label="Imię" prop="user.name">
+        <el-form-item v-if="form.user.account_type === 'user'" label="Imię" prop="user.name">
           <el-input v-model="form.user.name" placeholder="Imię" />
+        </el-form-item>
+        <el-form-item v-if="form.user.account_type !== 'user'" label="Nazwa Firmy" prop="user.name">
+          <el-input v-model="form.user.name" placeholder="Nazwa Firmy" />
         </el-form-item>
         <el-row class="contact">
           <el-col :span="12">
@@ -451,8 +454,11 @@
             Deweloperem
           </el-button>
         </el-form-item>
-        <el-form-item label="Imię">
+        <el-form-item v-if="form.user.account_type === 'user'" label="Imię">
           <el-input v-model="$store.state.user.name" placeholder="Imię" disabled />
+        </el-form-item>
+        <el-form-item v-if="form.user.account_type !== 'user'" label="Nazwa Firmy">
+          <el-input v-model="$store.state.user.name" placeholder="Nazwa Firmy" disabled />
         </el-form-item>
         <el-row class="contact">
           <el-col :span="12">
@@ -555,7 +561,7 @@ export default {
         mainImage: [],
         images: [],
         user: {
-          account_type: 'private',
+          account_type: 'user',
           name: '',
           email: '',
           password: '',
