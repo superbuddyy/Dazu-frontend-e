@@ -1,4 +1,4 @@
-const state = {
+export const state = () => ({
   filters: {
     price: {
       max: [],
@@ -11,23 +11,16 @@ const state = {
       }
     }
   }
-}
+})
 
-const mutations = {
+export const mutations = {
   SET_FILTERS: (state, filters) => {
     state.filters = filters
   }
 }
 
-const actions = {
+export const actions = {
   setFilters ({ commit }, data) {
     commit('SET_FILTERS', data)
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
 }

@@ -2,7 +2,7 @@ import { login, register, completeRegistration, getUser, logout } from '@/api/au
 import { updateProfile } from '@/api/user'
 import { isLogged, setLogged, removeToken } from '@/utils/auth'
 
-const state = {
+export const state = () => ({
   id: null,
   user: null,
   token: isLogged(),
@@ -22,9 +22,9 @@ const state = {
   roles: [],
   permissions: [],
   subscriptions: null
-}
+})
 
-const mutations = {
+export const mutations = {
   SET_ID: (state, id) => {
     state.id = id
   },
@@ -69,7 +69,7 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   setLoginFirst ({ commit }, status) {
     commit('SET_LOGIN_FIRST', status)
   },
@@ -189,11 +189,4 @@ const actions = {
       resolve()
     })
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
 }
