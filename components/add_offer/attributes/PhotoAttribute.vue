@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-images">
+  <el-form-item label="Typ Ogłoszenia" class="upload-images">
     <el-upload
       action="#"
       :show-file-list="false"
@@ -26,14 +26,14 @@
         </div>
       </transition-group>
     </draggable>
-  </div>
+  </el-form-item>
 </template>
 
 <script>
 import draggable from 'vuedraggable'
 
 export default {
-  name: 'Images',
+  name: 'PhotoAttribute',
   components: {
     draggable
   },
@@ -50,16 +50,18 @@ export default {
       localFileList: []
     }
   },
-  async mounted () {
-    if (this.fileList.length > 0) {
-      const photos = []
-      for (const file of this.fileList) {
-        if ('id' in file) {
-          photos.push(await this.urlToObject('/storage/' + file.path_name, file.id))
+  watch: {
+    async fileList (value) {
+      if (value.length > 0) {
+        const photos = []
+        for (const file of value) {
+          if ('id' in file) {
+            photos.push(await this.urlToObject('/storage/' + file.path_name, file.id))
+          }
         }
+        this.localFileList = photos
+        this.$emit('on-change', photos)
       }
-      this.localFileList = photos
-      this.$emit('on-change', photos)
     }
   },
   methods: {
@@ -95,7 +97,7 @@ export default {
       })
     },
     async urlToObject (imageUrl, id) {
-      const response = await this.$axios({
+      const response = await window.axios({
         method: 'get',
         url: imageUrl,
         responseType: 'blob'
@@ -113,6 +115,7 @@ export default {
 <style scoped lang="scss">
 .drag-images {
   display: flex;
+  margin-top: 10px;
 
   span {
     display: flex;
