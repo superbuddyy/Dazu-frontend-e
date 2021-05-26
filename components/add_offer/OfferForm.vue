@@ -842,9 +842,7 @@ export default {
       this.showParagraph = !this.showParagraph
     },
     fillForm (offer) {
-      const form = mapOfferModelToOfferForm(offer, this.rootCategories, this.categories)
-      this.setSubCategories(form.category)
-      return form
+      return mapOfferModelToOfferForm(offer, this.rootCategories, this.rootSubCategories)
     },
     async getSubscriptions () {
       const result = await index()

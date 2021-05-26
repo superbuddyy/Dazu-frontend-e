@@ -88,7 +88,6 @@ export default {
       height: 200px;
     }
     .captcha {
-
       margin-top: 20px;
     }
   }

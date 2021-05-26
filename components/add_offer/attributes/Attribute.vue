@@ -86,11 +86,9 @@ export default {
         return []
       }
     },
+    // eslint-disable-next-line vue/require-default-prop
     value: {
-      type: [Number, String, Array],
-      default () {
-        return ''
-      }
+      type: [Number, String, Array, Boolean]
     }
   },
   data () {
