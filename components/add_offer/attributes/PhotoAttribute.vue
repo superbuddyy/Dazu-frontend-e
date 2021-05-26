@@ -1,5 +1,5 @@
 <template>
-  <el-form-item label="Typ Ogłoszenia" class="upload-images">
+  <el-form-item label="Zdjęcia" class="upload-images">
     <el-upload
       action="#"
       :show-file-list="false"
@@ -97,7 +97,7 @@ export default {
       })
     },
     async urlToObject (imageUrl, id) {
-      const response = await window.axios({
+      const response = await this.$axios({
         method: 'get',
         url: imageUrl,
         responseType: 'blob'

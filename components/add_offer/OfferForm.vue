@@ -170,7 +170,7 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="13">
+        <el-col :md="12" :sm="24">
           <Attribute
             v-if="attributes['_16']['offer_types'].includes($store.state.addOfferForm.type)"
             :name="attributes['_16'].name"
@@ -181,9 +181,7 @@
             @set-value="form.attributes[16] = $event"
           />
         </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="13">
+        <el-col :md="12" :sm="24">
           <Attribute
             v-if="attributes['_17']['offer_types'].includes($store.state.addOfferForm.type)"
             :name="attributes['_17'].name"

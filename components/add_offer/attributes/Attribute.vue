@@ -18,13 +18,17 @@
       v-if="type === 'checkbox_group'"
       v-model="local_value"
     >
-      <el-checkbox
+      <div
         v-for="option in options"
         :key="option.id"
-        :label="option.slug"
       >
-        {{ option.name }}
-      </el-checkbox>
+        <el-checkbox
+          v-if="option['offer_types'].includes($store.state.addOfferForm.type)"
+          :label="option.slug"
+        >
+          {{ option.name }}
+        </el-checkbox>
+      </div>
     </el-checkbox-group>
     <el-select
       v-if="type === 'select'"
@@ -65,7 +69,7 @@ export default {
       }
     },
     type: {
-      type: [Number, String, Array],
+      type: [String],
       default () {
         return 'input'
       }
@@ -83,7 +87,7 @@ export default {
       }
     },
     value: {
-      type: String,
+      type: [Number, String, Array],
       default () {
         return ''
       }
@@ -101,6 +105,11 @@ export default {
     },
     local_value (value) {
       this.$emit('set-value', value)
+    }
+  },
+  mounted () {
+    if (this.type === 'checkbox_group') {
+      this.local_value = []
     }
   },
   methods: {
