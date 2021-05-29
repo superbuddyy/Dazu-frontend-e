@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     ytLink () {
-      if (this.link !== '') {
+      if (this.link) {
         const url = new URL(this.link)
         const hostname = url.hostname
         if (hostname === 'youtu.be') {
