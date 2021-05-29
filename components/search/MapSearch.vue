@@ -138,8 +138,22 @@
       <l-map ref="map" :zoom="zoom" :center="center" class="map" :options="{zoomControl: false}">
         <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
         <l-control-zoom position="bottomleft" />
-        <l-marker v-for="offer in offers" :key="offer.id" :lat-lng="[offer.lat, offer.lon]">
-          <l-popup>{{ offer.title }}</l-popup>
+        <l-marker
+          v-for="offer in offers"
+          :key="offer.id"
+          :ref="`marker-${offer.id}`"
+          :lat-lng="[offer.lat, offer.lon]"
+        >
+          <l-popup style="min-width: 100px">
+            <div class="l-popup-content">
+              <div class="title">
+                {{ offer.title }}
+              </div>
+              <Money
+                :money="offer.price"
+              />
+            </div>
+          </l-popup>
         </l-marker>
       </l-map>
     </div>
@@ -267,6 +281,7 @@ export default {
   },
   data () {
     return {
+      lastOpen: null,
       excludedIds: [1, 3, 4, 14],
       saveFiltersVisible: false,
       active: '',
@@ -385,6 +400,12 @@ export default {
       this.active = id
       if (this.$refs.map) {
         this.$refs.map.mapObject.setView([lat, lon], 16)
+        if (this.lastOpen) {
+          this.lastOpen.closePopup()
+        }
+        const popupId = `marker-${id}`
+        this.$refs[popupId][0].mapObject.openPopup()
+        this.lastOpen = this.$refs[popupId][0].mapObject
       }
     },
     setFavorite (slug) {
@@ -527,6 +548,12 @@ export default {
     .map {
       width: 100%;
       height: calc(100vh - 102px);
+    }
+
+    .l-popup-content {
+      .title, .price {
+        text-align: left;
+      }
     }
   }
 
