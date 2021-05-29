@@ -31,7 +31,8 @@ export default {
     '~/plugins/click-outside.js',
     '~/plugins/storage',
     { src: '~/plugins/flickity', ssr: false },
-    { src: '~/plugins/toggle-btn', ssr: false }
+    { src: '~/plugins/toggle-btn', ssr: false },
+    { src: '~/plugins/vue2-editor', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

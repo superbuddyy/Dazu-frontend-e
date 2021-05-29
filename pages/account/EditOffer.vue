@@ -9,6 +9,7 @@
         :attributes="attributes"
         :categories="categories"
         :root-categories="rootCategories"
+        :root-sub-categories="rootSubCategories"
         :loading="loading"
       />
     </div>
@@ -29,6 +30,7 @@ export default {
     attributes: {},
     categories: {},
     rootCategories: [],
+    rootSubCategories: [],
     loading: true
   }),
   mounted () {
@@ -44,15 +46,15 @@ export default {
       }
     },
     async getCategories () {
-      const result = await categoryIndex()
-      if (result.status === 200) {
-        for (const category of result.data) {
-          this.categories[category.slug] = category.children.map((category) => {
+      const categories = await categoryIndex()
+      if (categories.status === 200) {
+        for (const category of categories.data) {
+          this.rootSubCategories[category.slug] = category.children.map((category) => {
             return { name: category.name, value: category.slug, id: category.id }
           })
         }
 
-        this.rootCategories = result.data.map((category) => {
+        this.rootCategories = categories.data.map((category) => {
           return { name: category.name, value: category.slug, id: category.id }
         })
       }

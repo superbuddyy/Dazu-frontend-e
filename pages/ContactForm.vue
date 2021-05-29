@@ -144,7 +144,7 @@ export default {
         }
       }
 
-        .captcha {
+      .captcha {
         display: flex;
         justify-content: center;
       }

@@ -109,7 +109,7 @@ export default {
       this.isPausedForced = true
     },
     update () {
-      if (this.isPaused) {
+      if (this.isPaused || this.$refs.flickity === undefined) {
         return
       }
       const tickerSpeed = 0.8
@@ -172,6 +172,9 @@ export default {
     color: unset;
     border: 0 !important;
     outline: 0 !important;
+    &:hover {
+      border: 1px solid #f1f1f1!important;
+    }
 
     .bargain {
       position: absolute;

@@ -1,5 +1,8 @@
 <template>
-  <div v-loading="processing" :class="[failShake ? 'add-offer-form' : 'shake add-offer-form']">
+  <div
+    v-loading="processing"
+    :class="[failShake ? 'add-offer-form' : 'shake add-offer-form']"
+  >
     <el-form
       v-if="!loading"
       ref="form"
@@ -9,129 +12,117 @@
       label-width="120px"
       @submit.prevent="onSubmit"
     >
-      <el-form-item label="Typ Ogłoszenia">
-        <el-button type="plain" :class="[ form.attributes[1] === 'sprzedaz' ? 'active' : '' ]" @click="setType('sprzedaz')">
-          Sprzedam
-        </el-button>
-        <el-button type="plain" :class="[ form.attributes[1] === 'wynajem' ? 'active' : '' ]" @click="setType('wynajem')">
-          Wynajmę
-        </el-button>
-        <el-button type="plain" :class="[ form.attributes[1] === 'zamienie' ? 'active' : '' ]" @click="setType('zamienie')">
-          Zamienię
-        </el-button>
-        <el-button type="plain" :class="[ form.attributes[1] === 'oddam' ? 'active' : '' ]" @click="setType('oddam')">
-          Oddam
-        </el-button>
-      </el-form-item>
-      <el-form-item label="Kategoria" prop="category">
-        <el-select v-model="form.category" placeholder="Wybierz" clearable @change="setSubCategories">
-          <el-option
-            v-for="rootCategory in rootCategories"
-            :key="rootCategory.value"
-            :label="rootCategory.name"
-            :value="rootCategory.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item v-if="form.category" label="Pod kategoria">
-        <el-select v-model="form.subcategory" placeholder="Wybierz" clearable>
-          <el-option
-            v-for="subcategory in subcategories"
-            :key="subcategory.value"
-            :label="subcategory.name"
-            :value="subcategory.value"
-          />
-        </el-select>
-      </el-form-item>
+      <OfferTypeAttribute
+        :type="form.attributes[1]"
+        @set-type="setType"
+      />
+      <CategoryAttribute
+        :category="form.category"
+        :subcategory="form.subcategory"
+        :root-categories="rootCategories"
+        :root-sub-categories="rootSubCategories"
+        @set-root-category="setCategory($event)"
+        @set-sub-category="form.subcategory = $event"
+      />
       <el-row>
         <el-col :span="11">
-          <el-form-item label="Cena" prop="price">
-            <el-input
-              v-model="formattedPrice"
-              placeholder="0"
-              name="price"
-            >
-              <template slot="append">
-                zł
-              </template>
-            </el-input>
-          </el-form-item>
+          <Attribute
+            name="Cena"
+            slug="price"
+            placeholder="0"
+            append-info="zł"
+            :value="formattedPrice"
+            @set-value="formattedPrice = $event"
+          />
         </el-col>
         <el-col :span="11">
-          <el-form-item label="Cena za m2">
-            <el-input
-              v-model="formattedAttributePrice"
-              placeholder="0"
-            >
-              <template slot="append">
-                zł
-              </template>
-            </el-input>
-          </el-form-item>
+          <Attribute
+            v-if="attributes['_3']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_3'].name"
+            :slug="attributes['_3'].slug"
+            placeholder="0"
+            :append-info="attributes['_3'].unit"
+            :value="formattedAttributePrice"
+            @set-value="formattedAttributePrice = $event"
+          />
         </el-col>
       </el-row>
       <el-row>
-        <el-form-item label="">
-          <el-checkbox
-            v-model="form.attributes[2]"
-          >
-            {{ attributes['_2'].name }}
-          </el-checkbox>
-          <el-checkbox
-            v-model="form.attributes[5]"
-          >
-            {{ attributes['_5'].name }}
-          </el-checkbox>
-          <el-checkbox
-            v-model="form.attributes[6]"
-          >
-            {{ attributes['_6'].name }}
-          </el-checkbox>
-          <el-checkbox
-            v-model="form.attributes[7]"
-          >
-            {{ attributes['_7'].name }}
-          </el-checkbox>
-          <el-checkbox
-            v-model="form.attributes[8]"
-          >
-            {{ attributes['_8'].name }}
-          </el-checkbox>
-        </el-form-item>
+        <Attribute
+          v-if="attributes['_2']['offer_types'].includes($store.state.addOfferForm.type)"
+          :name="attributes['_2'].name"
+          :slug="attributes['_2'].slug"
+          :value="form.attributes[2]"
+          type="checkbox"
+          @set-value="form.attributes[2] = $event"
+        />
+        <Attribute
+          v-if="attributes['_5']['offer_types'].includes($store.state.addOfferForm.type)"
+          :name="attributes['_5'].name"
+          :slug="attributes['_5'].slug"
+          :value="form.attributes[5]"
+          type="checkbox"
+          @set-value="form.attributes[5] = $event"
+        />
+        <Attribute
+          v-if="attributes['_6']['offer_types'].includes($store.state.addOfferForm.type)"
+          :name="attributes['_6'].name"
+          :slug="attributes['_6'].slug"
+          :value="form.attributes[6]"
+          type="checkbox"
+          @set-value="form.attributes[6] = $event"
+        />
+        <Attribute
+          v-if="attributes['_7']['offer_types'].includes($store.state.addOfferForm.type)"
+          :name="attributes['_7'].name"
+          :slug="attributes['_7'].slug"
+          :value="form.attributes[7]"
+          type="checkbox"
+          @set-value="form.attributes[7] = $event"
+        />
+        <Attribute
+          v-if="attributes['_8']['offer_types'].includes($store.state.addOfferForm.type)"
+          :name="attributes['_8'].name"
+          :slug="attributes['_8'].slug"
+          :value="form.attributes[8]"
+          type="checkbox"
+          @set-value="form.attributes[8] = $event"
+        />
       </el-row>
       <el-row>
         <el-col :span="6">
-          <el-form-item label="Metraż">
-            <el-input v-model="form.attributes[4]" placeholder="0">
-              <template slot="append">
-                m<sup>2</sup>
-              </template>
-            </el-input>
-          </el-form-item>
+          <Attribute
+            v-if="attributes['_4']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_4'].name"
+            :slug="attributes['_4'].slug"
+            :value="form.attributes[4]"
+            :append-info="attributes['_4'].unit"
+            @set-value="form.attributes[4] = $event"
+          />
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Piętro">
-            <el-select v-model="form.attributes[9]" placeholder="Wybierz" clearable>
-              <el-option
-                v-for="option in attributes['_9'].options"
-                :key="option.id"
-                :label="option.name"
-                :value="option.slug"
-              />
-            </el-select>
-          </el-form-item>
+          <Attribute
+            v-if="attributes['_9']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_9'].name"
+            :slug="attributes['_9'].slug"
+            :options="attributes['_9'].options"
+            :value="form.attributes[9]"
+            placeholder="Wybierz"
+            type="select"
+            @set-value="form.attributes[9] = $event"
+          />
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Ilość pięter">
-            <el-select v-model="form.attributes[10]" placeholder="Wybierz" clearable>
-              <el-option
-                v-for="option in attributes['_10'].options"
-                :key="option.id"
-                :label="option.name"
-                :value="option.slug"
-              />
-            </el-select>
-          </el-form-item>
+          <Attribute
+            v-if="attributes['_10']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_10'].name"
+            :slug="attributes['_10'].slug"
+            :options="attributes['_10'].options"
+            :value="form.attributes[10]"
+            placeholder="Wybierz"
+            type="select"
+            @set-value="form.attributes[10] = $event"
+          />
         </el-col>
         <el-col :span="6" />
       </el-row>
@@ -139,137 +130,132 @@
         <el-col :span="24">
           <el-row>
             <el-col :span="6">
-              <el-form-item label="Ilość pokojów">
-                <el-select v-model="form.attributes[11]" placeholder="Wybierz" clearable>
-                  <el-option
-                    v-for="option in attributes['_11'].options"
-                    :key="option.id"
-                    :label="option.name"
-                    :value="option.slug"
-                  />
-                </el-select>
-              </el-form-item>
+              <Attribute
+                v-if="attributes['_11']['offer_types'].includes($store.state.addOfferForm.type)"
+                :name="attributes['_11'].name"
+                :slug="attributes['_11'].slug"
+                :options="attributes['_11'].options"
+                :value="form.attributes[11]"
+                placeholder="Wybierz"
+                type="select"
+                @set-value="form.attributes[11] = $event"
+              />
             </el-col>
             <el-col :span="6">
-              <el-form-item label="Stan">
-                <el-select v-model="form.attributes[12]" placeholder="Wybierz" clearable>
-                  <el-option
-                    v-for="option in attributes['_12'].options"
-                    :key="option.id"
-                    :label="option.name"
-                    :value="option.slug"
-                  />
-                </el-select>
-              </el-form-item>
+              <Attribute
+                v-if="attributes['_12']['offer_types'].includes($store.state.addOfferForm.type)"
+                :name="attributes['_12'].name"
+                :slug="attributes['_12'].slug"
+                :options="attributes['_12'].options"
+                :value="form.attributes[12]"
+                placeholder="Wybierz"
+                type="select"
+                @set-value="form.attributes[12] = $event"
+              />
             </el-col>
           </el-row>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="13">
-          <el-form-item label="Na Okres">
-            <el-checkbox-group v-model="form.attributes[15]">
-              <el-checkbox
-                v-for="option in attributes['_15'].options"
-                :key="option.id"
-                :label="option.slug"
-              >
-                {{ option.name }}
-              </el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
+          <Attribute
+            v-if="attributes['_15']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_15'].name"
+            :slug="attributes['_15'].slug"
+            :options="attributes['_15'].options"
+            :value="form.attributes[15]"
+            type="checkbox_group"
+            @set-value="form.attributes[15] = $event"
+          />
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="13">
-          <el-form-item label="Dodatkowe">
-            <el-checkbox-group v-model="form.attributes[16]">
-              <el-checkbox
-                v-for="option in attributes['_16'].options"
-                :key="option.id"
-                :label="option.slug"
-              >
-                {{ option.name }}
-              </el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
+        <el-col :md="12" :sm="24">
+          <Attribute
+            v-if="attributes['_16']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_16'].name"
+            :slug="attributes['_16'].slug"
+            :options="attributes['_16'].options"
+            :value="form.attributes[16]"
+            type="checkbox_group"
+            @set-value="form.attributes[16] = $event"
+          />
         </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="13">
-          <el-form-item label="Blisko">
-            <el-checkbox-group v-model="form.attributes[17]">
-              <el-checkbox
-                v-for="option in attributes['_17'].options"
-                :key="option.id"
-                :label="option.slug"
-              >
-                {{ option.name }}
-              </el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
+        <el-col :md="12" :sm="24">
+          <Attribute
+            v-if="attributes['_17']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_17'].name"
+            :slug="attributes['_17'].slug"
+            :options="attributes['_17'].options"
+            :value="form.attributes[17]"
+            type="checkbox_group"
+            @set-value="form.attributes[17] = $event"
+          />
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="Rok budowy">
-            <el-select v-model="form.attributes[18]" placeholder="Wybierz" clearable>
-              <el-option
-                v-for="option in attributes['_18'].options"
-                :key="option.id"
-                :label="option.name"
-                :value="option.slug"
-              />
-            </el-select>
-          </el-form-item>
+          <Attribute
+            v-if="attributes['_18']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_18'].name"
+            :slug="attributes['_18'].slug"
+            :options="attributes['_18'].options"
+            :value="form.attributes[18]"
+            placeholder="Wybierz"
+            type="select"
+            @set-value="form.attributes[18] = $event"
+          />
         </el-col>
         <el-col :span="12">
-          <el-form-item label="Rynek">
-            <el-select v-model="form.attributes[19]" placeholder="Wybierz" clearable>
-              <el-option
-                v-for="option in attributes['_19'].options"
-                :key="option.id"
-                :label="option.name"
-                :value="option.slug"
-              />
-            </el-select>
-          </el-form-item>
+          <Attribute
+            v-if="attributes['_19']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_19'].name"
+            :slug="attributes['_19'].slug"
+            :options="attributes['_19'].options"
+            :value="form.attributes[19]"
+            placeholder="Wybierz"
+            type="select"
+            @set-value="form.attributes[19] = $event"
+          />
         </el-col>
       </el-row>
-      <el-form-item label="Tytuł ogłoszenia" prop="title">
-        <el-input v-model="form.title" placeholder="Wpisz" />
-      </el-form-item>
-      <el-form-item label="Opis" prop="description">
-        <el-input v-model="form.description" type="textarea" :rows="10" />
-      </el-form-item>
-      <el-form-item label="Link">
-        <el-tooltip class="item" effect="dark" content="Każdy link jest płatny 1zł" placement="right">
-          <el-input v-model="form.links.video" placeholder="do youtube, vimeo" />
-        </el-tooltip>
-      </el-form-item>
-      <el-form-item label="Link">
-        <el-tooltip class="item" effect="dark" content="Każdy link jest płatny 1zł" placement="right">
-          <el-input v-model="form.links.video_2" placeholder="do youtube, vimeo" />
-        </el-tooltip>
-      </el-form-item>
-      <el-form-item label="Link">
-        <el-tooltip class="item" effect="dark" content="Każdy link jest płatny 1zł" placement="right">
-          <el-input v-model="form.links.walk_video" placeholder="do wirtualnego spaceru" />
-        </el-tooltip>
-      </el-form-item>
+      <Attribute
+        name="Tytuł"
+        slug="title"
+        :value="form.title"
+        @set-value="form.title = $event"
+      />
+      <DescriptionAttribute
+        :value="form.description"
+        @set-value="form.description = $event"
+      />
+      <Attribute
+        name="Link"
+        slug="link"
+        placeholder="do youtube, vimeo"
+        :value="form.links.video"
+        @set-value="form.links.video = $event"
+      />
+      <Attribute
+        name="Link"
+        slug="link"
+        placeholder="do youtube, vimeo"
+        :value="form.links.video_2"
+        @set-value="form.links.video_2 = $event"
+      />
+      <Attribute
+        name="Link"
+        slug="link"
+        placeholder="wirtualnego spaceru"
+        :value="form.links.walk_video"
+        @set-value="form.links.walk_video = $event"
+      />
       <el-row>
         <el-col :span="24">
-          <el-form-item label="Zdjęcia">
-            <div class="photos-box">
-              <Images
-                :file-list="fileList"
-                @on-change="handleChangeImages"
-              />
-            </div>
-            <el-dialog :visible.sync="dialogVisible">
-              <img width="100%" :src="dialogImageUrl" alt="">
-            </el-dialog>
-          </el-form-item>
+          <PhotoAttribute
+            :file-list="fileList"
+            @on-change="handleChangeImages"
+          />
         </el-col>
       </el-row>
       <el-form-item label="Lokalizacja" prop="location">
@@ -490,12 +476,20 @@ import { store, show, update } from '@/api/offer'
 import { getLocation } from '@/api/osm'
 import { mapOfferModelToOfferForm } from '@/helpers'
 import { index } from '@/api/subscriptions'
-import Images from '@/components/add_offer/Images'
+import OfferTypeAttribute from '@/components/add_offer/attributes/OfferTypeAttribute'
+import Attribute from '@/components/add_offer/attributes/Attribute'
+import CategoryAttribute from '@/components/add_offer/attributes/CategoryAttribute'
+import PhotoAttribute from '@/components/add_offer/attributes/PhotoAttribute'
+import DescriptionAttribute from '@/components/add_offer/attributes/DescriptionAttribute'
 
 export default {
   name: 'AddOfferForm',
   components: {
-    Images
+    OfferTypeAttribute,
+    Attribute,
+    CategoryAttribute,
+    PhotoAttribute,
+    DescriptionAttribute
   },
   props: {
     attributes: {
@@ -511,6 +505,12 @@ export default {
       type: Object
     },
     rootCategories: {
+      default () {
+        return []
+      },
+      type: Array
+    },
+    rootSubCategories: {
       default () {
         return []
       },
@@ -642,6 +642,7 @@ export default {
     }
   },
   async mounted () {
+    this.setType('sell')
     if (window.innerWidth < 700) {
       this.labelPosition = 'top'
     }
@@ -665,6 +666,12 @@ export default {
     }
   },
   methods: {
+    setCategory (e) {
+      this.form.category = e
+      if (this.viewType !== 'update') {
+        this.form.subcategory = ''
+      }
+    },
     getLatLon (location) {
       const coords = location.split('-')
       return [coords[0], coords[1]]
@@ -684,10 +691,6 @@ export default {
           this.addOffer()
         }
       })
-    },
-    setSubCategories (event) {
-      this.form.subcategory = ''
-      this.subcategories = this.categories[event]
     },
     changeLatLngAfterDrag (event) {
       const latLng = this.$refs.marker.mapObject.getLatLng()
@@ -811,6 +814,7 @@ export default {
     },
     setType (type) {
       this.form.attributes[1] = type
+      this.$store.dispatch('addOfferForm/setType', type)
     },
     setUserType (type) {
       this.form.user.account_type = type
@@ -838,9 +842,7 @@ export default {
       this.showParagraph = !this.showParagraph
     },
     fillForm (offer) {
-      const form = mapOfferModelToOfferForm(offer, this.rootCategories, this.categories)
-      this.setSubCategories(form.category)
-      return form
+      return mapOfferModelToOfferForm(offer, this.rootCategories, this.rootSubCategories)
     },
     async getSubscriptions () {
       const result = await index()
