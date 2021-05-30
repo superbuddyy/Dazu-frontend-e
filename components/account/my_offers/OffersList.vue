@@ -4,9 +4,23 @@
       <el-checkbox class="check-box" @change="checkAll">
         Zaznacz wszystkie
       </el-checkbox>
-      <el-button type="danger" round icon="el-icon-circle-close" @click="deactivateChecked">
-        Dezaktywuj
-      </el-button>
+      <el-popover
+        v-model="deactivatePopoverVisible"
+        placement="bottom"
+      >
+        <p>Czy na pewno chcesz zdezaktywować?</p>
+        <div style="text-align: center; margin: 0">
+          <el-button size="mini" type="text" @click="deactivatePopoverVisible = false">
+            Nie
+          </el-button>
+          <el-button type="primary" size="mini" @click="deactivateChecked">
+            Tak
+          </el-button>
+        </div>
+        <el-button slot="reference" type="danger" round icon="el-icon-circle-close">
+          Dezaktywuj
+        </el-button>
+      </el-popover>
       <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked">
         Odświerz
       </el-button>
@@ -205,6 +219,7 @@ export default {
     OfferStats
   },
   data: () => ({
+    deactivatePopoverVisible: false,
     checked_offers: [],
     offers: [],
     loading: true,
@@ -331,6 +346,7 @@ export default {
       }
     },
     async deactivateChecked () {
+      this.deactivatePopoverVisible = false
       if (this.checked_offers.length !== 0) {
         const result = await deactivate({ offers: this.checked_offers })
         if (result.status === 200) {
