@@ -32,13 +32,10 @@
     <div class="info-body">
       <div class="personal-data">
         <div v-if="offer.company" class="avatar">
-          <div
-            class="avatar-img company-avatar"
-            :style="{backgroundImage: 'url(' + companyAvatar + ')'}"
-            @click="openPhotoDialog(offer.company.avatar, offer.company.video_avatar)"
-          >
-            <i v-if="videoAvatarAvailable" class="el-icon-video-play video-icon" />
-          </div>
+          <Avatar
+            :company="offer.company"
+            :user="offer.user"
+          />
         </div>
         <div v-if="offer.user" class="right-data">
           <div v-if="offer.company !== null" class="company-name">
@@ -47,16 +44,15 @@
             </nuxt-link>
           </div>
           <div
-            v-if="offer.user.type === 'agent' || offer.user.type === 'user'"
+            v-if="offer.user.type === 'user' && offer.user.type === 'agent'"
             class="agent"
           >
-            <div
-              v-if="offer.user.avatar !== null"
-              class="agent-avatar-img"
-              :style="{backgroundImage: 'url(' + userAvatar + ')'}"
-              @click="openPhotoDialog(offer.user.avatar)"
+            <Avatar
+              :user="offer.user"
             />
-            <b class="agent-name">
+            <b
+              class="agent-name"
+            >
               <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
             </b>
           </div>
@@ -168,6 +164,7 @@
 
 <script>
 import VueRecaptcha from 'vue-recaptcha'
+import Avatar from '../Avatar'
 import ReportDialog from '~/components/offer/ReportDialog'
 import EmailDialog from '~/components/offer/EmailDialog'
 import Favorite from '~/components/Favorite'
@@ -188,7 +185,8 @@ export default {
     SubscriptionsDialog,
     VueRecaptcha,
     PhotoDialog,
-    Map
+    Map,
+    Avatar
   },
   props: {
     offer: {
@@ -338,7 +336,7 @@ export default {
         .avatar {
           width: 20%;
           display: flex;
-          justify-content: flex-start;
+          justify-content: center;
           .avatar-img {
             cursor: pointer;
             height: 80px;

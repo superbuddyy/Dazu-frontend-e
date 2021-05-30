@@ -1,8 +1,11 @@
 <template>
   <div class="profile">
-    <div class="user-data">
-      <div v-if="user.company" class="avatar">
-        <div v-if="user.avatar" class="avatar-img" :style="{backgroundImage: 'url(' + user.avatar + ')'}" />
+    <div v-if="user" class="user-data">
+      <div class="avatar">
+        <Avatar
+          :company="user.company"
+          :user="user"
+        />
       </div>
       <div class="details">
         <div class="stats">
@@ -66,6 +69,7 @@ import OffersCarousel from '@/components/OffersCarousel'
 import EmailDialog from '@/components/offer/EmailDialog'
 import VueRecaptcha from 'vue-recaptcha'
 import SearchOffers from '@/components/search/SearchOffers'
+import Avatar from '../components/Avatar'
 
 export default {
   name: 'Profile',
@@ -73,12 +77,13 @@ export default {
     OffersCarousel,
     EmailDialog,
     VueRecaptcha,
-    SearchOffers
+    SearchOffers,
+    Avatar
   },
   data: () => ({
     loading: false,
     recaptchaVisible: false,
-    user: {},
+    user: null,
     offers: [],
     emailVisible: false,
     phone: null,
@@ -163,7 +168,7 @@ export default {
       }
     }
 
-    .avatar-img {
+    .avatar-img, .agent-avatar-img {
       height: 110px;
       width: 110px;
       background-position: center;
