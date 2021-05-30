@@ -22,8 +22,8 @@
           <el-button type="plane" @click="mapVisible = true">
             Mapa <i class="el-icon-location-information" />
           </el-button>
-          <el-button type="info" @click="filtersVisible = true">
-            Filtry <i class="el-icon-setting" />
+          <el-button type="plain" @click="filtersVisible = true" class="filters-btn">
+            <div v-if="filtersExists" class="filters-exists" /> Filtry <img src="~/assets/filter-icon.svg" alt="">
           </el-button>
           <el-button type="plain" @click="resetFilters">
             Wyczyść filtry
@@ -94,6 +94,18 @@ export default {
     filter: 'Cena rosnąca',
     refreshFilters: false
   }),
+  computed: {
+    filtersExists () {
+      const query = this.$route.query
+      if (Object.keys(query).length > 0 && query.page === undefined) {
+        return true
+      } else if (Object.keys(query).length > 0 && query.page !== undefined) {
+        return false
+      } else {
+        return false
+      }
+    }
+  },
   watch: {
     '$route.query.phrase' () {
       this.searchOffers(1, this.$route.query)
@@ -173,6 +185,23 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        .filters-btn {
+          width: 100px;
+          padding: 12px 10px;
+          span {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .filters-exists {
+              width: 6px;
+              height: 6px;
+              background: #00ff85;
+              border-radius: 50%
+            }
+          }
+        }
       }
     }
   }

@@ -253,6 +253,9 @@ export default {
       .location {
         font-weight: bold;
         font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
