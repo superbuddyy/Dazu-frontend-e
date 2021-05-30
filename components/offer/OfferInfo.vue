@@ -98,9 +98,9 @@
       </div>
       <div class="text">
         <h1>{{ offer.title }}</h1>
-        <p>
-          {{ offer.description }}
-        </p>
+        <p
+          v-html-safe="offer.description"
+        />
       </div>
       <div class="stats">
         <el-table

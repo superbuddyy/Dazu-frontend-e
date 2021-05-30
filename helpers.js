@@ -212,6 +212,26 @@ export function fromSearchQueryStringToFromData (query) {
   return search
 }
 
+export function setSearchDefaultData () {
+  return {
+    dodatkowe: {},
+    price: {
+      min: null,
+      max: null
+    },
+    metraz: {
+      min: null,
+      max: null
+    },
+    typ: '',
+    location: {
+      lat: null,
+      lon: null,
+      display_name: null
+    }
+  }
+}
+
 export function generatePhotoFromYoutubeLink (videoLink) {
   const parts = videoLink.split('/')
   return 'https://img.youtube.com/vi/' + parts[parts.length - 1] + '/0.jpg'

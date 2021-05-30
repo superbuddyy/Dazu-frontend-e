@@ -1,6 +1,7 @@
 <template>
   <div class="map-search">
     <el-form
+      v-if="Object.keys(search).length > 0"
       ref="form"
       :model="search"
       label-position="top"
@@ -52,6 +53,7 @@
           </el-select>
         </el-form-item>
         <div class="search">
+          <el-button @click="resetFilters">Wyczyść filtry</el-button>
           <el-button type="primary" @click="searchResults()">
             Szukaj
           </el-button>
@@ -233,6 +235,7 @@ import Favorite from '@/components/Favorite'
 import SaveFilters from '@/components/search/SaveFilters'
 import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
+import { setSearchDefaultData } from '../../helpers'
 
 export default {
   name: 'MapSearch',
@@ -290,22 +293,7 @@ export default {
       firstLoad: false,
       zoom: 7,
       center: [51.9189046, 19.1343786],
-      search: {
-        dodatkowe: {},
-        price: {
-          min: null,
-          max: null
-        },
-        metraz: {
-          min: null,
-          max: null
-        },
-        typ: '',
-        location: {
-          lat: null,
-          lon: null
-        }
-      },
+      search: setSearchDefaultData(),
       locations: [],
       location: {},
       locationsLoading: false,
@@ -366,6 +354,12 @@ export default {
     }
   },
   methods: {
+    resetFilters () {
+      this.$router.replace({ query: null })
+      this.search = {}
+      this.search = setSearchDefaultData()
+      this.searchResults()
+    },
     setAttributeValue (slug, value) {
       this.search[slug] = value
     },

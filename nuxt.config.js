@@ -30,6 +30,7 @@ export default {
     '~/plugins/axios',
     '~/plugins/click-outside.js',
     '~/plugins/storage',
+    '~/plugins/html-safe',
     { src: '~/plugins/flickity', ssr: false },
     { src: '~/plugins/toggle-btn', ssr: false },
     { src: '~/plugins/vue2-editor', ssr: false }

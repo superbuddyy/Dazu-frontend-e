@@ -8,6 +8,10 @@
       <AccountTypeList />
       <BlogPost />
     </div>
+    <CookiesPopup
+      v-if="cookiesPopup"
+      @accept-cookies="cookiesPopup = false"
+    />
   </div>
 </template>
 <script>
@@ -16,16 +20,19 @@ import OffersCarousel from '@/components/OffersCarousel'
 import AccountTypeList from '@/components/home_page/AccountTypeList'
 import BlogPost from '@/components/home_page/BlogPost'
 import { check } from '@/api/auth'
+import * as Cookies from 'js-cookie'
+import CookiesPopup from '../components/CookiesPopup'
 
 export default {
   components: {
     AdvancedSearch,
     OffersCarousel,
     AccountTypeList,
-    BlogPost
+    BlogPost,
+    CookiesPopup
   },
   data: () => ({
-    //
+    cookiesPopup: false
   }),
   mounted () {
     this.$ga.page({
@@ -50,8 +57,14 @@ export default {
       })
       this.$router.push(this.$route.path)
     }
+    this.toggleCookiesPopup()
   },
   methods: {
+    toggleCookiesPopup () {
+      if (Cookies.get('cookies-popup') === undefined) {
+        this.cookiesPopup = true
+      }
+    },
     async checkAuth () {
       const result = await check()
       if (this.$store.state.user.isLogged && result.data === false) {

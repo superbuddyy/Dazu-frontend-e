@@ -6,7 +6,7 @@
       :before-close="close"
       class="filter-dialog"
     >
-      <el-form :label-position="'top'" :model="filters" class="form">
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category">
             <el-cascader
@@ -19,7 +19,7 @@
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
-              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
+              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
           </el-form-item>
           <el-form-item label="Lokalizacja" prop="location">
@@ -126,6 +126,12 @@ export default {
       default () {
         return false
       }
+    },
+    refreshFilters: {
+      type: Boolean,
+      default () {
+        return false
+      }
     }
   },
   data () {
@@ -133,39 +139,19 @@ export default {
       excludedIds: [1, 3, 4, 9, 14],
       locationsLoading: false,
       locations: [],
-      filters: {
-        price: {
-          min: [],
-          max: []
-        },
-        attributes: {
-          metraz: {
-            min: [],
-            max: []
-          }
-        }
-      },
-      search: {
-        dodatkowe: {},
-        price: {
-          min: null,
-          max: null
-        },
-        metraz: {
-          min: null,
-          max: null
-        },
-        typ: '',
-        location: {
-          lat: null,
-          lon: null,
-          display_name: null
-        }
+      filters: this.getFilters(),
+      search: {}
+    }
+  },
+  watch: {
+    refreshFilters (value) {
+      if (value) {
+        this.search = {}
+        this.$emit('refreshed')
       }
     }
   },
   mounted () {
-    this.getFilters()
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
       this.locations = [{

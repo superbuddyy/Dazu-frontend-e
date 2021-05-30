@@ -25,6 +25,9 @@
           <el-button type="info" @click="filtersVisible = true">
             Filtry <i class="el-icon-setting" />
           </el-button>
+          <el-button type="plain" @click="resetFilters">
+            Wyczyść filtry
+          </el-button>
         </div>
       </div>
       <SearchOffers
@@ -49,6 +52,8 @@
       />
       <Filters
         :visible="filtersVisible"
+        :refresh-filters="refreshFilters"
+        @refreshed="refreshFilters = false"
         @close-filters="filtersVisible = false"
         @save="saveFilters"
       />
@@ -86,7 +91,8 @@ export default {
     currentPage: 1,
     loading: true,
     filtersVisible: false,
-    filter: 'Cena rosnąca'
+    filter: 'Cena rosnąca',
+    refreshFilters: false
   }),
   watch: {
     '$route.query.phrase' () {
@@ -97,6 +103,11 @@ export default {
     this.searchOffers(1, this.$route.query)
   },
   methods: {
+    resetFilters () {
+      this.$router.replace('/szukaj')
+      this.searchOffers(1, {})
+      this.refreshFilters = true
+    },
     openSaveFilters () {
       if (!this.$store.state.user.isLogged) {
         this.$store.dispatch('user/setLoginFirst', true)

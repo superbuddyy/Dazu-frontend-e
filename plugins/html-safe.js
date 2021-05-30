@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import VueSecureHTML from 'vue-html-secure'
+import VueSafeHTML from 'vue-safe-html'
 
-Vue.use(VueSecureHTML)
+Vue.use(VueSafeHTML)
