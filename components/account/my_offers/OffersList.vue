@@ -77,7 +77,7 @@
                 </el-button>
               </nuxt-link>
               <div class="promo-btn">
-                <el-button type="primary" round icon="el-icon-top-right" @click="openSubscriptionsDialog(offer.slug)">
+                <el-button class="promo" type="primary" round icon="el-icon-star-on" @click="openSubscriptionsDialog(offer.slug)">
                   Promuj
                 </el-button>
               </div>
@@ -363,6 +363,10 @@ export default {
 .offers-list {
   width: 100%;
 
+  .el-button.is-round {
+    border-radius: 10px;
+  }
+
   @media only screen and (max-width: 834px) {
     .el-dialog {
       width: 90%;
@@ -441,9 +445,9 @@ export default {
         position: absolute;
         left: 0;
         top: 0;
-        background: #009E79;
+        background: #D3D3D3;
         padding: 4px 10px;
-        color: #ffffff;
+        color: #000000;
         font-size: 14px;
       }
 
@@ -510,6 +514,11 @@ export default {
           padding: 10px;
           .edit-btn, .promo-btn {
             width: 50%;
+            .promo {
+              background-color: #FFE122;
+              border: 1px solid #FFD165;
+              color: #000000;
+            }
           }
           button {
             width: 90%;
