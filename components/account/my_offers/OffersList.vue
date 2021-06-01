@@ -22,7 +22,7 @@
         </el-button>
       </el-popover>
       <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked">
-        Odświerz
+        Odśwież
       </el-button>
     </div>
     <div v-loading="loading" class="loading">
@@ -53,6 +53,9 @@
                 <el-button type="text" @click="showStats(offer.slug)">
                   Zobacz statystyki
                 </el-button>
+              </div>
+              <div class="expire-time">
+                <ExpireTime :expire-time="offer.expire_time"/>
               </div>
             </div>
           </div>
@@ -88,7 +91,7 @@
                 </el-button>
               </nuxt-link>
               <div class="promo-btn">
-                <el-button type="primary" round icon="el-icon-top-right" @click="openSubscriptionsDialog(offer.slug)">
+                <el-button class="promo" type="primary" round icon="el-icon-star-on" @click="openSubscriptionsDialog(offer.slug)">
                   Promuj
                 </el-button>
               </div>
@@ -130,7 +133,7 @@
                 icon="el-icon-refresh-right"
                 @click="refresh(offer.slug)"
               >
-                Odświerz ({{ offer.refresh_price / 100 }} pln)
+                Odśwież ({{ offer.refresh_price / 100 }} pln)
               </el-button>
               <el-button
                 v-if="offer.is_expired && offer.refresh_price !== 0"
@@ -138,7 +141,7 @@
                 icon="el-icon-refresh-right"
                 @click="openRefreshPaymentDialog(offer.slug)"
               >
-                Odświerz ({{ offer.refresh_price / 100 }} pln)
+                Odśwież ({{ offer.refresh_price / 100 }} pln)
               </el-button>
               <el-button
                 v-if="offer.status === 'pending' && !offer.is_expired"
@@ -211,10 +214,12 @@ import { getOffers } from '@/api/user'
 import { deactivate, refresh, raise } from '@/api/offer'
 import SubscriptionsDialog from '@/components/SubscriptionsDialog'
 import OfferStats from '@/components/account/my_offers/OfferStats'
+import ExpireTime from './ExpireTime'
 
 export default {
   name: 'OffersList',
   components: {
+    ExpireTime,
     SubscriptionsDialog,
     OfferStats
   },
@@ -339,7 +344,7 @@ export default {
     refreshChecked () {
       if (this.checked_offers.length === 0) {
         this.$message({
-          message: 'Musisz zaznaczyć ofert do odświerzenia',
+          message: 'Musisz zaznaczyć ofert do odświeżenia',
           type: 'warning',
           duration: 3000
         })
@@ -373,6 +378,10 @@ export default {
 <style lang="scss">
 .offers-list {
   width: 100%;
+
+  .el-button.is-round {
+    border-radius: 10px;
+  }
 
   @media only screen and (max-width: 834px) {
     .el-dialog {
@@ -450,11 +459,11 @@ export default {
 
       .subscription-badge {
         position: absolute;
-        right: 0;
+        left: 0;
         top: 0;
-        background: #009E79;
+        background: #D3D3D3;
         padding: 4px 10px;
-        color: #ffffff;
+        color: #000000;
         font-size: 14px;
       }
 
@@ -521,6 +530,11 @@ export default {
           padding: 10px;
           .edit-btn, .promo-btn {
             width: 50%;
+            .promo {
+              background-color: #FFE122;
+              border: 1px solid #FFD165;
+              color: #000000;
+            }
           }
           button {
             width: 90%;

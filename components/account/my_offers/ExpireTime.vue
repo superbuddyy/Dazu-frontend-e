@@ -1,0 +1,58 @@
+<template>
+  <div class="expire-time">
+    ogłoszenie wygasa za {{ calcTime().value }} {{ calcTime().unit }}
+  </div>
+</template>
+
+<script>
+import moment from 'moment'
+
+export default {
+  name: 'ExpireTime',
+  props: {
+    expireTime: {
+      type: String,
+      default: () => ''
+    }
+  },
+  computed: {
+    expireDate () {
+      return moment(this.expireTime).format('DD.MM.YYYY HH:mm:ss')
+    }
+  },
+  methods: {
+    calcTime () {
+      const now = moment().format('DD.MM.YYYY HH:mm:ss')
+      const nowDate = moment(now, 'DD.MM.YYYY HH:mm:ss')
+      const endDate = moment(this.expireDate, 'DD.MM.YYYY HH:mm:ss')
+      let diff = endDate.diff(nowDate, 'minutes')
+      let unit = ''
+      if (diff < 60) {
+        unit = 'minut'
+        if (diff > 1 && diff < 5) { unit = 'minuty' }
+        if (diff === 1) {
+          unit = 'minutę'
+        }
+        return { value: diff, unit } // minutes
+      }
+      if (diff < 1440) {
+        diff = endDate.diff(nowDate, 'hours')
+        unit = 'godziny'
+        if (diff < 23 && diff > 4) { unit = 'godzin' }
+        if (diff === 1) { unit = 'godzina' }
+        return { value: diff, unit } // hours
+      }
+      diff = endDate.diff(nowDate, 'days')
+      unit = 'dni'
+      if (diff === 1) { unit = 'dzień' }
+      return { value: diff, unit } // days
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.expire-time {
+  font-size: 14px;
+}
+</style>
