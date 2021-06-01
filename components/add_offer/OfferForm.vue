@@ -350,7 +350,7 @@
           :labels="{checked: 'Tak', unchecked: 'Nie'}"
         />
       </div>
-      <div v-if="!$store.state.user.isLogged" class="contact-form">
+      <div v-if="!$store.state.user.isLogged && viewType !== 'update'" class="contact-form">
         <el-form-item label="Jestem">
           <el-button type="plain" :class="[ form.user.account_type === 'user' ? 'active' : '' ]" @click="setUserType('user')">
             Osobą prywatną
@@ -460,7 +460,10 @@
         </el-row>
       </div>
       <el-form-item class="add-btn">
-        <el-button v-if="viewType === 'create'" type="primary" @click="onSubmit">
+        <el-button v-if="viewType === 'create'" type="primary" @click="onSubmit(true)">
+          Podgląd
+        </el-button>
+        <el-button v-if="viewType === 'create'" type="primary" @click="onSubmit(false)">
           Dodaj ogłoszenie
         </el-button>
         <el-button v-if="viewType === 'update'" type="primary" @click="onSubmitEdit">
@@ -472,6 +475,7 @@
 </template>
 
 <script>
+import * as Cookies from 'js-cookie'
 import { store, show, update } from '@/api/offer'
 import { getLocation } from '@/api/osm'
 import { mapOfferModelToOfferForm } from '@/helpers'
@@ -676,7 +680,7 @@ export default {
       const coords = location.split('-')
       return [coords[0], coords[1]]
     },
-    onSubmit () {
+    onSubmit (preview) {
       this.processing = true
       this.$refs.form.validate((valid) => {
         if (!valid) {
@@ -688,7 +692,7 @@ export default {
           })
           return false
         } else {
-          this.addOffer()
+          this.addOffer(preview)
         }
       })
     },
@@ -710,11 +714,16 @@ export default {
         this.locations = []
       }
     },
-    async addOffer () {
+    async addOffer (preview) {
       const formData = this.makeFormData()
+      formData.append('preview', preview)
       try {
         const result = await store(formData)
-        if (result.status === 201) {
+        const offerSlug = result.data.offer_slug === undefined ? result.data.slug : result.data.offer_slug
+        if (preview && (result.status === 200 || result.status === 201)) {
+          Cookies.set('offer-token', result.data.offer_token, { expires: 1 })
+          await this.$router.push('/ogloszenia/' + offerSlug + '?preview=true')
+        } else if (result.status === 201) {
           this.$message({
             message: 'Dodano ogłoszenie',
             type: 'success',
@@ -725,7 +734,7 @@ export default {
         } else if (result.status === 200) {
           this.processing = false
           if (this.$store.state.user.isLogged) {
-            await this.$router.push('/moje-ogloszenia/oplac/' + result.data.offer_slug)
+            await this.$router.push('/moje-ogloszenia/oplac/' + offerSlug)
           } else {
             this.$message({
               message: 'Na podany adres email został wysłany link do aktywacji konta i opłacenia ogłoszenia',
@@ -746,11 +755,20 @@ export default {
     async onSubmitEdit () {
       this.processing = true
       const formData = this.makeFormData()
+      // If user is not logged it send request with preview param.
+      formData.append('preview', !this.$store.state.user.isLogged)
       const result = await update(this.offer.slug, formData)
       if (result.status === 200 && result.data.bill_amount !== undefined) {
         this.processing = false
         if (this.$store.state.user.isLogged) {
           await this.$router.push('/moje-ogloszenia/oplac/' + result.data.offer_slug)
+        } else {
+          this.$message({
+            message: 'Na podany adres email został wysłany link do aktywacji konta i opłacenia ogłoszenia',
+            type: 'success',
+            duration: 3000
+          })
+          await this.$router.push('/')
         }
       } else if (result.status === 200) {
         this.$message({
@@ -771,9 +789,15 @@ export default {
       formData.append('lat', location[0])
       formData.append('lon', location[1])
       formData.append('location_name', location[2])
-      formData.append('links[video]', this.form.links.video)
-      formData.append('links[video_2]', this.form.links.video_2)
-      formData.append('links[walk_video]', this.form.links.walk_video)
+      if (this.form.links.video) {
+        formData.append('links[video]', this.form.links.video)
+      }
+      if (this.form.links.video_2) {
+        formData.append('links[video_2]', this.form.links.video_2)
+      }
+      if (this.form.links.walk_video) {
+        formData.append('links[walk_video]', this.form.links.walk_video)
+      }
       formData.append('visible_from_date', this.form.visibleFromDate)
 
       if (this.form.subcategory !== '') {

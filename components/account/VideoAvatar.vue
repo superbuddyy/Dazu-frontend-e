@@ -10,7 +10,7 @@
         target="_blank"
       >
         <div class="video-avatar-block">
-          <i class="el-icon-video-play video-icon" />
+          <img src="~/assets/play-icon.svg" class="video-icon">
           <el-avatar :size="60" :src="videoAvatarUrl" />
         </div>
       </a>
@@ -133,12 +133,10 @@ export default {
   align-items: center;
   position: relative;
   .video-icon {
-    background: #000000;
     border-radius: 50%;
-    color: #009e79;
     position: absolute;
-    font-size: 20px;
-    font-weight: bold;
+    height: 20px;
+    width: 20px;
   }
 }
 

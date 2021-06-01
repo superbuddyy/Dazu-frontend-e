@@ -22,6 +22,10 @@
       />
     </div>
     <OffersCarousel />
+    <PreviewBar
+      v-if="isPreview"
+      :offer-slug="offer.slug"
+    />
   </div>
 </template>
 <script>
@@ -30,6 +34,7 @@ import OfferInfo from '@/components/offer/OfferInfo'
 import OfferDetails from '@/components/offer/OfferDetails'
 import OffersCarousel from '@/components/OffersCarousel'
 import { show } from '@/api/offer'
+import PreviewBar from '../components/offer/PreviewBar'
 
 export default {
   name: 'Offer',
@@ -37,13 +42,19 @@ export default {
     Breadcrumbs,
     OfferInfo,
     OfferDetails,
-    OffersCarousel
+    OffersCarousel,
+    PreviewBar
   },
   data: () => ({
     offer: {},
     attributes: [],
     loading: true
   }),
+  computed: {
+    isPreview () {
+      return Object.prototype.hasOwnProperty.call(this.$route.query, 'preview') && this.$route.query.preview
+    }
+  },
   mounted () {
     this.getOfferFromApi()
   },

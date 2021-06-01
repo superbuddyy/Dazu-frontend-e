@@ -21,7 +21,6 @@ import { index } from '@/api/attributes'
 import { index as categoryIndex } from '@/api/categories'
 
 export default {
-  middleware: 'authenticated',
   name: 'EditOffer',
   components: {
     OfferForm

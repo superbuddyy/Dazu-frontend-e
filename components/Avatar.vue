@@ -1,11 +1,11 @@
 <template>
   <div class="avatar-container">
     <div
-      :class="[ company && isCompanyUser ? 'avatar-img company-avatar' : 'agent-avatar-img']"
+      :class="[ company && isCompanyUser ? 'avatar-img company-avatar' : 'avatar-img agent-avatar-img']"
       :style="{backgroundImage: 'url(' + avatarUrl + ')'}"
       @click="openPhotoDialog()"
     >
-      <i v-if="videoAvatarUrl && company" class="el-icon-video-play video-icon" />
+      <img v-if="videoAvatarUrl && company" src="~/assets/play-icon.svg" class="video-icon">
     </div>
 
     <PhotoDialog
@@ -102,5 +102,14 @@ export default {
 </script>
 
 <style scoped>
+.avatar-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.video-icon {
+  width: 20px;
+  height: 20px;
+}
 </style>
