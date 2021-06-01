@@ -42,6 +42,11 @@
                 Kontakt
               </nuxt-link>
             </li>
+            <li>
+              <nuxt-link to="/faq">
+                FAQ
+              </nuxt-link>
+            </li>
           </ul>
           <ul>
             <li>
