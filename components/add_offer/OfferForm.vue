@@ -283,7 +283,7 @@
           :center="getLatLon(form.location)"
           class="map"
         >
-          <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+          <l-tile-layer :url="mapStyle" />
           <l-marker
             ref="marker"
             :lat-lng="getLatLon(form.location)"
@@ -628,6 +628,9 @@ export default {
     }
   },
   computed: {
+    mapStyle () {
+      return process.env.VUE_APP_MAP_STYLE
+    },
     formattedPrice: {
       get () {
         return this.form.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')

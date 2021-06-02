@@ -1,7 +1,7 @@
 <template>
   <div class="offer-map">
     <l-map v-if="location" :zoom="16" :center="location" class="map">
-      <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+      <l-tile-layer :url="mapStyle" />
       <l-marker :lat-lng="location" />
     </l-map>
   </div>
@@ -16,6 +16,11 @@ export default {
       default () {
         return [0, 0]
       }
+    }
+  },
+  computed: {
+    mapStyle () {
+      return process.env.VUE_APP_MAP_STYLE
     }
   }
 }

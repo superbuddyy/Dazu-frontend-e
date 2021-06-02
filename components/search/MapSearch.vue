@@ -138,7 +138,7 @@
     </el-form>
     <div class="map-box">
       <l-map ref="map" :zoom="zoom" :center="center" class="map" :options="{zoomControl: false}">
-        <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+        <l-tile-layer :url="mapStyle" />
         <l-control-zoom position="bottomleft" />
         <l-marker
           v-for="offer in offers"
@@ -312,6 +312,9 @@ export default {
     }
   },
   computed: {
+    mapStyle () {
+      return process.env.VUE_APP_MAP_STYLE
+    },
     priceMaxFilters () {
       if (this.search.price.min === null) {
         return this.$store.state.storage.filters.price.max
