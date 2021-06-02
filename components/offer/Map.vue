@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     mapStyle () {
-      return process.env.VUE_APP_MAP_STYLE
+      return this.$config.mapStyle
     }
   }
 }
