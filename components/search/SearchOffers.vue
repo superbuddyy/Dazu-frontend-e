@@ -134,11 +134,16 @@ export default {
     min-height: 20vh;
 
     .margin-box {
-      margin: 20px;
+      padding: 10px;
+      margin: 10px;
+      border: 2px solid #ffffff;
+      &:hover {
+        border: 2px solid #f1f1f1;
+      }
     }
 
     .offer {
-      max-width: 300px;
+      max-width: 320px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -213,6 +218,9 @@ export default {
         .location {
           font-weight: bold;
           font-size: 13px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
