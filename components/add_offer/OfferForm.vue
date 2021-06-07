@@ -46,6 +46,17 @@
             @set-value="formattedAttributePrice = $event"
           />
         </el-col>
+        <el-col :span="11">
+          <Attribute
+            v-if="attributes['_21']['offer_types'].includes($store.state.addOfferForm.type)"
+            :name="attributes['_21'].name"
+            :slug="attributes['_21'].slug"
+            placeholder="0"
+            :append-info="attributes['_21'].unit"
+            :value="formattedAttributePrice"
+            @set-value="formattedAttributePrice = $event"
+          />
+        </el-col>
       </el-row>
       <el-row>
         <Attribute
@@ -63,6 +74,22 @@
           :value="form.attributes[5]"
           type="checkbox"
           @set-value="form.attributes[5] = $event"
+        />
+        <Attribute
+          v-if="attributes['_22']['offer_types'].includes($store.state.addOfferForm.type)"
+          :name="attributes['_22'].name"
+          :slug="attributes['_22'].slug"
+          :value="form.attributes[22]"
+          type="checkbox"
+          @set-value="form.attributes[22] = $event"
+        />
+        <Attribute
+          v-if="attributes['_23']['offer_types'].includes($store.state.addOfferForm.type)"
+          :name="attributes['_23'].name"
+          :slug="attributes['_23'].slug"
+          :value="form.attributes[23]"
+          type="checkbox"
+          @set-value="form.attributes[23] = $event"
         />
         <Attribute
           v-if="attributes['_6']['offer_types'].includes($store.state.addOfferForm.type)"
