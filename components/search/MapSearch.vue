@@ -609,7 +609,7 @@ export default {
     }
 
     .active {
-      background: #5dca8c70;
+      background: #E4E4E4;
     }
 
     .map-offer {
@@ -621,7 +621,7 @@ export default {
       padding: 10px;
 
       &:hover {
-        background: #5dca8c70;
+        background: #E4E4E4;
       }
 
       .details {
