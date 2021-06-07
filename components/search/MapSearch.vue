@@ -146,7 +146,7 @@
           :ref="`marker-${offer.id}`"
           :lat-lng="[offer.lat, offer.lon]"
         >
-          <l-popup style="min-width: 100px">
+          <l-popup class="map-popup" @click.native="openOffer(offer.slug)">
             <div class="l-popup-content">
               <div class="title">
                 {{ offer.title }}
@@ -357,6 +357,9 @@ export default {
     }
   },
   methods: {
+    openOffer (offerSlug) {
+      this.$router.push('ogloszenia/' + offerSlug)
+    },
     resetFilters () {
       this.$router.replace({ query: null })
       this.search = {}
@@ -545,6 +548,11 @@ export default {
     .map {
       width: 100%;
       height: calc(100vh - 102px);
+    }
+
+    .map-popup {
+      min-width: 100px;
+      cursor: pointer;
     }
 
     .l-popup-content {
