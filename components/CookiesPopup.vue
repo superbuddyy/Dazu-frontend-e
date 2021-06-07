@@ -36,6 +36,7 @@ export default {
     color: #ffffff;
     padding: 10px;
     width: 50%;
+    font-size: 13px;
 
     .accept-btn {
       float: right;
