@@ -5,6 +5,7 @@
     </div>
     <div class="container">
       <OfferForm
+        v-if="Object.keys(attributes).length !== 0"
         :attributes="attributes"
         :categories="categories"
         :root-categories="rootCategories"
