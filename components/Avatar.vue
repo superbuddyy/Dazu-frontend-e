@@ -77,7 +77,11 @@ export default {
       if (this.company) {
         if (this.isCompanyUser) {
           this.companyVideoAvatar = this.company.video_avatar
-          this.companyAvatar = this.generatedCompanyVideoAvatar
+          if (this.company.video_avatar !== null) {
+            this.companyAvatar = this.generatedCompanyVideoAvatar
+          } else {
+            this.companyAvatar = this.company.avatar
+          }
         } else {
           this.setUserAvatars()
         }
