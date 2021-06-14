@@ -55,12 +55,38 @@
                 </el-button>
               </div>
               <div class="expire-time">
-                <ExpireTime :expire-time="offer.expire_time"/>
+                <ExpireTime :expire-time="offer.expire_time" />
               </div>
             </div>
           </div>
           <div class="actions">
             <div class="buttons">
+              <el-popover
+                v-model="deactivateOnePopoverVisible"
+                placement="bottom"
+              >
+                <p>Czy na pewno chcesz zdezaktywować?</p>
+                <div style="text-align: center; margin: 0">
+                  <el-button size="mini" type="text" @click="deactivateOnePopoverVisible = false">
+                    Nie
+                  </el-button>
+                  <el-button type="primary" size="mini" @click="deactivateOne(offer.id)">
+                    Tak
+                  </el-button>
+                </div>
+                <el-button slot="reference" type="danger" round icon="el-icon-circle-close">
+                  Dezaktywuj
+                </el-button>
+              </el-popover>
+              <el-button
+                type="primary"
+                class="refresh-btn"
+                round
+                icon="el-icon-refresh-right"
+                @click="refresh(offer.slug)"
+              >
+                Odśwież
+              </el-button>
               <div class="promo-btn">
                 <el-tooltip :content="'(' + (offer.raise_price / 100) + ' pln)'" placement="top">
                   <el-button
@@ -224,6 +250,7 @@ export default {
     OfferStats
   },
   data: () => ({
+    deactivateOnePopoverVisible: false,
     deactivatePopoverVisible: false,
     checked_offers: [],
     offers: [],
@@ -350,6 +377,15 @@ export default {
         })
       }
     },
+    refreshOne (id) {
+      this.checked_offers.push(id)
+      this.refreshChecked()
+    },
+    deactivateOne (id) {
+      this.checked_offers.push(id)
+      this.deactivateChecked()
+      this.deactivateOnePopoverVisible = false
+    },
     async deactivateChecked () {
       this.deactivatePopoverVisible = false
       if (this.checked_offers.length !== 0) {
@@ -436,7 +472,7 @@ export default {
     .offer {
       display: flex;
       flex-wrap: wrap;
-      width: 80%;
+      width: 90%;
       border: 1px solid gray;
       padding: 16px 16px 16px 6px;
       margin-bottom: 20px;
@@ -448,7 +484,7 @@ export default {
 
       .left {
         display: flex;
-        width: 65%;
+        width: 50%;
         min-width: 600px;
 
         @media only screen and (max-width: 843px) {
@@ -528,8 +564,9 @@ export default {
           display: flex;
           align-items: center;
           padding: 10px;
-          .edit-btn, .promo-btn {
+          .edit-btn, .promo-btn, .refresh-btn, span {
             width: 50%;
+            text-align: center;
             .promo {
               background-color: #FFE122;
               border: 1px solid #FFD165;
@@ -537,7 +574,7 @@ export default {
             }
           }
           button {
-            width: 90%;
+            margin-right: 10px;
           }
         }
         .stats {

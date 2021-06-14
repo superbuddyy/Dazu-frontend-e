@@ -10,7 +10,7 @@
       <div class="details">
         <div class="stats">
           <div class="stat">
-            Dołączył: <span>{{ user.created_at }}</span>
+            Data rejestracji: <span>{{ user.created_at }}</span>
           </div>
           <div class="stat">
             Ilość ogłoszeń: <span>{{ user.offers_count }}</span>
@@ -145,7 +145,6 @@ export default {
 
         .stat {
           margin-left: 10px;
-          font-weight: bold;
           &:first-child {
             margin-left: 0;
           }

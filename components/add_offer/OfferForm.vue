@@ -731,7 +731,9 @@ export default {
     },
     changeLatLngAfterDrag (event) {
       const latLng = this.$refs.marker.mapObject.getLatLng()
-      this.form.location = latLng.lat + '-' + latLng.lng + '-' + this.form.location[2]
+      const location = this.form.location.split('-')
+      this.locations = [{ lat: latLng.lat, lng: latLng.lng, display_name: location[2] }]
+      this.form.location = latLng.lat + '-' + latLng.lng + '-' + location[2]
     },
     async getLocations (locationName) {
       if (locationName !== '') {
