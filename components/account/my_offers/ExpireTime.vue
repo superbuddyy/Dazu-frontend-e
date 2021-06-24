@@ -1,5 +1,5 @@
 <template>
-  <div class="expire-time">
+  <div v-if="calcTime().value > 0" class="expire-time">
     ogłoszenie wygasa za {{ calcTime().value }} {{ calcTime().unit }}
   </div>
 </template>
