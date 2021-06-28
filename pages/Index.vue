@@ -12,6 +12,10 @@
       v-if="cookiesPopup"
       @accept-cookies="cookiesPopup = false"
     />
+    <CustomPopup
+      v-if="customPopup"
+      @close="customPopup = false"
+    />
   </div>
 </template>
 <script>
@@ -22,6 +26,7 @@ import BlogPost from '@/components/home_page/BlogPost'
 import { check } from '@/api/auth'
 import * as Cookies from 'js-cookie'
 import CookiesPopup from '../components/CookiesPopup'
+import CustomPopup from '../components/CustomPopup'
 
 export default {
   components: {
@@ -29,10 +34,12 @@ export default {
     OffersCarousel,
     AccountTypeList,
     BlogPost,
-    CookiesPopup
+    CookiesPopup,
+    CustomPopup
   },
   data: () => ({
-    cookiesPopup: false
+    cookiesPopup: false,
+    customPopup: false
   }),
   mounted () {
     this.$ga.page({
@@ -58,11 +65,17 @@ export default {
       this.$router.push(this.$route.path)
     }
     this.toggleCookiesPopup()
+    this.toggleCustomPopup()
   },
   methods: {
     toggleCookiesPopup () {
       if (Cookies.get('cookies-popup') === undefined) {
         this.cookiesPopup = true
+      }
+    },
+    toggleCustomPopup () {
+      if (Cookies.get('custom-popup') === undefined) {
+        this.customPopup = true
       }
     },
     async checkAuth () {
