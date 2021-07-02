@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-popup">
+  <div v-if="visible" class="custom-popup">
     <div class="left">
       <h2>{{ title }}</h2>
       <p
@@ -21,6 +21,7 @@ export default {
   name: 'CustomPopup',
   data () {
     return {
+      visible: false,
       title: '',
       content: '',
       image: '',
@@ -37,11 +38,12 @@ export default {
     },
     async getData () {
       const result = await show(1)
-      if (result.status === 200) {
+      if (result.status === 200 && result.data.is_active === true) {
         this.title = result.data.title
         this.content = result.data.content
         this.image = result.data.image.url
         this.showAgainAfter = result.data.showAgainAfter
+        this.visible = true
       }
     }
   }

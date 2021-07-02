@@ -13,8 +13,8 @@
       @accept-cookies="cookiesPopup = false"
     />
     <CustomPopup
-      v-if="customPopup"
-      @close="customPopup = false"
+      v-if="customPopupCookie"
+      @close="closeCustomPopup"
     />
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   },
   data: () => ({
     cookiesPopup: false,
-    customPopup: false
+    customPopupCookie: false
   }),
   mounted () {
     this.$ga.page({
@@ -68,6 +68,10 @@ export default {
     this.toggleCustomPopup()
   },
   methods: {
+    closeCustomPopup () {
+      this.customPopupCookie = false
+      this.customPopup = false
+    },
     toggleCookiesPopup () {
       if (Cookies.get('cookies-popup') === undefined) {
         this.cookiesPopup = true
@@ -75,7 +79,7 @@ export default {
     },
     toggleCustomPopup () {
       if (Cookies.get('custom-popup') === undefined) {
-        this.customPopup = true
+        this.customPopupCookie = true
       }
     },
     async checkAuth () {
