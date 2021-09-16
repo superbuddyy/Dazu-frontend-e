@@ -373,6 +373,7 @@
         <toggle-button
           v-model="form.attributes[20]"
           color="#009E79"
+          :value="false"
           :sync="true"
           :labels="{checked: 'Tak', unchecked: 'Nie'}"
         />
@@ -624,7 +625,7 @@ export default {
           17: [],
           18: '',
           19: '',
-          20: '',
+          20: false,
           21: '',
           22: ''
         }
