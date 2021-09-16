@@ -4,7 +4,7 @@
     <div class="container">
       <div class="controls">
         <div class="left">
-          <el-select v-model="filter">
+          <el-select v-model="filter" @change="sortResults($event)">
             <el-option
               label="Cena rosnąca"
               :value="1"
@@ -12,6 +12,14 @@
             <el-option
               label="Cena malejąco"
               :value="2"
+            />
+            <el-option
+              label="Najnowsze"
+              :value="3"
+            />
+            <el-option
+              label="Najstarsze"
+              :value="4"
             />
           </el-select>
         </div>
@@ -92,7 +100,13 @@ export default {
     loading: true,
     filtersVisible: false,
     filter: 'Cena rosnąca',
-    refreshFilters: false
+    refreshFilters: false,
+    sorting: {
+      1: { order_by: 'price', order: 'ASC' },
+      2: { order_by: 'price', order: 'DESC' },
+      3: { order_by: 'created_at', order: 'DESC' },
+      4: { order_by: 'created_at', order: 'ASC' }
+    }
   }),
   computed: {
     filtersExists () {
@@ -115,6 +129,10 @@ export default {
     this.searchOffers(1, this.$route.query)
   },
   methods: {
+    sortResults () {
+      const queryWithSearch = Object.assign(this.$data.sorting[this.filter], this.$route.query)
+      this.searchOffers(1, queryWithSearch)
+    },
     resetFilters () {
       this.$router.replace('/szukaj')
       this.searchOffers(1, {})
