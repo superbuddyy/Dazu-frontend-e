@@ -16,9 +16,18 @@
             <b>na {{ item.duration / 24 }} dni</b>
           </div>
           <div class="list">
-            <div v-for="descItem in item.description.split(';')" :key="descItem" class="list-item">
-              <i class="el-icon-arrow-down" />
-              {{ descItem }}
+            <div class="list-item" v-if="item.number_of_raises !== 0">
+              <i class="el-icon-star-on" /> {{ item.number_of_raises}} darmowe podbicia
+            </div>
+            <div class="list-item">
+              <i class="el-icon-star-on" /> {{ item.number_of_refreshes}} darmowe odświeżenia
+            </div>
+            <div class="list-item" v-if="item.featured_on_search_results_and_categories === true">
+              <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii w wynikach
+            </div>
+            <div class="list-item" v-if="item.featured_on_homepage === true">
+              <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii na stronie, głównej w wynikach wyszukiwań i kategoriach
+
             </div>
           </div>
         </div>
@@ -29,7 +38,6 @@
 
 <script>
 import { index } from '@/api/subscriptions'
-
 export default {
   name: 'Subscriptions',
   data () {
@@ -76,7 +84,7 @@ export default {
 
   .card-box {
     width: 300px;
-    min-height: 260px;
+    min-height: 340px;
     cursor: pointer;
 
     .el-card__body {
