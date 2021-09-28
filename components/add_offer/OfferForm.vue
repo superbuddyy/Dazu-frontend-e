@@ -285,40 +285,39 @@
           />
         </el-col>
       </el-row>
-      <el-form-item label="Lokalizacja" prop="location">
-        <el-select
-          v-model="form.location"
-          class="location-input"
-          filterable
-          remote
-          placeholder="Podaj lokalizacje"
-          :remote-method="getLocations"
-          :loading="locationsLoading"
-          :debounce="500"
-          @change="showMap = true"
-        >
-          <el-option
-            v-for="location in locations"
-            :key="location.osm_id"
-            :label="location.display_name"
-            :value="location.lat + '-' + location.lon + '-' + location.display_name"
-          />
-        </el-select>
-        <l-map
-          v-if="showMap || viewType === 'update'"
-          :zoom="zoom"
-          :center="getLatLon(form.location)"
-          class="map"
-        >
-          <l-tile-layer :url="mapStyle" />
-          <l-marker
-            ref="marker"
-            :lat-lng="getLatLon(form.location)"
-            :draggable="true"
-            @dragend="changeLatLngAfterDrag"
-          />
-        </l-map>
-      </el-form-item>
+<!--      <el-form-item label="Lokalizacja" prop="location">-->
+<!--        <el-select-->
+<!--          v-model="form.location"-->
+<!--          class="location-input"-->
+<!--          filterable-->
+<!--          remote-->
+<!--          placeholder="Podaj lokalizacje"-->
+<!--          :remote-method="getLocations"-->
+<!--          :loading="locationsLoading"-->
+<!--          :debounce="500"-->
+<!--        >-->
+<!--          <el-option-->
+<!--            v-for="location in locations"-->
+<!--            :key="location.osm_id"-->
+<!--            :label="location.display_name"-->
+<!--            :value="location.lat + '-' + location.lon + '-' + location.display_name"-->
+<!--          />-->
+<!--        </el-select>-->
+<!--        <l-map-->
+<!--          v-if="showMap || viewType === 'update'"-->
+<!--          :zoom="zoom"-->
+<!--          :center="getLatLon(form.location)"-->
+<!--          class="map"-->
+<!--        >-->
+<!--          <l-tile-layer :url="mapStyle" />-->
+<!--          <l-marker-->
+<!--            ref="marker"-->
+<!--            :lat-lng="getLatLon(form.location)"-->
+<!--            :draggable="true"-->
+<!--            @dragend="changeLatLngAfterDrag"-->
+<!--          />-->
+<!--        </l-map>-->
+<!--      </el-form-item>-->
       <el-row>
         <el-col :span="24">
           <el-form-item label="" class="visible-date">
@@ -351,9 +350,42 @@
                   </div>
                   <b>na {{ subscription.duration / 24 }} dni</b>
                   <div class="list">
-                    <div v-for="item in subscription.description.split(';')" :key="item" class="list-item">
-                      <i class="el-icon-arrow-down" />
-                      {{ item }}
+                      <div class="list-item" v-if="subscription.number_of_raises !== 0">
+                        <i class="el-icon-star-on" /> {{ subscription.number_of_raises }} darmowe podbicia
+                      </div>
+                      <div class="list-item">
+                        <i class="el-icon-star-on" /> {{ subscription.number_of_refreshes }} darmowe odświeżenia
+                      </div>
+                      <div class="list-item" v-if="subscription.featured_on_search_results_and_categories === true">
+                        <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii w wynikach
+                      </div>
+                      <div class="list-item" v-if="subscription.featured_on_homepage === true">
+                        <i class="el-icon-star-on" />   wyróżnione w ruchomej galerii na stronie, głównej w wynikach wyszukiwań i kategoriach
+                      </div>
+                    <div class="list-item">
+                        Dodaj żółtą ramkę z napisem okazja
+                      <el-switch
+                      v-model="subscription.is_urgent"
+                      :value="form.urgent"
+                      @set-value="form.urgent = $event"
+                    ></el-switch>
+                    </div>
+                    <div class="list-item">
+                      Dodaj czerwoną ramkę z napisem pilne
+                      <el-switch
+                        v-model="subscription.is_bargain"
+                        :value="form.bargain"
+                        @set-value="form.bargain = $event"
+                      ></el-switch>
+                    </div>
+                    <div class="list-item">
+                      1 podbicie <strong>{{ subscription.raise_price }} zł</strong> <el-switch></el-switch>
+                    </div>
+                    <div class="list-item">
+                      3 podbicia <strong>{{ subscription.raise_price_three }} zł</strong> <el-switch></el-switch>
+                    </div>
+                    <div class="list-item">
+                      10 podbić <strong>{{ subscription.raise_price_ten }} zł</strong> <el-switch></el-switch>
                     </div>
                   </div>
                 </div>
@@ -628,7 +660,9 @@ export default {
           20: false,
           21: '',
           22: ''
-        }
+        },
+        urgent: false,
+        bargain: false
       },
       dialogImageUrl: '',
       dialogVisible: false,
@@ -797,14 +831,14 @@ export default {
       if (result.status === 200 && result.data.bill_amount !== undefined) {
         this.processing = false
         if (this.$store.state.user.isLogged) {
-          await this.$router.push('/moje-ogloszenia/oplac/' + result.data.offer_slug)
+          // await this.$router.push('/moje-ogloszenia/oplac/' + result.data.offer_slug)
         } else {
           this.$message({
             message: 'Na podany adres email został wysłany link do aktywacji konta i opłacenia ogłoszenia',
             type: 'success',
             duration: 3000
           })
-          await this.$router.push('/')
+          // await this.$router.push('/')
         }
       } else if (result.status === 200) {
         this.$message({
@@ -822,8 +856,10 @@ export default {
       formData.append('price', parseInt(this.form.price.toString().replace(/\s/g, '')) * 100)
 
       const location = this.form.location.split('-')
-      formData.append('lat', location[0])
-      formData.append('lon', location[1])
+      formData.append('lat', '223')
+      formData.append('lon', '222')
+      // formData.append('lat', location[0])
+      // formData.append('lon', location[1])
       formData.append('location_name', location[2])
       if (this.form.links.video) {
         formData.append('links[video]', this.form.links.video)
@@ -870,6 +906,7 @@ export default {
         formData.append('subscription', this.selectedSubscription)
       }
 
+      formData.append('urgent', this.form.urgent)
       return formData
     },
     setType (type) {
@@ -1036,7 +1073,7 @@ export default {
 
     .card-box {
       width: 220px;
-      height: 300px;
+      height: 650px;
       cursor: pointer;
 
       .card-body {

@@ -20,9 +20,13 @@
 </template>
 
 <script>
+import Subscriptions from '@/components/Subscriptions'
 
 export default {
   name: 'AccountTypeList',
+  components: {
+    Subscriptions
+  },
   data: () => ({
     active_item: null,
     items: [],
