@@ -285,39 +285,39 @@
           />
         </el-col>
       </el-row>
-<!--      <el-form-item label="Lokalizacja" prop="location">-->
-<!--        <el-select-->
-<!--          v-model="form.location"-->
-<!--          class="location-input"-->
-<!--          filterable-->
-<!--          remote-->
-<!--          placeholder="Podaj lokalizacje"-->
-<!--          :remote-method="getLocations"-->
-<!--          :loading="locationsLoading"-->
-<!--          :debounce="500"-->
-<!--        >-->
-<!--          <el-option-->
-<!--            v-for="location in locations"-->
-<!--            :key="location.osm_id"-->
-<!--            :label="location.display_name"-->
-<!--            :value="location.lat + '-' + location.lon + '-' + location.display_name"-->
-<!--          />-->
-<!--        </el-select>-->
-<!--        <l-map-->
-<!--          v-if="showMap || viewType === 'update'"-->
-<!--          :zoom="zoom"-->
-<!--          :center="getLatLon(form.location)"-->
-<!--          class="map"-->
-<!--        >-->
-<!--          <l-tile-layer :url="mapStyle" />-->
-<!--          <l-marker-->
-<!--            ref="marker"-->
-<!--            :lat-lng="getLatLon(form.location)"-->
-<!--            :draggable="true"-->
-<!--            @dragend="changeLatLngAfterDrag"-->
-<!--          />-->
-<!--        </l-map>-->
-<!--      </el-form-item>-->
+      <el-form-item label="Lokalizacja" prop="location">
+        <el-select
+          v-model="form.location"
+          class="location-input"
+          filterable
+          remote
+          placeholder="Podaj lokalizacje"
+          :remote-method="getLocations"
+          :loading="locationsLoading"
+          :debounce="500"
+        >
+          <el-option
+            v-for="location in locations"
+            :key="location.osm_id"
+            :label="location.display_name"
+            :value="location.lat + '-' + location.lon + '-' + location.display_name"
+          />
+        </el-select>
+        <l-map
+          v-if="showMap || viewType === 'update'"
+          :zoom="zoom"
+          :center="getLatLon(form.location)"
+          class="map"
+        >
+          <l-tile-layer :url="mapStyle" />
+          <l-marker
+            ref="marker"
+            :lat-lng="getLatLon(form.location)"
+            :draggable="true"
+            @dragend="changeLatLngAfterDrag"
+          />
+        </l-map>
+      </el-form-item>
       <el-row>
         <el-col :span="24">
           <el-form-item label="" class="visible-date">
@@ -333,7 +333,8 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-form-item v-if="viewType === 'create'">
+
+      <el-form-item v-if="viewType === 'create'" label-width="0px">
         <div class="container-account-types">
           <div
             v-for="subscription in subscriptions"
@@ -343,7 +344,7 @@
           >
             <el-card class="card-box">
               <div class="card-body">
-                <span>{{ subscription.name }}</span>
+                <span class="upper">{{ subscription.name }}</span>
                 <div class="bottom clearfix">
                   <div class="price">
                     <span>{{ subscription.price / 100 }}<sup>zł</sup></span>
@@ -351,41 +352,62 @@
                   <b>na {{ subscription.duration / 24 }} dni</b>
                   <div class="list">
                       <div class="list-item" v-if="subscription.number_of_raises !== 0">
-                        <i class="el-icon-star-on" /> {{ subscription.number_of_raises }} darmowe podbicia
+                        <i class="el-icon-star-on" /> {{ subscription.number_of_raises }}
+                        <span v-if='subscription.number_of_raises == 1'>darmowe podbicie</span>
+                        <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>darmowe podbicia</span>
+                        <span v-else-if='subscription.number_of_raises >= 5'>darmowych podbić</span>
                       </div>
                       <div class="list-item">
-                        <i class="el-icon-star-on" /> {{ subscription.number_of_refreshes }} darmowe odświeżenia
+                        <i class="el-icon-star-on" /> {{ subscription.number_of_refreshes }}
+                         <span v-if='subscription.number_of_refreshes == 1'>darmowe odświeżenie</span>
+                         <span v-else-if='subscription.number_of_refreshes > 1 && subscription.number_of_refreshes < 5'>darmowe odświeżenia</span>
+                         <span v-else-if='subscription.number_of_refreshes >= 5'>darmowych odświeżeń</span>
                       </div>
                       <div class="list-item" v-if="subscription.featured_on_search_results_and_categories === true">
                         <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii w wynikach
                       </div>
                       <div class="list-item" v-if="subscription.featured_on_homepage === true">
-                        <i class="el-icon-star-on" />   wyróżnione w ruchomej galerii na stronie, głównej w wynikach wyszukiwań i kategoriach
+                        <i class="el-icon-star-on" />  wyróżnione w ruchomej galerii na stronie, głównej w wynikach wyszukiwań i kategoriach
                       </div>
                     <div class="list-item">
-                        Dodaj żółtą ramkę z napisem okazja
+                        Dodaj czerwoną ramkę z napisem <el-button class="button_urgent" size="mini" rounded="true">PILNE</el-button>
                       <el-switch
-                      v-model="subscription.is_urgent"
-                      :value="form.urgent"
-                      @set-value="form.urgent = $event"
-                    ></el-switch>
+                        v-model="form.subscriptions[subscription.id].is_urgent"
+                        :value="form.is_urgent"
+                        @set-value="form.is_urgent = $event"
+                        ></el-switch>
                     </div>
                     <div class="list-item">
-                      Dodaj czerwoną ramkę z napisem pilne
+                      Dodaj żółtą ramkę z napisem <el-button class="button_bargain" size="mini">OKAZJA</el-button>
                       <el-switch
-                        v-model="subscription.is_bargain"
-                        :value="form.bargain"
-                        @set-value="form.bargain = $event"
+                        v-model="form.subscriptions[subscription.id].is_bargain"
+                        :value="form.is_bargain"
+                        @set-value="form.is_bargain = $event"
                       ></el-switch>
                     </div>
                     <div class="list-item">
-                      1 podbicie <strong>{{ subscription.raise_price }} zł</strong> <el-switch></el-switch>
+                      1 podbiciea <strong>{{ subscription.raise_price / 100 }} zł</strong>
+                      <el-switch
+                        v-model="form.subscriptions[subscription.id].has_raise_one"
+                        :value="form.has_raise_one"
+                        @set-value="form.has_raise_one = $event"
+                      ></el-switch>
                     </div>
                     <div class="list-item">
-                      3 podbicia <strong>{{ subscription.raise_price_three }} zł</strong> <el-switch></el-switch>
+                      3 podbicia <strong>{{ subscription.raise_price_three / 100 }} zł</strong>
+                      <el-switch
+                        v-model="form.subscriptions[subscription.id].has_raise_three"
+                        :value="form.has_raise_three"
+                        @set-value="form.has_raise_three = $event"
+                      ></el-switch>
                     </div>
                     <div class="list-item">
-                      10 podbić <strong>{{ subscription.raise_price_ten }} zł</strong> <el-switch></el-switch>
+                      10 podbić <strong>{{ subscription.raise_price_ten / 100 }} zł</strong>
+                      <el-switch
+                        v-model="form.subscriptions[subscription.id].has_raise_ten"
+                        :value="form.has_raise_ten"
+                        @set-value="form.has_raise_ten = $event"
+                      ></el-switch>
                     </div>
                   </div>
                 </div>
@@ -394,6 +416,7 @@
           </div>
         </div>
       </el-form-item>
+
       <div class="urgent">
         <div class="urgent-img">
           <img v-if="!form.attributes[20]" src="~/assets/house.svg" alt="">
@@ -606,6 +629,7 @@ export default {
       avatars: [],
       subscriptions: [],
       selectedSubscription: 1,
+      selectedPrice: 1,
       processing: false,
       viewType: 'create',
       zoom: 16,
@@ -621,6 +645,7 @@ export default {
         price: '',
         description: '',
         visibleFromDate: '',
+        subscriptions: { 1: {}, 2: {}, 3: {}, 4: {} },
         location: '',
         mainImage: [],
         images: [],
@@ -661,8 +686,11 @@ export default {
           21: '',
           22: ''
         },
-        urgent: false,
-        bargain: false
+        is_urgent: false,
+        is_bargain: false,
+        has_raise_one: false,
+        has_raise_three: false,
+        has_raise_ten: false
       },
       dialogImageUrl: '',
       dialogVisible: false,
@@ -904,9 +932,13 @@ export default {
 
       if (this.selectedSubscription) {
         formData.append('subscription', this.selectedSubscription)
+        formData.append('is_urgent', this.form.subscriptions[this.selectedSubscription].is_urgent)
+        formData.append('is_bargain', this.form.subscriptions[this.selectedSubscription].is_bargain)
+        formData.append('has_raise_one', this.form.subscriptions[this.selectedSubscription].has_raise_one)
+        formData.append('has_raise_three', this.form.subscriptions[this.selectedSubscription].has_raise_three)
+        formData.append('has_raise_ten', this.form.subscriptions[this.selectedSubscription].has_raise_ten)
       }
 
-      formData.append('urgent', this.form.urgent)
       return formData
     },
     setType (type) {
@@ -1050,10 +1082,15 @@ export default {
 
     .sub-box {
       margin-bottom: 20px;
+      border-radius: 32px;
     }
 
     .active {
       box-shadow: 0 0 0 2pt #5dca8c;
+    }
+
+    .el-card {
+      border-radius: 32px;
     }
 
     .el-card__body {
@@ -1072,7 +1109,7 @@ export default {
     }
 
     .card-box {
-      width: 220px;
+      width: 280px;
       height: 650px;
       cursor: pointer;
 
@@ -1091,14 +1128,33 @@ export default {
             color: #000000;
           }
         }
-        span {
+        span.upper {
           text-transform: uppercase;
         }
+
         .bottom {
           text-align: center;
         }
       }
     }
+  }
+
+  .button_urgent {
+    background-color: #F50000;
+    color: white;
+    font-weight: 500;
+    border-radius: 6px !important;
+    /* font-family: sans-serif; */
+    padding: 4px;
+  }
+
+  .button_bargain {
+    background-color: #FFE122;
+    color: black;
+    font-weight: 500;
+    border-radius: 6px !important;
+    /* font-family: sans-serif; */
+    padding: 4px;
   }
 }
 </style>
