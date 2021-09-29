@@ -99,7 +99,7 @@ export default {
     }
 
     .add-offer-form {
-      width: 70%;
+      width: 80%;
       margin: 0 auto;
       @media only screen and (max-width: 1600px) {
         width: 90%;
