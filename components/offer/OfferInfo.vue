@@ -356,7 +356,7 @@ export default {
             position: absolute;
             background: #000000;
             border-radius: 50%;
-            color: #009e79;
+            color: #ff19b7;
             font-size: 20px;
             font-weight: bold;
           }
@@ -384,7 +384,7 @@ export default {
           top: -4px;
         }
         b {
-          color: #009E79;
+          color: #ff19b7;
         }
       }
 

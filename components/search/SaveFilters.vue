@@ -160,7 +160,7 @@ export default {
         align-items: center;
 
         .active {
-          color: #009E79;
+          color: #ff19b7;
           border-color: #ceefdd;
           background-color: #effaf4;
         }

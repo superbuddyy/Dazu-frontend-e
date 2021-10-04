@@ -63,7 +63,7 @@ export default {
       margin: 10px 6vw;
 
       .active {
-        background: #009E79;
+        background: #ff19b7;
         color: #ffffff;
       }
 

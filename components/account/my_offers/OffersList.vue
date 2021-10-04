@@ -542,7 +542,7 @@ export default {
           .views {
             padding: 10px 10px 0 0;
             span {
-              color: #009E79;
+              color: #ff19b7;
               font-weight: bold;
             }
           }
@@ -594,7 +594,7 @@ export default {
           }
           .status-active {
             i {
-              color: #009E79;
+              color: #ff19b7;
             }
           }
           .status-expired, .status-expired {

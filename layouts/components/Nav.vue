@@ -394,7 +394,7 @@ a {
         cursor: pointer;
 
         &:hover {
-          color: #009E79;
+          color: #ff19b7;
         }
       }
       .notifications {
@@ -415,14 +415,14 @@ a {
       outline: 0!important;
 
       &:hover {
-        color: #009E79;
+        color: #ff19b7;
       }
     }
 
     .add-offer {
       font-family: Mulish-Regular;
-      background: #009E79;
-      border-color: #009E79;
+      background: #ff19b7;
+      border-color: #ff19b7;
     }
   }
 }

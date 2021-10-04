@@ -26,10 +26,10 @@ export default {
     background-repeat: no-repeat;
     b {
       font-size: 46px;
-      color: #009E79;
+      color: #ff19b7;
     }
     a {
-      color: #009E79;
+      color: #ff19b7;
     }
   }
 </style>

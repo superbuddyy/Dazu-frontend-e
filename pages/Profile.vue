@@ -150,7 +150,7 @@ export default {
           }
         }
         span {
-          color: #009E79;
+          color: #ff19b7;
         }
       }
 
