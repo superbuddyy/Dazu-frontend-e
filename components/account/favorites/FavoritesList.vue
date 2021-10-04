@@ -42,7 +42,7 @@
           <el-tooltip content="Wyłącz/Włącz powiadomienia" placement="top">
             <toggle-button
               v-model="favorite.allow_notifications"
-              color="#009E79"
+              color="#ff19b7"
               :sync="true"
               :labels="{checked: 'Tak', unchecked: 'Nie'}"
               @change="updateNotifications($event, favorite.slug)"

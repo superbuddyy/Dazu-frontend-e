@@ -53,7 +53,7 @@ export default {
     width: 80%;
     margin: 0 auto;
     height: 40vh;
-    color: #009E79;
+    color: #ff19b7;
 
     p {
       color: #000000;

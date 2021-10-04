@@ -8,7 +8,7 @@
     >
       <el-card class="card-box">
         <div class="card-body">
-          <span>{{ item.name }}</span>
+          <div class="subscription-header">{{ item.name }}</div>
           <div class="bottom clearfix">
             <div class="price">
               <span>{{ item.price / 100 }}<sup>zł</sup></span>
@@ -22,12 +22,11 @@
             <div class="list-item">
               <i class="el-icon-star-on" /> {{ item.number_of_refreshes}} darmowe odświeżenia
             </div>
-            <div class="list-item" v-if="item.featured_on_search_results_and_categories === true">
-              <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii w wynikach
+            <div class="list-item" v-if="item.featured_on_search_results_and_categories === true && item.featured_on_homepage === false">
+              <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii w wynikach wyszukiwań i kategoriach
             </div>
             <div class="list-item" v-if="item.featured_on_homepage === true">
-              <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii na stronie, głównej w wynikach wyszukiwań i kategoriach
-
+              <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii na stronie głównej w wynikach wyszukiwań i kategoriach
             </div>
           </div>
         </div>
@@ -98,7 +97,7 @@ export default {
           padding: 2px 20px;
           i {
             font-weight: bold;
-            color: #009E79;
+            color: #ff19b7;
           }
         }
       }
@@ -111,7 +110,7 @@ export default {
         text-align: center;
         font-weight: bold;
         font-size: 50px;
-        color: #009E79;
+        color: #ff19b7;
         padding: 20px;
         sup {
           font-size: 12px;
@@ -128,10 +127,18 @@ export default {
       .active-text {
         text-transform: uppercase;
         text-align: center;
-        color: #009E79;
+        color: #ff19b7;
         margin: 10px 0 0 0;
       }
     }
+  }
+  .subscription-header {
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 1px;
   }
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-badge v-if="notifications.length !== 0" :value="amount" class="item">
-      <BellIcon :style="[showList ? {'color': '#009E79'} : {}]" class="notifications" @click="toggle" />
+      <BellIcon :style="[showList ? {'color': '#ff19b7'} : {}]" class="notifications" @click="toggle" />
     </el-badge>
-    <BellIcon v-if="notifications.length === 0" :style="[showList ? {'color': '#009E79'} : {}]" class="notifications" @click="toggle" />
+    <BellIcon v-if="notifications.length === 0" :style="[showList ? {'color': '#ff19b7'} : {}]" class="notifications" @click="toggle" />
     <div v-if="showList" v-click-outside="toggle" class="notifications-box">
       <div class="notifications-header">
         <span @click="deactivate()">Oznacz jako przeczytane</span>

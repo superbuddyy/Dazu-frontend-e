@@ -147,7 +147,7 @@ export default {
           }
 
           h2 {
-            color: #009E79;
+            color: #ff19b7;
           }
           p {
             color: #000000;
@@ -168,7 +168,7 @@ export default {
             align-items: center;
           }
           .el-button--primary {
-            background-color: #009E79!important;
+            background-color: #ff19b7!important;
             color: #ffffff!important;
           }
         }

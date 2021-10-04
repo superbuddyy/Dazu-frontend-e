@@ -209,7 +209,7 @@ export default {
       }
 
       .promoted-label {
-        background: #009E79;
+        background: #ff19b7;
       }
     }
 

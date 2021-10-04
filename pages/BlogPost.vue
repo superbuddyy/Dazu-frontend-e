@@ -78,7 +78,7 @@ export default {
     padding: 40px;
     width: 80%;
     margin: 0 auto;
-    color: #009E79;
+    color: #ff19b7;
 
     @media only screen and (max-width: 1360px) {
       width: 100%;

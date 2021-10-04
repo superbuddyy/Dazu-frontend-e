@@ -145,7 +145,7 @@ export default {
                 padding: 2px 20px;
                 i {
                   font-weight: bold;
-                  color: #009E79;
+                  color: #ff19b7;
                 }
               }
             }
@@ -158,7 +158,7 @@ export default {
               text-align: center;
               font-weight: bold;
               font-size: 36px;
-              color: #009E79;
+              color: #ff19b7;
               padding: 20px;
               sup {
                 font-size: 12px;
@@ -174,7 +174,7 @@ export default {
             .active-text {
               text-transform: uppercase;
               text-align: center;
-              color: #009E79;
+              color: #ff19b7;
               margin: 10px 0 0 0;
             }
           }

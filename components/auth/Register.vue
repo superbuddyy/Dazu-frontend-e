@@ -203,7 +203,7 @@ export default {
 
     a {
       text-transform: lowercase;
-      color: #009E79;
+      color: #ff19b7;
     }
   }
 
@@ -219,7 +219,7 @@ export default {
   .el-dialog__footer {
     text-align: center;
     .link {
-      color: #009E79;
+      color: #ff19b7;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
