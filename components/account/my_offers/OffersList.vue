@@ -24,6 +24,20 @@
       <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked">
         Odśwież
       </el-button>
+      Filtruj wg. agentów:
+      <el-select
+        v-model="current_agent"
+        filterable
+        :change="filterByUser()"
+        placeholder="Choose tags for your article">
+        <el-option
+          v-for="agent in agents"
+          :key="agent.id"
+          :label="agent.username"
+          :value="agent.username">
+          {{agent.username}}
+        </el-option>
+      </el-select>
     </div>
     <div v-loading="loading" class="loading">
       <div v-if="offers" class="offers-content">
@@ -31,6 +45,7 @@
           v-for="offer in offers"
           :key="offer.id"
           class="offer"
+          :class="[(current_agent === '' || offer.user_name === current_agent) ? 'offer' : 'offer-hide']"
         >
           <div class="subscription-badge">
             {{ offer.subscriptions[0].name }}
@@ -53,6 +68,7 @@
                 <el-button type="text" @click="showStats(offer.slug)">
                   Zobacz statystyki
                 </el-button>
+                <el-button type="info">{{offer.user_name}}</el-button>
               </div>
               <div class="expire-time">
                 <ExpireTime :expire-time="offer.expire_time" />
@@ -253,6 +269,9 @@ export default {
     deactivateOnePopoverVisible: false,
     deactivatePopoverVisible: false,
     checked_offers: [],
+    agents: [],
+    current_agent: '',
+    agents_names: [],
     offers: [],
     loading: true,
     total: 1,
@@ -301,11 +320,28 @@ export default {
       const result = await getOffers()
       if (result.status === 200) {
         this.offers = result.data.data
+        this.agents = []
+        this.offers.map((item) => {
+          if (!this.agents_names.includes(item.user_name)) {
+            this.agents.push({
+              id: item.user_id,
+              username: item.user_name
+            })
+            this.agents_names.push(item.user_name)
+          }
+        })
+
         this.total = result.data.last_page
         this.pageSize = result.data.per_page
         this.currentPage = result.data.current_page
         this.loading = false
       }
+    },
+    filterByUser () {
+      // current_agent = 'mark'
+      // console.log('filter by user triggered', this.current_agent)
+      // this.current_agent = 'mark'
+      console.log('done changing', this.current_agent)
     },
     checkAll (e) {
       if (!e) {

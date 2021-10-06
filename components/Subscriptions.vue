@@ -11,7 +11,7 @@
           <div class="subscription-header">{{ item.name }}</div>
           <div class="bottom clearfix">
             <div class="price">
-              <span>{{ item.price / 100 }}<sup>zł</sup></span>
+              <span>{{ item.price / 100 }} <sup>zł</sup></span>
             </div>
             <b>na {{ item.duration / 24 }} dni</b>
           </div>
@@ -74,7 +74,7 @@ export default {
   padding: 0 4vw;
 
   .active {
-    box-shadow: 0 0 0 2pt #5dca8c;
+    box-shadow: 0 0 0 2pt #ff19b7;
   }
 
   .sub-box {

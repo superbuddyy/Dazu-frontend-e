@@ -347,7 +347,7 @@
                 <div class="subscription-header">{{ subscription.name }}</div>
                 <div class="bottom clearfix">
                   <div class="price">
-                    <span>{{ subscription.price / 100 }} <sup>zł</sup></span>
+                    <span>{{ subscription.price / 100 }} <sup> zł</sup></span>
                   </div>
                   <b>na {{ subscription.duration / 24 }} dni</b>
                   <div class="list subscription-options">
@@ -490,7 +490,7 @@
           Spieszysz się? Aktywuj "<span>Pilne</span>"
         </div>
         <toggle-button
-          v-model="form.attributes[20]"
+          v-model="form.subscriptions[selectedSubscription].is_urgent"
           color="#ff19b7"
           :value="false"
           :sync="true"
@@ -1164,7 +1164,7 @@ export default {
     }
 
     .active {
-      box-shadow: 0 0 0 2pt #FF19B7;
+      box-shadow: 0 0 0 2pt #ff56c0;
     }
 
     .el-card {

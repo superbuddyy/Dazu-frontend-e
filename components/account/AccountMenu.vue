@@ -53,12 +53,12 @@ export default {
 
       &:hover {
         font-weight: bold;
-        background: #5dca8c42;
+        background: #ff19b742;
       }
     }
 
     .active {
-      background: #5dca8c42;
+      background: #ff19b742;
       font-weight: bold;
       text-decoration: underline;
     }

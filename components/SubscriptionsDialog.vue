@@ -15,7 +15,7 @@
               <span>{{ item.name }}</span>
               <div class="bottom clearfix">
                 <div class="price">
-                  <span>{{ item.price / 100 }}<sup>zł</sup></span>
+                  <span>{{ item.price / 100 }} <sup>zł</sup></span>
                 </div>
                 <b>na {{ item.duration / 24 }} dni</b>
               </div>
@@ -132,7 +132,7 @@ export default {
         margin-bottom: 10px;
 
         .active {
-          box-shadow: inset 0 0 0 2pt #5dca8c;
+          box-shadow: inset 0 0 0 2pt #ff19b7;
         }
 
         .card-box {
@@ -193,7 +193,7 @@ export default {
         display: flex;
         justify-content: center;
         .active {
-          box-shadow: inset 0 0 0pt 2pt #5dca8c;
+          box-shadow: inset 0 0 0pt 2pt #ff19b7;
         }
         .paypal {
           display: flex;

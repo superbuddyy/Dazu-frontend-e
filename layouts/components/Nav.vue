@@ -221,7 +221,7 @@ export default {
 
 .pulse-add {
   color: #ffffff;
-  background: rgb(0 158 121 / 80%);
+  background: rgb(255 25 183 / 80%);
   animation: pulse-add 2s infinite;
   border: none;
 }
@@ -229,17 +229,17 @@ export default {
 @keyframes pulse-add {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgb(0 158 121 / 70%);
+    box-shadow: 0 0 0 0 rgb(255 25 183 / 70%);
   }
 
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 12px rgb(0 158 121 / 0%);
+    box-shadow: 0 0 0 12px rgb(255 25 183 / 0%);
   }
 
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgb(0 158 121 / 0%);
+    box-shadow: 0 0 0 0 rgb(255 25 183 / 0%);
   }
 }
 
@@ -304,7 +304,7 @@ a {
   height: 80px;
 
   .logo {
-    color: #5dca8c;
+    color: #ff19b7;
     cursor: pointer;
     width: 25%;
     text-align: left;

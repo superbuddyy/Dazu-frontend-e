@@ -502,7 +502,7 @@ export default {
     .logo {
       font-weight: bold;
       font-size: 2em;
-      color: #5dca8c;
+      color: #ff19b7;
       cursor: pointer;
       text-align: left;
     }

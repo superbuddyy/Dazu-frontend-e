@@ -149,7 +149,7 @@ export default {
       }
 
       .info {
-        color: #5dca8c;
+        color: #ff19b7;
       }
 
       .warning {
