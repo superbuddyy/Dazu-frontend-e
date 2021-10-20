@@ -1266,19 +1266,27 @@ export default {
   }
 
   .subscription-box-0 {
-    height: 380px !important;
+    // height: 380px !important;
+    height: unset !important;
+    min-height: 550px;
   }
 
   .subscription-box-1 {
-    height: 420px !important;
+    // height: 420px !important;
+    height: unset !important;
+    min-height: 550px;
   }
 
   .subscription-box-2 {
-    height: 490px !important;
+    // height: 490px !important;
+    height: unset !important;
+    min-height: 550px;
   }
 
   .subscription-box-3 {
-    height: 490px !important;
+    // height: 490px !important;
+    height: unset !important;
+    min-height: 550px;
   }
   .starred {
     margin-bottom: 30px;
