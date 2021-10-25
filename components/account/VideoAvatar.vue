@@ -96,6 +96,15 @@ export default {
   },
   methods: {
     async addAvatar () {
+      this.videoLink = this.videoLink.trim()
+      if (typeof this.videoLink === 'undefined' || this.videoLink === null || this.videoLink === '') {
+        this.$message({
+          message: 'Wprowadź adres URL filmu',
+          type: 'error',
+          duration: 3000
+        })
+        return
+      }
       this.buyVisible = false
       this.loading = true
       const formData = new FormData()
