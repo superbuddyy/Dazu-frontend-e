@@ -20,6 +20,10 @@ export function remindPassword (data) {
   return apiClient.post('/api/auth/remind-password', data)
 }
 
+export function resendMail (data) {
+  return apiClient.post('/api/auth/resend-email', data)
+}
+
 export function getUser (data) {
   return apiClient.get('/api/user', data)
 }

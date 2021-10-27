@@ -31,11 +31,14 @@
       <div class="link" @click="openRemindPassword">
         Przypomnienie hasła
       </div>
+      <div class="link" @click="openResendMail">
+        Wyślij email ponownie
+      </div>
     </span>
   </el-dialog>
 </template>
 <script>
-import { csrf, remindPassword } from '@/api/auth'
+import { csrf, remindPassword, resendMail } from '@/api/auth'
 
 export default {
   props: {
@@ -93,6 +96,26 @@ export default {
           this.$message({
             type: 'success',
             message: 'Na podany adres email został wysłany link do resetu hasła: ' + value,
+            duration: 3000
+          })
+        }
+      }).catch(() => {
+      })
+    },
+    openResendMail () {
+      this.$emit('toggle-popup')
+      this.$prompt('Prosimy o wpisanie swojego adresu email w celu poczta aktywacyjna', 'Poczta aktywacyjna', {
+        confirmButtonText: 'Wyślij',
+        cancelButtonText: 'Zamknij',
+        inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+        inputErrorMessage: 'Nieprawidłowy adres email!',
+        inputPlaceholder: 'Email'
+      }).then(async ({ value }) => {
+        const result = await resendMail({ email: value })
+        if (result.status === 204 || result.status === 200) {
+          this.$message({
+            type: 'success',
+            message: 'Na podany adres e-mail został wysłany link do maila aktywacyjnego: ' + value,
             duration: 3000
           })
         }
