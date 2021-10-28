@@ -130,7 +130,11 @@ export default {
       } catch (_) {
         return false
       }
-      return url.protocol === 'http:' || url.protocol === 'https:'
+      if (url.protocol === 'http:' || url.protocol === 'https:') {
+        return url.hostname === 'youtu.be'
+      } else {
+        return true
+      }
     },
     async removeAvatar () {
       const result = await deleteAvatar('video_url')
