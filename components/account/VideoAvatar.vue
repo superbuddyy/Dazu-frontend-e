@@ -105,6 +105,14 @@ export default {
         })
         return
       }
+      if (!this.isValidHttpUrl(this.videoLink)) {
+        this.$message({
+          message: 'Wprowadź adres URL filmu',
+          type: 'error',
+          duration: 3000
+        })
+        return
+      }
       this.buyVisible = false
       this.loading = true
       const formData = new FormData()
@@ -114,6 +122,15 @@ export default {
       if (result.status === 200) {
         window.location.href = result.data.links[1].href
       }
+    },
+    isValidHttpUrl (string) {
+      let url
+      try {
+        url = new URL(string)
+      } catch (_) {
+        return false
+      }
+      return url.protocol === 'http:' || url.protocol === 'https:'
     },
     async removeAvatar () {
       const result = await deleteAvatar('video_url')

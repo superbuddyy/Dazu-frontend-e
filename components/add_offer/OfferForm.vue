@@ -295,6 +295,7 @@
           :remote-method="getLocations"
           :loading="locationsLoading"
           :debounce="500"
+          @change="showMap = true"
         >
           <el-option
             v-for="location in locations"
