@@ -53,7 +53,9 @@
           </el-select>
         </el-form-item>
         <div class="search">
-          <el-button @click="resetFilters">Wyczyść filtry</el-button>
+          <el-button @click="resetFilters">
+            Wyczyść filtry
+          </el-button>
           <el-button type="primary" @click="searchResults()">
             Szukaj
           </el-button>
@@ -146,13 +148,18 @@
           :ref="`marker-${offer.id}`"
           :lat-lng="[offer.lat, offer.lon]"
         >
-          <l-popup class="map-popup" @click.native="openOffer(offer.slug)">
+          <l-popup class="map-popup">
+            <!-- @click.native="openOffer(offer.slug)"> -->
             <div class="l-popup-content">
-              <div class="title">
+              <!-- <div class="title">
                 {{ offer.title }}
               </div>
               <Money
                 :money="offer.price"
+              /> -->
+              <ResultItem
+                :item="offer"
+                :is-link-activer="false"
               />
             </div>
           </l-popup>
@@ -236,13 +243,14 @@ import SaveFilters from '@/components/search/SaveFilters'
 import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
 import { setSearchDefaultData } from '../../helpers'
-
+import ResultItem from '~/components/search/ResultItem'
 export default {
   name: 'MapSearch',
   components: {
     Favorite,
     SaveFilters,
-    AttributeFilter
+    AttributeFilter,
+    ResultItem
   },
   props: {
     offers: {
