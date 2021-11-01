@@ -4,8 +4,9 @@
       Dodaj ogłoszenie
     </h2>
     <div class="account-types-list">
-      <Subscriptions
+      <SubscriptionsNew
         @set-active-item="setActiveItem"
+        @set-subscription-package="setSubscriptionPackage"
       />
       <el-button
         type="primary"
@@ -20,12 +21,12 @@
 </template>
 
 <script>
-import Subscriptions from '@/components/Subscriptions'
+import SubscriptionsNew from '@/components/SubscriptionsNew'
 
 export default {
   name: 'AccountTypeList',
   components: {
-    Subscriptions
+    SubscriptionsNew
   },
   data: () => ({
     active_item: null,
@@ -35,10 +36,15 @@ export default {
   }),
   methods: {
     async add () {
-      await this.$router.push('/dodaj-ogloszenie?option=' + this.active_item)
+      let url = '/dodaj-ogloszenie?'
+      url += 'option=' + this.active_item
+      await this.$router.push(url)
     },
     setActiveItem (id) {
       this.active_item = id
+    },
+    setSubscriptionPackage (form) {
+      localStorage.setItem('add-form', JSON.stringify(form))
     }
   }
 }
