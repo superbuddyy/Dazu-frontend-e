@@ -254,35 +254,48 @@
       />
       <DescriptionAttribute
         :value="form.description"
-        @set-value="form.description = $event"
+        @set-value="setDescValue"
       />
-      <Attribute
-        name="Link"
-        slug="link"
-        placeholder="do youtube, vimeo"
-        :value="form.links.video"
-        @set-value="form.links.video = $event"
-      />
-      <Attribute
-        name="Link"
-        slug="link"
-        placeholder="do youtube, vimeo"
-        :value="form.links.video_2"
-        @set-value="form.links.video_2 = $event"
-      />
-      <Attribute
-        name="Link"
-        slug="link"
-        placeholder="wirtualnego spaceru"
-        :value="form.links.walk_video"
-        @set-value="form.links.walk_video = $event"
-      />
+      <el-tooltip :content="linkLimitMsg" placement="top">
+        <Attribute
+          name="Link"
+          slug="link"
+          placeholder="do youtube, vimeo"
+          :value="form.links.video"
+          @set-value="form.links.video = $event"
+        />
+      </el-tooltip>
+      <el-tooltip :content="linkLimitMsg" placement="top">
+        <Attribute
+          name="Link"
+          slug="link"
+          placeholder="do youtube, vimeo"
+          :value="form.links.video_2"
+          @set-value="form.links.video_2 = $event"
+        />
+      </el-tooltip>
+      <el-tooltip :content="linkLimitMsg" placement="top">
+        <Attribute
+          name="Link"
+          slug="link"
+          placeholder="wirtualnego spaceru"
+          :value="form.links.walk_video"
+          @set-value="form.links.walk_video = $event"
+        />
+      </el-tooltip>
       <el-row>
         <el-col :span="24">
           <PhotoAttribute
             :file-list="fileList"
             @on-change="handleChangeImages"
           />
+        </el-col>
+      </el-row>
+      <el-row class="el-form-item__error" v-if="isPhotoLimitReached === true">
+        <el-col :span="24">
+          <el-form-item>
+            {{photoLimitMsg}}
+          </el-form-item>
         </el-col>
       </el-row>
       <el-form-item label="Lokalizacja" prop="location">
@@ -323,6 +336,7 @@
         <el-col :span="24">
           <el-form-item label="" class="visible-date">
             <div>Chcesz aby ogłoszenie pojawiło się w innym terminie?</div>
+            <div v-if="dateLimitMsg !== ''" class="el-form-item__error">{{dateLimitMsg}}</div>
             <el-date-picker
               v-model="form.visibleFromDate"
               type="datetime"
@@ -637,6 +651,7 @@ import { store, show, update } from '@/api/offer'
 import { getLocation } from '@/api/osm'
 import { mapOfferModelToOfferForm } from '@/helpers'
 import { index } from '@/api/subscriptions'
+import { getSettings } from '@/api/setting'
 import OfferTypeAttribute from '@/components/add_offer/attributes/OfferTypeAttribute'
 import Attribute from '@/components/add_offer/attributes/Attribute'
 import CategoryAttribute from '@/components/add_offer/attributes/CategoryAttribute'
@@ -791,7 +806,16 @@ export default {
         'user.password': { required: true, message: 'Hasło jest wymagane', trigger: 'change' },
         'user.rePassword': { required: true, message: 'Powtórz hasło jest wymagane', trigger: 'change' },
         'user.name': { required: true, message: 'Imię lub nazwa firmy jest wymagane', trigger: 'change' }
-      }
+      },
+      isPhotoLimitReached: false,
+      settingData: [],
+      photoLimitMsg: '',
+      linkLimitMsg: '',
+      dateLimitMsg: '',
+      photoPrice: 0,
+      linkPrice: 0,
+      datePrice: 0,
+      isLocalData: true
     }
   },
   computed: {
@@ -821,8 +845,21 @@ export default {
       this.labelPosition = 'top'
     }
     await this.getSubscriptions()
+    await this.getSettingsValues()
     if ('option' in this.$route.query) {
-      this.selectedSubscription = parseInt(this.$route.query.option)
+      this.selectedSubscription = parseInt(this.$route.query.option) ? parseInt(this.$route.query.option) : 1
+      let addPackage = localStorage.getItem('add-form') ? localStorage.getItem('add-form') : null
+      if (addPackage && this.selectedSubscription && this.isLocalData === true) {
+        console.log('inside the package')
+        addPackage = JSON.parse(addPackage)
+        this.isLocalData = false
+        this.form.subscriptions[this.selectedSubscription].has_raise_three = addPackage.subscriptions[this.selectedSubscription].has_raise_three
+        this.form.subscriptions[this.selectedSubscription].has_raise_one = addPackage.subscriptions[this.selectedSubscription].has_raise_one
+        this.form.subscriptions[this.selectedSubscription].is_urgent = addPackage.subscriptions[this.selectedSubscription].is_urgent
+        this.form.subscriptions[this.selectedSubscription].is_bargain = addPackage.subscriptions[this.selectedSubscription].is_bargain
+        this.form.subscriptions[this.selectedSubscription].has_raise_ten = addPackage.subscriptions[this.selectedSubscription].has_raise_ten
+        localStorage.removeItem('add-form')
+      }
     }
     if (this.$store.state.user.isLogged) {
       this.form.user.account_type = this.$store.state.user.roles[0]
@@ -1031,6 +1068,11 @@ export default {
     },
     handleChangeImages (files) {
       this.form.images = files
+      if (this.form.images.length >= 3) {
+        this.isPhotoLimitReached = true
+      } else {
+        this.isPhotoLimitReached = false
+      }
     },
     handleChangeAvatar (file) {
       this.form.user.avatar = file.raw
@@ -1041,6 +1083,28 @@ export default {
     },
     handleDownload (file) {
       //
+    },
+    async getSettingsValues () {
+      const result = await getSettings()
+      this.settingData = result.data
+      this.settingData.forEach((item, index) => {
+        item.value = (item.value / 100).toFixed(2)
+        if (item.name === 'photo.price') {
+          this.photoLimitMsg = `pierwsze 3 zdjecia sa darmowe kazde kolejne ${item.value} zł`
+          this.photoPrice = item.value
+        }
+        if (item.name === 'link.price') {
+          this.linkLimitMsg = `Każdy link jest płatny ${item.value} zł`
+          this.linkPrice = item.value
+        }
+        if (item.name === 'visible_from_date.price') {
+          this.dateLimitMsg = `Ta opcja jest płatna ${item.value} zł`
+          this.datePrice = item.value
+        }
+      })
+    },
+    setDescValue (value) {
+      this.form.description = value
     },
     centerUpdate (center) {
       this.currentCenter = center
