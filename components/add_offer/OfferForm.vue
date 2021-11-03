@@ -807,7 +807,7 @@ export default {
         'user.rePassword': { required: true, message: 'Powtórz hasło jest wymagane', trigger: 'change' },
         'user.name': { required: true, message: 'Imię lub nazwa firmy jest wymagane', trigger: 'change' }
       },
-      isPhotoLimitReached: false,
+      isPhotoLimitReached: true,
       settingData: [],
       photoLimitMsg: '',
       linkLimitMsg: '',
@@ -1068,11 +1068,11 @@ export default {
     },
     handleChangeImages (files) {
       this.form.images = files
-      if (this.form.images.length >= 3) {
+      /* if (this.form.images.length >= 3) {
         this.isPhotoLimitReached = true
       } else {
         this.isPhotoLimitReached = false
-      }
+      } */
     },
     handleChangeAvatar (file) {
       this.form.user.avatar = file.raw
