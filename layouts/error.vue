@@ -1,7 +1,8 @@
 <template>
   <div class="page404">
-    <b>404</b>
-    <div>Nie znaleziono strony</div>
+    <img src="~/assets/dazu_404.svg" alt="">
+    <!-- <b>404</b>
+    <div>Nie znaleziono strony</div> -->
     <div><a href="/">Kliknij</a> aby wrócić na stronę główną</div>
   </div>
 </template>
@@ -15,7 +16,8 @@ export default {
 <style lang="scss">
   .page404 {
     color: #ffffff;
-    height: calc(100vh - 274px);
+    // height: calc(100vh - 274px);
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
