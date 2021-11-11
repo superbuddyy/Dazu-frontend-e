@@ -33,5 +33,8 @@ export default {
     a {
       color: #ff19b7;
     }
+	img{
+      margin: 100px 0px 0px 0px;
+    }
   }
 </style>
