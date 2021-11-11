@@ -4,12 +4,15 @@
       <div v-if="offers.length === 0">
         Brak danych
       </div>
-      <div v-for="offer in offers" :key="offer.id" class="offer margin-box">
+      <div v-for="offer in offers" :key="offer.id" class="offer margin-box carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && offer.subscriptions[0]['featured_on_homepage'] === true ) ? 'featured_l' : '' ]">
         <div class="content">
           <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer">
+            <span class="featured_img_label" v-if="offer.subscriptions.length && offer.subscriptions[0]['featured_on_homepage'] === true">
+              <img src="~/assets/Star.svg" style="width: 24px;">
+            </span>
+            <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Oferta</span>
+            <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Pilne</span>
             <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
-              <span v-if="offer.is_argent" class="argent-label img-label">Pilne</span>
-              <span v-if="offer.is_promoted" class="promoted-label img-label">Wyróżnione</span>
             </div>
             <div v-if="offer.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}" />
             <div class="description">
@@ -137,6 +140,7 @@ export default {
       padding: 10px;
       margin: 10px;
       border: 2px solid #ffffff;
+      overflow: hidden;
       &:hover {
         border: 2px solid #f1f1f1;
       }
@@ -228,6 +232,50 @@ export default {
   .pagination-section {
     margin-top: 16px;
     text-align: center;
+  }
+  .carousel-cell.featured_l {
+    border: 2px solid #FFC500!important;
+    border-radius: 5px;
+  }
+  .carousel-cell.featured_l:hover {
+    border: 2px solid #FFC500!important;
+  }
+  .carousel-cell span.featured_img_label {
+    position: absolute;
+    z-index: 1;
+    right: 25px;
+    top: 25px;
+  }
+  .carousel-cell span.promoted-label.img-label {
+    transform: rotate(-45deg);
+    left: -46px;
+    top: 60px;
+    position: absolute;
+    font-weight: 700;
+    padding: 5px;
+    width: 240px;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    z-index: 1;
+    text-transform: uppercase;
+  }
+  .carousel-cell span.promoted-label.img-label.urgent_label {
+    background: #f91101;
+  }
+  .carousel-cell span.promoted-label.img-label.offer_label {
+    background: #FFC500;
+    color: #000;
+  }
+  .carousel-cell.urgent_l.offer_l .offer_label{
+    left: -56px;
+    top: 50px;
+    width: 250px;
+  }
+  .carousel-cell.urgent_l.offer_l .urgent_label{
+    left: -50px;
+    top: 30px;
+    width: 200px;
   }
 }
 </style>

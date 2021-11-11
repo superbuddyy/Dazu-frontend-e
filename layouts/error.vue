@@ -1,6 +1,6 @@
 <template>
   <div class="page404">
-    <img src="~/assets/dazu_404.svg" alt="">
+    <img class="pageImg" src="~/assets/dazu_404.svg" alt="">
     <!-- <b>404</b>
     <div>Nie znaleziono strony</div> -->
     <div><a href="/">Kliknij</a> aby wrócić na stronę główną</div>
@@ -15,7 +15,7 @@ export default {
 
 <style lang="scss">
   .page404 {
-    color: #ffffff;
+    // color: #ffffff;
     // height: calc(100vh - 274px);
     height: 100%;
     display: flex;
@@ -33,8 +33,11 @@ export default {
     a {
       color: #ff19b7;
     }
-	img{
+    img {
       margin: 60px 0px 0px 0px;
     }
+  }
+  .pageImg {
+    margin: 100px 0 0 0;
   }
 </style>
