@@ -34,7 +34,7 @@ export default {
       color: #ff19b7;
     }
 	img{
-      margin: 100px 0px 0px 0px;
+      margin: 60px 0px 0px 0px;
     }
   }
 </style>
