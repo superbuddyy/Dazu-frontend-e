@@ -22,7 +22,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('~assets/header-background.jpg');
+    //background-image: url('~assets/header-background.jpg');
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
