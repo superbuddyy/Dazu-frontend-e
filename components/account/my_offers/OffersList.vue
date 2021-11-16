@@ -1,6 +1,18 @@
 <template>
   <div class="offers-list">
     <div class="panel">
+      <el-row class="search-row">
+        <el-col :span="7">
+          <el-input v-model="searchTxt" placeholder="Search Keyword"/>
+        </el-col>
+        <el-col :span="2" class="search-box-btn">
+          <el-button type="primary" class="login-btn" @click="searchOfferList">
+            Search
+          </el-button>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="panel">
       <el-checkbox class="check-box" @change="checkAll">
         Zaznacz wszystkie
       </el-checkbox>
@@ -17,15 +29,16 @@
             Tak
           </el-button>
         </div>
-        <el-button slot="reference" type="danger" round icon="el-icon-circle-close">
+        <el-button slot="reference" type="danger" round icon="el-icon-circle-close" class="mr-5">
           Dezaktywuj
         </el-button>
       </el-popover>
-      <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked">
+      <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked" class="mr-5">
         Odśwież
       </el-button>
       Filtruj wg. agentów:
       <el-select
+        class="mr-5"
         v-model="current_agent"
         filterable
         :change="filterByUser()"
@@ -37,6 +50,21 @@
           :value="agent.username">
           {{agent.username}}
         </el-option>
+      </el-select>
+      <el-select
+        v-model="changeOrder"
+        class="location-input"
+        filterable
+        placeholder="Select sort options"
+        clearable
+        @change="changeOfferList"
+      >
+        <el-option
+          v-for="loc in sortOptions"
+          :key="loc.id"
+          :label="loc.name"
+          :value="loc.value"
+        />
       </el-select>
     </div>
     <div v-loading="loading" class="loading">
@@ -284,12 +312,66 @@ export default {
     paymentSlug: '',
     offerSlug: '',
     visibleStats: false,
-    statsOfferSlug: null
+    statsOfferSlug: null,
+    changeOrder: null,
+    searchTxt: '',
+    sortOptions: [
+      {
+        id: 1,
+        name: 'Newest',
+        value: 'desc'
+      },
+      {
+        id: 2,
+        name: 'Oldest',
+        value: 'asc'
+      },
+      {
+        id: 3,
+        name: 'Active',
+        value: 'active'
+      },
+      {
+        id: 4,
+        name: 'In-Active',
+        value: 'in_active'
+      },
+      {
+        id: 5,
+        name: 'In-Active by User',
+        value: 'in_active_by_user'
+      },
+      {
+        id: 6,
+        name: 'Pending',
+        value: 'pending'
+      },
+      {
+        id: 7,
+        name: 'Rejected',
+        value: 'rejected'
+      }
+    ]
   }),
   mounted () {
-    this.getOffers()
+    this.getOffers('')
   },
   methods: {
+    changeOfferList () {
+      let query = 'sort=' + this.changeOrder
+      if (this.searchTxt) {
+        query = query + '&keyword=' + this.searchTxt
+      }
+      this.getOffers(query)
+    },
+    searchOfferList () {
+      console.log(this.searchTxt)
+      let query = '&keyword=' + this.searchTxt
+      if (this.changeOrder) {
+        query = query + '&sort=' + this.changeOrder
+      }
+      this.getOffers(query)
+    },
     showStats (offerSlug) {
       this.visibleStats = true
       this.statsOfferSlug = offerSlug
@@ -316,8 +398,8 @@ export default {
       window.location.href = result.data.links[1].href
       this.loading = false
     },
-    async getOffers () {
-      const result = await getOffers()
+    async getOffers (query) {
+      const result = await getOffers(query)
       if (result.status === 200) {
         this.offers = result.data.data
         this.agents = []
@@ -466,7 +548,8 @@ export default {
   }
 
   .panel {
-    display: flex;
+    // display: flex;
+    margin-left: 75px;
     justify-content: center;
     align-items: center;
 
@@ -641,6 +724,16 @@ export default {
         }
       }
     }
+  }
+  .search-box-btn {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .search-row {
+    margin-bottom: 5px;
+  }
+  .mr-5 {
+    margin-right: 5px;
   }
 }
 </style>
