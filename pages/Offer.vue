@@ -73,7 +73,7 @@ export default {
     mapAttributes (attributes) {
       const mappedAttributes = []
       for (const attr of attributes) {
-        if ([2, 5, 6, 7, 8, 13].includes(attr.id)) {
+        if ([2, 5, 6, 7, 8, 13, 20].includes(attr.id)) {
           continue
         }
         if (attr.id in mappedAttributes) {

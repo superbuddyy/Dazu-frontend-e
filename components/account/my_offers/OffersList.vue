@@ -3,11 +3,11 @@
     <div class="panel">
       <el-row class="search-row">
         <el-col :span="7">
-          <el-input v-model="searchTxt" placeholder="Search Keyword"/>
+          <el-input v-model="searchTxt" placeholder="Poszukaj ogłoszenia"/>
         </el-col>
         <el-col :span="2" class="search-box-btn">
-          <el-button type="primary" class="login-btn" @click="searchOfferList">
-            Search
+          <el-button type="primary" loading class="login-btn" @click="searchOfferList">
+            Szukaj
           </el-button>
         </el-col>
       </el-row>
@@ -55,7 +55,7 @@
         v-model="changeOrder"
         class="location-input"
         filterable
-        placeholder="Select sort options"
+        placeholder="Wybierz opcje sortowania"
         clearable
         @change="changeOfferList"
       >
@@ -318,37 +318,37 @@ export default {
     sortOptions: [
       {
         id: 1,
-        name: 'Newest',
+        name: 'Najnowsze',
         value: 'desc'
       },
       {
         id: 2,
-        name: 'Oldest',
+        name: 'Najstarsze',
         value: 'asc'
       },
       {
         id: 3,
-        name: 'Active',
+        name: 'Aktywne',
         value: 'active'
       },
       {
         id: 4,
-        name: 'In-Active',
+        name: 'Dezaktywowane',
         value: 'in_active'
       },
       {
         id: 5,
-        name: 'In-Active by User',
+        name: 'Dezaktywowany przez użytkownika',
         value: 'in_active_by_user'
       },
       {
         id: 6,
-        name: 'Pending',
+        name: 'oczekuje na zatwierdzenie',
         value: 'pending'
       },
       {
         id: 7,
-        name: 'Rejected',
+        name: 'Odrzucony',
         value: 'rejected'
       }
     ]
@@ -679,7 +679,7 @@ export default {
         }
 
         .buttons {
-          width: 100%;
+          // width: 100%;
           display: flex;
           align-items: center;
           padding: 10px;

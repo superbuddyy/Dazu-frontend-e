@@ -56,7 +56,7 @@
       <div class="captcha">
         <vue-recaptcha
           ref="recaptcha"
-          sitekey="6LdeEN4UAAAAAJz2waONCAXZKdXsMOp7ZCbDcgbn"
+          :sitekey="siteKey"
           @verify="onVerify"
         />
       </div>
@@ -89,6 +89,11 @@ export default {
     phone: null,
     recaptcha: null
   }),
+  computed: {
+    siteKey () {
+      return this.$config.recaptchaSiteKey
+    }
+  },
   watch: {
     recaptcha (value) {
       if (value !== null) {

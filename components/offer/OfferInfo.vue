@@ -73,6 +73,12 @@
         Cena: <b><Money :money="offer.price" /></b>
       </div>
       <div class="tags">
+        <el-tag v-if="offer.is_urgent" type="danger" class="urgent_label">
+          PILNIE
+        </el-tag>
+        <el-tag v-if="offer.is_promoted" type="warn" class="offer_label">
+          OKAZJA
+        </el-tag>
         <el-tag v-if="offer.is_installments" type="info">
           Na raty
         </el-tag>
@@ -154,7 +160,7 @@
       <div class="captcha">
         <vue-recaptcha
           ref="recaptcha"
-          sitekey="6LdeEN4UAAAAAJz2waONCAXZKdXsMOp7ZCbDcgbn"
+          :sitekey="siteKey"
           @verify="onVerify"
         />
       </div>
@@ -233,6 +239,9 @@ export default {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.videoAvatarAvailable = false
       return this.offer.company.avatar
+    },
+    siteKey () {
+      return this.$config.recaptchaSiteKey
     }
   },
   watch: {
@@ -422,6 +431,14 @@ export default {
       .offer-map {
         height: 300px;
       }
+    }
+    .urgent_label {
+      background: #FF4800 !important;
+      color: #fff !important;
+    }
+    .offer_label {
+      background: #FFE000 !important;
+      color: #000 !important;
     }
   }
 </style>

@@ -41,7 +41,7 @@
         <div class="captcha">
           <vue-recaptcha
             ref="recaptcha"
-            sitekey="6LdeEN4UAAAAAJz2waONCAXZKdXsMOp7ZCbDcgbn"
+            :sitekey="siteKey"
             @verify="onVerify"
           />
         </div>
@@ -101,6 +101,11 @@ export default {
       }
     }
   },
+  computed: {
+    siteKey () {
+      return this.$config.recaptchaSiteKey
+    }
+  },
   watch: {
     'form.date' (value) {
       if (this.datetimeForm) {
@@ -120,7 +125,13 @@ export default {
       }
     }
   },
+  mounted () {
+    this.default()
+  },
   methods: {
+    default () {
+      this.form.wantToSee = true
+    },
     active (option) {
       if (option === 2) {
         this.datetimeForm = true
@@ -190,6 +201,7 @@ export default {
     .captcha {
       display: flex;
       justify-content: center;
+      margin-top: 100px;
     }
 
   }

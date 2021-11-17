@@ -99,7 +99,7 @@ export default {
 
 <style lang="scss">
 .offers-details {
-  display: flex;
+  display: inline;
   width: 60%;
   flex-direction: column;
 

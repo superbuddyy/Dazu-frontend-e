@@ -30,6 +30,8 @@ export default {
         this.local_value = this.value
         this.$emit('set-value', value)
       }
+      /* this.local_value = this.value
+      this.$emit('set-value', value) */
     },
     local_value (value) {
       this.$emit('set-value', value)

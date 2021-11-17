@@ -8,8 +8,8 @@ export function getProfilePage (id) {
   return apiClient.get('/api/profile/' + id)
 }
 
-export function getOffers () {
-  return apiClient.get('/api/user/offers')
+export function getOffers (query = '') {
+  return apiClient.get('/api/user/offers?' + query)
 }
 
 export function updateProfile (data) {

@@ -21,7 +21,10 @@ export default {
   css: [
     // 'element-ui/lib/theme-chalk/index.css'
     '~/assets/index.css',
-    '~/assets/fonts.css'
+    '~/assets/fonts.css',
+    // '~/assets/buttons/normalize.css',
+    // '~/assets/buttons/demo.css',
+    // '~/assets/buttons/component.css'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -31,6 +34,10 @@ export default {
     '~/plugins/click-outside.js',
     '~/plugins/storage',
     '~/plugins/html-safe',
+    // '~/plugins/modernizr.custom.js',
+    // '~/plugins/classie.js',
+    // '~/plugins/progressButton.js',
+    // '~/plugins/progressButtonScript.js',
     { src: '~/plugins/flickity', ssr: false },
     { src: '~/plugins/toggle-btn', ssr: false },
     { src: '~/plugins/vue2-editor', ssr: false }
@@ -61,7 +68,8 @@ export default {
   publicRuntimeConfig: {
     assetsUrl: process.env.VUE_APP_ASSETS_BASE_URL,
     baseUrl: process.env.VUE_APP_BASE_API,
-    mapStyle: process.env.VUE_APP_MAP_STYLE
+    mapStyle: process.env.VUE_APP_MAP_STYLE,
+    recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY
   },
 
   proxy: {
