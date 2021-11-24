@@ -286,6 +286,7 @@
       <el-row>
         <el-col :span="24">
           <PhotoAttribute
+            fileLabel="Zdjęcia"
             :file-list="fileList"
             @on-change="handleChangeImages"
           />
@@ -296,6 +297,16 @@
           <el-form-item>
             {{photoLimitMsg}}
           </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <PhotoAttribute
+            fileLabel="plan projektu"
+            :file-list="projectFileList"
+            :limit="2"
+            @on-change="handleChangeProjectImages"
+          />
         </el-col>
       </el-row>
       <el-form-item label="Lokalizacja" prop="location">
@@ -738,6 +749,7 @@ export default {
         location: '',
         mainImage: [],
         images: [],
+        projectPlans: [],
         user: {
           account_type: 'user',
           name: '',
@@ -785,6 +797,7 @@ export default {
       dialogVisible: false,
       disabled: false,
       fileList: [],
+      projectFileList: [],
       mainPhoto: [],
       marker: null,
       labelPosition: 'right',
@@ -1034,7 +1047,12 @@ export default {
           formData.append(`images[${image}]`, this.form.images[image].raw)
         }
       }
-
+      for (const image in this.form.projectPlans) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (this.form.projectPlans.hasOwnProperty(image)) {
+          formData.append(`projectPlans[${image}]`, this.form.projectPlans[image].raw)
+        }
+      }
       if (!this.$store.state.user.isLogged) {
         formData.append('email', this.form.user.email)
         formData.append('password', this.form.user.password)
@@ -1073,6 +1091,9 @@ export default {
       } else {
         this.isPhotoLimitReached = false
       } */
+    },
+    handleChangeProjectImages (files) {
+      this.form.projectPlans = files
     },
     handleChangeAvatar (file) {
       this.form.user.avatar = file.raw

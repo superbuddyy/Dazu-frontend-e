@@ -173,6 +173,7 @@ export const actions = {
           commit('SET_VIDEO_AVATAR', null)
           resolve()
           removeToken()
+          localStorage.removeItem('recent_search')
         })
         .catch((error) => {
           reject(error)

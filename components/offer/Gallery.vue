@@ -63,6 +63,14 @@ export default {
           { file: '' }
         ]
       }
+    },
+    projectPlans: {
+      type: Array,
+      default () {
+        return [
+          { file: '' }
+        ]
+      }
     }
   },
   data () {
@@ -77,6 +85,11 @@ export default {
         initialSlide: 0,
         arrows: true
       }
+    }
+  },
+  mounted () {
+    if (this.projectPlans) {
+      this.photos = this.photos.concat(this.projectPlans)
     }
   },
   methods: {

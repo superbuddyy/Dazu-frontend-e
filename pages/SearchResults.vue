@@ -78,7 +78,7 @@ import SearchOffers from '@/components/search/SearchOffers'
 import Filters from '@/components/search/Filters'
 import SaveFilters from '@/components/search/SaveFilters'
 import MapSearch from '@/components/search/MapSearch'
-import { search } from '@/api/search'
+import { search, postrecentsearch } from '@/api/search'
 
 export default {
   name: 'SearchResults',
@@ -148,7 +148,7 @@ export default {
     async loadMore (query) {
       this.loadingMore = true
       await this.$router.push({ query })
-      const mappedQuery = Object.keys(query).map(key => key + '=' + query[key]).join('&')
+      const mappedQuery = Object.keys(query).map(key => key + '=' + decodeURIComponent(query[key])).join('&')
       const result = await search(mappedQuery)
       if (result.status === 200) {
         for (const offer of result.data.data) {
@@ -168,7 +168,14 @@ export default {
     async searchOffers (page, query) {
       this.loading = true
       this.$route.query.page = page
-      const mappedQuery = Object.keys(query).map(key => key + '=' + query[key]).join('&')
+      const mappedQuery = Object.keys(query).map(key => key + '=' + decodeURIComponent(query[key])).join('&')
+      if (query['location[lat]'] && query['location[lon]'] && query['location[display_name]']) {
+        if (this.$store.state.user.isLogged) {
+          this.postRecentSearch(query['location[display_name]'], query['location[lat]'], query['location[lon]'])
+        } else {
+          this.postLocalRecentSearch(query['location[display_name]'], query['location[lat]'], query['location[lon]'])
+        }
+      }
       const result = await search(mappedQuery)
       if (result.status === 200) {
         this.offers = result.data.data
@@ -178,6 +185,33 @@ export default {
         this.lastPage = result.data.last_page
         this.loading = false
       }
+    },
+    async postRecentSearch (displayName, lat, lon) {
+      const obj = {
+        display_name: decodeURIComponent(displayName),
+        lat: decodeURIComponent(lat),
+        lon: decodeURIComponent(lon)
+      }
+      const result = await postrecentsearch(obj)
+      console.log(result.status)
+      console.log(result.data)
+    },
+    postLocalRecentSearch (displayName, lat, lon) {
+      const obj = {
+        display_name: decodeURIComponent(displayName),
+        lat: decodeURIComponent(lat),
+        lon: decodeURIComponent(lon)
+      }
+      const localData = localStorage.getItem('recent_search') ? JSON.parse(localStorage.getItem('recent_search')) : []
+      const f = localData.find(f => f.display_name === displayName && f.lat === lat && f.lon === lon)
+      console.log(f)
+      if (!f) {
+        localData.push(obj)
+      }
+      if (localData.length > 5) {
+        localData.splice(0, 1)
+      }
+      localStorage.setItem('recent_search', JSON.stringify(localData))
     }
   }
 }

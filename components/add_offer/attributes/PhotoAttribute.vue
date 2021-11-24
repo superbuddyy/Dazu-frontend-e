@@ -1,11 +1,11 @@
 <template>
-  <el-form-item label="Zdjęcia" class="upload-images">
+  <el-form-item :label="fileLabel" class="upload-images">
     <el-upload
       action="#"
       :show-file-list="false"
       list-type="picture-card"
       accept="image/jpeg,image/png"
-      :limit="10"
+      :limit="limit"
       :multiple="true"
       :on-preview="handlePictureCardPreview"
       :on-change="handleChange"
@@ -42,6 +42,18 @@ export default {
       type: Array,
       default () {
         return []
+      }
+    },
+    fileLabel: {
+      type: String,
+      default () {
+        return 'Zdjęcia'
+      }
+    },
+    limit: {
+      type: Number,
+      default () {
+        return 10
       }
     }
   },
@@ -91,7 +103,7 @@ export default {
     },
     limitExceed () {
       this.$message({
-        message: 'Możesz dodać maksymalnie 10 zdjęć!',
+        message: 'Możesz dodać maksymalnie ' + this.limit + ' zdjęć!',
         type: 'warning',
         duration: 3000
       })

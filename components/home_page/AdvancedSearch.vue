@@ -31,8 +31,11 @@
           v-for="loc in locations"
           :key="loc.osm_id"
           :label="loc.display_name"
-          :value="loc.lat + '-' + loc.lon + '-' + loc.display_name"
+          :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
         />
+        <el-button v-if="isClearButton" class="clr-margin-btn" @click="clearRecentSearch">
+          wyczyść
+        </el-button>
       </el-select>
       <el-button type="primary plain" @click="onSearch">
         Szukaj
@@ -118,7 +121,7 @@
 </template>
 
 <script>
-import { getFilters } from '@/api/search'
+import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocationReverse, getLocation } from '@/api/osm'
 import * as Cookies from 'js-cookie'
 import { buildSearchQuery } from '@/helpers'
@@ -147,6 +150,7 @@ export default {
       },
       locations: [],
       locationsLoading: false,
+      isClearButton: false,
       filters_backup: {},
       filters: {
         price: {
@@ -217,13 +221,18 @@ export default {
     if (this.onlyAdvanced) {
       this.toggleAdvanced()
     }
+    if (this.$store.state.user.isLogged) {
+      this.getRecentSearch()
+    } else {
+      this.getLocalRecentSearch()
+    }
     this.getFilters()
     if (!Cookies.getJSON('user-location')) {
       navigator.geolocation.getCurrentPosition(this.successGetLocation, this.errorGetLocation, this.getLocationOptions)
     } else {
       this.locations = Cookies.getJSON('user-location')
-      this.location = this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name
-      this.setLocation(this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name)
+      this.location = this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name
+      this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
     }
   },
   methods: {
@@ -268,6 +277,7 @@ export default {
         const locations = await getLocation(locationName)
         if (locations.data) {
           this.locationsLoading = false
+          this.isClearButton = false
           this.locations = locations.data.filter((item) => {
             return item.display_name.toLowerCase()
           })
@@ -278,7 +288,7 @@ export default {
     },
     setLocation (e) {
       if (e) {
-        const coords = e.split('-')
+        const coords = e.split('*')
         this.search.location.lat = coords[0]
         this.search.location.lon = coords[1]
         this.search.location.display_name = coords[2]
@@ -299,8 +309,42 @@ export default {
       }
     },
     onSearch () {
+      console.log(buildSearchQuery(this.search))
       this.$router.push({ path: 'szukaj', query: buildSearchQuery(this.search) })
       this.$emit('close')
+    },
+    async getRecentSearch () {
+      console.log('test')
+      const result = await getrecentsearch()
+      console.log(result.status)
+      console.log(result.data)
+      if (result.status === 200) {
+        this.locations = result.data
+        this.isClearButton = true
+      }
+    },
+    getLocalRecentSearch () {
+      const localData = localStorage.getItem('recent_search') ? JSON.parse(localStorage.getItem('recent_search')) : []
+      if (localData && localData.length) {
+        this.locations = localData
+        this.isClearButton = true
+      }
+    },
+    async deleteRecentSearch () {
+      const result = await deleterecentsearch()
+      console.log(result.status)
+      console.log(result.data)
+    },
+    deleteLocalRecentSearch () {
+      localStorage.removeItem('recent_search')
+    },
+    clearRecentSearch () {
+      if (this.$store.state.user.isLogged) {
+        this.deleteRecentSearch()
+      } else {
+        this.deleteLocalRecentSearch()
+      }
+      this.locations = []
     }
   }
 }
@@ -460,7 +504,11 @@ export default {
     }
   }
 }
-
+.clr-margin-btn {
+  margin: 18px !important;
+  border-radius: 25px;
+  border: 1px solid red;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: 1s;

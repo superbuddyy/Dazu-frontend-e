@@ -124,9 +124,9 @@ export function buildSearchQuery (searchParams) {
           searchParams[searchParam].lat !== null &&
           searchParams[searchParam].long !== null
         ) {
-          params[searchParam + '[lat]'] = searchParams[searchParam].lat
-          params[searchParam + '[lon]'] = searchParams[searchParam].lon
-          params[searchParam + '[display_name]'] = searchParams[searchParam].display_name
+          params[searchParam + '[lat]'] = encodeURIComponent(searchParams[searchParam].lat)
+          params[searchParam + '[lon]'] = encodeURIComponent(searchParams[searchParam].lon)
+          params[searchParam + '[display_name]'] = encodeURIComponent(searchParams[searchParam].display_name)
           continue
         }
 

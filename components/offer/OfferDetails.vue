@@ -5,6 +5,7 @@
         v-if="offer.main_photo"
         :main-photo="offer.main_photo"
         :photos="offer.photos"
+        :projectPlans="offer.project_plan_photos"
       />
       <Map
         v-if="!offer.main_photo"

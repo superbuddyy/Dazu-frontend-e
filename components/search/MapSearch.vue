@@ -29,7 +29,7 @@
               v-for="loc in locations"
               :key="loc.osm_id"
               :label="loc.display_name"
-              :value="loc.lat + '-' + loc.lon + '-' + loc.display_name"
+              :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
             />
           </el-select>
         </el-form-item>
@@ -361,7 +361,7 @@ export default {
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
       this.locations = [{ lat: this.search.location.lat, lon: this.search.location.lon, display_name: this.search.location.display_name }]
-      this.setLocation(this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name)
+      this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
     }
   },
   methods: {
@@ -446,7 +446,7 @@ export default {
     },
     setLocation (e) {
       if (e) {
-        const coords = e.split('-')
+        const coords = e.split('*')
         this.location.lat = coords[0]
         this.location.lon = coords[1]
       } else {

@@ -74,7 +74,7 @@
       </div>
       <div class="tags">
         <el-tag v-if="offer.is_urgent" type="danger" class="urgent_label">
-          PILNIE
+          PILNE
         </el-tag>
         <el-tag v-if="offer.is_promoted" type="warn" class="offer_label">
           OKAZJA

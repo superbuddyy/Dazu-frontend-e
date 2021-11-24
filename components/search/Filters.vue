@@ -39,7 +39,7 @@
                 v-for="loc in locations"
                 :key="loc.osm_id"
                 :label="loc.display_name"
-                :value="loc.lat + '-' + loc.lon + '-' + loc.display_name"
+                :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
               />
             </el-select>
           </el-form-item>
@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import { getFilters } from '@/api/search'
+import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocation } from '@/api/osm'
 import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
@@ -152,6 +152,7 @@ export default {
     }
   },
   mounted () {
+    // this.getRecentSearch()
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
       this.locations = [{
@@ -159,7 +160,7 @@ export default {
         lon: this.search.location.lon,
         display_name: this.search.location.display_name
       }]
-      this.setLocation(this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name)
+      this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
     }
   },
   methods: {
@@ -196,7 +197,7 @@ export default {
     setLocation (e) {
       this.search.location = {}
       if (e) {
-        const coords = e.split('-')
+        const coords = e.split('*')
         this.search.location.lat = coords[0]
         this.search.location.lon = coords[1]
         this.search.location.display_name = coords[2]
@@ -205,6 +206,20 @@ export default {
         this.search.location.lon = null
         this.search.location.display_name = null
       }
+    },
+    async getRecentSearch () {
+      console.log('test')
+      const result = await getrecentsearch()
+      console.log(result.status)
+      console.log(result.data)
+      if (result.status === 200) {
+        this.locations = result.data
+      }
+    },
+    async deleteRecentSearch () {
+      const result = await deleterecentsearch()
+      console.log(result.status)
+      console.log(result.data)
     }
   }
 }
