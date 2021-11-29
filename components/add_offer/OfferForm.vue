@@ -305,6 +305,7 @@
             fileLabel="plan projektu"
             :file-list="projectFileList"
             :limit="2"
+            :isProjectPlan="true"
             @on-change="handleChangeProjectImages"
           />
         </el-col>
@@ -325,7 +326,7 @@
             v-for="location in locations"
             :key="location.osm_id"
             :label="location.display_name"
-            :value="location.lat + '-' + location.lon + '-' + location.display_name"
+            :value="location.lat + '*' + location.lon + '*' + location.display_name"
           />
         </el-select>
         <l-map
@@ -882,14 +883,21 @@ export default {
       if (result.status === 200) {
         this.viewType = 'update'
         this.offer = result.data
-        this.form = this.fillForm(result.data)
+        const eFormData = this.fillForm(result.data)
+        for (const e in eFormData) {
+          console.log(e)
+          console.log(eFormData[e])
+          this.form[e] = eFormData[e]
+        }
+        // this.form = eFormData
         this.fileList = this.form.images
+        this.projectFileList = this.form.projectPlans
         this.locations = [{
           lat: this.offer.location.lat,
           lon: this.offer.location.lon,
           display_name: this.offer.location.name
         }]
-        this.form.location = this.offer.location.lat + '-' + this.offer.location.lon + '-' + this.offer.location.name
+        this.form.location = this.offer.location.lat + '*' + this.offer.location.lon + '*' + this.offer.location.name
       }
     }
   },
@@ -901,7 +909,7 @@ export default {
       }
     },
     getLatLon (location) {
-      const coords = location.split('-')
+      const coords = location.split('*')
       return [coords[0], coords[1]]
     },
     onSubmit (preview) {
@@ -922,9 +930,9 @@ export default {
     },
     changeLatLngAfterDrag (event) {
       const latLng = this.$refs.marker.mapObject.getLatLng()
-      const location = this.form.location.split('-')
+      const location = this.form.location.split('*')
       this.locations = [{ lat: latLng.lat, lng: latLng.lng, display_name: location[2] }]
-      this.form.location = latLng.lat + '-' + latLng.lng + '-' + location[2]
+      this.form.location = latLng.lat + '*' + latLng.lng + '*' + location[2]
     },
     async getLocations (locationName) {
       if (locationName !== '') {
@@ -1011,11 +1019,11 @@ export default {
       formData.append('description', this.form.description)
       formData.append('price', parseInt(this.form.price.toString().replace(/\s/g, '')) * 100)
 
-      const location = this.form.location.split('-')
-      formData.append('lat', '223')
-      formData.append('lon', '222')
-      // formData.append('lat', location[0])
-      // formData.append('lon', location[1])
+      const location = this.form.location.split('*')
+      // formData.append('lat', '223')
+      // formData.append('lon', '222')
+      formData.append('lat', location[0])
+      formData.append('lon', location[1])
       formData.append('location_name', location[2])
       if (this.form.links.video) {
         formData.append('links[video]', this.form.links.video)

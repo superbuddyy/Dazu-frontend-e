@@ -7,6 +7,9 @@
       <div class="block">
         <el-avatar :size="60" :src="avatarUrl" />
       </div>
+      <div class="check">
+        <el-checkbox v-model="checkStatus" @change="changeAvatarStatus" />
+      </div>
     </div>
     <el-popover
       v-model="buyVisible"
@@ -60,7 +63,7 @@
 </template>
 
 <script>
-import { storeAvatar, deleteAvatar } from '@/api/user'
+import { storeAvatar, deleteAvatar, updateDefaultAvatar } from '@/api/user'
 
 export default {
   name: 'Avatar',
@@ -68,7 +71,9 @@ export default {
     buyVisible: false,
     deleteAvatarVisible: false,
     avatar: [],
-    loading: false
+    loading: false,
+    checkValue: 'photo',
+    checkStatus: false
   }),
   computed: {
     avatarUrl () {
@@ -79,6 +84,14 @@ export default {
       }
       return user.avatar ? user.avatar : defaultAvatar
     }
+  },
+  watch: {
+    '$store.state.user.default_avatar' () {
+      this.checkDefaultAvatar()
+    }
+  },
+  mounted () {
+    this.checkDefaultAvatar()
   },
   methods: {
     async addAvatar (file) {
@@ -101,6 +114,32 @@ export default {
           type: 'success',
           duration: 3000
         })
+      }
+    },
+    checkDefaultAvatar () {
+      const user = this.$store.state.user
+      console.log('user local')
+      console.log(user)
+      console.log(user.default_avatar === 'photo')
+      if (user.default_avatar === 'photo') {
+        this.checkStatus = true
+      } else {
+        this.checkStatus = false
+      }
+    },
+    async changeAvatarStatus (e) {
+      if (e) {
+        const result = await updateDefaultAvatar({ default_avatar: 'photo' })
+        if (result.status === 200) {
+          this.$store.dispatch('user/setDefaultAvatar', 'photo')
+          this.$message({
+            message: 'Changed avatar status',
+            type: 'success',
+            duration: 3000
+          })
+        }
+      } else {
+        this.checkStatus = true
       }
     }
   }

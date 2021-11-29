@@ -17,10 +17,10 @@
     </el-upload>
     <draggable v-model="localFileList" class="drag-images" @end="handleMove">
       <transition-group>
-        <div v-for="(element, index) in localFileList" :key="index+1" class="img-box">
+        <div v-for="(element, index) in localFileList" :key="index+1" class="img-box" :class="[ isProjectPlan === true ? 'no-bor-img-box' : '' ]">
           <i class="el-icon-delete-solid" @click="removeImage(index)" />
           <img :src="element.url" alt="test">
-          <div v-if="index === 0" class="name">
+          <div v-if="index === 0 && isProjectPlan === false" class="name">
             Zdjęcie główne
           </div>
         </div>
@@ -54,6 +54,12 @@ export default {
       type: Number,
       default () {
         return 10
+      }
+    },
+    isProjectPlan: {
+      type: Boolean,
+      default () {
+        return false
       }
     }
   },
@@ -134,7 +140,10 @@ export default {
     flex-wrap: wrap;
     align-items: flex-start;
   }
-
+  .no-bor-img-box {
+    border: unset !important;
+    background-color: unset !important;
+  }
   .img-box {
     //overflow: hidden;
     background-color: #fff;

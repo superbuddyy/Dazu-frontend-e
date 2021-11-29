@@ -18,6 +18,9 @@
         <i class="el-icon-video-play video-icon" />
         <el-avatar :size="60" :src="videoAvatarUrl" />
       </div>
+      <div class="check">
+        <el-checkbox v-model="checkStatus" @change="changeAvatarStatus" />
+      </div>
     </div>
     <el-popover
       v-model="buyVisible"
@@ -68,7 +71,7 @@
 </template>
 
 <script>
-import { storeAvatar, deleteAvatar } from '@/api/user'
+import { storeAvatar, deleteAvatar, updateDefaultAvatar } from '@/api/user'
 import { generatePhotoFromYoutubeLink } from '@/helpers'
 
 export default {
@@ -77,7 +80,9 @@ export default {
     deleteAvatarVisible: false,
     videoLink: '',
     buyVisible: false,
-    loading: false
+    loading: false,
+    checkValue: 'photo',
+    checkStatus: false
   }),
   computed: {
     videoAvatarUrl () {
@@ -93,6 +98,14 @@ export default {
 
       return ''
     }
+  },
+  watch: {
+    '$store.state.user.default_avatar' () {
+      this.checkDefaultAvatar()
+    }
+  },
+  mounted () {
+    this.checkDefaultAvatar()
   },
   methods: {
     async addAvatar () {
@@ -146,6 +159,33 @@ export default {
           type: 'success',
           duration: 3000
         })
+      }
+    },
+    checkDefaultAvatar () {
+      const user = this.$store.state.user
+      console.log('user local')
+      console.log(user)
+      console.log(user.default_avatar === 'video')
+      if (user.default_avatar === 'video') {
+        this.checkStatus = true
+      } else {
+        this.checkStatus = false
+      }
+    },
+    async changeAvatarStatus (e) {
+      console.log(e)
+      if (e) {
+        const result = await updateDefaultAvatar({ default_avatar: 'video' })
+        if (result.status === 200) {
+          this.$store.dispatch('user/setDefaultAvatar', 'video')
+          this.$message({
+            message: 'Changed avatar status',
+            type: 'success',
+            duration: 3000
+          })
+        }
+      } else {
+        this.checkStatus = true
       }
     }
   }

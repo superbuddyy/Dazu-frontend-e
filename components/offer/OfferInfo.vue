@@ -31,20 +31,20 @@
     </div>
     <div class="info-body">
       <div class="personal-data">
-        <div v-if="offer.company" class="avatar">
+        <div v-if="offer.company && offer.user.type === 'company'" class="avatar">
           <Avatar
             :company="offer.company"
             :user="offer.user"
           />
         </div>
         <div v-if="offer.user" class="right-data">
-          <div v-if="offer.company !== null" class="company-name">
+          <div v-if="offer.company && offer.user.type === 'company'" class="company-name">
             <nuxt-link :to="'/profil/' + offer.user.id">
               {{ offer.company.name }}
             </nuxt-link>
           </div>
           <div
-            v-if="offer.user.type === 'user' && offer.user.type === 'agent'"
+            v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin') && offer.company === null"
             class="agent"
           >
             <Avatar

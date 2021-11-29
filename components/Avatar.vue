@@ -1,17 +1,24 @@
 <template>
   <div class="avatar-container">
-    <div
+    <!-- <div
       :class="[ company && isCompanyUser ? 'avatar-img company-avatar' : 'avatar-img agent-avatar-img']"
       :style="{backgroundImage: 'url(' + avatarUrl + ')'}"
       @click="openPhotoDialog()"
     >
       <img v-if="videoAvatarUrl && company" src="~/assets/play-icon.svg" class="video-icon">
+    </div> -->
+    <div
+      v-if="avatarUrl"
+      :class="[ company && isCompanyUser ? 'avatar-img company-avatar' : 'avatar-img agent-avatar-img']"
+      :style="{backgroundImage: 'url(' + avatarUrl + ')'}"
+      @click="openPhotoDialog()"
+    >
+      <img v-if="videoAvatarUrl && defaultAvatarType === 'video'" src="~/assets/play-icon.svg" class="video-icon">
     </div>
-
     <PhotoDialog
       :visible="photoDialog"
       :img-path="avatarUrl"
-      :link="videoAvatarUrl"
+      :link="videoUrl"
       @close="photoDialog = false"
     />
   </div>
@@ -34,7 +41,7 @@ export default {
       }
     },
     company: {
-      type: [Object, Array],
+      type: Object,
       default () {
         return null
       }
@@ -46,15 +53,23 @@ export default {
       companyAvatar: null,
       companyVideoAvatar: null,
       userAvatar: null,
-      userVideoAvatar: null
+      userVideoAvatar: null,
+      userVideoUrl: null,
+      defaultAvatar: null
     }
   },
   computed: {
     avatarUrl () {
-      return this.companyAvatar === null ? this.userAvatar : this.companyAvatar
+      // return this.companyAvatar === null ? this.userAvatar : this.companyAvatar
+      return this.defaultAvatar === 'video' ? this.userVideoAvatar : this.userAvatar
+      // return this.userAvatar
     },
     videoAvatarUrl () {
-      return this.companyVideoAvatar === null ? this.userVideoAvatar : this.companyVideoAvatar
+      // return this.companyVideoAvatar === null ? this.userVideoAvatar : this.companyVideoAvatar
+      return this.userVideoAvatar
+    },
+    videoUrl () {
+      return this.userVideoUrl
     },
     isCompanyUser () {
       if (this.user) {
@@ -67,14 +82,50 @@ export default {
         return generatePhotoFromYoutubeLink(this.company.video_avatar)
       }
       return null
+    },
+    defaultAvatarType () {
+      return this.defaultAvatar
     }
   },
   mounted () {
-    this.setAvatars()
+    this.setAvatarsV1()
+    // this.setUserAvatars()
   },
   methods: {
+    setAvatarsV1 () {
+      console.log(this.company)
+      if (this.company) {
+        console.log('if')
+        this.userVideoAvatar = this.company.video_avatar ? generatePhotoFromYoutubeLink(this.company.video_avatar) : null
+        this.userVideoUrl = this.company.video_avatar ? this.company.video_avatar : this.company.avatar
+        // this.userVideoAvatar = this.company.video_avatar
+        this.userAvatar = this.company.avatar
+        this.defaultAvatar = this.company.default_avatar
+      } else {
+        console.log('esle')
+        if (this.user.video_avatar) {
+          this.userVideoAvatar = this.user.video_avatar ? generatePhotoFromYoutubeLink(this.user.video_avatar) : null
+          this.userVideoUrl = this.user.video_avatar
+        }
+        console.log('111')
+        this.userAvatar = this.user.avatar
+        this.defaultAvatar = this.user.default_avatar
+        console.log(this.userVideoAvatar)
+        console.log(this.userAvatar)
+        console.log(this.defaultAvatar)
+        console.log('222')
+      }
+      console.log('this.company')
+      console.log(this.company)
+      console.log('this.user')
+      console.log(this.user)
+      console.log(this.userVideoAvatar)
+      console.log(this.userAvatar)
+      console.log(this.defaultAvatar)
+    },
     setAvatars () {
       if (this.company) {
+        this.defaultAvatar = this.company.default_avatar
         if (this.isCompanyUser) {
           this.companyVideoAvatar = this.company.video_avatar
           if (this.company.video_avatar !== null) {
@@ -92,6 +143,7 @@ export default {
     setUserAvatars () {
       this.userVideoAvatar = this.user.video_avatar
       this.userAvatar = this.user.avatar
+      this.defaultAvatar = this.user.default_avatar
     },
     openPhotoDialog () {
       this.photoDialog = true

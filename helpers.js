@@ -1,74 +1,91 @@
 export function mapOfferModelToOfferForm (offer, rootCategories, subCategories) {
   const category = setCategories(offer.category_id, rootCategories, subCategories)
-  return {
-    title: offer.title,
-    category: category.root_category,
-    subcategory: category.sub_category,
-    price: offer.price / 100,
-    description: offer.description,
-    date: '',
-    location: [
-      offer.location.lat,
-      offer.location.lon,
-      offer.location.name
-    ],
-    mainImage: [],
-    images: offer.photos,
-    user: {
-      account_type: 'private',
-      name: '',
-      email: '',
-      password: '',
-      rePassword: ''
-    },
-    links: {
-      video: offer.links.video,
-      video_2: offer.links.video_2,
-      walk_video: offer.links.walk_video
-    },
-    visibleFromDate: offer.visible_from_date,
-    attributes: {
-      1: getAttributeValue(1, offer.attributes),
-      2: isTrue(getAttributeValue(2, offer.attributes)),
-      3: getAttributeValue(3, offer.attributes),
-      4: getAttributeValue(4, offer.attributes),
-      5: isTrue(getAttributeValue(5, offer.attributes)),
-      6: isTrue(getAttributeValue(6, offer.attributes)),
-      7: isTrue(getAttributeValue(7, offer.attributes)),
-      8: isTrue(getAttributeValue(8, offer.attributes)),
-      9: getAttributeValue(9, offer.attributes),
-      10: getAttributeValue(10, offer.attributes),
-      11: getAttributeValue(11, offer.attributes),
-      12: getAttributeValue(12, offer.attributes),
-      13: getAttributeValue(13, offer.attributes),
-      14: getAttributeValue(14, offer.attributes),
-      15: getAttributeValues(15, offer.attributes),
-      16: getAttributeValues(16, offer.attributes),
-      17: getAttributeValues(17, offer.attributes),
-      18: getAttributeValue(18, offer.attributes),
-      19: getAttributeValue(19, offer.attributes),
-      20: isTrue(getAttributeValue(20, offer.attributes))
+  try {
+    const data = {
+      title: offer.title ? offer.title : '',
+      category: category.root_category ? category.root_category : '',
+      subcategory: category.sub_category ? category.sub_category : '',
+      price: offer.price ? offer.price / 100 : 0,
+      description: offer.description ? offer.description : '',
+      date: '',
+      location: [
+        offer.location.lat ? offer.location.lat : '',
+        offer.location.lon ? offer.location.lon : '',
+        offer.location.name ? offer.location.name : ''
+      ],
+      mainImage: [],
+      images: offer.photos && offer.photos.length ? offer.photos : [],
+      projectPlans: offer.project_plan_photos && offer.project_plan_photos.length ? offer.project_plan_photos : [],
+      user: {
+        account_type: 'private',
+        name: '',
+        email: '',
+        password: '',
+        rePassword: ''
+      },
+      links: {
+        video: offer.links && offer.links.video ? offer.links.video : '',
+        video_2: offer.links && offer.links.video_2 ? offer.links.video_2 : '',
+        walk_video: offer.links && offer.links.walk_video ? offer.links.walk_video : ''
+      },
+      visibleFromDate: offer.visible_from_date ? offer.visible_from_date : '',
+      attributes: {
+        1: getAttributeValue(1, offer.attributes),
+        2: isTrue(getAttributeValue(2, offer.attributes)),
+        3: getAttributeValue(3, offer.attributes),
+        4: getAttributeValue(4, offer.attributes),
+        5: isTrue(getAttributeValue(5, offer.attributes)),
+        6: isTrue(getAttributeValue(6, offer.attributes)),
+        7: isTrue(getAttributeValue(7, offer.attributes)),
+        8: isTrue(getAttributeValue(8, offer.attributes)),
+        9: getAttributeValue(9, offer.attributes),
+        10: getAttributeValue(10, offer.attributes),
+        11: getAttributeValue(11, offer.attributes),
+        12: getAttributeValue(12, offer.attributes),
+        13: getAttributeValue(13, offer.attributes),
+        14: getAttributeValue(14, offer.attributes),
+        15: getAttributeValues(15, offer.attributes),
+        16: getAttributeValues(16, offer.attributes),
+        17: getAttributeValues(17, offer.attributes),
+        18: getAttributeValue(18, offer.attributes),
+        19: getAttributeValue(19, offer.attributes),
+        20: isTrue(getAttributeValue(20, offer.attributes)),
+        21: getAttributeValue(21, offer.attributes),
+        22: getAttributeValue(22, offer.attributes)
+      }
     }
+    return data
+  } catch (e) {
+    console.log('catch error')
+    console.log(e)
   }
 }
 
 function getAttributeValue (id, attributes) {
-  const attribute = attributes.find(attr => attr.id === id)
-  if (attribute) {
-    return attribute.value
+  if (attributes && attributes.length) {
+    const attribute = attributes.find(attr => attr.id === id)
+    if (attribute) {
+      return attribute.value
+    } else {
+      return ''
+    }
   } else {
     return ''
   }
 }
 
 function getAttributeValues (id, attributes) {
-  const attributeValues = attributes.filter(attr => attr.id === id).map(function (attr) {
-    if (attr) {
-      return attr.value
+  if (attributes && attributes.length) {
+    const attributeValues = attributes.filter(attr => attr.id === id).map(function (attr) {
+      if (attr) {
+        return attr.value
+      }
+    })
+    if (attributeValues) {
+      return attributeValues
+    } else {
+      return []
     }
-  })
-  if (attributeValues) {
-    return attributeValues
   } else {
     return []
   }

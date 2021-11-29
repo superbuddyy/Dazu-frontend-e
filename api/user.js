@@ -55,3 +55,7 @@ export function deleteAgent (id) {
 export function getPhone (id, recaptcha) {
   return apiClient.post(`/api/user/${id}/phone`, recaptcha)
 }
+
+export function updateDefaultAvatar (data) {
+  return apiClient.put('/api/user/default-avatar', data)
+}

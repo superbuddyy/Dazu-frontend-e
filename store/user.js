@@ -13,6 +13,7 @@ export const state = () => ({
   nip: '',
   avatar: '',
   videoAvatar: '',
+  default_avatar: '',
   city: '',
   street: '',
   zip_code: '',
@@ -55,6 +56,9 @@ export const mutations = {
   SET_VIDEO_AVATAR: (state, avatar) => {
     state.videoAvatar = avatar
   },
+  SET_DEFAULT_AVATAR: (state, avatar) => {
+    state.default_avatar = avatar
+  },
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
@@ -90,6 +94,7 @@ export const actions = {
           commit('SET_EMAIL', response.data.email)
           commit('SET_PHONE', response.data.phone)
           commit('SET_AVATAR', response.data.avatar)
+          commit('SET_DEFAULT_AVATAR', response.data.default_avatar)
           commit('SET_VIDEO_AVATAR', response.data.video_avatar)
           commit('SET_ID', response.data.id)
           commit('SET_IS_LOGGED', true)
@@ -112,7 +117,9 @@ export const actions = {
   setAvatar ({ commit }, data) {
     commit('SET_AVATAR', data)
   },
-
+  setDefaultAvatar ({ commit }, data) {
+    commit('SET_DEFAULT_AVATAR', data)
+  },
   setVideoAvatar ({ commit }, data) {
     commit('SET_VIDEO_AVATAR', data)
   },
