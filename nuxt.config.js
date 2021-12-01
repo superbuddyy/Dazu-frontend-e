@@ -8,7 +8,7 @@ export default {
       { hid: 'description', name: 'description', content: 'Serwis nieruchomosci online - mieszkania, domy, działki, lokale użytkowe, magazyny, kampingi, domy modularowe na sprzedaż, wynajem, zamianę » Dazu.pl' }
     ],
     link: [
-      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
       {
@@ -57,6 +57,7 @@ export default {
     '@nuxtjs/google-analytics',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/pwa',
     'nuxt-leaflet'
   ],
 
@@ -71,7 +72,14 @@ export default {
     mapStyle: process.env.VUE_APP_MAP_STYLE,
     recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY
   },
-
+  pwa: {
+    manifest: {
+      lang: 'en'
+    },
+    icon: {
+      source: '~/static/icon.png'
+    }
+  },
   proxy: {
     '/api/': process.env.VUE_APP_BASE_API,
     '/storage/': process.env.VUE_APP_BASE_API,

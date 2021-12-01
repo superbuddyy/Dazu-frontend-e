@@ -2,7 +2,8 @@
   <div>
     <div class="nav">
       <n-link to="/" class="logo">
-        <h1>Dazu</h1>
+        <!-- <h1>Dazu</h1> -->
+        <img src="~/assets/logo.svg" alt="">
       </n-link>
       <div class="search">
         <el-input
@@ -311,6 +312,9 @@ a {
 
     @media only screen and (max-width: 1100px) {
       width: 50%;
+    }
+    img {
+      width: 90px !important;
     }
   }
 

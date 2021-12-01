@@ -6,7 +6,7 @@
           <el-input v-model="searchTxt" placeholder="Poszukaj ogłoszenia"/>
         </el-col>
         <el-col :span="2" class="search-box-btn">
-          <el-button type="primary" loading class="login-btn" @click="searchOfferList">
+          <el-button type="primary" class="login-btn" @click="searchOfferList">
             Szukaj
           </el-button>
         </el-col>

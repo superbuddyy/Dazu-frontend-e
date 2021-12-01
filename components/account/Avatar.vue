@@ -10,6 +10,9 @@
       <div class="check">
         <el-checkbox v-model="checkStatus" @change="changeAvatarStatus" />
       </div>
+      <div v-if="expireTime" class="expire-time">
+        <ExpireTime :expire-time="expireTime" text="Avatar wygasa za " />
+      </div>
     </div>
     <el-popover
       v-model="buyVisible"
@@ -63,17 +66,21 @@
 </template>
 
 <script>
-import { storeAvatar, deleteAvatar, updateDefaultAvatar } from '@/api/user'
-
+import { storeAvatar, deleteAvatar, updateDefaultAvatar, getMyProfile } from '@/api/user'
+import ExpireTime from './my_offers/ExpireTime'
 export default {
   name: 'Avatar',
+  components: {
+    ExpireTime
+  },
   data: () => ({
     buyVisible: false,
     deleteAvatarVisible: false,
     avatar: [],
     loading: false,
     checkValue: 'photo',
-    checkStatus: false
+    checkStatus: false,
+    user: null
   }),
   computed: {
     avatarUrl () {
@@ -83,6 +90,9 @@ export default {
         return defaultAvatar
       }
       return user.avatar ? user.avatar : defaultAvatar
+    },
+    expireTime () {
+      return this.user && this.user.avatar_expire_time ? this.user.avatar_expire_time : null
     }
   },
   watch: {
@@ -92,6 +102,9 @@ export default {
   },
   mounted () {
     this.checkDefaultAvatar()
+    if (this.$store.state.user.isLogged) {
+      this.getProfile()
+    }
   },
   methods: {
     async addAvatar (file) {
@@ -140,6 +153,12 @@ export default {
         }
       } else {
         this.checkStatus = true
+      }
+    },
+    async getProfile () {
+      const result = await getMyProfile(this.$store.state.user.id)
+      if (result.status === 200) {
+        this.user = result.data
       }
     }
   }

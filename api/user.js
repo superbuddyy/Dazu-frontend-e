@@ -59,3 +59,7 @@ export function getPhone (id, recaptcha) {
 export function updateDefaultAvatar (data) {
   return apiClient.put('/api/user/default-avatar', data)
 }
+
+export function getMyProfile (id) {
+  return apiClient.get('/api/my-profile/' + id)
+}

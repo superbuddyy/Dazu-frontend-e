@@ -1,6 +1,6 @@
 <template>
   <div v-if="calcTime().value > 0" class="expire-time">
-    ogłoszenie wygasa za {{ calcTime().value }} {{ calcTime().unit }}
+    {{text}} {{ calcTime().value }} {{ calcTime().unit }}
   </div>
 </template>
 
@@ -13,6 +13,10 @@ export default {
     expireTime: {
       type: String,
       default: () => ''
+    },
+    text: {
+      type: String,
+      default: () => 'ogłoszenie wygasa za '
     }
   },
   computed: {
@@ -54,5 +58,6 @@ export default {
 <style lang="scss">
 .expire-time {
   font-size: 14px;
+  color: red;
 }
 </style>
