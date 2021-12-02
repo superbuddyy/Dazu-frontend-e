@@ -142,7 +142,7 @@ export default {
   },
   data () {
     return {
-      excludedIds: [1, 3, 4, 14, 24, 25, 26, 27, 28],
+      excludedIds: [1, 2, 3, 4, 5, 14, 21, 22, 23, 24, 25, 26, 27, 28],
       getLocationOptions: {
         enableHighAccuracy: true,
         timeout: 5000,
