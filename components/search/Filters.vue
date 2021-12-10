@@ -24,7 +24,7 @@
           </el-form-item>
           <el-form-item label="Lokalizacja" prop="location">
             <el-select
-              v-model="search.location"
+              v-model="location"
               class="location-input"
               filterable
               remote
@@ -141,13 +141,17 @@ export default {
       locationsLoading: false,
       locations: [],
       filters: this.getFilters(),
-      search: {}
+      search: {},
+      location: ''
     }
   },
   watch: {
     refreshFilters (value) {
       if (value) {
-        this.search = {}
+        // this.search = {}
+        this.search = fromSearchQueryStringToFromData({})
+        this.setLocation(false)
+        this.locations = []
         this.$emit('refreshed')
       }
     }

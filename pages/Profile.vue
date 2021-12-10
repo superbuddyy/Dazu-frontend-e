@@ -18,6 +18,12 @@
         </div>
         <div class="name">
           {{ user.name }}
+          <FavoriteUser
+            class="favorite-btn"
+            :userSlug="user.id"
+            :isFavoriteUser="user.is_favorite_user"
+            size="20"
+          />
         </div>
         <div v-if="user.address && user.address.street && user.address.city" class="address">
           ul. {{ user.address.street }}, {{ user.address.city }}, {{ user.address.country }}
@@ -69,6 +75,7 @@ import OffersCarousel from '@/components/OffersCarousel'
 import EmailDialog from '@/components/offer/EmailDialog'
 import VueRecaptcha from 'vue-recaptcha'
 import SearchOffers from '@/components/search/SearchOffers'
+import FavoriteUser from '@/components/FavoriteUser'
 import Avatar from '../components/Avatar'
 
 export default {
@@ -78,6 +85,7 @@ export default {
     EmailDialog,
     VueRecaptcha,
     SearchOffers,
+    FavoriteUser,
     Avatar
   },
   data: () => ({

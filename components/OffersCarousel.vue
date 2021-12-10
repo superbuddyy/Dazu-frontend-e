@@ -78,7 +78,8 @@ export default {
   },
   computed: {
     isCarouselActive () {
-      return !(this.offers.length < 6)
+      // return !(this.offers.length < 6)
+      return true
     },
     isPaused () {
       if (this.isPausedForced) {

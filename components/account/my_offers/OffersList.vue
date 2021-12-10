@@ -36,8 +36,11 @@
       <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked" class="mr-5">
         Odśwież
       </el-button>
-      Filtruj wg. agentów:
+      <span v-if="!$store.state.user.roles.includes('user')">
+        Filtruj wg. agentów:
+      </span>
       <el-select
+        v-if="!$store.state.user.roles.includes('user')"
         class="mr-5"
         v-model="current_agent"
         filterable
@@ -96,7 +99,7 @@
                 <el-button type="text" @click="showStats(offer.slug)">
                   Zobacz statystyki
                 </el-button>
-                <el-button type="info">{{offer.user_name}}</el-button>
+                <el-button v-if="!$store.state.user.roles.includes('user')" type="info">{{offer.user_name}}</el-button>
               </div>
               <div class="expire-time">
                 <ExpireTime :expire-time="offer.expire_time" />

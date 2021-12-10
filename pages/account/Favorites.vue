@@ -18,6 +18,13 @@
       >
         Ulubione
       </el-button>
+      <el-button
+        :class="[ activePage === 'users' ? 'active sub-item' : 'sub-item' ]"
+        :to="'/ogloszenia/'"
+        @click="activePage = 'users'"
+      >
+        Agents, Agencies and Developers
+      </el-button>
     </div>
     <div class="container">
       <FavoritesList
@@ -26,6 +33,9 @@
       <FavoriteFiltersList
         v-if="activePage === 'search'"
       />
+      <FavoritesUserList
+        v-if="activePage === 'users'"
+      />
     </div>
   </div>
 </template>
@@ -33,6 +43,7 @@
 import AccountMenu from '@/components/account/AccountMenu'
 import FavoritesList from '@/components/account/favorites/FavoritesList'
 import FavoriteFiltersList from '@/components/account/favorites/FavoriteFiltersList'
+import FavoritesUserList from '@/components/account/favorites/FavoritesUserList'
 
 export default {
   middleware: 'authenticated',
@@ -40,7 +51,8 @@ export default {
   components: {
     AccountMenu,
     FavoritesList,
-    FavoriteFiltersList
+    FavoriteFiltersList,
+    FavoritesUserList
   },
   data: () => ({
     activePage: 'offers'

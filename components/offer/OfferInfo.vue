@@ -42,6 +42,12 @@
             <nuxt-link :to="'/profil/' + offer.user.id">
               {{ offer.company.name }}
             </nuxt-link>
+            <FavoriteUser
+              class="favorite-btn"
+              :userSlug="offer.user.id"
+              :isFavoriteUser="offer.user.is_favorite_user"
+              size="20"
+            />
           </div>
           <div
             v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin') && offer.company === null"
@@ -54,6 +60,12 @@
               class="agent-name"
             >
               <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
+              <FavoriteUser
+                class="favorite-btn"
+                :user-slug="offer.user.id"
+                :is-favorite="offer.user.is_favorite_user"
+                size="20"
+              />
             </b>
           </div>
           <div class="buttons">
@@ -180,6 +192,7 @@ import SubscriptionsDialog from '~/components/SubscriptionsDialog'
 import { getPhone } from '~/api/user'
 import PhotoDialog from '~/components/PhotoDialog'
 import { generatePhotoFromYoutubeLink } from '~/helpers'
+import FavoriteUser from '~/components/FavoriteUser'
 
 export default {
   name: 'OfferInfo',
@@ -192,7 +205,8 @@ export default {
     VueRecaptcha,
     PhotoDialog,
     Map,
-    Avatar
+    Avatar,
+    FavoriteUser
   },
   props: {
     offer: {

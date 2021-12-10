@@ -1,17 +1,19 @@
 <template>
   <div class="favorite-filters">
-    <div v-for="searchFilter in filters" :key="searchFilter.id" class="filters-list">
+    <div v-for="(searchFilter, ind) in filters" :key="searchFilter.id" class="filters-list">
       <div class="filter">
         <div class="check">
-          <el-checkbox :value="getCheckedIndex(searchFilter.id) !== -1" @change="addToChecked(searchFilter.id)" />
+          <el-tooltip content="Delete saved search" placement="top">
+            <el-checkbox :value="getCheckedIndex(searchFilter.id) !== -1" @change="addToChecked(searchFilter.id)" />
+          </el-tooltip>
         </div>
         <div class="filters-container">
-          <div class="filters-values">
+          <div class="filters-values" @click="searchRedirect(searchFilter.filters)">
             <div v-for="(filter, index) in searchFilter.filters" :key="index" class="f-value">
               <span>{{ showFilterValue(index, filter) }}</span>
             </div>
           </div>
-          <el-checkbox :value="searchFilter.notification">
+          <el-checkbox :value="searchFilter.notification" @change="updateNotification(searchFilter.id, searchFilter.notification, ind)">
             Chcę otrzymywać powiadomienia email
           </el-checkbox>
         </div>
@@ -21,8 +23,8 @@
 </template>
 
 <script>
-import { index } from '@/api/filters'
-import { fromSearchQueryStringToFromData } from '@/helpers'
+import { index, update, destroy } from '@/api/filters'
+import { fromSearchQueryStringToFromData, buildSearchQuery } from '@/helpers'
 
 export default {
   name: 'FavoriteFiltersList',
@@ -44,6 +46,8 @@ export default {
           return 'Typ: ' + value
         case 'na-raty':
           return 'Na raty: ' + value
+        case 'location':
+          if (value.display_name) { return 'Lokalizacja: ' + decodeURIComponent(value.display_name) }
       }
     },
     transformedFilters (filters) {
@@ -52,12 +56,18 @@ export default {
     getCheckedIndex (id) {
       return this.checked.indexOf(id)
     },
-    addToChecked (id) {
-      const index = this.getCheckedIndex(id)
-      if (index === -1) {
-        this.checked.push(id)
-      } else {
-        this.checked.splice(this.checked.indexOf(id), 1)
+    async addToChecked (id) {
+      const result = await destroy(id)
+      if (result.status === 200 || result.status === 204) {
+        this.getFavoriteFilters()
+      }
+    },
+    async updateNotification (id, status, ind) {
+      status = !status
+      const obj = { id, status }
+      const result = await update(obj)
+      if (result.status === 200 || result.status === 204) {
+        this.filters[ind].notification = status
       }
     },
     async getFavoriteFilters () {
@@ -68,6 +78,9 @@ export default {
           return f
         })
       }
+    },
+    searchRedirect (search) {
+      this.$router.push({ path: 'szukaj', query: buildSearchQuery(search) })
     }
   }
 }
@@ -93,6 +106,7 @@ export default {
         }
 
         .filters-values {
+          cursor: pointer;
           width: 90%;
           display: flex;
           flex-wrap: wrap;

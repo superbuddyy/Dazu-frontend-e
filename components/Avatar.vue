@@ -93,35 +93,20 @@ export default {
   },
   methods: {
     setAvatarsV1 () {
-      console.log(this.company)
       if (this.company) {
-        console.log('if')
         this.userVideoAvatar = this.company.video_avatar ? generatePhotoFromYoutubeLink(this.company.video_avatar) : null
         this.userVideoUrl = this.company.video_avatar ? this.company.video_avatar : this.company.avatar
         // this.userVideoAvatar = this.company.video_avatar
         this.userAvatar = this.company.avatar
         this.defaultAvatar = this.company.default_avatar
       } else {
-        console.log('esle')
         if (this.user.video_avatar) {
           this.userVideoAvatar = this.user.video_avatar ? generatePhotoFromYoutubeLink(this.user.video_avatar) : null
           this.userVideoUrl = this.user.video_avatar
         }
-        console.log('111')
         this.userAvatar = this.user.avatar
         this.defaultAvatar = this.user.default_avatar
-        console.log(this.userVideoAvatar)
-        console.log(this.userAvatar)
-        console.log(this.defaultAvatar)
-        console.log('222')
       }
-      console.log('this.company')
-      console.log(this.company)
-      console.log('this.user')
-      console.log(this.user)
-      console.log(this.userVideoAvatar)
-      console.log(this.userAvatar)
-      console.log(this.defaultAvatar)
     },
     setAvatars () {
       if (this.company) {
