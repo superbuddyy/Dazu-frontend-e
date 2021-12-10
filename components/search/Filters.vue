@@ -152,6 +152,7 @@ export default {
         this.search = fromSearchQueryStringToFromData({})
         this.setLocation(false)
         this.locations = []
+        this.location = ''
         this.$emit('refreshed')
       }
     }
@@ -201,6 +202,9 @@ export default {
     },
     setLocation (e) {
       this.search.location = {}
+      console.log(this.location)
+      console.log(e)
+      this.location = e
       if (e) {
         const coords = e.split('*')
         this.search.location.lat = coords[0]

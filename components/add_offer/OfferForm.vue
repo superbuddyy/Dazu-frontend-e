@@ -339,7 +339,7 @@
           <l-marker
             ref="marker"
             :lat-lng="getLatLon(form.location)"
-            :draggable="true"
+            :draggable="false"
             @dragend="changeLatLngAfterDrag"
           />
         </l-map>
@@ -895,7 +895,8 @@ export default {
         this.locations = [{
           lat: this.offer.location.lat,
           lon: this.offer.location.lon,
-          display_name: this.offer.location.name
+          display_name: this.offer.location.name,
+          osm_id: new Date().getTime()
         }]
         this.form.location = this.offer.location.lat + '*' + this.offer.location.lon + '*' + this.offer.location.name
       }
@@ -931,7 +932,7 @@ export default {
     changeLatLngAfterDrag (event) {
       const latLng = this.$refs.marker.mapObject.getLatLng()
       const location = this.form.location.split('*')
-      this.locations = [{ lat: latLng.lat, lng: latLng.lng, display_name: location[2] }]
+      this.locations = [{ lat: latLng.lat, lon: latLng.lng, display_name: location[2], osm_id: new Date().getTime() }]
       this.form.location = latLng.lat + '*' + latLng.lng + '*' + location[2]
     },
     async getLocations (locationName) {

@@ -4,7 +4,8 @@
       <div class="filter">
         <div class="check">
           <el-tooltip content="Delete saved search" placement="top">
-            <el-checkbox :value="getCheckedIndex(searchFilter.id) !== -1" @change="addToChecked(searchFilter.id)" />
+            <!-- <el-checkbox :value="getCheckedIndex(searchFilter.id) !== -1" @change="addToChecked(searchFilter.id)" /> -->
+            <i class="el-icon-delete-solid" @click="addToChecked(searchFilter.id)" />
           </el-tooltip>
         </div>
         <div class="filters-container">
