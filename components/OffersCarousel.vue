@@ -6,7 +6,7 @@
           <span class="featured_img_label" v-if="offer.subscriptions.length && offer.subscriptions[0]['featured_on_homepage'] === true">
             <img src="~/assets/Star.svg" style="width: 24px;">
           </span>
-          <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Oferta</span>
+          <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Okazja</span>
           <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Pilne</span>
           <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
           </div>

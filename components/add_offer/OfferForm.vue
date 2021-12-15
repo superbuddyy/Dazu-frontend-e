@@ -339,7 +339,7 @@
           <l-marker
             ref="marker"
             :lat-lng="getLatLon(form.location)"
-            :draggable="false"
+            :draggable="true"
             @dragend="changeLatLngAfterDrag"
           />
         </l-map>
@@ -1074,14 +1074,21 @@ export default {
 
       if (this.selectedSubscription) {
         formData.append('subscription', this.selectedSubscription)
-        formData.append('is_urgent', this.form.subscriptions[this.selectedSubscription].is_urgent)
-        formData.append('is_bargain', this.form.subscriptions[this.selectedSubscription].is_bargain)
-        formData.append('has_raise_one', this.form.subscriptions[this.selectedSubscription].has_raise_one)
-        formData.append('has_raise_three', this.form.subscriptions[this.selectedSubscription].has_raise_three)
-        formData.append('has_raise_ten', this.form.subscriptions[this.selectedSubscription].has_raise_ten)
+        formData.append('is_urgent', this.setFormBoolValue(this.form.subscriptions[this.selectedSubscription].is_urgent))
+        formData.append('is_bargain', this.setFormBoolValue(this.form.subscriptions[this.selectedSubscription].is_bargain))
+        formData.append('has_raise_one', this.setFormBoolValue(this.form.subscriptions[this.selectedSubscription].has_raise_one))
+        formData.append('has_raise_three', this.setFormBoolValue(this.form.subscriptions[this.selectedSubscription].has_raise_three))
+        formData.append('has_raise_ten', this.setFormBoolValue(this.form.subscriptions[this.selectedSubscription].has_raise_ten))
       }
 
       return formData
+    },
+    setFormBoolValue (value) {
+      let val = value
+      if (typeof value === 'undefined' || value === undefined) {
+        val = false
+      }
+      return val
     },
     setType (type) {
       this.form.attributes[1] = type

@@ -202,8 +202,6 @@ export default {
     },
     setLocation (e) {
       this.search.location = {}
-      console.log(this.location)
-      console.log(e)
       this.location = e
       if (e) {
         const coords = e.split('*')
