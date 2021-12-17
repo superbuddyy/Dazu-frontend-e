@@ -113,7 +113,7 @@
       <div class="text">
         <h1>{{ offer.title }}</h1>
         <p
-          v-html-safe="offer.description"
+          v-html="offer.description"
         />
       </div>
       <div class="stats">

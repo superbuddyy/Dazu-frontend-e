@@ -4,13 +4,13 @@
       <div v-if="offers.length === 0">
         Brak danych
       </div>
-      <div v-for="offer in offers" :key="offer.id" class="offer margin-box carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && offer.subscriptions[0]['featured_on_homepage'] === true ) ? 'featured_l' : '' ]">
+      <div v-for="offer in offers" :key="offer.id" class="offer margin-box carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')) ? 'featured_l' : '' ]">
         <div class="content">
           <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer">
-            <span class="featured_img_label" v-if="offer.subscriptions.length && offer.subscriptions[0]['featured_on_homepage'] === true">
+            <span class="featured_img_label" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
               <img src="~/assets/Star.svg" style="width: 24px;">
             </span>
-            <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Oferta</span>
+            <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Okazja</span>
             <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Pilne</span>
             <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
             </div>

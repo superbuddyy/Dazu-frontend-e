@@ -367,7 +367,7 @@
             v-for="(subscription, index) in subscriptions"
             :key="subscription.id"
             :class="[ selectedSubscription === subscription.id ? 'active sub-box' : 'sub-box' ]"
-            @click="selectedSubscription = subscription.id"
+            @click="selectPackage(subscription.id)"
           >
             <el-card :class="[`card-box subscription-box-${index}`]">
               <div class="card-body">
@@ -440,7 +440,7 @@
                           <el-switch
                             v-model="form.subscriptions[subscription.id].is_urgent"
                             :value="form.is_urgent"
-                            @set-value="form.is_urgent = $event"
+                            @change="setUrgentValue"
                           ></el-switch>
                         </div>
                       </el-col>
@@ -517,11 +517,12 @@
           Spieszysz się? Aktywuj "<span>Pilne</span>"
         </div>
         <toggle-button
-          v-model="form.subscriptions[selectedSubscription].is_urgent"
+          v-model="form.attributes[20]"
           color="#ff19b7"
-          :value="false"
+          :value="form.attributes[20]"
           :sync="true"
           :labels="{checked: 'Tak', unchecked: 'Nie'}"
+          @change="setUrgentValue"
         />
       </div>
       <div v-if="!$store.state.user.isLogged && viewType !== 'update'" class="contact-form">
@@ -829,7 +830,8 @@ export default {
       photoPrice: 0,
       linkPrice: 0,
       datePrice: 0,
-      isLocalData: true
+      isLocalData: true,
+      isGlobal: false
     }
   },
   computed: {
@@ -1093,6 +1095,28 @@ export default {
     setType (type) {
       this.form.attributes[1] = type
       this.$store.dispatch('addOfferForm/setType', type)
+    },
+    setUrgentValue (e) {
+      console.log(e)
+      if (typeof e === 'object') {
+        this.form.is_urgent = this.form.attributes[20] = this.form.subscriptions[this.selectedSubscription].is_urgent = e.value
+        this.isGlobal = true
+      } else {
+        this.form.is_urgent = this.form.attributes[20] = this.form.subscriptions[this.selectedSubscription].is_urgent = e
+        this.isGlobal = false
+      }
+    },
+    selectPackage (id) {
+      if (this.selectedSubscription !== id) {
+        console.log('seleccted package')
+        this.selectedSubscription = id
+        // this.form.subscriptions[this.selectedSubscription].is_urgent = this.form.urgent = this.form.attributes[20]
+        if (this.isGlobal) {
+          this.form.subscriptions[this.selectedSubscription].is_urgent = this.form.urgent = this.form.attributes[20]
+        } /* else {
+          this.form.subscriptions[this.selectedSubscription].is_urgent = this.form.urgent = this.form.attributes[20] = false
+        } */
+      }
     },
     setUserType (type) {
       this.form.user.account_type = type
