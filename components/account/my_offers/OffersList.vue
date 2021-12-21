@@ -36,16 +36,16 @@
       <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked" class="mr-5">
         Odśwież
       </el-button>
-      <span v-if="!$store.state.user.roles.includes('user')">
+      <span v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')">
         Filtruj wg. agentów:
       </span>
       <el-select
-        v-if="!$store.state.user.roles.includes('user')"
+        v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')"
         class="mr-5"
         v-model="current_agent"
         filterable
         :change="filterByUser()"
-        placeholder="Choose tags for your article">
+        placeholder="Wybierz tagi dla swojego artykułu">
         <el-option
           v-for="agent in agents"
           :key="agent.id"
@@ -99,7 +99,7 @@
                 <el-button type="text" @click="showStats(offer.slug)">
                   Zobacz statystyki
                 </el-button>
-                <el-button v-if="!$store.state.user.roles.includes('user')" type="info">{{offer.user_name}}</el-button>
+                <el-button v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')" type="info">{{offer.user_name}}</el-button>
               </div>
               <div class="expire-time">
                 <ExpireTime :expire-time="offer.expire_time" />

@@ -650,6 +650,9 @@
         <el-button v-if="viewType === 'create'" type="primary" @click="onSubmit(false)">
           Dodaj ogłoszenie
         </el-button>
+        <el-button v-if="viewType === 'update'" @click="cancelEdit">
+          Anuluj
+        </el-button>
         <el-button v-if="viewType === 'update'" type="primary" @click="onSubmitEdit">
           Zapisz zmiany
         </el-button>
@@ -988,6 +991,9 @@ export default {
           this.failShake = false
         }, 1000)
       }
+    },
+    cancelEdit () {
+      this.$router.push('/moje-ogloszenia')
     },
     async onSubmitEdit () {
       this.processing = true
