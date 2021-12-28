@@ -267,7 +267,7 @@ export default {
       }
 
       this.locations = [{ lat, lon, display_name: city }]
-      this.location = `${lat}-${lon}-${city}`
+      this.location = `${lat}*${lon}*${city}`
       this.setLocation(this.location)
       Cookies.set('user-location', this.locations, { expires: 1 })
     },

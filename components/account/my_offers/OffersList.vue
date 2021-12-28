@@ -109,22 +109,22 @@
           <div class="actions">
             <div class="buttons">
               <el-popover
-                v-model="deactivateOnePopoverVisible"
+                v-model="offer.showDialog"
                 placement="bottom"
               >
                 <p>Czy na pewno chcesz zdezaktywować?</p>
                 <div style="text-align: center; margin: 0">
-                  <el-button size="mini" type="text" @click="deactivateOnePopoverVisible = false">
+                  <el-button size="mini" type="text" @click="offer.showDialog = false">
                     Nie
                   </el-button>
                   <el-button type="primary" size="mini" @click="deactivateOne(offer.id)">
                     Tak
                   </el-button>
                 </div>
-                <el-button slot="reference" type="danger" round icon="el-icon-circle-close">
-                  Dezaktywuj
-                </el-button>
               </el-popover>
+              <el-button slot="reference" type="danger" round icon="el-icon-circle-close" @click="offer.showDialog = true">
+                Dezaktywuj
+              </el-button>
               <el-button
                 type="primary"
                 class="refresh-btn"

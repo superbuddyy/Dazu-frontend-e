@@ -14,7 +14,7 @@
         </div>
         <el-form-item label="Lokalizacja" class="location">
           <el-select
-            v-model="search.location"
+            v-model="location"
             class="location-input"
             filterable
             remote
@@ -303,7 +303,7 @@ export default {
       center: [51.9189046, 19.1343786],
       search: setSearchDefaultData(),
       locations: [],
-      location: {},
+      location: '',
       locationsLoading: false,
       filters: {
         price: {
@@ -372,6 +372,7 @@ export default {
       this.$router.replace({ query: null })
       this.search = {}
       this.search = setSearchDefaultData()
+      this.location = ''
       this.searchResults()
     },
     setAttributeValue (slug, value) {
@@ -445,13 +446,17 @@ export default {
       }
     },
     setLocation (e) {
+      this.search.location = {}
+      this.location = e
       if (e) {
         const coords = e.split('*')
-        this.location.lat = coords[0]
-        this.location.lon = coords[1]
+        this.search.location.lat = coords[0]
+        this.search.location.lon = coords[1]
+        this.search.location.display_name = coords[2]
       } else {
-        this.location.lat = null
-        this.location.lon = null
+        this.search.location.lat = null
+        this.search.location.lon = null
+        this.search.location.display_name = null
       }
     },
     async getFilters () {

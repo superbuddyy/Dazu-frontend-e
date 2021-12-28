@@ -72,14 +72,14 @@ export default {
     mapStyle: process.env.VUE_APP_MAP_STYLE,
     recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY
   },
-  pwa: {
-    manifest: {
-      lang: 'en'
-    },
-    icon: {
-      source: '~/static/icon.png'
-    }
-  },
+  // pwa: {
+  //   manifest: {
+  //     lang: 'en'
+  //   },
+  //   icon: {
+  //     source: '~/static/icon.png'
+  //   }
+  // },
   proxy: {
     '/api/': process.env.VUE_APP_BASE_API,
     '/storage/': process.env.VUE_APP_BASE_API,
