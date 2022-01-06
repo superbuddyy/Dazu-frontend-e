@@ -135,20 +135,27 @@
                 Odśwież
               </el-button>
               <div class="promo-btn">
-                <el-tooltip :content="'(' + (offer.raise_price / 100) + ' pln)'" placement="top">
+                <el-tooltip :content="toolTipText(offer)" placement="top">
                   <el-button
-                    v-if="offer.raise_price === 0"
+                    v-if="offer.total_raises !== 0"
                     type="warning"
                     round
                     icon="el-icon-upload2"
-                    @click="raise(offer.slug)"
+                    @click="raise(offer.slug, true)"
                   >
                     Podbij
                   </el-button>
-                </el-tooltip>
-                <el-tooltip :content="'(' + (offer.raise_price / 100) + ' pln)'" placement="top">
                   <el-button
-                    v-if="offer.raise_price !== 0"
+                    v-else-if="offer.raise_price === 0"
+                    type="warning"
+                    round
+                    icon="el-icon-upload2"
+                    @click="raise(offer.slug, false)"
+                  >
+                    Podbij
+                  </el-button>
+                  <el-button
+                    v-else-if="offer.raise_price !== 0"
                     type="warning"
                     round
                     icon="el-icon-upload2"
@@ -360,6 +367,13 @@ export default {
     this.getOffers('')
   },
   methods: {
+    toolTipText (offer) {
+      if (offer.total_raises !== 0) {
+        return '(' + offer.total_raises + ' raises)'
+      } else {
+        return '(' + (offer.raise_price / 100) + ' pln)'
+      }
+    },
     changeOfferList () {
       let query = 'sort=' + this.changeOrder
       if (this.searchTxt) {
@@ -468,8 +482,11 @@ export default {
       }
       this.loading = false
     },
-    async raise (slug) {
+    async raise (slug, isReduce) {
       this.loading = true
+      if (isReduce) {
+        slug = slug + '?reduce_raise=true'
+      }
       const result = await raise(slug)
       if (result.status === 204) {
         this.$message({

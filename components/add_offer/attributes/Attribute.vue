@@ -3,7 +3,7 @@
     :label="type === 'checkbox' ? '' : name"
     :prop="slug"
   >
-    <el-input v-if="type === 'input'" v-model="local_value" :placeholder="placeholder">
+    <el-input v-if="type === 'input'" :type="inputType" v-model="local_value" :placeholder="placeholder">
       <template v-if="appendInfo" slot="append">
         {{ appendInfo }}
       </template>
@@ -84,6 +84,12 @@ export default {
       type: Array,
       default () {
         return []
+      }
+    },
+    inputType: {
+      type: String,
+      default () {
+        return 'text'
       }
     },
     // eslint-disable-next-line vue/require-default-prop

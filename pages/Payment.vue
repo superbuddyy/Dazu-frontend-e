@@ -5,7 +5,7 @@
         <h1>Opłać ogłoszenie</h1>
         <h4>{{ offerTitle }}</h4>
         <el-table
-          :data="details"
+          :data="formDetails"
           style="width: 100%"
           class="items-table"
         >
@@ -113,6 +113,9 @@ export default {
   computed: {
     amount () {
       return this.billAmount + this.additionalAmount
+    },
+    formDetails () {
+      return this.details
     }
   },
   mounted () {
@@ -163,13 +166,16 @@ export default {
     },
     setActiveItem (e) {
       this.selectedSubscription = e.id
-      this.details = this.details.filter(item => !('additional' in item))
+      let tmpDetails = []
+      tmpDetails = this.details.filter(item => !('additional' in item))
       if (e.price !== 0) {
-        this.details.push({ name: e.name, value: (e.price / 100) + ' pln', additional: true })
+        tmpDetails.push({ name: e.name, value: (e.price / 100) + ' pln', additional: true, id: Math.random().toString(16).slice(2) })
+        this.details = tmpDetails
         this.additionalAmount = e.price
       } else {
         this.additionalAmount = 0
       }
+      console.log(this.details)
     }
   }
 }

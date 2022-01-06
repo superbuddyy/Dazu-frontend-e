@@ -31,6 +31,7 @@
             slug="price"
             placeholder="0"
             append-info="zł"
+            inputType="number"
             :value="formattedPrice"
             @set-value="formattedPrice = $event"
           />
@@ -42,6 +43,7 @@
             :slug="attributes['_3'].slug"
             placeholder="0"
             :append-info="attributes['_3'].unit"
+            inputType="number"
             :value="formattedAttributePrice"
             @set-value="formattedAttributePrice = $event"
           />
@@ -52,6 +54,7 @@
             :name="attributes['_21'].name"
             :slug="attributes['_21'].slug"
             placeholder="0"
+            inputType="number"
             :append-info="attributes['_21'].unit"
             :value="formattedAttributePrice"
             @set-value="formattedAttributePrice = $event"
@@ -123,6 +126,7 @@
             :name="attributes['_4'].name"
             :slug="attributes['_4'].slug"
             :value="form.attributes[4]"
+            inputType="number"
             :append-info="attributes['_4'].unit"
             @set-value="form.attributes[4] = $event"
           />
