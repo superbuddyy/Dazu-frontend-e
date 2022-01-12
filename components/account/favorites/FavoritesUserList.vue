@@ -2,16 +2,16 @@
   <div class="favorites-user-list">
     <div class="left">
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'all' ? 'activated-btn' : '']" @click="sortResults('all')">
-        All
+        Wszyscy
       </el-tag>
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'agent' ? 'activated-btn' : '']" @click="sortResults('agent')">
-        Agents
+        Agenci
       </el-tag>
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'company' ? 'activated-btn' : '']" @click="sortResults('company')">
-        Agencies
+        Agencje
       </el-tag>
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'user' ? 'activated-btn' : '']" @click="sortResults('user')">
-        Developers
+        Deweloperzy
       </el-tag>
     </div>
     <div v-if="!loading && favorites.length === 0" class="empty">

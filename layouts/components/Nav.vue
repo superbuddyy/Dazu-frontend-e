@@ -56,7 +56,7 @@
           </nuxt-link>
           <div v-if="!$store.state.user.isLogged" @click="toggleLogin">
             <div class="nav-menu-item">
-              Zaloguj
+              Logowanie/Rejestracja
             </div>
           </div>
           <div v-if="$store.state.user.isLogged" @click="logout">
@@ -79,8 +79,8 @@
             @toggle="visibleNotifications = !visibleNotifications"
           />
         </div>
-        <div v-if="!$store.state.user.isLogged" class="login" @click="toggleLogin">
-          Zaloguj
+        <div v-if="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
+          Logowanie/Rejestracja
         </div>
         <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
@@ -105,7 +105,7 @@
               Agenci
             </el-dropdown-item>
             <el-dropdown-item command="payments">
-              Histroia płatności
+              Historia płatności
             </el-dropdown-item>
             <el-dropdown-item command="logout" divided>
               Wyloguj
@@ -414,13 +414,16 @@ a {
       color: #000000;
       cursor: pointer;
       padding: 13px 4px;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       font-size: 14px;
       outline: 0!important;
 
       &:hover {
         color: #ff19b7;
       }
+    }
+    .wht-clr {
+      color: #ffffff !important;
     }
 
     .add-offer {

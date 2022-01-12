@@ -23,7 +23,7 @@
         :to="'/ogloszenia/'"
         @click="activePage = 'users'"
       >
-        Agents, Agencies and Developers
+        Użytkownicy
       </el-button>
     </div>
     <div class="container">

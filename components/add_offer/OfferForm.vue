@@ -559,7 +559,13 @@
         <el-row class="contact">
           <el-col :span="12">
             <el-form-item label="Numer telefonu">
-              <el-input v-model="form.user.phone" placeholder="Numer telefonu"/>
+              <el-input
+                type="number"
+                min="0"
+                v-model="form.user.phone"
+                placeholder="Numer telefonu"
+                onkeyup="value = value.replace(/[^\d]/g, 0)"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -582,6 +588,16 @@
             </el-button>
             <div slot="tip" class="el-upload__tip">
               Płatne 5zł ważne na 30dni
+            </div>
+            <div slot="tip" class="el-upload__tip fw-bld">
+              Uwaga! Aby poprawnie dodać link do wideo, prosimi zapoznać się z sekcja dotyczącą dodawania linków w
+                <a
+                  href="/faq"
+                  target="_blank"
+                  class="bld"
+                >
+                  FAQ
+                </a>
             </div>
           </el-upload>
         </el-form-item>
@@ -1429,6 +1445,17 @@ export default {
   }
   .hidden {
     display: none;
+  }
+  .upload-demo {
+    .bld {
+      font-weight: bold;
+      color: #000000 !important
+      ;
+      text-decoration: underline !important;
+    }
+    .fw-bld {
+      font-weight: bolder;
+    }
   }
 }
 </style>

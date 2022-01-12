@@ -101,7 +101,7 @@
                 </el-button>
                 <el-button v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')" type="info">{{offer.user_name}}</el-button>
               </div>
-              <div class="expire-time">
+              <div class="expire-time" v-if="offer.status === 'active' && !offer.is_expired">
                 <ExpireTime :expire-time="offer.expire_time" />
               </div>
             </div>

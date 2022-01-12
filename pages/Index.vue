@@ -64,6 +64,20 @@ export default {
       })
       this.$router.push(this.$route.path)
     }
+    if (this.$route.query['test-msg'] === 'success') {
+      this.$message({
+        message: 'Test success msg.',
+        type: 'success',
+        duration: 30000
+      })
+    }
+    if (this.$route.query['test-msg'] === 'fail') {
+      this.$message({
+        message: 'Test fail msg.',
+        type: 'warning',
+        duration: 30000
+      })
+    }
     this.toggleCookiesPopup()
     this.toggleCustomPopup()
   },

@@ -7,6 +7,16 @@
         <VideoAvatar
           v-if="$store.state.user.roles.includes('company')"
         />
+        <div slot="tip" class="el-upload__tip fw-bld" v-if="$store.state.user.roles.includes('company')">
+          Uwaga! Aby poprawnie dodać link do wideo, prosimi zapoznać się z sekcja dotyczącą dodawania linków w
+            <a
+              href="/faq"
+              target="_blank"
+              class="bld"
+            >
+              FAQ
+            </a>
+        </div>
       </div>
       <EditAccountForm />
       <ResetPasswordForm
@@ -79,6 +89,17 @@ export default {
           @media only screen and (max-width: 700px) {
             align-items: center;
           }
+        }
+        .bld {
+          font-weight: bold;
+          color: #000000 !important
+          ;
+          text-decoration: underline !important;
+        }
+        .fw-bld {
+          font-weight: bolder;
+          width: 150px;
+          line-height: 1.5;
         }
       }
 
