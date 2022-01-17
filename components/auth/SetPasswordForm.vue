@@ -61,7 +61,8 @@ export default {
       },
       rules: {
         password: [
-          { validator: validatePass, trigger: 'blur' }
+          { validator: validatePass, trigger: 'blur' },
+          { pattern: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$', message: 'Hasło musi posiadać co najmnie 6 znaków, 1 dużą literę i jedną liczbę', trigger: 'blur' }
         ],
         rePassword: [
           { validator: validatePass2, trigger: 'blur' }

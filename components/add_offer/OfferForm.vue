@@ -1456,6 +1456,9 @@ export default {
     .fw-bld {
       font-weight: bolder;
     }
+    .el-upload-list {
+      width: 30% !important;
+    }
   }
 }
 </style>

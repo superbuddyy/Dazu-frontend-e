@@ -37,36 +37,43 @@
             :user="offer.user"
           />
         </div>
+        <div v-if="offer.company === null && offer.user.type !== 'company'" class="avatar">
+          <Avatar
+            :company="offer.company"
+            :user="offer.user"
+          />
+        </div>
         <div v-if="offer.user" class="right-data">
           <div v-if="offer.company && offer.user.type === 'company'" class="company-name">
             <nuxt-link :to="'/profil/' + offer.user.id">
               {{ offer.company.name }}
             </nuxt-link>
-            <FavoriteUser
-              class="favorite-btn"
-              :userSlug="offer.user.id"
-              :isFavoriteUser="offer.user.is_favorite_user"
-              size="20"
-            />
+            <div class="fvt-usr-btn">
+              <FavoriteUser
+                class="favorite-btn"
+                :userSlug="offer.user.id"
+                :isFavoriteUser="offer.user.is_favorite_user"
+                size="20"
+              />
+            </div>
           </div>
           <div
             v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin') && offer.company === null"
             class="agent"
           >
-            <Avatar
-              :user="offer.user"
-            />
             <b
               class="agent-name"
             >
               <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
+            </b>
+            <div class="fvt-usr-btn">
               <FavoriteUser
                 class="favorite-btn"
-                :user-slug="offer.user.id"
-                :is-favorite="offer.user.is_favorite_user"
+                :userSlug="offer.user.id"
+                :isFavoriteUser="offer.user.is_favorite_user"
                 size="20"
               />
-            </b>
+            </div>
           </div>
           <div class="buttons">
             <el-button type="plain" round @click="showPhone">
@@ -80,6 +87,12 @@
             Numer telefonu: {{ phone }}
           </div>
         </div>
+      </div>
+      <div class="text">
+        <h1>{{ offer.title }}</h1>
+        <p
+          v-html="offer.description"
+        />
       </div>
       <div class="price">
         Cena: <b><Money :money="offer.price" /></b>
@@ -109,12 +122,6 @@
         <el-tag v-if="offer.is_available_now" type="info">
           Dostepne od zaraz
         </el-tag>
-      </div>
-      <div class="text">
-        <h1>{{ offer.title }}</h1>
-        <p
-          v-html="offer.description"
-        />
       </div>
       <div class="stats">
         <el-table
@@ -324,6 +331,9 @@ export default {
         .views, .favorite-btn {
           margin-left: 20px;
         }
+        .fvt-usr-btn {
+          display: flex;
+        }
       }
     }
 
@@ -345,7 +355,7 @@ export default {
       }
 
       .personal-data {
-        background: #f5f5f5;
+        // background: #f5f5f5;
         padding: 19px 10px;
         margin: 20px 0 40px 0;
         display: flex;
@@ -357,16 +367,18 @@ export default {
         }
 
         .avatar {
-          width: 20%;
+          width: 30%;
           display: flex;
           justify-content: center;
           .avatar-img {
             cursor: pointer;
-            height: 80px;
-            width: 80px;
+            height: 100px;
+            width: 100px;
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
+            border-radius: 12px;
+            background-color: #f5f5f5;
           }
         }
 
@@ -398,6 +410,11 @@ export default {
               text-decoration: none;
               color: #000000;
             }
+          }
+          .fvt-usr-btn {
+            display: flex;
+            margin-left: 15px;
+            margin-top: -3px;
           }
         }
       }

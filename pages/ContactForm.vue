@@ -2,8 +2,8 @@
   <div class="page-contact-form">
     <div class="container">
       <h1>Kontakt</h1>
-      <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="Temat">
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+        <el-form-item label="Temat" prop="topic">
           <el-select v-model="form.topic" placeholder="Wybierz" clearable class="select-topic">
             <el-option
               v-for="topic in topics"
@@ -13,13 +13,13 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="Email">
+        <el-form-item label="Email" prop="email">
           <el-input v-model="form.email" placeholder="Email" />
         </el-form-item>
-        <el-form-item label="Imię">
+        <el-form-item label="Imię" prop="name">
           <el-input v-model="form.name" placeholder="Imię" />
         </el-form-item>
-        <el-form-item label="Wiadomość">
+        <el-form-item label="Wiadomość" prop="message">
           <el-input
             v-model="form.message"
             type="textarea"
@@ -35,7 +35,7 @@
           />
         </div>
         <div class="buttons">
-          <el-button type="primary" icon="el-icon-right" @click="send()">
+          <el-button type="primary" icon="el-icon-right" @click="submit">
             Wyślj
           </el-button>
         </div>
@@ -65,7 +65,16 @@ export default {
       'Pomoc graficzna',
       'Problem techniczny',
       'Inne'
-    ]
+    ],
+    rules: {
+      topic: { required: true, message: 'Temat jest wymagany', trigger: 'change' },
+      message: { required: true, message: 'Wiadomość jest wymagana', trigger: 'change' },
+      email: [
+        { required: true, message: 'Email jest wymagany', trigger: 'change' },
+        { type: 'email', message: 'Niepoprawny adres email', trigger: ['blur', 'change'] }
+      ],
+      name: { required: true, message: 'Imie jest wymagane', trigger: 'change' }
+    }
   }),
   computed: {
     siteKey () {
@@ -78,6 +87,20 @@ export default {
   methods: {
     onVerify (response) {
       this.form.recaptcha = response
+    },
+    submit () {
+      this.$refs.form.validate((valid) => {
+        if (!valid) {
+          this.$message({
+            message: 'Proszę, popraw formularz rejestracji',
+            type: 'error',
+            duration: 3000
+          })
+          return false
+        } else {
+          this.send()
+        }
+      })
     },
     async send () {
       if (this.form.recaptcha === null) {
@@ -112,8 +135,8 @@ export default {
 
 <style lang="scss">
   .page-contact-form {
-    height: calc(100vh - 170px);
-    display: flex;
+    // height: calc(100vh - 170px);
+    // display: flex;
     justify-content: center;
     align-items: center;
     background-image: url('~assets/header-background.jpg');
@@ -121,6 +144,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 80px;
+    padding-bottom: 20px;
 
     h1 {
       text-align: center;

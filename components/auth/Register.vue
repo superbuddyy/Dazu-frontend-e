@@ -117,7 +117,7 @@ export default {
       rules: {
         password: [
           { validator: validatePass, trigger: 'blur' },
-          { pattern: '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$', message: 'Hasło musi posiadać co najmnie 6 znaków, 1 dużą literę i jedną liczbę', trigger: 'blur' }
+          { pattern: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$', message: 'Hasło musi posiadać co najmnie 6 znaków, 1 dużą literę i jedną liczbę', trigger: 'blur' }
         ],
         rePassword: [
           { validator: validatePass2, trigger: 'blur' }
@@ -126,7 +126,10 @@ export default {
           { required: true, message: 'Akceptacja regulaminu jest wymagana', trigger: 'change' }
         ],
         type: { required: true, message: 'Wybierz kim jesteś?', trigger: 'change' },
-        email: { required: true, message: 'Email jest wymagany', trigger: 'change' },
+        email: [
+          { required: true, message: 'Email jest wymagany', trigger: 'change' },
+          { type: 'email', message: 'Niepoprawny adres email', trigger: ['blur', 'change'] }
+        ],
         name: { required: true, message: 'Nazwa firmy lub imię jest wymagane', trigger: 'change' }
       }
     }
@@ -225,6 +228,13 @@ export default {
         text-decoration: underline;
       }
     }
+  }
+  .el-dialog {
+    margin-top: 3vh !important;
+  }
+  .el-input {
+    margin-top: 10px;
+    margin-bottom: 2px;
   }
 }
 </style>
