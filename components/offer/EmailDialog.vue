@@ -5,7 +5,7 @@
       :visible.sync="dialogVisible"
       :before-close="close"
     >
-      <el-form :label-position="'left'" :model="form" class="form">
+      <el-form v-if="isShowForm" :label-position="'left'" :model="form" class="form">
         <el-row :span="24">
           <el-col :span="12">
             <el-form-item label="Imię">
@@ -46,10 +46,23 @@
           />
         </div>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <span v-if="isShowForm" slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
-        <el-button type="primary" icon="el-icon-right" @click="send()">Wyślj</el-button>
+        <el-button type="primary" icon="el-icon-right" @click="showAlertDialog()">Wyślj</el-button>
       </span>
+      <div v-if="!isShowForm" class="alert-div">
+        Aby Twoja wiadomość została dostarczona, musisz kliknąć w link emaila jaki został podany w wiadomości.
+        <div class="alert-div-btn">
+          <el-button
+            type="primary"
+            round
+            class="alert-btn"
+            @click="send()"
+          >
+            OK
+          </el-button>
+        </div>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -98,7 +111,8 @@ export default {
         recaptcha: null,
         date: '',
         time: ''
-      }
+      },
+      isShowForm: true
     }
   },
   computed: {
@@ -127,6 +141,9 @@ export default {
   },
   mounted () {
     this.default()
+    if (this.$store.state.user.isLogged) {
+      this.form.email = this.$store.state.user.email
+    }
   },
   methods: {
     default () {
@@ -149,6 +166,13 @@ export default {
     close () {
       this.$emit('close-dialog')
     },
+    showAlertDialog () {
+      if (this.form.email === this.$store.state.user.email) {
+        this.send()
+      } else {
+        this.isShowForm = false
+      }
+    },
     async send () {
       let result = {}
       if (this.form.recaptcha === null) {
@@ -159,7 +183,7 @@ export default {
         })
         return
       }
-
+      this.$emit('close-dialog')
       if (this.userId !== '' || this.offerSlug === '') {
         result = await sendProfileEmail(this.userId, this.form)
       } else {
@@ -175,12 +199,33 @@ export default {
         this.form = {
           name: '',
           email: '',
-          message: '',
-          wantToSee: false,
+          message: this.form.message,
+          wantToSee: this.form.wantToSee,
           captcha: null
         }
         this.$refs.recaptcha.reset()
-        this.$emit('close-dialog')
+        // this.$emit('close-dialog')
+      } else if (result.status === 200) {
+        this.$message({
+          message: 'Gratulacje. Potwierdzić swoje konto. Kliknij w link przesłany na e-mail.',
+          type: 'success',
+          duration: 3000
+        })
+        this.form = {
+          name: '',
+          email: '',
+          message: this.form.message,
+          wantToSee: this.form.wantToSee,
+          captcha: null
+        }
+        this.$refs.recaptcha.reset()
+        // this.$emit('close-dialog')
+      } else {
+        this.$message({
+          message: 'Something went wrong',
+          type: 'error',
+          duration: 3000
+        })
       }
     }
   }
@@ -203,6 +248,16 @@ export default {
       justify-content: center;
       margin-top: 100px;
     }
-
+    .alert-div {
+      font-weight: bolder;
+    }
+    .alert-div-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .alert-btn {
+      width: 50%;
+    }
   }
 </style>

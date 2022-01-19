@@ -34,6 +34,8 @@ import OfferInfo from '@/components/offer/OfferInfo'
 import OfferDetails from '@/components/offer/OfferDetails'
 import OffersCarousel from '@/components/OffersCarousel'
 import { show } from '@/api/offer'
+import { csrf } from '@/api/auth'
+import { verifyContact } from '@/api/contact'
 import PreviewBar from '../components/offer/PreviewBar'
 
 export default {
@@ -57,6 +59,9 @@ export default {
   },
   mounted () {
     this.getOfferFromApi()
+    if (this.$route.query.token) {
+      this.verifyToken()
+    }
   },
   methods: {
     setFavorite (e) {
@@ -86,6 +91,22 @@ export default {
     },
     getPathName () {
       return [this.offer.type, this.offer.title]
+    },
+    verifyToken () {
+      csrf().then(async () => {
+        await this.apiCall()
+      })
+    },
+    async apiCall () {
+      const result = await verifyContact({ token: this.$route.query.token })
+      if (result.status === 204 || result.status === 200) {
+        this.$message({
+          message: 'Wiadomość została wysłana',
+          type: 'success',
+          duration: 3000
+        })
+        this.$router.push(this.$route.path)
+      }
     }
   }
 }

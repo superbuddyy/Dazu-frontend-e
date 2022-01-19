@@ -90,9 +90,6 @@
       </div>
       <div class="text">
         <h1>{{ offer.title }}</h1>
-        <p
-          v-html="offer.description"
-        />
       </div>
       <div class="price">
         Cena: <b><Money :money="offer.price" /></b>
@@ -122,6 +119,9 @@
         <el-tag v-if="offer.is_available_now" type="info">
           Dostepne od zaraz
         </el-tag>
+      </div>
+      <div class="text">
+        <h1>{{ offer.title }}</h1>
       </div>
       <div class="stats">
         <el-table

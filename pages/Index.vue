@@ -23,7 +23,8 @@ import AdvancedSearch from '@/components/home_page/AdvancedSearch'
 import OffersCarousel from '@/components/OffersCarousel'
 import AccountTypeList from '@/components/home_page/AccountTypeList'
 import BlogPost from '@/components/home_page/BlogPost'
-import { check } from '@/api/auth'
+import { check, csrf } from '@/api/auth'
+import { verifyContact } from '@/api/contact'
 import * as Cookies from 'js-cookie'
 import CookiesPopup from '../components/CookiesPopup'
 import CustomPopup from '../components/CustomPopup'
@@ -55,6 +56,9 @@ export default {
         duration: 3000
       })
       this.$router.push(this.$route.path)
+    }
+    if (this.$route.query.token) {
+      this.verifyToken()
     }
     if (this.$route.query['payment-status'] === 'success') {
       this.$message({
@@ -100,6 +104,22 @@ export default {
       const result = await check()
       if (this.$store.state.user.isLogged && result.data === false) {
         await this.$store.dispatch('user/logout')
+      }
+    },
+    verifyToken () {
+      csrf().then(async () => {
+        await this.apiCall()
+      })
+    },
+    async apiCall () {
+      const result = await verifyContact({ token: this.$route.query.token })
+      if (result.status === 204 || result.status === 200) {
+        this.$message({
+          message: 'Wiadomość została wysłana',
+          type: 'success',
+          duration: 3000
+        })
+        this.$router.push(this.$route.path)
       }
     }
   }
