@@ -189,7 +189,7 @@ export default {
       } else {
         result = await sendOfferEmail(this.offerSlug, this.form)
       }
-
+      this.isShowForm = true
       if (result.status === 204) {
         this.$message({
           message: 'Wiadomość została wysłana',
