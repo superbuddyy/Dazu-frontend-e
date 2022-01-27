@@ -14,7 +14,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="Email">
-              <el-input v-model="form.email" placeholder="Email" />
+              <el-input v-model="form.email" :disabled="isDisabled" placeholder="Email" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -112,7 +112,8 @@ export default {
         date: '',
         time: ''
       },
-      isShowForm: true
+      isShowForm: true,
+      isDisabled: false
     }
   },
   computed: {
@@ -143,6 +144,7 @@ export default {
     this.default()
     if (this.$store.state.user.isLogged) {
       this.form.email = this.$store.state.user.email
+      this.isDisabled = true
     }
   },
   methods: {
@@ -198,7 +200,7 @@ export default {
         })
         this.form = {
           name: '',
-          email: '',
+          email: this.isDisabled ? this.form.email : '',
           message: this.form.message,
           wantToSee: this.form.wantToSee,
           captcha: null
@@ -213,7 +215,7 @@ export default {
         })
         this.form = {
           name: '',
-          email: '',
+          email: this.isDisabled ? this.form.email : '',
           message: this.form.message,
           wantToSee: this.form.wantToSee,
           captcha: null

@@ -20,7 +20,8 @@
       width="300px"
     >
       <p style="margin: 14px">
-        Dodanie lub zmiana avatara jest płatna - 5zł na 30dni
+        <!-- Dodanie lub zmiana avatara jest płatna - 5zł na 30dni -->
+        {{ avatarLimitMsg }}
       </p>
       <div style="text-align: center; margin: 0">
         <el-upload
@@ -67,6 +68,7 @@
 
 <script>
 import { storeAvatar, deleteAvatar, updateDefaultAvatar, getMyProfile } from '@/api/user'
+import { getSettings } from '@/api/setting'
 import ExpireTime from './my_offers/ExpireTime'
 export default {
   name: 'Avatar',
@@ -80,7 +82,9 @@ export default {
     loading: false,
     checkValue: 'photo',
     checkStatus: false,
-    user: null
+    user: null,
+    avatarLimitMsg: '',
+    avatarPrice: ''
   }),
   computed: {
     avatarUrl () {
@@ -100,11 +104,12 @@ export default {
       this.checkDefaultAvatar()
     }
   },
-  mounted () {
+  async mounted () {
     this.checkDefaultAvatar()
     if (this.$store.state.user.isLogged) {
       this.getProfile()
     }
+    await this.getSettingsValues()
   },
   methods: {
     async addAvatar (file) {
@@ -160,6 +165,16 @@ export default {
       if (result.status === 200) {
         this.user = result.data
       }
+    },
+    async getSettingsValues () {
+      const result = await getSettings()
+      result.data.forEach((item, index) => {
+        item.value = (item.value / 100).toFixed(2)
+        if (item.name === 'avatar_photo.price') {
+          this.avatarLimitMsg = `Dodanie lub zmiana avatara jest płatna - ${item.value}zł na 30dni`
+          this.avatarPrice = item.value
+        }
+      })
     }
   }
 }

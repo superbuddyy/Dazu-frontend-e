@@ -75,6 +75,24 @@
               />
             </div>
           </div>
+          <div
+            v-if="isPreview && !$store.state.user.isLogged"
+            class="agent"
+          >
+            <b
+              class="agent-name"
+            >
+              {{ localData.user.name }}
+            </b>
+            <div class="fvt-usr-btn">
+              <FavoriteUser
+                class="favorite-btn"
+                :userSlug="offer.user.id"
+                :isFavoriteUser="offer.user.is_favorite_user"
+                size="20"
+              />
+            </div>
+          </div>
           <div class="buttons">
             <el-button type="plain" round @click="showPhone">
               Zadzwoń
@@ -121,7 +139,9 @@
         </el-tag>
       </div>
       <div class="text">
-        <h1>{{ offer.title }}</h1>
+        <p
+          v-html="offer.description"
+        />
       </div>
       <div class="stats">
         <el-table
@@ -244,7 +264,8 @@ export default {
       recaptchaVisible: false,
       recaptcha: null,
       phone: null,
-      videoAvatarAvailable: false
+      videoAvatarAvailable: false,
+      localData: {}
     }
   },
   computed: {
@@ -263,6 +284,9 @@ export default {
     },
     siteKey () {
       return this.$config.recaptchaSiteKey
+    },
+    isPreview () {
+      return Object.prototype.hasOwnProperty.call(this.$route.query, 'preview') && this.$route.query.preview
     }
   },
   watch: {
@@ -271,6 +295,11 @@ export default {
         this.recaptchaVisible = false
         this.getPhone()
       }
+    }
+  },
+  mounted () {
+    if (this.isPreview && !this.$store.state.user.isLogged) {
+      this.localData = localStorage.getItem('offer') ? JSON.parse(localStorage.getItem('offer')) : null
     }
   },
   methods: {

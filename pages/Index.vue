@@ -66,7 +66,11 @@ export default {
         type: 'success',
         duration: 3000
       })
-      this.$router.push(this.$route.path)
+      if (this.$store.state.user.isLogged) {
+        this.$router.push('/moje-ogloszenia')
+      } else {
+        this.$router.push(this.$route.path)
+      }
     }
     if (this.$route.query['test-msg'] === 'success') {
       this.$message({

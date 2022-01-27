@@ -260,6 +260,20 @@
         :value="form.description"
         @set-value="setDescValue"
       />
+      <el-row class="fw-bld">
+        <el-col :span="24">
+          <el-form-item>
+            <span class="_error">UWAGA!</span> Aby dodać wideo lub spacer 3D prosimy używać skopiowanych linków z “udostępienia" a nie z paska adresu - więcej na
+            <a
+              href="/faq"
+              target="_blank"
+              class="bld"
+            >
+              FAQ
+            </a>
+          </el-form-item>
+        </el-col>
+      </el-row>
       <el-tooltip :content="linkLimitMsg" placement="top">
         <Attribute
           name="Link"
@@ -365,7 +379,7 @@
         </el-col>
       </el-row>
 
-      <el-form-item v-if="viewType === 'create'" label-width="0px">
+      <el-form-item v-if="viewType === 'create' || viewType === 'preview'" label-width="0px">
         <div class="container-account-types">
           <div
             v-for="(subscription, index) in subscriptions"
@@ -587,10 +601,11 @@
               Kliknij aby dodać
             </el-button>
             <div slot="tip" class="el-upload__tip">
-              Płatne 5zł ważne na 30dni
+              <!-- Płatne 5zł ważne na 30dni -->
+              {{ avatarLimitMsg }}
             </div>
             <div slot="tip" class="el-upload__tip fw-bld">
-              Uwaga! Aby poprawnie dodać link do wideo, prosimi zapoznać się z sekcja dotyczącą dodawania linków w
+              <span class="_error">Uwaga!</span> Aby poprawnie dodać link do wideo, prosimi zapoznać się z sekcja dotyczącą dodawania linków w
                 <a
                   href="/faq"
                   target="_blank"
@@ -676,6 +691,12 @@
         <el-button v-if="viewType === 'update'" type="primary" @click="onSubmitEdit">
           Zapisz zmiany
         </el-button>
+        <el-button v-if="viewType === 'preview'" type="primary" @click="onSubmitPreview(true)">
+          Podgląd
+        </el-button>
+        <el-button v-if="viewType === 'preview'" type="primary" @click="onSubmitPreview(false)">
+          Dodaj ogłoszenie
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -683,7 +704,7 @@
 
 <script>
 import * as Cookies from 'js-cookie'
-import { store, show, update } from '@/api/offer'
+import { store, show, update, previewStore, previewShow, previewMigrate, previewUpdate } from '@/api/offer'
 import { getLocation } from '@/api/osm'
 import { mapOfferModelToOfferForm } from '@/helpers'
 import { index } from '@/api/subscriptions'
@@ -847,6 +868,8 @@ export default {
       },
       isPhotoLimitReached: true,
       settingData: [],
+      avatarLimitMsg: '',
+      avatarPrice: '',
       photoLimitMsg: '',
       linkLimitMsg: '',
       dateLimitMsg: '',
@@ -876,6 +899,9 @@ export default {
       set (newValue) {
         this.form.attributes[3] = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
       }
+    },
+    isPreview () {
+      return Object.prototype.hasOwnProperty.call(this.$route.query, 'preview') && this.$route.query.preview
     }
   },
   async mounted () {
@@ -904,9 +930,18 @@ export default {
       this.form.user.account_type = this.$store.state.user.roles[0]
     }
     if (this.$route.params.slug) {
-      const result = await show(this.$route.params.slug, this.categories)
+      let result = {}
+      if (this.isPreview && !this.$store.state.user.isLogged) {
+        result = await previewShow(this.$route.params.slug)
+      } else {
+        result = await show(this.$route.params.slug, this.categories)
+      }
       if (result.status === 200) {
-        this.viewType = 'update'
+        if (this.isPreview && !this.$store.state.user.isLogged) {
+          this.viewType = 'preview'
+        } else {
+          this.viewType = 'update'
+        }
         this.offer = result.data
         const eFormData = this.fillForm(result.data)
         for (const e in eFormData) {
@@ -924,6 +959,13 @@ export default {
           osm_id: new Date().getTime()
         }]
         this.form.location = this.offer.location.lat + '*' + this.offer.location.lon + '*' + this.offer.location.name
+        const localData = localStorage.getItem('offer') ? JSON.parse(localStorage.getItem('offer')) : null
+        if (localData) {
+          this.form.user.account_type = localData.user.account_type
+          this.form.user.name = localData.user.name ? localData.user.name : ''
+          this.form.user.email = localData.user.email ? localData.user.email : ''
+          this.form.user.phone = localData.user.phone ? localData.user.phone : 0
+        }
       }
     }
   },
@@ -954,6 +996,22 @@ export default {
         }
       })
     },
+    onSubmitPreview (preview) {
+      this.processing = true
+      this.$refs.form.validate((valid) => {
+        if (!valid) {
+          this.processing = false
+          this.$message({
+            message: 'Popraw formularz dodawania ogłoszenia',
+            type: 'error',
+            duration: 3000
+          })
+          return false
+        } else {
+          this.previewOffer(preview)
+        }
+      })
+    },
     changeLatLngAfterDrag (event) {
       const latLng = this.$refs.marker.mapObject.getLatLng()
       const location = this.form.location.split('*')
@@ -974,11 +1032,69 @@ export default {
         this.locations = []
       }
     },
+    async previewOffer (preview) {
+      const formData = this.makeFormData()
+      formData.append('preview', preview)
+      if (preview && !this.$store.state.user.isLogged) {
+        localStorage.setItem('offer', JSON.stringify(this.form))
+      }
+      try {
+        let result = {}
+        if (preview) {
+          result = await previewUpdate(this.offer.slug, formData)
+        } else {
+          result = await previewMigrate(this.offer.slug, formData)
+          localStorage.removeItem('offer')
+        }
+        const offerSlug = result.data.offer_slug === undefined ? result.data.slug : result.data.offer_slug
+        if (preview && (result.status === 200 || result.status === 201)) {
+          Cookies.set('offer-token', result.data.offer_token, { expires: 1 })
+          await this.$router.push('/ogloszenia/' + offerSlug + '?preview=true')
+        } else if (result.status === 201) {
+          this.$message({
+            message: 'Dodano ogłoszenie',
+            type: 'success',
+            duration: 3000
+          })
+          this.processing = false
+          await this.$router.push('/moje-ogloszenia')
+        } else if (result.status === 200) {
+          this.processing = false
+          if (this.$store.state.user.isLogged) {
+            await this.$router.push('/moje-ogloszenia/oplac/' + offerSlug)
+          } else {
+            this.$message({
+              message: 'Na podany adres email został wysłany link do aktywacji konta i opłacenia ogłoszenia',
+              type: 'success',
+              duration: 3000
+            })
+            await this.$router.push('/')
+          }
+        }
+      } catch (e) {
+        this.processing = false
+        this.failShake = true
+        setTimeout(() => {
+          this.failShake = false
+        }, 1000)
+      }
+    },
     async addOffer (preview) {
       const formData = this.makeFormData()
       formData.append('preview', preview)
+      if (preview && !this.$store.state.user.isLogged) {
+        console.log(this.form)
+        console.log(formData)
+        localStorage.setItem('offer', JSON.stringify(this.form))
+        // return
+      }
       try {
-        const result = await store(formData)
+        let result = {}
+        if (preview && !this.$store.state.user.isLogged) {
+          result = await previewStore(formData)
+        } else {
+          result = await store(formData)
+        }
         const offerSlug = result.data.offer_slug === undefined ? result.data.slug : result.data.offer_slug
         if (preview && (result.status === 200 || result.status === 201)) {
           Cookies.set('offer-token', result.data.offer_token, { expires: 1 })
@@ -1187,6 +1303,10 @@ export default {
         if (item.name === 'visible_from_date.price') {
           this.dateLimitMsg = `Ta opcja jest płatna ${item.value} zł`
           this.datePrice = item.value
+        }
+        if (item.name === 'avatar_photo.price') {
+          this.avatarLimitMsg = `Płatne ${item.value}zł ważne na 30dni`
+          this.avatarPrice = item.value
         }
       })
     },
@@ -1453,12 +1573,15 @@ export default {
       ;
       text-decoration: underline !important;
     }
-    .fw-bld {
-      font-weight: bolder;
-    }
     .el-upload-list {
       width: 30% !important;
     }
+  }
+  .fw-bld {
+    font-weight: bolder;
+  }
+  ._error {
+    color: #F56C6C;
   }
 }
 </style>

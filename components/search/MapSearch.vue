@@ -195,6 +195,14 @@
                   :money="offer.price"
                 />
               </div>
+              <div class="tags">
+                <el-tag v-if="offer.is_promoted" type="warn" class="offer_label">
+                  OKAZJA
+                </el-tag>
+                <el-tag v-if="offer.is_urgent" type="danger" class="urgent_label">
+                  PILNE
+                </el-tag>
+              </div>
               <div class="type">
                 {{ offer.type }}
               </div>
@@ -640,6 +648,16 @@ export default {
       .details {
         display: flex;
         justify-content: space-around;
+        .urgent_label {
+          background: #FF4800 !important;
+          color: #fff !important;
+          border-radius: 20px;
+        }
+        .offer_label {
+          background: #FFE000 !important;
+          color: #000 !important;
+          border-radius: 20px;
+        }
       }
 
       .bargain {

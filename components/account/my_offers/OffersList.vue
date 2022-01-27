@@ -33,9 +33,9 @@
           Dezaktywuj
         </el-button>
       </el-popover>
-      <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked" class="mr-5">
+      <!-- <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked" class="mr-5">
         Odśwież
-      </el-button>
+      </el-button> -->
       <span v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')">
         Filtruj wg. agentów:
       </span>
@@ -369,7 +369,7 @@ export default {
   methods: {
     toolTipText (offer) {
       if (offer.total_raises !== 0) {
-        return '(' + offer.total_raises + ' raises)'
+        return '(' + offer.total_raises + ' podbicia)'
       } else {
         return '(' + (offer.raise_price / 100) + ' pln)'
       }

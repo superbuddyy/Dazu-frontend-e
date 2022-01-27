@@ -51,3 +51,19 @@ export function charge (slug, data) {
 export function getImageBlob (url) {
   return apiClient.get('/storage/' + url)
 }
+
+export function previewStore (data) {
+  return apiClient.post('/api/offers-preview', data, { headers: { 'Content-Type': 'multipart/form-data' } })
+}
+
+export function previewUpdate (offerSlug, data) {
+  return apiClient.post('/api/offers-preview/' + offerSlug, data, { headers: { 'Content-Type': 'multipart/form-data' } })
+}
+
+export function previewShow (slug) {
+  return apiClient.get('/api/offers-preview/' + slug)
+}
+
+export function previewMigrate (offerSlug, data) {
+  return apiClient.post('/api/migrate/offers-preview/' + offerSlug, data, { headers: { 'Content-Type': 'multipart/form-data' } })
+}

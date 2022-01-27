@@ -33,7 +33,7 @@ import Breadcrumbs from '@/components/offer/Breadcrumbs'
 import OfferInfo from '@/components/offer/OfferInfo'
 import OfferDetails from '@/components/offer/OfferDetails'
 import OffersCarousel from '@/components/OffersCarousel'
-import { show } from '@/api/offer'
+import { show, previewShow } from '@/api/offer'
 import { csrf } from '@/api/auth'
 import { verifyContact } from '@/api/contact'
 import PreviewBar from '../components/offer/PreviewBar'
@@ -58,7 +58,11 @@ export default {
     }
   },
   mounted () {
-    this.getOfferFromApi()
+    if (this.isPreview && !this.$store.state.user.isLogged) {
+      this.getOfferPreviewFromApi()
+    } else {
+      this.getOfferFromApi()
+    }
     if (this.$route.query.token) {
       this.verifyToken()
     }
@@ -69,6 +73,14 @@ export default {
     },
     async getOfferFromApi () {
       const result = await show(this.$route.params.slug)
+      if (result.data) {
+        this.offer = result.data
+        this.attributes = this.mapAttributes(result.data.attributes)
+      }
+      this.loading = false
+    },
+    async getOfferPreviewFromApi () {
+      const result = await previewShow(this.$route.params.slug)
       if (result.data) {
         this.offer = result.data
         this.attributes = this.mapAttributes(result.data.attributes)

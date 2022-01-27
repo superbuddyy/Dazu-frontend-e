@@ -11,7 +11,7 @@
         <el-button type="plain" class="preview-btn" icon="el-icon-edit" @click="edit">
           Edytuj
         </el-button>
-        <el-button type="primary" class="preview-btn" icon="el-icon-check" @click="save">
+        <el-button v-if="$store.state.user.isLogged" type="primary" class="preview-btn" icon="el-icon-check" @click="save">
           Zapisz
         </el-button>
       </div>
@@ -32,7 +32,11 @@ export default {
   },
   methods: {
     edit () {
-      this.$router.push('/moje-ogloszenia/edytuj-ogloszenie/' + this.offerSlug)
+      if (this.$store.state.user.isLogged) {
+        this.$router.push('/moje-ogloszenia/edytuj-ogloszenie/' + this.offerSlug)
+      } else {
+        this.$router.push('/moje-ogloszenia/edytuj-ogloszenie/' + this.offerSlug + '?preview=true')
+      }
     },
     save () {
       this.$router.push('/moje-ogloszenia')
