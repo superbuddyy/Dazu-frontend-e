@@ -1,6 +1,6 @@
 <template>
   <el-collapse-item :title="title" :name="title">
-    <p v-safe-html="content" />
+    <p v-html="content" />
   </el-collapse-item>
 </template>
 

@@ -7,7 +7,12 @@
       :before-close="close"
     >
       <div class="subscriptions">
-        <div v-for="item in subscriptions" :key="item.id" class="subscription-box" @click="selectSubscription(item.id)">
+        <SubscriptionsNew
+          :isDialog="isDialogNew"
+          @set-active-item="setActiveItem"
+          @set-subscription-package="setSubscriptionPackage"
+        />
+        <!-- <div v-for="item in subscriptions" :key="item.id" class="subscription-box" @click="selectSubscription(item.id)">
           <el-card
             :class="[ selectedItem === item.id ? 'active card-box' : 'card-box' ]"
           >
@@ -27,7 +32,7 @@
               </div>
             </div>
           </el-card>
-        </div>
+        </div> -->
       </div>
       <div v-if="selectedItem !== null" class="payments">
         <p>Wybierz metodę płatności</p>
@@ -50,9 +55,13 @@
 
 <script>
 import { buy, index } from '@/api/subscriptions'
+import SubscriptionsNew from '@/components/SubscriptionsNew'
 
 export default {
   name: 'SubscriptionsDialog',
+  components: {
+    SubscriptionsNew
+  },
   props: {
     visible: {
       type: Boolean,
@@ -72,10 +81,12 @@ export default {
     subscriptions: [],
     selectedItem: null,
     gateway: null,
-    paymentDialog: true
+    paymentDialog: true,
+    form: {},
+    isDialogNew: true
   }),
   mounted () {
-    this.getSubscriptions()
+    // this.getSubscriptions()
   },
   methods: {
     close () {
@@ -87,6 +98,13 @@ export default {
     },
     selectSubscription (id) {
       this.selectedItem = id
+    },
+    setActiveItem (id) {
+      this.selectedItem = id
+    },
+    setSubscriptionPackage (form) {
+      this.form = form
+      console.log(this.form)
     },
     setGateway (gateway) {
       this.gateway = gateway
@@ -102,7 +120,9 @@ export default {
       }
       this.loading = true
       // TODO: Pass gateway
-      const result = await buy(this.selectedItem, this.offerSlug)
+      const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem] } : {}
+      console.log(formInput)
+      const result = await buy(this.selectedItem, this.offerSlug, formInput)
       if (result.status === 200) {
         window.location.href = result.data.links[1].href
         this.loading = false
@@ -202,6 +222,9 @@ export default {
           align-items: center;
         }
       }
+    }
+    .el-dialog {
+      width: 75% !important;
     }
   }
 </style>

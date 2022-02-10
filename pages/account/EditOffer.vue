@@ -49,12 +49,12 @@ export default {
       if (categories.status === 200) {
         for (const category of categories.data) {
           this.rootSubCategories[category.slug] = category.children.map((category) => {
-            return { name: category.name, value: category.slug, id: category.id }
+            return { name: category.name, value: category.slug, id: category.id, offer_types: category.offer_types ? category.offer_types : [] }
           })
         }
 
         this.rootCategories = categories.data.map((category) => {
-          return { name: category.name, value: category.slug, id: category.id }
+          return { name: category.name, value: category.slug, id: category.id, offer_types: category.offer_types ? category.offer_types : [] }
         })
       }
     }

@@ -2,22 +2,30 @@
   <div class="category">
     <el-form-item label="Kategoria" prop="category">
       <el-select v-model="local_category" placeholder="Wybierz" clearable @change="setSubCategories($event)">
-        <el-option
+        <template
           v-for="rootCategory in rootCategories"
-          :key="rootCategory.value"
-          :label="rootCategory.name"
-          :value="rootCategory.value"
+        >
+          <el-option
+            v-if="rootCategory['offer_types'].includes($store.state.addOfferForm.type)"
+            :key="rootCategory.value"
+            :label="rootCategory.name"
+            :value="rootCategory.value"
         />
+        </template>
       </el-select>
     </el-form-item>
     <el-form-item v-if="category" label="Pod kategoria">
       <el-select v-model="local_subcategory" placeholder="Wybierz" clearable @change="setSubCategory">
-        <el-option
+        <template
           v-for="subCat in subCategories"
-          :key="subCat.value"
-          :label="subCat.name"
-          :value="subCat.value"
-        />
+        >
+          <el-option
+            v-if="subCat['offer_types'].includes($store.state.addOfferForm.type)"
+            :key="subCat.value"
+            :label="subCat.name"
+            :value="subCat.value"
+          />
+        </template>
       </el-select>
     </el-form-item>
   </div>

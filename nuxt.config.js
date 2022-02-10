@@ -10,9 +10,26 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
+    __dangerouslyDisableSanitizers: ['script'],
     script: [
       {
         src: 'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit'
+      },
+      {
+        hid: 'gtm-script1',
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-F778WV99TH',
+        defer: true
+      },
+      {
+        hid: 'gtm-script2',
+        innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-F778WV99TH');
+        `,
+        type: 'text/javascript',
+        charset: 'utf-8'
       }
     ]
   },
@@ -34,6 +51,7 @@ export default {
     '~/plugins/click-outside.js',
     '~/plugins/storage',
     '~/plugins/html-safe',
+    '~/plugins/gtm',
     // '~/plugins/modernizr.custom.js',
     // '~/plugins/classie.js',
     // '~/plugins/progressButton.js',
@@ -58,19 +76,26 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
-    'nuxt-leaflet'
+    'nuxt-leaflet',
+    '@nuxtjs/gtm'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     proxy: true
   },
-
+  gtm: {
+    id: process.env.GTM_ID || 'GTM-KGXZ77W',
+    enabled: true
+  },
   publicRuntimeConfig: {
     assetsUrl: process.env.VUE_APP_ASSETS_BASE_URL,
     baseUrl: process.env.VUE_APP_BASE_API,
     mapStyle: process.env.VUE_APP_MAP_STYLE,
-    recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY
+    recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY,
+    gtm: {
+      id: 'GTM-KGXZ77W'
+    }
   },
   // pwa: {
   //   manifest: {

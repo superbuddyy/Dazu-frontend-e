@@ -1,5 +1,5 @@
 <template>
-  <div class="homepage-subscription-list">
+  <div class="homepage-subscription-list" :class="[ !isDialog ? 'homepage-subscription-list--wdt' : '' ]">
     <div class="container-account-types">
       <div
         v-for="(subscription, index) in items"
@@ -153,6 +153,14 @@
 import { index } from '@/api/subscriptions'
 export default {
   name: 'SubscriptionsNew',
+  props: {
+    isDialog: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+  },
   data () {
     return {
       items: [],
@@ -166,7 +174,11 @@ export default {
   methods: {
     async getSubscriptions () {
       const result = await index()
-      this.items = result.data
+      if (this.isDialog) {
+        this.items = result.data.filter(sub => sub.id !== 1)
+      } else {
+        this.items = result.data
+      }
     },
     setActiveItem (id) {
       this.active_item = id
@@ -180,8 +192,10 @@ export default {
 </script>
 
 <style lang="scss">
-.homepage-subscription-list {
+.homepage-subscription-list--wdt {
   width: 88% !important;
+}
+.homepage-subscription-list {
   margin-top: 20px;
 
   .el-input__inner {
@@ -282,6 +296,7 @@ export default {
     .sub-box {
       margin-bottom: 20px;
       border-radius: 32px;
+      margin-right: 10px;
     }
 
     .active {

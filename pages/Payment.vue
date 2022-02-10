@@ -21,8 +21,9 @@
         </el-table>
         <div v-if="!hasSubscription" class="subscriptions">
           <h3>Czy chcesz dodatkowy pakiet?</h3>
-          <Subscriptions
+          <SubscriptionsNew
             @selected-details="setActiveItem"
+            @set-subscription-package="setSubscriptionPackage"
           />
         </div>
         <div class="invoice">
@@ -83,12 +84,12 @@
 </template>
 <script>
 import { getBill, charge } from '@/api/offer'
-import Subscriptions from '@/components/Subscriptions'
+import SubscriptionsNew from '@/components/SubscriptionsNew'
 
 export default {
   name: 'Payment',
   components: {
-    Subscriptions
+    SubscriptionsNew
   },
   data: () => ({
     selectedSubscription: 1,
@@ -108,7 +109,9 @@ export default {
       zip_code: '',
       country: '',
       nip: ''
-    }
+    },
+    subForm: {},
+    isDialogNew: true
   }),
   computed: {
     amount () {
@@ -140,7 +143,10 @@ export default {
       }
 
       if (this.selectedSubscription !== 1) {
-        data = { subscription: this.selectedSubscription }
+        data = {
+          subscription: this.selectedSubscription,
+          subscriptions: this.subForm.subscriptions[this.selectedSubscription] ? this.subForm.subscriptions[this.selectedSubscription] : {}
+        }
       }
 
       const result = await charge(this.$route.params.slug, data)
@@ -168,14 +174,21 @@ export default {
       this.selectedSubscription = e.id
       let tmpDetails = []
       tmpDetails = this.details.filter(item => !('additional' in item))
+      console.log(tmpDetails)
+      console.log(e)
       if (e.price !== 0) {
         tmpDetails.push({ name: e.name, value: (e.price / 100) + ' pln', additional: true, id: Math.random().toString(16).slice(2) })
         this.details = tmpDetails
         this.additionalAmount = e.price
       } else {
+        this.details = tmpDetails
         this.additionalAmount = 0
       }
       console.log(this.details)
+    },
+    setSubscriptionPackage (form) {
+      this.subForm = form
+      console.log(this.subForm)
     }
   }
 }

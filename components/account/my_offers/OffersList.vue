@@ -3,7 +3,7 @@
     <div class="panel">
       <el-row class="search-row">
         <el-col :span="7">
-          <el-input v-model="searchTxt" placeholder="Poszukaj ogłoszenia"/>
+          <el-input v-model="searchTxt" clearable v-on:clear="searchOfferList" placeholder="Poszukaj ogłoszenia"/>
         </el-col>
         <el-col :span="2" class="search-box-btn">
           <el-button type="primary" class="login-btn" @click="searchOfferList">
@@ -44,6 +44,7 @@
         class="mr-5"
         v-model="current_agent"
         filterable
+        clearable
         :change="filterByUser()"
         placeholder="Wybierz tagi dla swojego artykułu">
         <el-option

@@ -945,10 +945,9 @@ export default {
         this.offer = result.data
         const eFormData = this.fillForm(result.data)
         for (const e in eFormData) {
-          console.log(e)
-          console.log(eFormData[e])
           this.form[e] = eFormData[e]
         }
+        this.$store.dispatch('addOfferForm/setType', this.form.attributes[1])
         // this.form = eFormData
         this.fileList = this.form.images
         this.projectFileList = this.form.projectPlans
@@ -1237,6 +1236,8 @@ export default {
     setType (type) {
       this.form.attributes[1] = type
       this.$store.dispatch('addOfferForm/setType', type)
+      this.form.category = ''
+      this.form.subcategory = ''
     },
     setUrgentValue (e) {
       console.log(e)
