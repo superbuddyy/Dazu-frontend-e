@@ -31,80 +31,124 @@
     </div>
     <div class="info-body">
       <div class="personal-data">
-        <div v-if="offer.company && offer.user.type === 'company'" class="avatar">
-          <Avatar
-            :company="offer.company"
-            :user="offer.user"
-          />
-        </div>
-        <div v-if="offer.company === null && offer.user.type !== 'company'" class="avatar">
-          <Avatar
-            :company="offer.company"
-            :user="offer.user"
-          />
-        </div>
-        <div v-if="offer.user" class="right-data">
-          <div v-if="offer.company && offer.user.type === 'company'" class="company-name">
-            <nuxt-link :to="'/profil/' + offer.user.id">
-              {{ offer.company.name }}
-            </nuxt-link>
-            <div class="fvt-usr-btn">
-              <FavoriteUser
-                class="favorite-btn"
-                :userSlug="offer.user.id"
-                :isFavoriteUser="offer.user.is_favorite_user"
-                size="20"
-              />
-            </div>
+        <template v-if="($store.state.user.isLogged && $store.state.user.id === offer.user_id) || !offer.is_expired">
+          <div v-if="offer.company && offer.user.type === 'company'" class="avatar">
+            <Avatar
+              :company="offer.company"
+              :user="offer.user"
+            />
           </div>
-          <div
-            v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin') && offer.company === null"
-            class="agent"
-          >
-            <b
-              class="agent-name"
+          <div v-if="offer.company === null && offer.user.type !== 'company'" class="avatar">
+            <Avatar
+              :company="offer.company"
+              :user="offer.user"
+            />
+          </div>
+        </template>
+        <template v-else>
+          <div class="avatar">
+            <Avatar
+              :user="offer.exp_avatar_url"
+            />
+          </div>
+        </template>
+        <template v-if="($store.state.user.isLogged && $store.state.user.id === offer.user_id) || !offer.is_expired">
+          <div v-if="offer.user" class="right-data">
+            <div v-if="offer.company && offer.user.type === 'company'" class="company-name">
+              <nuxt-link :to="'/profil/' + offer.user.id">
+                {{ offer.company.name }}
+              </nuxt-link>
+              <div class="fvt-usr-btn">
+                <FavoriteUser
+                  class="favorite-btn"
+                  :userSlug="offer.user.id"
+                  :isFavoriteUser="offer.user.is_favorite_user"
+                  size="20"
+                />
+              </div>
+            </div>
+            <div
+              v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin') && offer.company === null"
+              class="agent"
             >
-              <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
-            </b>
-            <div class="fvt-usr-btn">
-              <FavoriteUser
-                class="favorite-btn"
-                :userSlug="offer.user.id"
-                :isFavoriteUser="offer.user.is_favorite_user"
-                size="20"
-              />
+              <b
+                class="agent-name"
+              >
+                <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
+              </b>
+              <div class="fvt-usr-btn">
+                <FavoriteUser
+                  class="favorite-btn"
+                  :userSlug="offer.user.id"
+                  :isFavoriteUser="offer.user.is_favorite_user"
+                  size="20"
+                />
+              </div>
             </div>
-          </div>
-          <div
-            v-if="isPreview && !$store.state.user.isLogged"
-            class="agent"
-          >
-            <b
-              class="agent-name"
+            <div
+              v-if="isPreview && !$store.state.user.isLogged"
+              class="agent"
             >
-              {{ localData.user.name }}</nuxt-link>
-            </b>
-            <div class="fvt-usr-btn">
-              <FavoriteUser
-                class="favorite-btn"
-                :userSlug="offer.user.id"
-                :isFavoriteUser="offer.user.is_favorite_user"
-                size="20"
-              />
+              <b
+                class="agent-name"
+              >
+                {{ localData.user.name }}</nuxt-link>
+              </b>
+              <div class="fvt-usr-btn">
+                <FavoriteUser
+                  class="favorite-btn"
+                  :userSlug="offer.user.id"
+                  :isFavoriteUser="offer.user.is_favorite_user"
+                  size="20"
+                />
+              </div>
+            </div>
+            <div class="buttons">
+              <el-button type="plain" round @click="showPhone">
+                Zadzwoń
+              </el-button>
+              <el-button type="primary" round @click="emailVisible = true">
+                Wyślij maila
+              </el-button>
+            </div>
+            <div v-if="phone !== null" class="phone">
+              Numer telefonu: {{ phone }}
             </div>
           </div>
-          <div class="buttons">
-            <el-button type="plain" round @click="showPhone">
-              Zadzwoń
-            </el-button>
-            <el-button type="primary" round @click="emailVisible = true">
-              Wyślij maila
-            </el-button>
+        </template>
+        <template v-else-if="isPreview && !$store.state.user.isLogged">
+          <div class="right-data">
+            <div
+              v-if="isPreview && !$store.state.user.isLogged"
+              class="agent"
+            >
+              <b
+                class="agent-name"
+              >
+                {{ localData.user.name }}</nuxt-link>
+              </b>
+              <div class="fvt-usr-btn">
+                <FavoriteUser
+                  class="favorite-btn"
+                  :userSlug="offer.user.id"
+                  :isFavoriteUser="offer.user.is_favorite_user"
+                  size="20"
+                />
+              </div>
+            </div>
+            <div class="buttons">
+              <el-button type="plain" round @click="showPhone">
+                Zadzwoń
+              </el-button>
+              <el-button type="primary" round @click="emailVisible = true">
+                Wyślij maila
+              </el-button>
+            </div>
+            <div v-if="phone !== null" class="phone">
+              Numer telefonu: {{ phone }}
+            </div>
           </div>
-          <div v-if="phone !== null" class="phone">
-            Numer telefonu: {{ phone }}
-          </div>
-        </div>
+        </template>
       </div>
       <div class="text">
         <h1>{{ offer.title }}</h1>

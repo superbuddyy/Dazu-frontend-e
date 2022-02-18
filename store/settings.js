@@ -1,5 +1,5 @@
 export const state = () => ({
-  assetUrl: 'https://api.dazu.pl/storage',
+  assetUrl: process.env.VUE_APP_ASSETS_BASE_URL || 'https://api.dazu.pl/storage',
   carouselPause: false
 })
 

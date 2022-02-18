@@ -17,7 +17,9 @@
         class="main-img"
         :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + photo.path_name + ')'}"
         @click="fullScreen = true"
-      />
+      >
+        <h1 v-if="isExpired" class="exp-flag">NIEAKTUALNE</h1>
+      </div>
     </VueSlickCarousel>
     <VueSlickCarousel
       ref="subGallery"
@@ -71,6 +73,10 @@ export default {
           { file: '' }
         ]
       }
+    },
+    isExpired: {
+      type: Boolean,
+      default: () => false
     }
   },
   data () {
@@ -170,6 +176,12 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     outline: 0;
+  }
+  .exp-flag {
+    color: #f1f1f1;
+    text-align: center;
+    position: relative;
+    top: 50%;
   }
 }
 </style>

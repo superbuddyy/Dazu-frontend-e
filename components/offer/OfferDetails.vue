@@ -3,6 +3,7 @@
     <div class="gallery">
       <Gallery
         v-if="offer.main_photo"
+        :is-expired="isExpired"
         :main-photo="offer.main_photo"
         :photos="offer.photos"
         :projectPlans="offer.project_plan_photos"
@@ -61,6 +62,15 @@ export default {
       type: Array,
       default () {
         return []
+      }
+    }
+  },
+  computed: {
+    isExpired () {
+      if (this.$store.state.user.isLogged && this.$store.state.user.id === this.offer.user_id) {
+        return false
+      } else {
+        return this.offer.is_expired
       }
     }
   },
