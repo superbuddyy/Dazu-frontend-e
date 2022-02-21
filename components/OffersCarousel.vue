@@ -70,6 +70,7 @@ export default {
         selectedAttraction: 0.015,
         friction: 0.25,
         cellAlign: 'left',
+        freeScroll: true,
         wrapAround: true
       },
       offers: [],
