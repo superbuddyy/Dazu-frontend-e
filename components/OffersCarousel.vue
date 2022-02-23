@@ -71,8 +71,8 @@ export default {
         // cellAlign: 'right',
         freeScroll: true,
         freeScrollFriction: 0.03,
-        autoPlay: true,
-        wrapAround: true,
+        autoPlay: false,
+        wrapAround: false,
         fade: true
       },
       offers: [],
@@ -116,16 +116,16 @@ export default {
     },
     update () {
       if (this.isPaused || this.$refs.flickity === undefined) {
-        // return
+        return
       }
-      // const tickerSpeed = 0.8
-      // const flickity = this.$refs.flickity.flickity()
-      // if (flickity.slides) {
-      //   flickity.x = (flickity.x - tickerSpeed) % flickity.slideableWidth
-      //   flickity.selectedIndex = flickity.dragEndRestingSelect()
-      //   flickity.updateSelectedSlide()
-      //   flickity.settle(flickity.x)
-      // }
+      const tickerSpeed = 0.8
+      const flickity = this.$refs.flickity.flickity()
+      if (flickity.slides) {
+        flickity.x = (flickity.x - tickerSpeed) % flickity.slideableWidth
+        flickity.selectedIndex = flickity.dragEndRestingSelect()
+        flickity.updateSelectedSlide()
+        flickity.settle(flickity.x)
+      }
       // window.requestAnimationFrame(this.update)
       // const flickity = this.$refs.flickity.flickity()
       // flickity.x -= 1.5
