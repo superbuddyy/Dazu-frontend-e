@@ -48,8 +48,6 @@
 </template>
 
 <script>
-import 'vue-slick-carousel/dist/vue-slick-carousel.css'
-import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import { index } from '@/api/offer'
 import Favorite from '@/components/Favorite'
 import Money from '@/components/Money'
@@ -64,14 +62,17 @@ export default {
     return {
       isPausedForced: false,
       flickityOptions: {
+        initialIndex: 1,
         prevNextButtons: true,
         pageDots: true,
         draggable: true,
         selectedAttraction: 0.015,
         friction: 0.25,
-        cellAlign: 'left',
+        // cellAlign: 'center',
         freeScroll: true,
-        wrapAround: true
+        freeScrollFriction: 0.03,
+        autoPlay: true,
+        wrapAround: false
       },
       offers: [],
       loading: true
@@ -113,17 +114,21 @@ export default {
     },
     update () {
       if (this.isPaused || this.$refs.flickity === undefined) {
-        return
+        // return
       }
-      const tickerSpeed = 0.8
-      const flickity = this.$refs.flickity.flickity()
-      if (flickity.slides) {
-        flickity.x = (flickity.x - tickerSpeed) % flickity.slideableWidth
-        flickity.selectedIndex = flickity.dragEndRestingSelect()
-        flickity.updateSelectedSlide()
-        flickity.settle(flickity.x)
-      }
-      window.requestAnimationFrame(this.update)
+      // const tickerSpeed = 0.8
+      // const flickity = this.$refs.flickity.flickity()
+      // if (flickity.slides) {
+      //   flickity.x = (flickity.x - tickerSpeed) % flickity.slideableWidth
+      //   flickity.selectedIndex = flickity.dragEndRestingSelect()
+      //   flickity.updateSelectedSlide()
+      //   flickity.settle(flickity.x)
+      // }
+      // window.requestAnimationFrame(this.update)
+      // const flickity = this.$refs.flickity.flickity()
+      // flickity.x -= 1.5
+      // flickity.settle(flickity.x)
+      // window.requestAnimationFrame(this.update)
     },
     async getOffers () {
       const result = await index()
