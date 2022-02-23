@@ -126,7 +126,7 @@ export default {
         flickity.updateSelectedSlide()
         flickity.settle(flickity.x)
       }
-      // window.requestAnimationFrame(this.update)
+      window.requestAnimationFrame(this.update)
       // const flickity = this.$refs.flickity.flickity()
       // flickity.x -= 1.5
       // flickity.settle(flickity.x)
