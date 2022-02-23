@@ -72,7 +72,7 @@ export default {
         freeScroll: true,
         freeScrollFriction: 0.03,
         autoPlay: false,
-        wrapAround: false,
+        wrapAround: true,
         fade: true
       },
       offers: [],
@@ -93,7 +93,7 @@ export default {
   },
   async mounted () {
     await this.getOffers()
-    this.$refs.flickity.flickity().x = 0
+    // this.$refs.flickity.flickity().x = 0
     if (!this.isCarouselActive) {
       await this.$store.dispatch('settings/setCarouselPause', true)
     }
