@@ -43,6 +43,7 @@
           />
         </div>
       </div>
+      <!-- <div v-if="offers.length < 5" class="carousel-cell" style="display: none;"></div> -->
     </flickity>
   </div>
 </template>
@@ -62,17 +63,17 @@ export default {
     return {
       isPausedForced: false,
       flickityOptions: {
-        initialIndex: 1,
         prevNextButtons: true,
         pageDots: true,
         draggable: true,
         selectedAttraction: 0.015,
         friction: 0.25,
-        // cellAlign: 'center',
+        // cellAlign: 'right',
         freeScroll: true,
         freeScrollFriction: 0.03,
         autoPlay: true,
-        wrapAround: false
+        wrapAround: false,
+        fade: true
       },
       offers: [],
       loading: true
@@ -92,6 +93,10 @@ export default {
   },
   async mounted () {
     await this.getOffers()
+    if (this.offers.length > 5) {
+      this.flickityOptions.wrapAround = true
+    }
+    this.$refs.flickity.flickity().x = 0
     if (!this.isCarouselActive) {
       await this.$store.dispatch('settings/setCarouselPause', true)
     }
