@@ -176,6 +176,12 @@ export default {
         }
       })
       routes.push({
+        path: '/strony/:slug',
+        components: {
+          default: resolve(__dirname, 'pages/FooterPages')
+        }
+      })
+      routes.push({
         path: '/dodaj-ogloszenie',
         components: {
           default: resolve(__dirname, 'pages/AddOffer')

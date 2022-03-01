@@ -22,6 +22,24 @@
       <div class="menu">
         <div class="container">
           <ul>
+            <li v-for="(item, index) in pages" :key="item.id">
+              <template v-if="oddEven(index) ==='odd' ">
+                <nuxt-link :to="'/strony/' + item.page_key">
+                  {{ item.name }}
+                </nuxt-link>
+              </template>
+            </li>
+          </ul>
+          <ul>
+            <li v-for="(item, index) in pages" :key="item.id">
+              <template v-if="oddEven(index) ==='even' ">
+                <nuxt-link :to="'/strony/' + item.page_key">
+                  {{ item.name }}
+                </nuxt-link>
+              </template>
+            </li>
+          </ul>
+          <ul>
             <li>
               <nuxt-link to="/">
                 O nas
@@ -87,12 +105,14 @@
 
 <script>
 import { store } from '@/api/newsleter'
+import { index } from '@/api/pages'
 
 export default {
   name: 'Footer',
   data: () => ({
     newsletterEmail: null,
-    oldUrl: ''
+    oldUrl: '',
+    pages: []
   }),
   watch: {
     '$route.path' (value) {
@@ -101,7 +121,24 @@ export default {
       }
     }
   },
+  mounted () {
+    this.getPages()
+  },
   methods: {
+    oddEven (ind) {
+      ind = ind + 1
+      if (ind % 2 === 0) {
+        return 'even'
+      } else {
+        return 'odd'
+      }
+    },
+    async getPages () {
+      const result = await index()
+      if (result.status === 200) {
+        this.pages = result.data
+      }
+    },
     async addToNewsletter () {
       const result = await store({ email: this.newsletterEmail })
       if (result.status === 204) {
