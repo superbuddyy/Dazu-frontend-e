@@ -40,7 +40,7 @@
             </li>
           </ul>
           <ul>
-            <li>
+            <!-- <li>
               <nuxt-link to="/">
                 O nas
               </nuxt-link>
@@ -54,7 +54,7 @@
               <nuxt-link to="/">
                 Regulamin
               </nuxt-link>
-            </li>
+            </li> -->
             <li>
               <nuxt-link to="/kontakt">
                 Kontakt
@@ -65,8 +65,6 @@
                 FAQ
               </nuxt-link>
             </li>
-          </ul>
-          <ul>
             <li>
               <nuxt-link to="/">
                 Strona Główna
@@ -81,12 +79,6 @@
               <nuxt-link to="/">
                 Logowanie
               </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/" />
-            </li>
-            <li>
-              <nuxt-link to="/" />
             </li>
           </ul>
         </div>
