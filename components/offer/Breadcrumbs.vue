@@ -2,9 +2,16 @@
   <div class="breadcrumbs">
     <div class="line">
       <p>
-        <span v-for="(element, index) in pathElements" :key="element">
-          {{ element }} <span v-if="index + 1 !== pathElements.length"> > </span>
-        </span>
+        <template v-if="pathElements && pathElements.length">
+          <span v-for="(element, index) in pathElements" :key="index">
+            <template v-if="element && typeof element.name !== 'undefined'">
+              <nuxt-link :to="'/szukaj?typ=' + element.link" > {{ element.name }} </nuxt-link><span v-if="index + 1 !== pathElements.length"> > </span>
+            </template>
+            <template v-else>
+              {{ element }} <span v-if="index + 1 !== pathElements.length"> > </span>
+            </template>
+          </span>
+        </template>
       </p>
     </div>
   </div>

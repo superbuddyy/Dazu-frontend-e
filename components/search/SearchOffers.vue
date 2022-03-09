@@ -234,11 +234,11 @@ export default {
     text-align: center;
   }
   .carousel-cell.featured_l {
-    border: 2px solid #FFC500!important;
+    border: 2px solid #FFF8E2 !important;
     border-radius: 5px;
   }
   .carousel-cell.featured_l:hover {
-    border: 2px solid #FFC500!important;
+    border: 2px solid #FFF8E2 !important;
   }
   .carousel-cell span.featured_img_label {
     position: absolute;

@@ -430,7 +430,7 @@ export default {
       .personal-data {
         // background: #f5f5f5;
         padding: 19px 10px;
-        margin: 20px 0 40px 0;
+        margin: 20px 0 20px 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -490,6 +490,9 @@ export default {
             margin-top: -3px;
           }
         }
+      }
+      .text {
+        margin: 20px 0;
       }
       .price {
         margin-bottom: 6px;

@@ -102,7 +102,9 @@ export default {
       return mappedAttributes
     },
     getPathName () {
-      return [this.offer.type, this.offer.title]
+      const type = this.offer.type
+      const offerType = this.offer.offer_type
+      return [{ name: type, link: offerType }, this.offer.title]
     },
     verifyToken () {
       csrf().then(async () => {
