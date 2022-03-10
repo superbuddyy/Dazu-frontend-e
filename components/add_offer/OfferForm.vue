@@ -277,7 +277,7 @@
       <el-tooltip :content="linkLimitMsg" placement="top">
         <Attribute
           name="Link"
-          slug="link"
+          slug="links.video"
           placeholder="do youtube, vimeo"
           :value="form.links.video"
           @set-value="form.links.video = $event"
@@ -286,7 +286,7 @@
       <el-tooltip :content="linkLimitMsg" placement="top">
         <Attribute
           name="Link"
-          slug="link"
+          slug="links.video_2"
           placeholder="do youtube, vimeo"
           :value="form.links.video_2"
           @set-value="form.links.video_2 = $event"
@@ -295,7 +295,7 @@
       <el-tooltip :content="linkLimitMsg" placement="top">
         <Attribute
           name="Link"
-          slug="link"
+          slug="links.walk_video"
           placeholder="wirtualnego spaceru"
           :value="form.links.walk_video"
           @set-value="form.links.walk_video = $event"
@@ -765,6 +765,28 @@ export default {
         callback()
       }
     }
+    const validateUrl = (rule, value, callback) => {
+      let url
+      if (!value) {
+        callback()
+        return
+      }
+      try {
+        url = new URL(value)
+      } catch (_) {
+        callback(new Error('Wprowadź adres URL filmu'))
+        return
+      }
+      if (url.protocol === 'http:' || url.protocol === 'https:') {
+        if (url.hostname === 'youtu.be' || url.hostname === 'vimeo.com') {
+          callback()
+        } else {
+          callback(new Error('Wprowadź adres URL filmu'))
+        }
+      } else {
+        callback()
+      }
+    }
     return {
       failShake: true,
       datePickerOptions: {
@@ -852,6 +874,15 @@ export default {
           { validator: validatePass, trigger: 'blur' }
         ],
         category: { required: true, message: 'Kategoria jest wymagana', trigger: 'change' },
+        'links.video': [
+          { validator: validateUrl, trigger: 'blur' }
+        ],
+        'links.video_2': [
+          { validator: validateUrl, trigger: 'blur' }
+        ],
+        'links.walk_video': [
+          { validator: validateUrl, trigger: 'blur' }
+        ],
         price: [
           { required: true, message: 'Cena jest wymagana', trigger: 'change' }
         ],
