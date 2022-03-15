@@ -917,18 +917,18 @@ export default {
     },
     formattedPrice: {
       get () {
-        return this.form.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+        return this.form.price.toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
       },
       set (newValue) {
-        this.form.price = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+        this.form.price = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
       }
     },
     formattedAttributePrice: {
       get () {
-        return this.form.attributes[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+        return this.form.attributes[3].toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
       },
       set (newValue) {
-        this.form.attributes[3] = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+        this.form.attributes[3] = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
       }
     },
     isPreview () {
