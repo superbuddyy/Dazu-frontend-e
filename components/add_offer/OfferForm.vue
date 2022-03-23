@@ -31,7 +31,8 @@
             slug="price"
             placeholder="0"
             append-info="zł"
-            inputType="number"
+            inputType="text"
+            inputMode="numeric"
             :value="formattedPrice"
             @set-value="formattedPrice = $event"
           />
@@ -44,7 +45,8 @@
             placeholder="0"
             :append-info="attributes['_3'].unit"
             :value="formattedAttributePrice"
-            inputType="number"
+            inputType="text"
+            inputMode="numeric"
             @set-value="formattedAttributePrice = $event"
           />
         </el-col>
@@ -55,9 +57,10 @@
             :slug="attributes['_21'].slug"
             placeholder="0"
             :append-info="attributes['_21'].unit"
-            :value="formattedAttributePrice"
-            inputType="number"
-            @set-value="formattedAttributePrice = $event"
+            :value="formattedAttribute21Price"
+            inputType="text"
+            inputMode="numeric"
+            @set-value="formattedAttribute21Price = $event"
           />
         </el-col>
       </el-row>
@@ -917,18 +920,26 @@ export default {
     },
     formattedPrice: {
       get () {
-        return this.form.price.toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
+        return this.form.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
       },
       set (newValue) {
-        this.form.price = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
+        this.form.price = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
       }
     },
     formattedAttributePrice: {
       get () {
-        return this.form.attributes[3].toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
+        return this.form.attributes[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
       },
       set (newValue) {
-        this.form.attributes[3] = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{8})+(?!\d))/g, ' ')
+        this.form.attributes[3] = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+      }
+    },
+    formattedAttribute21Price: {
+      get () {
+        return this.form.attributes[21].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+      },
+      set (newValue) {
+        this.form.attributes[21] = newValue.replace(/\s/g, '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
       }
     },
     isPreview () {

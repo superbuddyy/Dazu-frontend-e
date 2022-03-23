@@ -4,9 +4,10 @@
     :prop="slug"
   >
     <el-input
-      v-if="type === 'input' && inputType === 'number'"
+      v-if="type === 'input' && inputMode === 'numeric'"
       :type="inputType"
       min="0"
+      :inputmode="inputMode"
       v-model="local_value"
       :placeholder="placeholder"
       onkeyup="value = value.replace(/[^\d]/g, 0)"
@@ -15,7 +16,7 @@
         {{ appendInfo }}
       </template>
     </el-input>
-    <el-input v-if="type === 'input' && inputType !== 'number'" :type="inputType" v-model="local_value" :placeholder="placeholder">
+    <el-input v-if="type === 'input' && inputMode !== 'numeric'" :type="inputType" v-model="local_value" :placeholder="placeholder">
       <template v-if="appendInfo" slot="append">
         {{ appendInfo }}
       </template>
@@ -102,6 +103,12 @@ export default {
       type: String,
       default () {
         return 'text'
+      }
+    },
+    inputMode: {
+      type: String,
+      default () {
+        return ''
       }
     },
     // eslint-disable-next-line vue/require-default-prop
