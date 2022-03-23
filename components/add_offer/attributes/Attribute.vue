@@ -16,7 +16,19 @@
         {{ appendInfo }}
       </template>
     </el-input>
-    <el-input v-if="type === 'input' && inputMode !== 'numeric'" :type="inputType" v-model="local_value" :placeholder="placeholder">
+    <el-input
+      v-else-if="type === 'input' && inputType === 'number'"
+      :type="inputType"
+      min="0"
+      v-model="local_value"
+      :placeholder="placeholder"
+      onkeyup="value = value.replace(/[^\d]/g, 0)"
+    >
+      <template v-if="appendInfo" slot="append">
+        {{ appendInfo }}
+      </template>
+    </el-input>
+    <el-input v-else :type="inputType" v-model="local_value" :placeholder="placeholder">
       <template v-if="appendInfo" slot="append">
         {{ appendInfo }}
       </template>
