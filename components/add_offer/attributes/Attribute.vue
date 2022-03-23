@@ -10,8 +10,8 @@
       :inputmode="inputMode"
       v-model="local_value"
       :placeholder="placeholder"
-      onkeyup="value = value.replace(/[^\d]/g, 0)"
     >
+      <!-- onkeyup="value = value.replace(/[^\d]/g, 0)" -->
       <template v-if="appendInfo" slot="append">
         {{ appendInfo }}
       </template>
