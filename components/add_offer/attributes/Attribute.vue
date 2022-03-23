@@ -17,7 +17,7 @@
       </template>
     </el-input>
     <el-input
-      v-else-if="type === 'input' && inputType === 'number'"
+      v-if="type === 'input' && inputType === 'number'"
       :type="inputType"
       min="0"
       v-model="local_value"
@@ -28,7 +28,7 @@
         {{ appendInfo }}
       </template>
     </el-input>
-    <el-input v-else :type="inputType" v-model="local_value" :placeholder="placeholder">
+    <el-input v-if="type === 'input' && inputMode !== 'numeric' && inputType !== 'number'" :type="inputType" v-model="local_value" :placeholder="placeholder">
       <template v-if="appendInfo" slot="append">
         {{ appendInfo }}
       </template>
