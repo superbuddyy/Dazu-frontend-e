@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@lottiefiles/vue-lottie-player": "^1.0.5",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/proxy": "^2.0.1",

@@ -50,6 +50,7 @@ export default {
     '~/plugins/storage',
     '~/plugins/html-safe',
     '~/plugins/gtm',
+    '~/plugins/lottie-vue-player.client.js',
     { src: '~/plugins/gtm', mode: 'client' },
     { src: '~/plugins/flickity', ssr: false },
     { src: '~/plugins/toggle-btn', ssr: false },

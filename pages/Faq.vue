@@ -8,6 +8,7 @@
         :key="index"
         :title="item.title"
         :content="item.content"
+        :file="item.file"
       />
     </el-collapse>
   </div>
