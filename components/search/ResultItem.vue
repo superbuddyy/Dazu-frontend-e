@@ -11,7 +11,7 @@
           </el-tag>
         </div>
         <span class="featured_img_label custom-new-span3" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
-          <img src="~/assets/images/Star-new.svg" align="right">
+          <img src="~/assets/Star.svg" align="right">
         </span>
         <div v-if="offer.main_photo" class="main-img custom-center-image" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}" />
         <div v-else class="main-img custom-center-image" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}" />
