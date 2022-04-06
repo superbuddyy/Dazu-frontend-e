@@ -649,12 +649,12 @@ export default {
         .urgent_label {
           background: #FF4800 !important;
           color: #fff !important;
-          border-radius: 20px;
+          // border-radius: 20px;
         }
         .offer_label {
           background: #FFE000 !important;
           color: #000 !important;
-          border-radius: 20px;
+          // border-radius: 20px;
         }
       }
 
