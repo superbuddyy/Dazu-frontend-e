@@ -30,7 +30,7 @@
         </div>
         <div class="profile-buttons">
           <el-button
-            v-if="phone === null"
+            v-if="phone === null && user && user.phone"
             @click="recaptchaVisible = true"
           >
             Pokaż numer

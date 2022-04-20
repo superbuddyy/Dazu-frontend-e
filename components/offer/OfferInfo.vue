@@ -104,7 +104,7 @@
               </div>
             </div>
             <div class="buttons">
-              <el-button type="plain" round @click="showPhone">
+              <el-button v-if="offer.user && offer.user.phone" type="plain" round @click="showPhone">
                 Zadzwoń
               </el-button>
               <el-button type="primary" round @click="emailVisible = true">
@@ -137,7 +137,7 @@
               </div>
             </div>
             <div class="buttons">
-              <el-button type="plain" round @click="showPhone">
+              <el-button v-if="offer.user && offer.user.phone" type="plain" round @click="showPhone">
                 Zadzwoń
               </el-button>
               <el-button type="primary" round @click="emailVisible = true">
