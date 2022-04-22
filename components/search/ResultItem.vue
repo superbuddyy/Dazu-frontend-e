@@ -3,16 +3,12 @@
     <div class="margin-box urgent_l offer_l custom-offer-box" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote') ) ? 'featured_l' : '' ]">
       <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer-link" :event="isLinkActive ? 'click' : ''">
         <div class="tags pt-10 pb-10 new_custom-offer-div">
-          <div v-if="offer.is_urgent" class="flx-cls">
-              <el-tag v-if="offer.is_urgent" type="danger" class="promoted-label img-label urgent_label custom-new-span1">
-              PILNE
-            </el-tag>
-          </div>
-          <div v-if="offer.is_promoted" class="flx-cls">
-            <el-tag v-if="offer.is_promoted" type="warn" class="promoted-label img-label offer_label custom-new-span2" :class="[offer.is_urgent ? '' : 'add-offer-mrg']">
-              OKAZJA
-            </el-tag>
-          </div>
+          <el-tag v-if="offer.is_urgent" type="danger" class="promoted-label img-label urgent_label custom-new-span1">
+            PILNE
+          </el-tag>
+          <el-tag v-if="offer.is_promoted" type="warn" class="promoted-label img-label offer_label custom-new-span2" :class="[offer.is_urgent ? '' : 'add-offer-mrg']">
+            OKAZJA
+          </el-tag>
         </div>
         <span class="featured_img_label custom-new-span3" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
           <img src="~/assets/Star.svg" align="right">
@@ -82,9 +78,6 @@ export default {
 <style lang="scss">
 .result-item {
   padding: 5px;
-  .flx-cls {
-    display: flex;
-  }
   .main-img {
     width: 100%;
     background-size: cover;
@@ -291,5 +284,22 @@ export default {
     // right: 6%;
     // top: 21px;
   }
+}
+span.offer_label.el-tag.el-tag--warn.el-tag--light{
+  height: 29px;
+  border-radius: 4px;
+  border: 0px solid #fff;
+  font-size: 11px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+span.urgent_label.el-tag.el-tag--danger.el-tag--light{
+  height: 29px;
+  border-radius: 4px;
+  border: 0px solid #fff;
+  font-size: 11px;
+  vertical-align: middle;
+  text-align: center;
 }
 </style>
