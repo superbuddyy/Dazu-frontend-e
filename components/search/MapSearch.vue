@@ -635,6 +635,7 @@ export default {
       position: relative;
       display: flex;
       height: 90px;
+      min-height: 126px;
       cursor: pointer;
       font-size: 14px;
       padding: 10px;
@@ -685,6 +686,7 @@ export default {
         }
         .type {
           flex: 1;
+          text-align: center;
         }
       }
 
