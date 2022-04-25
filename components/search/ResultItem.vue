@@ -1,5 +1,5 @@
 <template>
-  <div class="result-item">
+  <div class="result-item odd">
     <div class="margin-box urgent_l offer_l custom-offer-box" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote') ) ? 'featured_l' : '' ]">
       <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer-link" :event="isLinkActive ? 'click' : ''">
         <div class="tags pt-10 pb-10 new_custom-offer-div">
