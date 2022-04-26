@@ -32,13 +32,13 @@
     <div class="info-body">
       <div class="personal-data">
         <template v-if="($store.state.user.isLogged && $store.state.user.id === offer.user_id) || !offer.is_expired">
-          <div v-if="offer.company && offer.user.type === 'company'" class="avatar">
+          <div v-if="offer.company && (offer.user.type === 'company' || offer.user.type === 'agent')" class="avatar">
             <Avatar
               :company="offer.company"
               :user="offer.user"
             />
           </div>
-          <div v-if="offer.company === null && offer.user.type !== 'company'" class="avatar">
+          <div v-else-if="offer.company === null && offer.user.type !== 'company'" class="avatar">
             <Avatar
               :company="offer.company"
               :user="offer.user"
