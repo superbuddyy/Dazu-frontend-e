@@ -54,7 +54,7 @@
         </template>
         <template v-if="($store.state.user.isLogged && $store.state.user.id === offer.user_id) || !offer.is_expired">
           <div v-if="offer.user" class="right-data">
-            <div v-if="offer.company && offer.user.type === 'company'" class="company-name">
+            <div v-if="offer.company && (offer.user.type === 'company' || offer.user.type === 'agent')" class="company-name">
               <nuxt-link :to="'/profil/' + offer.user.id">
                 {{ offer.company.name }}
               </nuxt-link>
