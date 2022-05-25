@@ -122,7 +122,7 @@ export default {
       })
 
       return {
-        raw: new File([response.data], id + '-image.jpg', { type: response.data.type, url: imageUrl }),
+        raw: new File([response.data], id, { type: response.data.type, url: imageUrl }),
         url: imageUrl
       }
     }
