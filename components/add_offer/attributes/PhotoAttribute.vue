@@ -74,7 +74,7 @@ export default {
         const photos = []
         for (const file of value) {
           if ('id' in file) {
-            photos.push(await this.urlToObject('/storage/' + file.path_name, file.id))
+            photos.push(await this.urlToObject('/storage/' + file.path_name, file.path_name))
           }
         }
         this.localFileList = photos
