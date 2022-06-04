@@ -127,6 +127,7 @@ export default {
           recaptcha: null
         }
         this.$refs.recaptcha.reset()
+        await this.$router.push('/')
       }
     }
   }
