@@ -119,6 +119,14 @@ export default {
           type: 'success',
           duration: 3000
         })
+        this.form = {
+          email: '',
+          name: '',
+          message: '',
+          topic: '',
+          recaptcha: null
+        }
+        this.$refs.recaptcha.reset()
         await this.$router.push('/')
       }
     }
