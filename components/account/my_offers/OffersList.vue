@@ -3,7 +3,7 @@
     <div class="panel">
       <el-row class="search-row">
         <el-col :span="7">
-          <el-input v-model="searchTxt" clearable v-on:clear="searchOfferList" placeholder="Poszukaj ogłoszenia"/>
+          <el-input v-model="searchTxt" clearable placeholder="Poszukaj ogłoszenia" @clear="searchOfferList" />
         </el-col>
         <el-col :span="2" class="search-box-btn">
           <el-button type="primary" class="login-btn" @click="searchOfferList">
@@ -41,18 +41,20 @@
       </span>
       <el-select
         v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')"
-        class="mr-5"
         v-model="current_agent"
+        class="mr-5"
         filterable
         clearable
-        :change="filterByUser()"
-        placeholder="Wybierz tagi dla swojego artykułu">
+        placeholder="Wybierz tagi dla swojego artykułu"
+        @change="searchOfferList()"
+      >
         <el-option
           v-for="agent in agents"
           :key="agent.id"
           :label="agent.username"
-          :value="agent.username">
-          {{agent.username}}
+          :value="agent.id"
+        >
+          {{ agent.username }}
         </el-option>
       </el-select>
       <el-select
@@ -100,9 +102,11 @@
                 <el-button type="text" @click="showStats(offer.slug)">
                   Zobacz statystyki
                 </el-button>
-                <el-button v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')" type="info">{{offer.user_name}}</el-button>
+                <el-button v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')" type="info">
+                  {{ offer.user_name }}
+                </el-button>
               </div>
-              <div class="expire-time" v-if="offer.status === 'active' && !offer.is_expired">
+              <div v-if="offer.status === 'active' && !offer.is_expired" class="expire-time">
                 <ExpireTime :expire-time="offer.expire_time" />
               </div>
             </div>
@@ -383,10 +387,15 @@ export default {
       this.getOffers(query)
     },
     searchOfferList () {
-      console.log(this.searchTxt)
-      let query = '&keyword=' + this.searchTxt
+      const query = new URLSearchParams('')
+      if (this.searchTxt) {
+        query.set('keyword', this.searchTxt)
+      }
       if (this.changeOrder) {
-        query = query + '&sort=' + this.changeOrder
+        query.set('sort', this.changeOrder)
+      }
+      if (this.current_agent) {
+        query.set('agent_id', this.current_agent)
       }
       this.getOffers(query)
     },
@@ -417,6 +426,7 @@ export default {
       this.loading = false
     },
     async getOffers (query) {
+      this.agents_names = []
       const result = await getOffers(query)
       if (result.status === 200) {
         this.offers = result.data.data
@@ -436,12 +446,6 @@ export default {
         this.currentPage = result.data.current_page
         this.loading = false
       }
-    },
-    filterByUser () {
-      // current_agent = 'mark'
-      // console.log('filter by user triggered', this.current_agent)
-      // this.current_agent = 'mark'
-      console.log('done changing', this.current_agent)
     },
     checkAll (e) {
       if (!e) {
