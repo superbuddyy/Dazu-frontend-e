@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     setAvatarsV1 () {
-      if (this.company) {
+      if (this.isCompanyUser && this.company) {
         this.userVideoAvatar = this.company.video_avatar ? generatePhotoFromYoutubeLink(this.company.video_avatar) : null
         this.userVideoUrl = this.company.video_avatar ? this.company.video_avatar : this.company.avatar
         // this.userVideoAvatar = this.company.video_avatar

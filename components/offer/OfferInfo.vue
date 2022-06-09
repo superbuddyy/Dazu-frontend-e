@@ -54,7 +54,7 @@
         </template>
         <template v-if="($store.state.user.isLogged && $store.state.user.id === offer.user_id) || !offer.is_expired">
           <div v-if="offer.user" class="right-data">
-            <div v-if="offer.company && (offer.user.type === 'company' || offer.user.type === 'agent')" class="company-name">
+            <div v-if="offer.company && offer.user.type === 'company'" class="company-name">
               <nuxt-link :to="'/profil/' + offer.user.id">
                 {{ offer.company.name }}
               </nuxt-link>
@@ -68,7 +68,7 @@
               </div>
             </div>
             <div
-              v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin') && offer.company === null"
+              v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin')"
               class="agent"
             >
               <b
@@ -92,7 +92,7 @@
               <b
                 class="agent-name"
               >
-                {{ localData.user.name }}</nuxt-link>
+                {{ localData.user.name }}
               </b>
               <div class="fvt-usr-btn">
                 <FavoriteUser
@@ -125,7 +125,7 @@
               <b
                 class="agent-name"
               >
-                {{ localData.user.name }}</nuxt-link>
+                {{ localData.user.name }}
               </b>
               <div class="fvt-usr-btn">
                 <FavoriteUser
