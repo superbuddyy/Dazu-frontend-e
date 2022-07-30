@@ -132,7 +132,8 @@ export function buildSearchQuery (searchParams) {
           searchParam === 'category' &&
           searchParams[searchParam][searchParams[searchParam].length - 1] !== undefined
         ) {
-          params[searchParam] = searchParams[searchParam][searchParams[searchParam].length - 1]
+          // params[searchParam] = searchParams[searchParam][searchParams[searchParam].length - 1]
+          params[searchParam] = searchParams[searchParam]
           continue
         }
 

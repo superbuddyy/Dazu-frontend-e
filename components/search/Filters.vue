@@ -8,13 +8,19 @@
     >
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
-          <el-form-item label="Kategoria" prop="category">
-            <el-cascader
+          <el-form-item label="Kategoria" prop="category" class="category">
+            <!-- <el-cascader
               v-model="search.category"
               :options="filters.categories"
               :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
               popper-class="category-dropdown"
               clearable
+            /> -->
+            <treeselect
+              v-model="search.category"
+              :multiple="true"
+              :options="filters.categories"
+              placeholder="Wybierz"
             />
           </el-form-item>
           <el-form-item label="Typ" prop="type">
@@ -110,6 +116,8 @@
 </template>
 
 <script>
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocation } from '@/api/osm'
 import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
@@ -118,6 +126,7 @@ import AttributeFilter from '@/components/Filters/AttributeFilter'
 export default {
   name: 'Filters',
   components: {
+    Treeselect,
     AttributeFilter
   },
   props: {
@@ -182,6 +191,21 @@ export default {
     async getFilters () {
       const result = await getFilters()
       if (result.status === 200) {
+        // this.filters = result.data
+        result.data.categories = await result.data.categories.map((item) => {
+          item.label = item.name
+          item.id = item.slug
+          if (item.children && item.children.length) {
+            item.children.map((child) => {
+              child.label = child.name
+              child.id = child.slug
+              return child
+            })
+          } else {
+            item.children = []
+          }
+          return item
+        })
         this.filters = result.data
       }
     },
@@ -253,6 +277,9 @@ export default {
   .first-line {
     display: flex;
     justify-content: space-around;
+  }
+  .category {
+    width: 28%;
   }
 }
 

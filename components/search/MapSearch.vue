@@ -37,12 +37,19 @@
           label="Kategoria"
           class="category"
         >
-          <el-cascader
+          <!-- <el-cascader
             v-model="search.category"
             :options="filters.categories"
             :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
             popper-class="category-dropdown"
+          /> -->
+          <treeselect
+            v-model="search.category"
+            :multiple="true"
+            :options="filters.categories"
+            placeholder="Wybierz"
           />
+          <!-- :always-open="true" -->
         </el-form-item>
         <el-form-item
           label="Typ"
@@ -242,6 +249,8 @@
 </template>
 
 <script>
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import { getLocation } from '@/api/osm'
 import { getFilters } from '@/api/search'
 import Favorite from '@/components/Favorite'
@@ -253,6 +262,7 @@ import ResultItem from '~/components/search/ResultItem'
 export default {
   name: 'MapSearch',
   components: {
+    Treeselect,
     Favorite,
     SaveFilters,
     AttributeFilter,
@@ -468,8 +478,25 @@ export default {
     async getFilters () {
       const result = await getFilters()
       if (result.status === 200) {
+        result.data.categories = await result.data.categories.map((item) => {
+          const itemObj = {}
+          itemObj.label = item.name
+          itemObj.id = item.slug
+          if (item.children && item.children.length) {
+            itemObj.children = item.children.map((child) => {
+              const childObj = {}
+              childObj.label = child.name
+              childObj.id = child.slug
+              return childObj
+            })
+          } else {
+            itemObj.children = []
+          }
+          return itemObj
+        })
         await this.$store.dispatch('storage/setFilters', result.data)
         this.filters = result.data
+        console.log(this.filters)
       }
     }
   }
@@ -502,6 +529,9 @@ export default {
       align-items: center;
       justify-content: space-around;
       width: 100%;
+    }
+    .category {
+      width: 20%;
     }
 
     .advanced {

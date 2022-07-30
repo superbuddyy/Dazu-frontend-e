@@ -4,13 +4,19 @@
       <div class="label">
         Szukam
       </div>
-      <el-cascader
+      <!-- <el-cascader
         v-model="search.category"
         :options="filters.categories"
         :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
         clearable
         popper-class="category-dropdown"
         @change="handleChange"
+      /> -->
+      <treeselect
+        v-model="search.category"
+        :multiple="true"
+        :options="filters.categories"
+        placeholder="Wybierz"
       />
       <el-select v-model="search.typ">
         <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
@@ -121,6 +127,8 @@
 </template>
 
 <script>
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocationReverse, getLocation } from '@/api/osm'
 import * as Cookies from 'js-cookie'
@@ -130,6 +138,7 @@ import AttributeFilter from '@/components/Filters/AttributeFilter'
 export default {
   name: 'AdvancedSearch',
   components: {
+    Treeselect,
     AttributeFilter
   },
   props: {
@@ -308,6 +317,20 @@ export default {
         //   delete value.children
         //   return value
         // })
+        result.data.categories = await result.data.categories.map((item) => {
+          item.label = item.name
+          item.id = item.slug
+          if (item.children && item.children.length) {
+            item.children.map((child) => {
+              child.label = child.name
+              child.id = child.slug
+              return child
+            })
+          } else {
+            item.children = []
+          }
+          return item
+        })
         await this.$store.dispatch('storage/setFilters', result.data)
         this.filters = result.data
       }
@@ -384,7 +407,7 @@ export default {
   color: #fff;
   padding: 30px;
   transition: 0.5s ease;
-  overflow: hidden;
+  // overflow: hidden;
 
   @media only screen and (max-width: 1640px) {
     width: 90%;
@@ -401,6 +424,9 @@ export default {
 
   @media only screen and (max-width: 834px) {
     width: 90vw;
+  }
+  .vue-treeselect {
+    width: 23% !important;
   }
 
   .first-line {
