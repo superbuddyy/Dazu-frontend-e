@@ -4,9 +4,7 @@
     <div class="container">
       <div class="avatars">
         <Avatar />
-        <VideoAvatar
-          v-if="$store.state.user.roles.includes('company')"
-        />
+        <VideoAvatar/>
         <div slot="tip" class="el-upload__tip fw-bld" v-if="$store.state.user.roles.includes('company')">
           Uwaga! Aby poprawnie dodać link do wideo, prosimi zapoznać się z sekcja dotyczącą dodawania linków w
             <a
