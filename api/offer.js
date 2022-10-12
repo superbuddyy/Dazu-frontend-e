@@ -28,12 +28,12 @@ export function deactivate (data) {
   return apiClient.patch('/api/offers/deactivate', data)
 }
 
-export function refresh (slug) {
-  return apiClient.patch('/api/offers/refresh/' + slug)
+export function refresh (slug, gateway) {
+  return apiClient.patch('/api/offers/refresh/' + slug + '?gateway=' + gateway)
 }
 
-export function raise (slug) {
-  return apiClient.patch('/api/offers/raise/' + slug)
+export function raise (slug, gateway) {
+  return apiClient.patch('/api/offers/raise/' + slug + '?gateway=' + gateway)
 }
 
 export function store (data) {

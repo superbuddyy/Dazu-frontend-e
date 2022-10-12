@@ -151,7 +151,7 @@ export default {
       formData.append('avatar_type', 'video_url')
       const result = await storeAvatar(formData)
       if (result.status === 200) {
-        window.location.href = result.data.links[1].href
+        window.location.href = result.data
       }
     },
     isValidHttpUrl (string) {

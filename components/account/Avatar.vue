@@ -43,6 +43,28 @@
         Zmień
       </el-button>
     </el-popover>
+    <el-dialog
+      v-loading="loading"
+      title="Wybierz metodę płatności"
+      :visible.sync="paymentDialog"
+      width="30%"
+      center
+    >
+      <div class="payments">
+<!--        <el-button @click="pay('paypal')">-->
+<!--          <div class="paypal">-->
+<!--            <img src="~/assets/paypal.svg" alt="">-->
+<!--            PayPal-->
+<!--          </div>-->
+<!--        </el-button>-->
+        <el-button>
+          <div class="tpay" @click="pay('tpay')">
+            <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
+            Tpay
+          </div>
+        </el-button>
+      </div>
+    </el-dialog>
     <el-popover
       v-model="deleteAvatarVisible"
       placement="top"
@@ -76,6 +98,8 @@ export default {
     ExpireTime
   },
   data: () => ({
+    avatarFile: null,
+    paymentDialog: false,
     buyVisible: false,
     deleteAvatarVisible: false,
     avatar: [],
@@ -112,14 +136,19 @@ export default {
     await this.getSettingsValues()
   },
   methods: {
-    async addAvatar (file) {
+    addAvatar (file) {
+      this.paymentDialog = true
+      this.avatarFile = file
+    },
+    async pay (gateway) {
       this.loading = true
       const formData = new FormData()
-      formData.append('avatar', file.raw)
+      formData.append('avatar', this.avatarFile.raw)
       formData.append('avatar_type', 'photo')
+      formData.append('gateway', gateway)
       const result = await storeAvatar(formData)
       if (result.status === 200) {
-        window.location.href = result.data.links[1].href
+        window.location.href = result.data
       }
     },
     async removeAvatar () {

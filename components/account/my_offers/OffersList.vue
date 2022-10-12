@@ -131,6 +131,7 @@
                 Dezaktywuj
               </el-button>
               <el-button
+                v-if="offer.refresh_price === 0"
                 type="primary"
                 class="refresh-btn"
                 round
@@ -138,6 +139,15 @@
                 @click="refresh(offer.slug)"
               >
                 Odśwież
+              </el-button>
+              <el-button
+                v-if="offer.refresh_price !== 0"
+                type="primary"
+                round
+                icon="el-icon-refresh-right"
+                @click="openRefreshPaymentDialog(offer.slug)"
+              >
+                Odśwież ({{ offer.refresh_price / 100 }} pln)
               </el-button>
               <div class="promo-btn">
                 <el-tooltip :content="toolTipText(offer)" placement="top">
@@ -262,10 +272,16 @@
       center
     >
       <div class="payments">
-        <el-button @click="pay">
-          <div class="paypal">
-            <img src="~/assets/paypal.svg" alt="">
-            PayPal
+<!--        <el-button @click="pay('paypal')">-->
+<!--          <div class="paypal">-->
+<!--            <img src="~/assets/paypal.svg" alt="">-->
+<!--            PayPal-->
+<!--          </div>-->
+<!--        </el-button>-->
+        <el-button @click="pay('tpay')">
+          <div class="tpay">
+            <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
+            Tpay
           </div>
         </el-button>
       </div>
@@ -277,10 +293,16 @@
       center
     >
       <div class="payments">
-        <el-button @click="refresh(refreshSlug)">
-          <div class="paypal">
-            <img src="~/assets/paypal.svg" alt="">
-            PayPal
+<!--        <el-button @click="refresh(refreshSlug, 'paypal')">-->
+<!--          <div class="paypal">-->
+<!--            <img src="~/assets/paypal.svg" alt="">-->
+<!--            PayPal-->
+<!--          </div>-->
+<!--        </el-button>-->
+        <el-button @click="refresh(refreshSlug, 'tpay')">
+          <div class="tpay">
+            <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
+            Tpay
           </div>
         </el-button>
       </div>
@@ -418,11 +440,11 @@ export default {
       this.refreshSlug = slug
       this.refreshPaymentDialog = true
     },
-    async pay () {
+    async pay (gateway) {
       this.loading = true
-      const result = await raise(this.paymentSlug, {})
+      const result = await raise(this.paymentSlug, gateway)
       this.paymentDialog = false
-      window.location.href = result.data.links[1].href
+      window.location.href = result.data
       this.loading = false
     },
     async getOffers (query) {
@@ -465,18 +487,18 @@ export default {
     getCheckedIndex (id) {
       return this.checked_offers.indexOf(id)
     },
-    async refresh (slug) {
+    async refresh (slug, gateway) {
       this.loading = true
-      const result = await refresh(slug)
+      const result = await refresh(slug, gateway)
       if (result.status === 204) {
         this.$message({
           message: 'Odświeżono ogłoszenie pomyślnie',
           type: 'success',
           duration: 3000
         })
-      } else if (result.status === 200 && 'links' in result.data) {
+      } else if (result.status === 200) {
         this.refreshPaymentDialog = false
-        window.location.href = result.data.links[1].href
+        window.location.href = result.data
       } else if (result.status === 200) {
         this.$message({
           message: 'Odświeżono ogłoszenie pomyślnie',
@@ -499,8 +521,8 @@ export default {
           type: 'success',
           duration: 3000
         })
-      } else if (result.status === 200 && 'links' in result.data) {
-        window.location.href = result.data.links[1].href
+      } else if (result.status === 200) {
+        window.location.href = result.data
       } else if (result.status === 200) {
         this.$message({
           message: 'Podbito ogłoszenie pomyślnie',

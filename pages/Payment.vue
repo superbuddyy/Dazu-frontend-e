@@ -75,10 +75,16 @@
       center
     >
       <div class="payments">
-        <el-button @click="pay">
-          <div class="paypal">
-            <img src="~/assets/paypal.svg" alt="">
-            PayPal
+<!--        <el-button @click="pay('paypal')">-->
+<!--          <div class="paypal">-->
+<!--            <img src="~/assets/paypal.svg" alt="">-->
+<!--            PayPal-->
+<!--          </div>-->
+<!--        </el-button>-->
+        <el-button @click="pay('tpay')">
+          <div class="tpay">
+            <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
+            Tpay
           </div>
         </el-button>
       </div>
@@ -142,15 +148,16 @@ export default {
     }
   },
   methods: {
-    async pay () {
+    async pay (gateway) {
       this.loading = true
-      let data = {}
+      let data = { gateway }
       if (this.invoice) {
-        data = { invoice_data: this.form }
+        data = { invoice_data: this.form, gateway }
       }
 
       if (!this.hasSubscription) {
         data = {
+          gateway,
           subscription: this.selectedSubscription,
           subscriptions: this.subForm.subscriptions[this.selectedSubscription] ? this.subForm.subscriptions[this.selectedSubscription] : {}
         }
@@ -159,7 +166,7 @@ export default {
       const result = await charge(this.$route.params.slug, data)
       await this.$store.dispatch('user/setProfile', this.form)
       this.paymentDialog = false
-      window.location.href = result.data.links[1].href
+      window.location.href = result.data
       this.loading = false
     },
     async getPaymentDetails (slug) {

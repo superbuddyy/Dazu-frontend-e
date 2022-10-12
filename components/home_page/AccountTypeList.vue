@@ -52,7 +52,12 @@ export default {
   .payments {
     display: flex;
     justify-content: center;
-    .paypal {
+
+    .tpay>img {
+      height: 25px;
+    }
+
+    .paypal, .tpay {
       display: flex;
       flex-direction: column;
       justify-content: center;

@@ -37,10 +37,16 @@
       <div v-if="selectedItem !== null" class="payments">
         <p>Wybierz metodę płatności</p>
         <div class="gateways">
-          <el-button :class="[ gateway === 'paypal' ? 'active' : '' ]" @click="setGateway('paypal')">
-            <div class="paypal">
-              <img src="~/assets/paypal.svg" alt="">
-              PayPal
+<!--          <el-button :class="[ gateway === 'paypal' ? 'active' : '' ]" @click="setGateway('paypal')">-->
+<!--            <div class="paypal">-->
+<!--              <img src="~/assets/paypal.svg" alt="">-->
+<!--              PayPal-->
+<!--            </div>-->
+<!--          </el-button>-->
+          <el-button :class="[ gateway === 'tpay' ? 'active' : '' ]" @click="setGateway('tpay')">
+            <div class="tpay">
+              <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
+              Tpay
             </div>
           </el-button>
         </div>
@@ -119,11 +125,10 @@ export default {
         return
       }
       this.loading = true
-      // TODO: Pass gateway
-      const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem] } : {}
+      const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem], gateway: this.gateway } : { gateway: this.gateway }
       const result = await buy(this.selectedItem, this.offerSlug, formInput)
       if (result.status === 200) {
-        window.location.href = result.data.links[1].href
+        window.location.href = result.data
         this.loading = false
         this.close()
       } else {
@@ -214,7 +219,7 @@ export default {
         .active {
           box-shadow: inset 0 0 0pt 2pt #ff19b7;
         }
-        .paypal {
+        .paypal, .tpay {
           display: flex;
           flex-direction: column;
           justify-content: center;
