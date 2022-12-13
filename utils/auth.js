@@ -1,15 +1,13 @@
-import Cookies from 'js-cookie'
-
 const TokenKey = 'isLogged'
 
 export function isLogged () {
-  return Cookies.get(TokenKey) === '1'
+  return app.$cookies.get(TokenKey) === '1'
 }
 
 export function setLogged (isLogged) {
-  return Cookies.set(TokenKey, isLogged)
+  return app.$cookies.set(TokenKey, isLogged)
 }
 
 export function removeToken () {
-  return Cookies.remove(TokenKey)
+  return app.$cookies.remove(TokenKey)
 }
