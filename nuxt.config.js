@@ -29,6 +29,7 @@ export default {
     '@/plugins/element-ui',
     '@/plugins/axios',
     '~/plugins/storage.js',
+    'cookie-universal-nuxt',
     '@/plugins/click-outside.js',
     { src: '~/plugins/flickity', ssr: false }
   ],
@@ -47,7 +48,6 @@ export default {
     '@nuxtjs/google-analytics',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    'cookie-universal-nuxt',
     'nuxt-leaflet'
   ],
 

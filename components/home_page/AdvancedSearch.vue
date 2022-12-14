@@ -217,10 +217,10 @@ export default {
       this.toggleAdvanced()
     }
     this.getFilters()
-    if (!this.$cookies.getJSON('user-location')) {
+    if (!app.$cookies.getJSON('user-location')) {
       navigator.geolocation.getCurrentPosition(this.successGetLocation, this.errorGetLocation, this.getLocationOptions)
     } else {
-      this.locations = this.$cookies.getJSON('user-location')
+      this.locations = app.$cookies.getJSON('user-location')
       this.location = this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name
       this.setLocation(this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name)
     }
@@ -256,7 +256,7 @@ export default {
       this.locations = [{ lat, lon, display_name: city }]
       this.location = `${lat}-${lon}-${city}`
       this.setLocation(this.location)
-      this.$cookies.set('user-location', this.locations, { expires: 1 })
+      app.$cookies.set('user-location', this.locations, { expires: 1 })
     },
     async getLocations (locationName) {
       if (locationName !== '') {
