@@ -1,13 +1,13 @@
 const TokenKey = 'isLogged'
 
 export function isLogged () {
-  return app.$cookies.get(TokenKey) === '1'
+  return this.$cookies.get(TokenKey) === '1'
 }
 
 export function setLogged (isLogged) {
-  return app.$cookies.set(TokenKey, isLogged)
+  return this.$cookies.set(TokenKey, isLogged)
 }
 
 export function removeToken () {
-  return app.$cookies.remove(TokenKey)
+  return this.$cookies.remove(TokenKey)
 }
