@@ -120,6 +120,7 @@
 <script>
 import { getFilters } from '@/api/search'
 import { getLocationReverse, getLocation } from '@/api/osm'
+import * as Cookies from 'js-cookie'
 import { buildSearchQuery } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
 
@@ -217,10 +218,10 @@ export default {
       this.toggleAdvanced()
     }
     this.getFilters()
-    if (!app.$cookies.getJSON('user-location')) {
+    if (!Cookies.getJSON('user-location')) {
       navigator.geolocation.getCurrentPosition(this.successGetLocation, this.errorGetLocation, this.getLocationOptions)
     } else {
-      this.locations = app.$cookies.getJSON('user-location')
+      this.locations = Cookies.getJSON('user-location')
       this.location = this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name
       this.setLocation(this.locations[0].lat + '-' + this.locations[0].lon + '-' + this.locations[0].display_name)
     }
@@ -256,7 +257,7 @@ export default {
       this.locations = [{ lat, lon, display_name: city }]
       this.location = `${lat}-${lon}-${city}`
       this.setLocation(this.location)
-      app.$cookies.set('user-location', this.locations, { expires: 1 })
+      Cookies.set('user-location', this.locations, { expires: 1 })
     },
     async getLocations (locationName) {
       if (locationName !== '') {
