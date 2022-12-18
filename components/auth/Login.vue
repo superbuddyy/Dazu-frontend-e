@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="" :visible.sync="localVisible" :class="[failed ? 'login-popup shake' : 'login-popup']">
+  <el-dialog title="" :visible.sync="localVisible" :close-on-click-modal="false" :class="[failed ? 'login-popup shake' : 'login-popup']">
     <h3>Logowanie</h3>
     <el-form @submit.prevent="login">
       <el-input
