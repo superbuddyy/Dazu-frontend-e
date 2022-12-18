@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="" :visible.sync="localVisible" class="register-popup">
+  <el-dialog title="" :visible.sync="localVisible" :close-on-click-modal="false" class="register-popup">
     <h3>Rejestracja</h3>
     <el-form ref="registerForm" :model="registerForm" :rules="rules">
       <el-form-item label="" prop="type">
