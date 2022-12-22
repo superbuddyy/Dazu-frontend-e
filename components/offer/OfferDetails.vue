@@ -88,9 +88,13 @@ export default {
         return this.googlePlace(link)
       } else if (hostname === 'poly.google.com') {
         return this.googlePlace(link)
-      } else {
-        return link;
+      } else if (hostname === 'www.youtube.com') {
+        return this.videoRawYT(link)
       }
+    },
+    videoRawYT (videoLink) {
+      const parts = videoLink.split('/')
+      return 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length);
     },
     videoYT (videoLink) {
       const parts = videoLink.split('/')
