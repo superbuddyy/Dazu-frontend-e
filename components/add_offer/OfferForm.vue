@@ -784,7 +784,7 @@ export default {
         if (url.hostname === 'youtu.be' || url.hostname === 'vimeo.com') {
           callback()
         } else {
-          callback(new Error('Wprowadź adres URL filmu'))
+          callback()
         }
       } else {
         callback()

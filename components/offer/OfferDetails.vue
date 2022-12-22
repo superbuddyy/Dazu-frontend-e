@@ -88,6 +88,8 @@ export default {
         return this.googlePlace(link)
       } else if (hostname === 'poly.google.com') {
         return this.googlePlace(link)
+      } else {
+        return link;
       }
     },
     videoYT (videoLink) {
