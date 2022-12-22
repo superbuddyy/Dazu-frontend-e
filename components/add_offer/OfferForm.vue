@@ -777,7 +777,7 @@ export default {
       try {
         url = new URL(value)
       } catch (_) {
-        callback(new Error('Wprowadź adres URLaaa filmu'))
+        callback(new Error('Wprowadź adres URL filmu'))
         return
       }
       if (url.protocol === 'http:' || url.protocol === 'https:') {
