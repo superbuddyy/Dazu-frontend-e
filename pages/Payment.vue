@@ -165,6 +165,7 @@ export default {
 
       const result = await charge(this.$route.params.slug, data)
       await this.$store.dispatch('user/setProfile', this.form)
+      console.log(this.form);
       this.paymentDialog = false
       window.location.href = result.data
       this.loading = false
