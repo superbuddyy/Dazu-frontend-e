@@ -63,6 +63,7 @@ export default {
         type: 'success',
         duration: 3000
       })
+      console.log(this.$store.state)
       if (this.$store.state.user.isLogged) {
         this.$router.push('/moje-ogloszenia')
       } else {
