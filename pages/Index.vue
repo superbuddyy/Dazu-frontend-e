@@ -28,6 +28,7 @@ import { verifyContact } from '@/api/contact'
 import * as Cookies from 'js-cookie'
 import CookiesPopup from '../components/CookiesPopup'
 import CustomPopup from '../components/CustomPopup'
+import {setLogged} from '../utils/auth'
 
 export default {
   components: {
@@ -63,6 +64,7 @@ export default {
         type: 'success',
         duration: 3000
       })
+      setLogged('1')
       if (this.$store.state.user.isLogged) {
         this.$router.push('/moje-ogloszenia')
       } else {
