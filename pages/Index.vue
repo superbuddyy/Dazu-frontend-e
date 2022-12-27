@@ -49,6 +49,7 @@ export default {
       location: window.location.href
     })
     this.checkAuth()
+    console.log(this.$route)
     if (this.$route.query['payment-status'] === 'fail') {
       this.$message({
         message: 'Płatność nie została zrealizowana',
@@ -63,7 +64,6 @@ export default {
         type: 'success',
         duration: 3000
       })
-      console.log(this.$store.state)
       if (this.$store.state.user.isLogged) {
         this.$router.push('/moje-ogloszenia')
       } else {
