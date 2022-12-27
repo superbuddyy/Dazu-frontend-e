@@ -163,12 +163,10 @@ export default {
         }
       }
       const result = await charge(this.$route.params.slug, data)
-      await this.$store.dispatch('user/setProfile', this.form)
+      // await this.$store.dispatch('user/setProfile', this.form)
       this.paymentDialog = false
       window.location.href = result.data
       this.loading = false
-      console.log('this is test form');
-      console.log(this.form);
     },
     async getPaymentDetails (slug) {
       const result = await getBill(slug)

@@ -105,7 +105,9 @@ export default {
       }
     },
     async checkAuth () {
+      console.log('auth check api')
       const result = await check()
+      console.log('auth check api')
       if (this.$store.state.user.isLogged && result.data === false) {
         await this.$store.dispatch('user/logout')
       }
