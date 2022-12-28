@@ -85,6 +85,7 @@ export const actions = {
       login({ email: email.trim(), password })
         .then((response) => {
           setLogged('1')
+          console.log(response)
           commit('SET_NEWSLETTER', response.data.newsletter)
           commit('SET_NIP', response.data.nip)
           commit('SET_ADDRESS', response.data.address)
