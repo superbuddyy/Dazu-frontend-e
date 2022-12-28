@@ -1,22 +1,24 @@
 <template>
-  <div class="center content-inputs">
-    <div class="header">
-      <AdvancedSearch />
+  <no-ssr> 
+    <div class="center content-inputs">
+      <div class="header">
+        <AdvancedSearch />
+      </div>
+      <div class="content">
+        <OffersCarousel />
+        <AccountTypeList />
+        <BlogPost />
+      </div>
+      <CookiesPopup
+        v-if="cookiesPopup"
+        @accept-cookies="cookiesPopup = false"
+      />
+      <CustomPopup
+        v-if="customPopupCookie"
+        @close="closeCustomPopup"
+      />
     </div>
-    <div class="content">
-      <OffersCarousel />
-      <AccountTypeList />
-      <BlogPost />
-    </div>
-    <CookiesPopup
-      v-if="cookiesPopup"
-      @accept-cookies="cookiesPopup = false"
-    />
-    <CustomPopup
-      v-if="customPopupCookie"
-      @close="closeCustomPopup"
-    />
-  </div>
+  </no-ssr> 
 </template>
 <script>
 import AdvancedSearch from '@/components/home_page/AdvancedSearch'
@@ -49,7 +51,6 @@ export default {
       location: window.location.href
     })
     this.checkAuth()
-    console.log(this.$route)
     if (this.$route.query['payment-status'] === 'fail') {
       this.$message({
         message: 'Płatność nie została zrealizowana',
