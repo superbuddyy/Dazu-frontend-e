@@ -1,5 +1,5 @@
 <template>
-  <no-ssr> 
+  <client-only> 
     <div class="center content-inputs">
       <div class="header">
         <AdvancedSearch />
@@ -18,7 +18,7 @@
         @close="closeCustomPopup"
       />
     </div>
-  </no-ssr> 
+  </client-only> 
 </template>
 <script>
 import AdvancedSearch from '@/components/home_page/AdvancedSearch'
