@@ -60,7 +60,7 @@
         <el-button>
           <div class="tpay" @click="pay('tpay')">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
-            Tpay
+            Tpay avatar
           </div>
         </el-button>
       </div>

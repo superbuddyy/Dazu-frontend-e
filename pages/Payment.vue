@@ -149,26 +149,24 @@ export default {
   },
   methods: {
     async pay (gateway) {
-      console.log('testttttttt')
+      this.loading = true
+      let data = { gateway }
+      if (this.invoice) {
+        data = { invoice_data: this.form, gateway }
+      }
 
-      // this.loading = true
-      // let data = { gateway }
-      // if (this.invoice) {
-      //   data = { invoice_data: this.form, gateway }
-      // }
-
-      // if (!this.hasSubscription) {
-      //   data = {
-      //     gateway,
-      //     subscription: this.selectedSubscription,
-      //     subscriptions: this.subForm.subscriptions[this.selectedSubscription] ? this.subForm.subscriptions[this.selectedSubscription] : {}
-      //   }
-      // }
-      // const result = await charge(this.$route.params.slug, data)
-      // await this.$store.dispatch('user/setProfile', this.form)
-      // this.paymentDialog = false
-      // window.location.href = result.data
-      // this.loading = false
+      if (!this.hasSubscription) {
+        data = {
+          gateway,
+          subscription: this.selectedSubscription,
+          subscriptions: this.subForm.subscriptions[this.selectedSubscription] ? this.subForm.subscriptions[this.selectedSubscription] : {}
+        }
+      }
+      const result = await charge(this.$route.params.slug, data)
+      await this.$store.dispatch('user/setProfile', this.form)
+      this.paymentDialog = false
+      window.location.href = result.data
+      this.loading = false
     },
     async getPaymentDetails (slug) {
       const result = await getBill(slug)

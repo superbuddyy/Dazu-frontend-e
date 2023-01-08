@@ -46,7 +46,7 @@
           <el-button :class="[ gateway === 'tpay' ? 'active' : '' ]" @click="setGateway('tpay')">
             <div class="tpay">
               <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
-              Tpay
+              Tpay subscription
             </div>
           </el-button>
         </div>
