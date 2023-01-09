@@ -62,7 +62,7 @@
             </li>
             <li>
               <nuxt-link to="/faq">
-                FAQ
+                FAQaaaa
               </nuxt-link>
             </li>
             <li>
