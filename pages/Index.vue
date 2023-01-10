@@ -9,14 +9,14 @@
         <AccountTypeList />
         <BlogPost />
       </div>
-      <CookiesPopup
+      <!-- <CookiesPopup
         v-if="cookiesPopup"
         @accept-cookies="cookiesPopup = false"
       />
       <CustomPopup
         v-if="customPopupCookie"
         @close="closeCustomPopup"
-      />
+      /> -->
     </div>
   </client-only> 
 </template>
@@ -92,9 +92,9 @@ export default {
     this.toggleCustomPopup()
 
     if (this.$store.state.user.isLogged) {
-      console.log('isLogged')
+      console.log('isLoggedasdf')
     } else {
-      console.log(this.$route.path)
+      console.log('tdsata', this.$route.path)
     }
   },
   methods: {
