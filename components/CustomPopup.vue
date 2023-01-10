@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <div v-if="visible" class="custom-popup">
-      <div class="left">
-        <h2>{{ title }}</h2>
-        <p
-          v-html="content"
-        />
-        <div class="newsletter">
-          <div class="container">
-            <b>Zapisz się do newslettera</b>
-            <div style="margin-top: 15px;">
-              <el-input v-model="newsletterEmail" placeholder="Twój email" class="input-with-select">
-              </el-input>
-              <el-button slot="append" type="primary" @click="addToNewsletter">
-                Subskrybuj
-              </el-button>
-            </div>
+  <div v-show="visible" class="custom-popup">
+    <div class="left">
+      <h2>{{ title }}</h2>
+      <p
+        v-html="content"
+      />
+      <div class="newsletter">
+        <div class="container">
+          <b>Zapisz się do newslettera</b>
+          <div style="margin-top: 15px;">
+            <el-input v-model="newsletterEmail" placeholder="Twój email" class="input-with-select">
+            </el-input>
+            <el-button slot="append" type="primary" @click="addToNewsletter">
+              Subskrybuj
+            </el-button>
           </div>
         </div>
       </div>
-      <div class="right" :style="{backgroundImage: 'url(' + image + ')'}" />
-      <div class="close" @click="close">
-        <i class="el-icon-error" />
-      </div>
+    </div>
+    <div class="right" :style="{backgroundImage: 'url(' + image + ')'}" />
+    <div class="close" @click="close">
+      <i class="el-icon-error" />
     </div>
   </div>
 </template>
