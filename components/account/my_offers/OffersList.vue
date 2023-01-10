@@ -281,7 +281,7 @@
         <el-button @click="pay('tpay')">
           <div class="tpay">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
-            Tpay offer
+            Tpay
           </div>
         </el-button>
       </div>
@@ -302,7 +302,7 @@
         <el-button @click="refresh(refreshSlug, 'tpay')">
           <div class="tpay">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
-            Tpay refresh
+            Tpay
           </div>
         </el-button>
       </div>

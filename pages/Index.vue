@@ -67,8 +67,10 @@ export default {
       })
       if (this.$store.state.user.isLogged) {
         this.$router.push('/moje-ogloszenia')
+        console('/moje-ogloszenia')
       } else {
         this.$router.push(this.$route.path)
+        console('test', this.$route.path)
       }
     }
     if (this.$route.query.token) {
