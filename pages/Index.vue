@@ -3,21 +3,21 @@
     <client-only> 
       <div class="center content-inputs">
         <div class="header">
-          <!-- <AdvancedSearch /> -->
+          <AdvancedSearch />
         </div>
         <div class="content">
-          <!-- <OffersCarousel /> -->
-          <!-- <AccountTypeList /> -->
-          <!-- <BlogPost /> -->
+          <OffersCarousel />
+          <AccountTypeList />
+          <BlogPost />
         </div>
-        <!-- <CookiesPopup
+        <CookiesPopup
           v-if="cookiesPopup"
           @accept-cookies="cookiesPopup = false"
         />
         <CustomPopup
           v-if="customPopupCookie"
           @close="closeCustomPopup"
-        /> -->
+        />
       </div>
     </client-only>
   </div> 
