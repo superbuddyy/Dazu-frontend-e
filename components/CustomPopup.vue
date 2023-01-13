@@ -2,9 +2,9 @@
   <div v-show="visible" class="custom-popup">
     <div class="left">
       <h2>{{ title }}</h2>
-      <p
+      <p>
         v-html="content"
-      />
+      </p>
       <div class="newsletter">
         <div class="container">
           <b>Zapisz się do newslettera</b>
