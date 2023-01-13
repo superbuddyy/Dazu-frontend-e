@@ -95,9 +95,9 @@ export default {
     this.toggleCustomPopup()
 
     if (this.$store.state.user.isLogged) {
-      console.log('isLoggedasdf')
+      console.log('isLoggedasdfaaaaaaaaaaaaaaaaa')
     } else {
-      console.log('tdsata', this.$route.path)
+      console.log('tdsataaaaaaaaaaaaaaa', this.$route.path)
     }
   },
   methods: {
