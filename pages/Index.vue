@@ -1,24 +1,26 @@
 <template>
-  <client-only> 
-    <div class="center content-inputs">
-      <div class="header">
-        <AdvancedSearch />
+  <div>
+    <client-only> 
+      <div class="center content-inputs">
+        <div class="header">
+          <AdvancedSearch />
+        </div>
+        <div class="content">
+          <OffersCarousel />
+          <AccountTypeList />
+          <BlogPost />
+        </div>
+        <CookiesPopup
+          v-if="cookiesPopup"
+          @accept-cookies="cookiesPopup = false"
+        />
+        <CustomPopup
+          v-if="customPopupCookie"
+          @close="closeCustomPopup"
+        />
       </div>
-      <div class="content">
-        <OffersCarousel />
-        <AccountTypeList />
-        <BlogPost />
-      </div>
-      <CookiesPopup
-        v-if="cookiesPopup"
-        @accept-cookies="cookiesPopup = false"
-      />
-      <CustomPopup
-        v-if="customPopupCookie"
-        @close="closeCustomPopup"
-      />
-    </div>
-  </client-only>
+    </client-only>
+  </div>
 </template>
 <script>
 import AdvancedSearch from '@/components/home_page/AdvancedSearch'
