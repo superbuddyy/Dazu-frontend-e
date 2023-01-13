@@ -19,6 +19,9 @@
           @close="closeCustomPopup"
         />
       </div>
+      <template #placeholder>
+        <p>Wait a sec</p>
+      </template>
     </client-only>
   </div>
 </template>
