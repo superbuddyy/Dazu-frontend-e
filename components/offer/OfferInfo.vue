@@ -184,7 +184,7 @@
       </div>
       <div class="text">
         <p>
-          v-html="offer.description"
+          <!-- v-html="offer.description" -->
         </p>
       </div>
       <div class="stats">

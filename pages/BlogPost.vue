@@ -5,7 +5,7 @@
     </div>
     <div class="container">
       <p>
-        v-html-safe="post.content"
+        <!-- v-html-safe="post.content" -->
       </p>
       <OtherPosts
         :posts="posts"

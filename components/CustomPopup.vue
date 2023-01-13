@@ -3,7 +3,7 @@
     <div class="left">
       <h2>{{ title }}</h2>
       <p>
-        v-html="content"
+        <!-- v-html="content" -->
       </p>
       <div class="newsletter">
         <div class="container">
