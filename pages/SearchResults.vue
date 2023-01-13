@@ -150,7 +150,7 @@ export default {
       await this.$router.push({ query })
       const mappedQuery = Object.keys(query).map(key => key + '=' + decodeURIComponent(query[key])).join('&')
       const result = await search(mappedQuery)
-      if (result.status === 200) {
+      if (result?.status === 200) {
         for (const offer of result.data.data) {
           this.offers.push(offer)
         }
@@ -177,7 +177,7 @@ export default {
         }
       }
       const result = await search(mappedQuery)
-      if (result.status === 200) {
+      if (result?.status === 200) {
         this.offers = result.data.data
         this.total = result.data.total
         this.pageSize = result.data.per_page
@@ -193,8 +193,8 @@ export default {
         lon: decodeURIComponent(lon)
       }
       const result = await postrecentsearch(obj)
-      console.log(result.status)
-      console.log(result.data)
+      console.log(result?.status)
+      console.log(result?.data)
     },
     postLocalRecentSearch (displayName, lat, lon) {
       const obj = {
