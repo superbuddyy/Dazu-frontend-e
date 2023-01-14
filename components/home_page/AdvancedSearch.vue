@@ -246,40 +246,6 @@ export default {
     }
   },
   methods: {
-    loadOptions({ action, parentNode, callback }) {
-      // Typically, do the AJAX stuff here.
-      // Once the server has responded,
-      // assign children options to the parent node & call the callback.
-
-      if (action === LOAD_CHILDREN_OPTIONS) {
-        switch (parentNode.id) {
-        case 'success': {
-          simulateAsyncOperation(() => {
-            parentNode.children = [ {
-              id: 'child',
-              label: 'Child option',
-            } ]
-            callback()
-          })
-          break
-        }
-        case 'no-children': {
-          simulateAsyncOperation(() => {
-            parentNode.children = []
-            callback()
-          })
-          break
-        }
-        case 'failure': {
-          simulateAsyncOperation(() => {
-            callback(new Error('Failed to load options: network error.'))
-          })
-          break
-        }
-        default: /* empty */
-        }
-      }
-    },
     setAttributeValue (slug, value) {
       this.search[slug] = value
     },
