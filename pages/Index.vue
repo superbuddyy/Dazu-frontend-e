@@ -90,12 +90,6 @@ export default {
     }
     this.toggleCookiesPopup()
     this.toggleCustomPopup()
-
-    if (this.$store.state.user.isLogged) {
-      console.log('isLoggedasdfaaaaaaaaaaaaaaaaa')
-    } else {
-      console.log('tdsataaaaaaaaaaaaaaa', this.$route.path)
-    }
   },
   methods: {
     closeCustomPopup () {
