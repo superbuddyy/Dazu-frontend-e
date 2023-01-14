@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div class="center content-inputs">
+    <!-- <div class="center content-inputs">
       <div class="header">
         <AdvancedSearch />
       </div>
@@ -17,7 +17,7 @@
         v-if="customPopupCookie"
         @close="closeCustomPopup"
       />
-    </div>
+    </div> -->
   </client-only>
 </template>
 <script>
