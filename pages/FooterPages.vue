@@ -5,7 +5,7 @@
     </div>
     <div class="container">
       <p>
-        <!-- v-html="post.content" -->
+        v-html="post.content"
       </p>
     </div>
   </div>
