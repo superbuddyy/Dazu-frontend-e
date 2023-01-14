@@ -6,7 +6,7 @@
         :is-expired="isExpired"
         :main-photo="offer.main_photo"
         :photos="offer.photos"
-        :projectPlans="offer.project_plan_photos"
+        :project-plans="offer.project_plan_photos"
       />
       <Map
         v-if="!offer.main_photo"
@@ -94,7 +94,7 @@ export default {
     },
     videoRawYT (videoLink) {
       const parts = videoLink.split('/')
-      return 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length);
+      return 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length)
     },
     videoYT (videoLink) {
       const parts = videoLink.split('/')

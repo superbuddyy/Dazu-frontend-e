@@ -15,6 +15,7 @@
       <treeselect
         v-model="search.category"
         :multiple="true"
+        :load-options="loadOptions"
         :options="filters.categories"
         placeholder="Wybierz"
       />

@@ -1,5 +1,5 @@
 <template>
-  <client-only> 
+  <client-only>
     <div class="center content-inputs">
       <div class="header">
         <AdvancedSearch />
