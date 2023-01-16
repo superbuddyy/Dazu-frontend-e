@@ -45,12 +45,12 @@ export default {
     customPopupCookie: false
   }),
   mounted () {
-    // this.$ga.page({
-    //   page: '/',
-    //   title: 'Strona główna',
-    //   location: window.location.href
-    // })
-    // this.checkAuth()
+    this.$ga.page({
+      page: '/',
+      title: 'Strona główna',
+      location: window.location.href
+    })
+    this.checkAuth()
     // if (this.$route.query['payment-status'] === 'fail') {
     //   this.$message({
     //     message: 'Płatność nie została zrealizowana',
@@ -71,9 +71,9 @@ export default {
     //     this.$router.push(this.$route.path)
     //   }
     // }
-    // if (this.$route.query.token) {
-    //   this.verifyToken()
-    // }
+    if (this.$route.query.token) {
+      this.verifyToken()
+    }
     // if (this.$route.query['test-msg'] === 'success') {
     //   this.$message({
     //     message: 'Test success msg.',
@@ -88,8 +88,8 @@ export default {
     //     duration: 30000
     //   })
     // }
-    // this.toggleCookiesPopup()
-    // this.toggleCustomPopup()
+    this.toggleCookiesPopup()
+    this.toggleCustomPopup()
   },
   methods: {
     closeCustomPopup () {
