@@ -17,7 +17,7 @@
           Zaawonsowane
         </el-button>
       </div>
-      <div class="mobile-menu">
+      <!-- <div class="mobile-menu">
         <i class="el-icon-s-fold" @click="mobileNav = !mobileNav" />
         <el-drawer
           size="50%"
@@ -65,9 +65,9 @@
             </div>
           </div>
         </el-drawer>
-      </div>
+      </div> -->
       <div class="menu">
-        <div
+        <!-- <div
           v-if="$store.state.user.isLogged"
           class="icons"
         >
@@ -78,11 +78,11 @@
             :show-list="visibleNotifications"
             @toggle="visibleNotifications = !visibleNotifications"
           />
-        </div>
-        <div v-if="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
+        </div> -->
+        <div class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
-        <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
+        <!-- <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
               Moje konto
@@ -116,7 +116,7 @@
           <el-button type="primary" round class="add-offer pulse-add">
             Dodaj ogłoszenie
           </el-button>
-        </nuxt-link>
+        </nuxt-link> -->
       </div>
     </div>
     <Login
@@ -124,12 +124,12 @@
       @toggle-popup="toggleLogin"
       @toggle-register-popup="toggleRegister"
     />
-    <!-- <Register
+    <Register
       :visible="registerVisible"
       @toggle-popup="toggleRegister"
       @toggle-login-popup="toggleLogin"
-    /> -->
-    <div v-if="searchPopup" class="search-popup">
+    />
+    <!-- <div v-if="searchPopup" class="search-popup">
       <div class="popup-container">
         <div class="close-btn" @click="searchPopup = false">
           <i class="el-icon-circle-close" />
@@ -139,14 +139,14 @@
           @close="searchPopup = false"
         />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import { HeartIcon } from 'vue-feather-icons'
 import Login from '@/components/auth/Login'
-// import Register from '@/components/auth/Register'
+import Register from '@/components/auth/Register'
 import AdvancedSearch from '@/components/home_page/AdvancedSearch'
 import Notifications from '@/components/Notifications'
 import { buildSearchQuery } from '@/helpers'
@@ -156,7 +156,7 @@ export default {
   components: {
     HeartIcon,
     Login,
-    // Register,
+    Register,
     AdvancedSearch,
     Notifications
   },
