@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div class="center content-inputs">
+    <!-- <div class="center content-inputs">
       <div class="header">
         <AdvancedSearch />
       </div>
@@ -17,7 +17,7 @@
         v-if="customPopupCookie"
         @close="closeCustomPopup"
       />
-    </div>
+    </div> -->
   </client-only>
 </template>
 <script>
@@ -51,43 +51,43 @@ export default {
       location: window.location.href
     })
     this.checkAuth()
-    // if (this.$route.query['payment-status'] === 'fail') {
-    //   this.$message({
-    //     message: 'Płatność nie została zrealizowana',
-    //     type: 'warning',
-    //     duration: 3000
-    //   })
-    //   this.$router.push(this.$route.path)
-    // }
-    // if (this.$route.query['payment-status'] === 'success') {
-    //   this.$message({
-    //     message: 'Płatność została zrealizowana.',
-    //     type: 'success',
-    //     duration: 3000
-    //   })
-    //   if (this.$store.state.user.isLogged) {
-    //     this.$router.push('/moje-ogloszenia')
-    //   } else {
-    //     this.$router.push(this.$route.path)
-    //   }
-    // }
+    if (this.$route.query['payment-status'] === 'fail') {
+      this.$message({
+        message: 'Płatność nie została zrealizowana',
+        type: 'warning',
+        duration: 3000
+      })
+      this.$router.push(this.$route.path)
+    }
+    if (this.$route.query['payment-status'] === 'success') {
+      this.$message({
+        message: 'Płatność została zrealizowana.',
+        type: 'success',
+        duration: 3000
+      })
+      if (this.$store.state.user.isLogged) {
+        this.$router.push('/moje-ogloszenia')
+      } else {
+        this.$router.push(this.$route.path)
+      }
+    }
     if (this.$route.query.token) {
       this.verifyToken()
     }
-    // if (this.$route.query['test-msg'] === 'success') {
-    //   this.$message({
-    //     message: 'Test success msg.',
-    //     type: 'success',
-    //     duration: 30000
-    //   })
-    // }
-    // if (this.$route.query['test-msg'] === 'fail') {
-    //   this.$message({
-    //     message: 'Test fail msg.',
-    //     type: 'warning',
-    //     duration: 30000
-    //   })
-    // }
+    if (this.$route.query['test-msg'] === 'success') {
+      this.$message({
+        message: 'Test success msg.',
+        type: 'success',
+        duration: 30000
+      })
+    }
+    if (this.$route.query['test-msg'] === 'fail') {
+      this.$message({
+        message: 'Test fail msg.',
+        type: 'warning',
+        duration: 30000
+      })
+    }
     this.toggleCookiesPopup()
     this.toggleCustomPopup()
   },

@@ -124,11 +124,11 @@
       @toggle-popup="toggleLogin"
       @toggle-register-popup="toggleRegister"
     />
-    <Register
+    <!-- <Register
       :visible="registerVisible"
       @toggle-popup="toggleRegister"
       @toggle-login-popup="toggleLogin"
-    />
+    /> -->
     <div v-if="searchPopup" class="search-popup">
       <div class="popup-container">
         <div class="close-btn" @click="searchPopup = false">
@@ -146,7 +146,7 @@
 <script>
 import { HeartIcon } from 'vue-feather-icons'
 import Login from '@/components/auth/Login'
-import Register from '@/components/auth/Register'
+// import Register from '@/components/auth/Register'
 import AdvancedSearch from '@/components/home_page/AdvancedSearch'
 import Notifications from '@/components/Notifications'
 import { buildSearchQuery } from '@/helpers'
@@ -156,7 +156,7 @@ export default {
   components: {
     HeartIcon,
     Login,
-    Register,
+    // Register,
     AdvancedSearch,
     Notifications
   },
