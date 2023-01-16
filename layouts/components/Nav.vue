@@ -82,7 +82,7 @@
         <div v-if="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
-        <!-- <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
+        <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
               Moje konto
@@ -98,12 +98,12 @@
             <el-dropdown-item command="ads">
               Moje Ogłoszenia
             </el-dropdown-item>
-            <el-dropdown-item
+            <!-- <el-dropdown-item
               v-if="$store.state.user.roles.includes('company')"
               command="agents"
             >
               Agenci
-            </el-dropdown-item>
+            </el-dropdown-item> -->
             <el-dropdown-item command="payments">
               Historia płatności
             </el-dropdown-item>
@@ -116,7 +116,7 @@
           <el-button type="primary" round class="add-offer pulse-add">
             Dodaj ogłoszenie
           </el-button>
-        </nuxt-link> -->
+        </nuxt-link>
       </div>
     </div>
     <Login
@@ -129,7 +129,7 @@
       @toggle-popup="toggleRegister"
       @toggle-login-popup="toggleLogin"
     />
-    <!-- <div v-if="searchPopup" class="search-popup">
+    <div v-if="searchPopup" class="search-popup">
       <div class="popup-container">
         <div class="close-btn" @click="searchPopup = false">
           <i class="el-icon-circle-close" />
@@ -139,7 +139,7 @@
           @close="searchPopup = false"
         />
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
