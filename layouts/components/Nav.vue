@@ -82,7 +82,7 @@
         <div v-if="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
-        <!-- <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
+        <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
               Moje konto
@@ -116,7 +116,7 @@
           <el-button type="primary" round class="add-offer pulse-add">
             Dodaj ogłoszenie
           </el-button>
-        </nuxt-link> -->
+        </nuxt-link>
       </div>
     </div>
     <Login
