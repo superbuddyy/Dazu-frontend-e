@@ -83,11 +83,11 @@
           Logowanie/Rejestracja
         </div>
         <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
-          <nuxt-link to="/ustawienia-konta">
+          <!-- <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
               Moje konto
             </div>
-          </nuxt-link>
+          </nuxt-link> -->
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="settings">
               Ustawienia
@@ -98,12 +98,12 @@
             <el-dropdown-item command="ads">
               Moje Ogłoszenia
             </el-dropdown-item>
-            <!-- <el-dropdown-item
+            <el-dropdown-item
               v-if="$store.state.user.roles.includes('company')"
               command="agents"
             >
               Agenci
-            </el-dropdown-item> -->
+            </el-dropdown-item>
             <el-dropdown-item command="payments">
               Historia płatności
             </el-dropdown-item>
