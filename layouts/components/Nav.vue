@@ -83,11 +83,11 @@
           Logowanie/Rejestracja
         </div>
         <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
-          <!-- <nuxt-link to="/ustawienia-konta">
+          <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
               Moje konto
             </div>
-          </nuxt-link> -->
+          </nuxt-link>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="settings">
               Ustawienia
