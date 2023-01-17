@@ -68,9 +68,10 @@ export default {
     async login () {
       await csrf()
       await this.$store.dispatch('user/login', this.loginForm)
+      console.log($store.state.user.isLogged)
       this.$emit('toggle-popup')
       this.clearForm()
-      await this.$store.dispatch('user/setLoginFirst', false)
+      // await this.$store.dispatch('user/setLoginFirst', false)
     },
     clearForm () {
       this.loginForm = {
