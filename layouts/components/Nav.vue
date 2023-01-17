@@ -17,7 +17,7 @@
           Zaawonsowane
         </el-button>
       </div>
-      <div class="mobile-menu">
+      <!-- <div class="mobile-menu">
         <i class="el-icon-s-fold" @click="mobileNav = !mobileNav" />
         <el-drawer
           size="50%"
@@ -65,9 +65,9 @@
             </div>
           </div>
         </el-drawer>
-      </div>
+      </div> -->
       <div class="menu">
-        <div
+        <!-- <div
           v-if="$store.state.user.isLogged"
           class="icons"
         >
@@ -78,7 +78,7 @@
             :show-list="visibleNotifications"
             @toggle="visibleNotifications = !visibleNotifications"
           />
-        </div>
+        </div> -->
         <div v-if="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
