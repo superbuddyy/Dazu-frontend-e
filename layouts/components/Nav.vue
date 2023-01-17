@@ -184,7 +184,9 @@ export default {
       this.$router.push({ path: '/szukaj', query: buildSearchQuery({ phrase: this.search }) })
     },
     toggleLogin () {
+      console.log(this.$store.state.user.isLogged)
       this.$store.dispatch('user/setLoginFirst', !this.loginVisible)
+      console.log(this.$store.state.user.isLogged)
     },
     toggleRegister () {
       this.registerVisible = !this.registerVisible
