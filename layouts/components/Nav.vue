@@ -82,6 +82,9 @@
         <div v-if="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
+        <div class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin1">
+          aaaa
+        </div>
         <!-- <el-dropdown v-if="$store.state.user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
@@ -184,9 +187,10 @@ export default {
       this.$router.push({ path: '/szukaj', query: buildSearchQuery({ phrase: this.search }) })
     },
     toggleLogin () {
-      console.log(this.$store.state.user.isLogged)
       this.$store.dispatch('user/setLoginFirst', !this.loginVisible)
-      console.log(this.$store.state.user.isLogged)
+    },
+    toggleLogin1 () {
+      console.log('asdf', this.$store.state.user.isLogged)
     },
     toggleRegister () {
       this.registerVisible = !this.registerVisible
