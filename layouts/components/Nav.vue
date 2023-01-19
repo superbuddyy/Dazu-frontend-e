@@ -17,7 +17,7 @@
           Zaawonsowane
         </el-button>
       </div>
-      <div class="mobile-menu">
+      <!-- <div class="mobile-menu">
         <i class="el-icon-s-fold" @click="mobileNav = !mobileNav" />
         <el-drawer
           size="50%"
@@ -65,7 +65,7 @@
             </div>
           </div>
         </el-drawer>
-      </div>
+      </div> -->
       <div class="menu">
         <div
           v-show="$store.state.user.isLogged"
@@ -82,10 +82,7 @@
         <div v-show="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
-        <div class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin1">
-          aaaa
-        </div>
-        <el-dropdown v-show="$store.state.user.isLogged" @command="handleCommand">
+        <!-- <el-dropdown v-show="$store.state.user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
               Moje konto
@@ -114,7 +111,7 @@
               Wyloguj
             </el-dropdown-item>
           </el-dropdown-menu>
-        </el-dropdown>
+        </el-dropdown> -->
         <nuxt-link to="/dodaj-ogloszenie">
           <el-button type="primary" round class="add-offer pulse-add">
             Dodaj ogłoszenie
