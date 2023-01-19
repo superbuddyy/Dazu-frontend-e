@@ -70,7 +70,7 @@ export default {
       await this.$store.dispatch('user/login', this.loginForm)
       this.$emit('toggle-popup')
       this.clearForm()
-      // await this.$store.dispatch('user/setLoginFirst', false)
+      await this.$store.dispatch('user/setLoginFirst', false)
     },
     clearForm () {
       this.loginForm = {
