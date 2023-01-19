@@ -82,9 +82,6 @@
         <div v-show="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
-        <div class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin1">
-          aaaa
-        </div>
         <el-dropdown v-show="$store.state.user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
