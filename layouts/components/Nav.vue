@@ -68,7 +68,7 @@
       </div> -->
       <div class="menu">
         <div
-          v-show="user.isLogged"
+          v-if="user.isLogged"
           class="icons"
         >
           <nuxt-link to="/ulubione">
@@ -79,10 +79,10 @@
             @toggle="visibleNotifications = !visibleNotifications"
           />
         </div>
-        <div v-show="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
+        <div v-if="user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
-        <!-- <el-dropdown v-show="$store.state.user.isLogged" @command="handleCommand">
+        <el-dropdown v-if="user.isLogged" @command="handleCommand">
           <nuxt-link to="/ustawienia-konta">
             <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
               Moje konto
@@ -99,7 +99,7 @@
               Moje Ogłoszenia
             </el-dropdown-item>
             <el-dropdown-item
-              v-show="$store.state.user.roles.includes('company')"
+              v-if="user.roles.includes('company')"
               command="agents"
             >
               Agenci
@@ -111,7 +111,7 @@
               Wyloguj
             </el-dropdown-item>
           </el-dropdown-menu>
-        </el-dropdown> -->
+        </el-dropdown>
         <nuxt-link to="/dodaj-ogloszenie">
           <el-button type="primary" round class="add-offer pulse-add">
             Dodaj ogłoszenie
