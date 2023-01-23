@@ -79,7 +79,7 @@
             @toggle="visibleNotifications = !visibleNotifications"
           />
         </div>
-        <div v-if="user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
+        <div v-if="!user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
         <el-dropdown v-if="user.isLogged" @command="handleCommand">
