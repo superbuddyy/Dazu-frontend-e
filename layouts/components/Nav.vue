@@ -170,7 +170,7 @@ export default {
     user: ''
   }),
   mounted () {
-    this.user = $store.state.user;
+    this.user = this.$store.state.user;
     console.log(this.user)
   },
   computed: {
