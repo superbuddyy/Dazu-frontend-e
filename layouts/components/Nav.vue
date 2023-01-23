@@ -17,7 +17,7 @@
           Zaawonsowane
         </el-button>
       </div>
-      <div class="mobile-menu">
+      <!-- <div class="mobile-menu">
         <i class="el-icon-s-fold" @click="mobileNav = !mobileNav" />
         <el-drawer
           size="50%"
@@ -65,7 +65,7 @@
             </div>
           </div>
         </el-drawer>
-      </div>
+      </div> -->
       <div class="menu">
         <div
           v-show="$store.state.user.isLogged"
