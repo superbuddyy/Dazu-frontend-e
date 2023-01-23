@@ -67,8 +67,8 @@
         </el-drawer>
       </div> -->
       <div class="menu">
-        <!-- <div
-          v-show="$store.state.user.isLogged"
+        <div
+          v-show="user.isLogged"
           class="icons"
         >
           <nuxt-link to="/ulubione">
@@ -78,7 +78,7 @@
             :show-list="visibleNotifications"
             @toggle="visibleNotifications = !visibleNotifications"
           />
-        </div> -->
+        </div>
         <div v-show="!$store.state.user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
           Logowanie/Rejestracja
         </div>
@@ -167,7 +167,7 @@ export default {
     notifications: [],
     visibleNotifications: false,
     mobileNav: false,
-    user
+    user: ''
   }),
   mounted () {
     this.user = $store.state.user;
