@@ -17,7 +17,7 @@
           Zaawonsowane
         </el-button>
       </div>
-      <!-- <div class="mobile-menu">
+      <div class="mobile-menu">
         <i class="el-icon-s-fold" @click="mobileNav = !mobileNav" />
         <el-drawer
           size="50%"
@@ -29,43 +29,43 @@
               Dodaj ogłoszenie
             </div>
           </nuxt-link>
-          <nuxt-link v-show="$store.state.user.isLogged" to="/ustawienia-konta">
+          <nuxt-link v-if="user.isLogged" to="/ustawienia-konta">
             <div class="nav-menu-item">
               Ustawienia
             </div>
           </nuxt-link>
-          <nuxt-link v-show="$store.state.user.isLogged" to="/ulubione">
+          <nuxt-link v-if="user.isLogged" to="/ulubione">
             <div class="nav-menu-item">
               Ulubione
             </div>
           </nuxt-link>
-          <nuxt-link v-show="$store.state.user.isLogged" to="/moje-ogloszenia">
+          <nuxt-link v-if="user.isLogged" to="/moje-ogloszenia">
             <div class="nav-menu-item">
               Moje Ogłoszenia
             </div>
           </nuxt-link>
-          <nuxt-link v-show="$store.state.user.roles.includes('company')" to="/agenci">
+          <nuxt-link v-if="user.roles.includes('company')" to="/agenci">
             <div class="nav-menu-item">
               Agenci
             </div>
           </nuxt-link>
-          <nuxt-link v-show="$store.state.user.isLogged" to="/faktury">
+          <nuxt-link v-if="user.isLogged" to="/faktury">
             <div class="nav-menu-item">
               Historia płatności
             </div>
           </nuxt-link>
-          <div v-show="!$store.state.user.isLogged" @click="toggleLogin">
+          <div v-if="!user.isLogged" @click="toggleLogin">
             <div class="nav-menu-item">
               Logowanie/Rejestracja
             </div>
           </div>
-          <div v-show="$store.state.user.isLogged" @click="logout">
+          <div v-if="user.isLogged" @click="logout">
             <div class="nav-menu-item">
               Wyloguj
             </div>
           </div>
         </el-drawer>
-      </div> -->
+      </div>
       <div class="menu">
         <div
           v-if="user.isLogged"
@@ -129,7 +129,7 @@
       @toggle-popup="toggleRegister"
       @toggle-login-popup="toggleLogin"
     />
-    <div v-show="searchPopup" class="search-popup">
+    <div v-if="searchPopup" class="search-popup">
       <div class="popup-container">
         <div class="close-btn" @click="searchPopup = false">
           <i class="el-icon-circle-close" />
@@ -171,7 +171,6 @@ export default {
   }),
   mounted () {
     this.user = this.$store.state.user;
-    console.log(this.user)
   },
   computed: {
     isHomePage () {
@@ -190,9 +189,6 @@ export default {
     },
     toggleLogin () {
       this.$store.dispatch('user/setLoginFirst', !this.loginVisible)
-    },
-    toggleLogin1 () {
-      console.log('asdf', this.$store.state.user.isLogged)
     },
     toggleRegister () {
       this.registerVisible = !this.registerVisible
