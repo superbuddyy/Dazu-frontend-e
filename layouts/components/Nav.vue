@@ -44,11 +44,11 @@
               Moje Ogłoszenia
             </div>
           </nuxt-link>
-          <nuxt-link v-if="user.roles.includes('company')" to="/agenci">
+          <!-- <nuxt-link v-if="user.roles.includes('company')" to="/agenci">
             <div class="nav-menu-item">
               Agenci
             </div>
-          </nuxt-link>
+          </nuxt-link> -->
           <nuxt-link v-if="user.isLogged" to="/faktury">
             <div class="nav-menu-item">
               Historia płatności
@@ -171,6 +171,7 @@ export default {
   }),
   mounted () {
     this.user = this.$store.state.user;
+    console.log(this.user)
   },
   computed: {
     isHomePage () {
