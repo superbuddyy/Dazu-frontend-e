@@ -54,7 +54,7 @@ export default {
     '~/plugins/element-ui',
     '~/plugins/axios',
     '~/plugins/click-outside.js',
-    { src: '~/plugins/persistedState.client.js' },
+    '~/plugins/persistedState',
     '~/plugins/html-safe',
     '~/plugins/gtm',
     '~/plugins/lottie-vue-player.client.js',
