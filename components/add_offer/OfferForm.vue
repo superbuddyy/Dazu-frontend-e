@@ -39,7 +39,7 @@
         </el-col>
         <el-col :span="11">
           <Attribute
-            v-if="attributes['_3']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_3']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_3'].name"
             :slug="attributes['_3'].slug"
             placeholder="0"
@@ -52,7 +52,7 @@
         </el-col>
         <el-col :span="11">
           <Attribute
-            v-if="attributes['_21']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_21']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_21'].name"
             :slug="attributes['_21'].slug"
             placeholder="0"
@@ -66,7 +66,7 @@
       </el-row>
       <el-row>
         <Attribute
-          v-if="attributes['_2']['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="attributes['_2']['offer_types'].includes(addOfferForm.type)"
           :name="attributes['_2'].name"
           :slug="attributes['_2'].slug"
           :value="form.attributes[2]"
@@ -74,7 +74,7 @@
           @set-value="form.attributes[2] = $event"
         />
         <Attribute
-          v-if="attributes['_5']['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="attributes['_5']['offer_types'].includes(addOfferForm.type)"
           :name="attributes['_5'].name"
           :slug="attributes['_5'].slug"
           :value="form.attributes[5]"
@@ -82,7 +82,7 @@
           @set-value="form.attributes[5] = $event"
         />
         <Attribute
-          v-if="attributes['_22']['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="attributes['_22']['offer_types'].includes(addOfferForm.type)"
           :name="attributes['_22'].name"
           :slug="attributes['_22'].slug"
           :value="form.attributes[22]"
@@ -90,7 +90,7 @@
           @set-value="form.attributes[22] = $event"
         />
         <Attribute
-          v-if="attributes['_23']['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="attributes['_23']['offer_types'].includes(addOfferForm.type)"
           :name="attributes['_23'].name"
           :slug="attributes['_23'].slug"
           :value="form.attributes[23]"
@@ -98,7 +98,7 @@
           @set-value="form.attributes[23] = $event"
         />
         <Attribute
-          v-if="attributes['_6']['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="attributes['_6']['offer_types'].includes(addOfferForm.type)"
           :name="attributes['_6'].name"
           :slug="attributes['_6'].slug"
           :value="form.attributes[6]"
@@ -106,7 +106,7 @@
           @set-value="form.attributes[6] = $event"
         />
         <Attribute
-          v-if="attributes['_7']['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="attributes['_7']['offer_types'].includes(addOfferForm.type)"
           :name="attributes['_7'].name"
           :slug="attributes['_7'].slug"
           :value="form.attributes[7]"
@@ -114,7 +114,7 @@
           @set-value="form.attributes[7] = $event"
         />
         <Attribute
-          v-if="attributes['_8']['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="attributes['_8']['offer_types'].includes(addOfferForm.type)"
           :name="attributes['_8'].name"
           :slug="attributes['_8'].slug"
           :value="form.attributes[8]"
@@ -125,7 +125,7 @@
       <el-row>
         <el-col :span="6">
           <Attribute
-            v-if="attributes['_4']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_4']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_4'].name"
             :slug="attributes['_4'].slug"
             :value="form.attributes[4]"
@@ -136,7 +136,7 @@
         </el-col>
         <el-col :span="6">
           <Attribute
-            v-if="attributes['_9']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_9']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_9'].name"
             :slug="attributes['_9'].slug"
             :options="attributes['_9'].options"
@@ -148,7 +148,7 @@
         </el-col>
         <el-col :span="6">
           <Attribute
-            v-if="attributes['_10']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_10']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_10'].name"
             :slug="attributes['_10'].slug"
             :options="attributes['_10'].options"
@@ -165,7 +165,7 @@
           <el-row>
             <el-col :span="6">
               <Attribute
-                v-if="attributes['_11']['offer_types'].includes($store.state.addOfferForm.type)"
+                v-if="attributes['_11']['offer_types'].includes(addOfferForm.type)"
                 :name="attributes['_11'].name"
                 :slug="attributes['_11'].slug"
                 :options="attributes['_11'].options"
@@ -177,7 +177,7 @@
             </el-col>
             <el-col :span="6">
               <Attribute
-                v-if="attributes['_12']['offer_types'].includes($store.state.addOfferForm.type)"
+                v-if="attributes['_12']['offer_types'].includes(addOfferForm.type)"
                 :name="attributes['_12'].name"
                 :slug="attributes['_12'].slug"
                 :options="attributes['_12'].options"
@@ -193,7 +193,7 @@
       <el-row>
         <el-col :span="13">
           <Attribute
-            v-if="attributes['_15']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_15']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_15'].name"
             :slug="attributes['_15'].slug"
             :options="attributes['_15'].options"
@@ -206,7 +206,7 @@
       <el-row>
         <el-col :md="12" :sm="24">
           <Attribute
-            v-if="attributes['_16']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_16']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_16'].name"
             :slug="attributes['_16'].slug"
             :options="attributes['_16'].options"
@@ -217,7 +217,7 @@
         </el-col>
         <el-col :md="12" :sm="24">
           <Attribute
-            v-if="attributes['_17']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_17']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_17'].name"
             :slug="attributes['_17'].slug"
             :options="attributes['_17'].options"
@@ -230,7 +230,7 @@
       <el-row>
         <el-col :span="12">
           <Attribute
-            v-if="attributes['_18']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_18']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_18'].name"
             :slug="attributes['_18'].slug"
             :options="attributes['_18'].options"
@@ -242,7 +242,7 @@
         </el-col>
         <el-col :span="12">
           <Attribute
-            v-if="attributes['_19']['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="attributes['_19']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_19'].name"
             :slug="attributes['_19'].slug"
             :options="attributes['_19'].options"
@@ -791,6 +791,7 @@ export default {
       }
     }
     return {
+      addOfferForm: {},
       failShake: true,
       datePickerOptions: {
         disabledDate (date) {
@@ -1009,6 +1010,9 @@ export default {
         }
       }
     }
+
+    this.addOfferForm = this.$store.state.addOfferForm;
+
   },
   methods: {
     setCategory (e) {
