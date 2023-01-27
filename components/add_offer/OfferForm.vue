@@ -546,7 +546,7 @@
           @change="setUrgentValue"
         />
       </div>
-      <div v-if="!$store.state.user.isLogged && viewType !== 'update'" class="contact-form">
+      <div v-if="!user.isLogged && viewType !== 'update'" class="contact-form">
         <el-form-item label="Jestem">
           <el-button
             type="plain"
@@ -635,7 +635,7 @@
           </el-col>
         </el-row>
       </div>
-      <div v-if="$store.state.user.isLogged" class="contact-form">
+      <div v-if="user.isLogged" class="contact-form">
         <el-form-item label="Jestem">
           <el-button
             type="plain"
@@ -663,20 +663,20 @@
           </el-button>
         </el-form-item>
         <el-form-item v-if="form.user.account_type === 'user'" label="Imię">
-          <el-input v-model="$store.state.user.name" placeholder="Imię" disabled/>
+          <el-input v-model="user.name" placeholder="Imię" disabled/>
         </el-form-item>
         <el-form-item v-if="form.user.account_type !== 'user'" label="Nazwa Firmy">
-          <el-input v-model="$store.state.user.name" placeholder="Nazwa Firmy" disabled/>
+          <el-input v-model="user.name" placeholder="Nazwa Firmy" disabled/>
         </el-form-item>
         <el-row class="contact">
           <el-col :span="12">
             <el-form-item label="Numer telefonu">
-              <el-input v-model="$store.state.user.phone" placeholder="Numer telefonu" disabled/>
+              <el-input v-model="user.phone" placeholder="Numer telefonu" disabled/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Email">
-              <el-input v-model="$store.state.user.email" placeholder="Email" disabled/>
+              <el-input v-model="user.email" placeholder="Email" disabled/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -791,6 +791,7 @@ export default {
       }
     }
     return {
+      user: {},
       addOfferForm: {},
       failShake: true,
       datePickerOptions: {
@@ -948,6 +949,9 @@ export default {
     }
   },
   async mounted () {
+    this.addOfferForm = this.$store.state.addOfferForm;
+    this.user = this.$store.state.user;
+
     this.setType('sell')
     if (window.innerWidth < 700) {
       this.labelPosition = 'top'
@@ -969,18 +973,18 @@ export default {
         localStorage.removeItem('add-form')
       }
     }
-    if (this.$store.state.user.isLogged) {
-      this.form.user.account_type = this.$store.state.user.roles[0]
+    if (this.user.isLogged) {
+      this.form.user.account_type = this.user.roles[0]
     }
     if (this.$route.params.slug) {
       let result = {}
-      if (this.isPreview && !this.$store.state.user.isLogged) {
+      if (this.isPreview && !this.user.isLogged) {
         result = await previewShow(this.$route.params.slug)
       } else {
         result = await show(this.$route.params.slug, this.categories)
       }
       if (result.status === 200) {
-        if (this.isPreview && !this.$store.state.user.isLogged) {
+        if (this.isPreview && !this.user.isLogged) {
           this.viewType = 'preview'
         } else {
           this.viewType = 'update'
@@ -1011,7 +1015,6 @@ export default {
       }
     }
 
-    this.addOfferForm = this.$store.state.addOfferForm;
 
   },
   methods: {
@@ -1080,7 +1083,7 @@ export default {
     async previewOffer (preview) {
       const formData = this.makeFormData()
       formData.append('preview', preview)
-      if (preview && !this.$store.state.user.isLogged) {
+      if (preview && !this.user.isLogged) {
         localStorage.setItem('offer', JSON.stringify(this.form))
       }
       try {
@@ -1105,7 +1108,7 @@ export default {
           await this.$router.push('/moje-ogloszenia')
         } else if (result.status === 200) {
           this.processing = false
-          if (this.$store.state.user.isLogged) {
+          if (this.user.isLogged) {
             await this.$router.push('/moje-ogloszenia/oplac/' + offerSlug)
           } else {
             this.$message({
@@ -1127,7 +1130,7 @@ export default {
     async addOffer (preview) {
       const formData = this.makeFormData()
       formData.append('preview', preview)
-      if (preview && !this.$store.state.user.isLogged) {
+      if (preview && !this.user.isLogged) {
         console.log(this.form)
         console.log(formData)
         localStorage.setItem('offer', JSON.stringify(this.form))
@@ -1135,7 +1138,7 @@ export default {
       }
       try {
         let result = {}
-        if (preview && !this.$store.state.user.isLogged) {
+        if (preview && !this.user.isLogged) {
           result = await previewStore(formData)
         } else {
           result = await store(formData)
@@ -1154,7 +1157,7 @@ export default {
           await this.$router.push('/moje-ogloszenia')
         } else if (result.status === 200) {
           this.processing = false
-          if (this.$store.state.user.isLogged) {
+          if (this.user.isLogged) {
             await this.$router.push('/moje-ogloszenia/oplac/' + offerSlug)
           } else {
             this.$message({
@@ -1180,11 +1183,11 @@ export default {
       this.processing = true
       const formData = this.makeFormData()
       // If user is not logged it send request with preview param.
-      formData.append('preview', !this.$store.state.user.isLogged)
+      formData.append('preview', !this.user.isLogged)
       const result = await update(this.offer.slug, formData)
       if (result.status === 200 && result.data.bill_amount !== undefined) {
         this.processing = false
-        if (this.$store.state.user.isLogged) {
+        if (this.user.isLogged) {
           // await this.$router.push('/moje-ogloszenia/oplac/' + result.data.offer_slug)
         } else {
           this.$message({
@@ -1251,7 +1254,7 @@ export default {
           formData.append(`projectPlans[${image}]`, this.form.projectPlans[image].raw)
         }
       }
-      if (!this.$store.state.user.isLogged) {
+      if (!this.user.isLogged) {
         formData.append('email', this.form.user.email)
         formData.append('password', this.form.user.password)
         formData.append('name', this.form.user.name)
