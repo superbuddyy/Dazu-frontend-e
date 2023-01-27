@@ -48,7 +48,7 @@
         :key="option.id"
       >
         <el-checkbox
-          v-if="option['offer_types'].includes($store.state.addOfferForm.type)"
+          v-if="option['offer_types'].includes(addOfferForm.type)"
           :label="option.slug"
         >
           {{ option.name }}
@@ -130,7 +130,8 @@ export default {
   },
   data () {
     return {
-      local_value: ''
+      local_value: '',
+      addOfferForm: {}
     }
   },
   watch: {
@@ -143,6 +144,7 @@ export default {
     }
   },
   mounted () {
+    this.addOfferForm = this.$store.state.addOfferForm;
     if (this.type === 'checkbox_group') {
       this.local_value = []
     }

@@ -6,7 +6,7 @@
           v-for="rootCategory in rootCategories"
         >
           <el-option
-            v-if="rootCategory['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="rootCategory['offer_types'].includes(addOfferForm.type)"
             :key="rootCategory.value"
             :label="rootCategory.name"
             :value="rootCategory.value"
@@ -20,7 +20,7 @@
           v-for="subCat in subCategories"
         >
           <el-option
-            v-if="subCat['offer_types'].includes($store.state.addOfferForm.type)"
+            v-if="subCat['offer_types'].includes(addOfferForm.type)"
             :key="subCat.value"
             :label="subCat.name"
             :value="subCat.value"
@@ -62,6 +62,7 @@ export default {
   },
   data () {
     return {
+      addOfferForm: {},
       subCategories: {},
       local_category: '',
       local_subcategory: ''
@@ -80,6 +81,7 @@ export default {
     }
   },
   mounted () {
+    this.addOfferForm = this.$store.state.addOfferForm;
     this.category = this.local_category
     this.subcategory = this.local_subcategory
   },
