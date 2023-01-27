@@ -7,7 +7,7 @@
       <div v-for="favorite in favorites" :key="favorite.id" class="offer">
         <nuxt-link :to="'/ogloszenia/' + favorite.slug" class="offer">
           <div class="content">
-            <div v-if="favorite.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + favorite.main_photo.file.path_name + ')'}" />
+            <div v-if="favorite.main_photo" class="img" :style="{backgroundImage: 'url(' + store_settings.assetUrl + '/' + favorite.main_photo.file.path_name + ')'}" />
             <div v-if="favorite.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}" />
             <div class="description">
               {{ favorite.title }}
@@ -76,6 +76,7 @@ export default {
   },
   data () {
     return {
+      store_settings: {},
       favorites: [],
       loading: true,
       total: 1,
@@ -85,6 +86,7 @@ export default {
   },
   mounted () {
     this.getFavorites()
+    this.store_settings = this.$store.state.settings
   },
   methods: {
     async getFavorites () {

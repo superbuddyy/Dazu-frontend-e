@@ -4,7 +4,7 @@
       <div v-for="offer in offers" :key="offer.id" class="offer">
         <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer">
           <div class="content">
-            <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
+            <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + store_settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
               <span v-if="offer.is_argent" class="argent-label img-label">Pilne</span>
               <span v-if="offer.is_promoted" class="promoted-label img-label">Wyróżnione</span>
             </div>
@@ -61,6 +61,7 @@ export default {
   },
   data () {
     return {
+      store_settings: {},
       offers: [],
       loading: true,
       settings: {
@@ -113,6 +114,7 @@ export default {
   },
   mounted () {
     this.getOffers()
+    this.store_settings = this.$store.state.settings
   },
   methods: {
     async getOffers () {

@@ -8,7 +8,7 @@
           </span>
           <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Okazja</span>
           <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Pilne</span>
-          <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
+          <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + store_settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
           </div>
           <div v-if="offer.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}">
           </div>
@@ -61,6 +61,7 @@ export default {
   },
   data () {
     return {
+      store_settings: {},
       isPausedForced: false,
       flickityOptions: {
         prevNextButtons: true,
@@ -97,6 +98,7 @@ export default {
     if (!this.isCarouselActive) {
       await this.$store.dispatch('settings/setCarouselPause', true)
     }
+    this.store_settings = this.$store.state.settings
   },
   methods: {
     onInit () {
