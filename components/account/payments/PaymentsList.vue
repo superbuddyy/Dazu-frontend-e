@@ -78,6 +78,7 @@ export default {
     },
     async generateInvoice (id) {
       const result = await invoice(id)
+      console.log(result)
       window.open(result.data.url, '_blank')
     },
     moneyFormatter (value) {
