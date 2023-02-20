@@ -1,5 +1,8 @@
 import apiClient from '~/services/apiClient'
 
+export function getCategories (){
+  return apiClient.get('/api/categories')
+}
 export function getFilters () {
   return apiClient.get('/api/search/filters')
 }
