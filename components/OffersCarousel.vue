@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { index } from '@/api/offers'
+import { index } from '@/api/offer'
 import Favorite from '@/components/Favorite'
 import Money from '@/components/Money'
 export default {
