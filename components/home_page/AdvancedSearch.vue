@@ -313,10 +313,10 @@ export default {
     async getFilters () {
       const result = await getFilters()
       if (result.status === 200) {
-        // result.data.categories = await result.data.categories.map((value) => {
-        //   delete value.children
-        //   return value
-        // })
+        result.data.categories = await result.data.categories.map((value) => {
+          delete value.children
+          return value
+        })
         result.data.categories = await result.data.categories.map((item) => {
           item.label = item.name
           item.id = item.slug
