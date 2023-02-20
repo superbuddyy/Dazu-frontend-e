@@ -129,7 +129,7 @@
 <script>
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import {getCategories} from '@/api/search'
+// import {getCategories} from '@/api/search'
 import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocationReverse, getLocation } from '@/api/osm'
 import * as Cookies from 'js-cookie'
@@ -237,7 +237,7 @@ export default {
       this.getLocalRecentSearch()
     }
     this.getFilters()
-    this.getCategories()
+    // this.getCategories()
     if (!Cookies.getJSON('user-location')) {
       navigator.geolocation.getCurrentPosition(this.successGetLocation, this.errorGetLocation, this.getLocationOptions)
     } else {
@@ -312,12 +312,12 @@ export default {
     toggleAdvanced () {
       this.visible = !this.visible
     },
-    async getCategories(){
-      const result = await this.getCategories()
-      if (result.status === 200){
-        console.log(result)
-      }
-    },
+    // async getCategories(){
+    //   const result = await this.getCategories()
+    //   if (result.status === 200){
+    //     console.log(result)
+    //   }
+    // },
     async getFilters () {
       const result = await getFilters()
       if (result.status === 200) {
