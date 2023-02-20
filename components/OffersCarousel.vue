@@ -52,7 +52,6 @@
 import { index } from '@/api/offers'
 import Favorite from '@/components/Favorite'
 import Money from '@/components/Money'
-
 export default {
   name: 'OffersCarousel',
   components: {
