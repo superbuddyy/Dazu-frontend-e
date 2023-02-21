@@ -236,8 +236,9 @@ export default {
     } else {
       this.getLocalRecentSearch()
     }
-    this.getFilters()
     this.getCategories()
+    this.getFilters()
+    
     if (!Cookies.getJSON('user-location')) {
       navigator.geolocation.getCurrentPosition(this.successGetLocation, this.errorGetLocation, this.getLocationOptions)
     } else {
@@ -314,6 +315,7 @@ export default {
     },
     async getCategories(){
       const result = await this.getCategories()
+      console.log(result)
       if (result.status === 200){
         console.log(result)
       }
