@@ -14,10 +14,10 @@
         :loading="loading"
       />
     </div>
-    <!-- <nuxt-link :to="'/kontakt'" target="_blank" class="help-link">
+    <nuxt-link :to="'/kontakt'" target="_blank" class="help-link">
       Potrzebujesz pomocy graficznej?
       <img src="~/assets/lifebuoy.png" alt="">
-    </nuxt-link> -->
+    </nuxt-link>
   </div>
 </template>
 <script>
