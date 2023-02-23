@@ -1,7 +1,7 @@
 <template>
   <div v-loading="loading" class="offers">
     <flickity v-if="offers.length > 0" ref="flickity" :options="flickityOptions" @init="onInit">
-      <div v-for="(offer, index) in offers" :key="index" class="carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')) ? 'featured_l' : '' ]">
+      <div v-for="(offer, index) in offers" :key="index" class="carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote') ) ? 'featured_l' : '' ]">
         <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer-link">
           <span class="featured_img_label" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
             <img src="~/assets/Star.svg" style="width: 24px;">
@@ -52,7 +52,6 @@
 import { index } from '@/api/offer'
 import Favorite from '@/components/Favorite'
 import Money from '@/components/Money'
-
 export default {
   name: 'OffersCarousel',
   components: {

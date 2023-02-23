@@ -1,17 +1,17 @@
 <template>
   <div class="blog-post-page">
-    <div class="post-header" :style="'background-image: url(' + post.main_photo_url +');'">
-      <h1>{{ post.name }}</h1>
+    <div class="post-header" >
+      <h1>{{ post.title }}</h1>
     </div>
     <div class="container">
       <p>
-        v-html="post.content"
+        {{post.name}}
       </p>
     </div>
   </div>
 </template>
 <script>
-import { show } from '@/api/pages'
+import { show } from '@/api/footers'
 
 export default {
   name: 'FooterPages',

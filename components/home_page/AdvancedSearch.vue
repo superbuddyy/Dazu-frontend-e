@@ -4,14 +4,14 @@
       <div class="label">
         Szukam
       </div>
-      <!-- <el-cascader
+      <el-cascader
         v-model="search.category"
         :options="filters.categories"
         :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
         clearable
         popper-class="category-dropdown"
         @change="handleChange"
-      /> -->
+      />
       <treeselect
         v-model="search.category"
         :multiple="true"
@@ -129,6 +129,7 @@
 <script>
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import {getCategories} from '@/api/search'
 import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocationReverse, getLocation } from '@/api/osm'
 import * as Cookies from 'js-cookie'
@@ -235,7 +236,9 @@ export default {
     } else {
       this.getLocalRecentSearch()
     }
+    this.getCategories()
     this.getFilters()
+    
     if (!Cookies.getJSON('user-location')) {
       navigator.geolocation.getCurrentPosition(this.successGetLocation, this.errorGetLocation, this.getLocationOptions)
     } else {
@@ -309,6 +312,13 @@ export default {
     },
     toggleAdvanced () {
       this.visible = !this.visible
+    },
+    async getCategories(){
+      const result = await this.getCategories()
+      console.log(result)
+      if (result.status === 200){
+        console.log(result)
+      }
     },
     async getFilters () {
       const result = await getFilters()
