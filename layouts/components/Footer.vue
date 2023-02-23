@@ -24,8 +24,8 @@
           <ul>
             <li v-for="(item, index) in pages" :key="item.id">
               <template v-if="oddEven(index) ==='odd' ">
-                <nuxt-link :to="'/strony/' + item.page_key">
-                  {{ item.name }}
+                <nuxt-link :to="'/strony/' + item.id">
+                  {{ item.title }}
                 </nuxt-link>
               </template>
             </li>
@@ -33,8 +33,8 @@
           <ul>
             <li v-for="(item, index) in pages" :key="item.id">
               <template v-if="oddEven(index) ==='even' ">
-                <nuxt-link :to="'/strony/' + item.page_key">
-                  {{ item.name }}
+                <nuxt-link :to="'/strony/' + item.id">
+                  {{ item.title }}
                 </nuxt-link>
               </template>
             </li>
