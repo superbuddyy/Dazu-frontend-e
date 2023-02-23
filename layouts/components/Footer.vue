@@ -97,7 +97,7 @@
 
 <script>
 import { store } from '@/api/newsleter'
-import { index } from '@/api/pages'
+import { index } from '@/api/footers'
 
 export default {
   name: 'Footer',

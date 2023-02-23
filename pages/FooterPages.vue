@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { show } from '@/api/pages'
+import { show } from '@/api/footers'
 
 export default {
   name: 'FooterPages',
