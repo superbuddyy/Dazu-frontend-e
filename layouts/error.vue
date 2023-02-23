@@ -6,8 +6,6 @@
     <div><a href="/">Kliknij</a> aby wrócić na stronę główną</div>
   </div>
 </template>
-
-
 <script>
 export default {
   name: 'Error404'
