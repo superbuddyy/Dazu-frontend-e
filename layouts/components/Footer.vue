@@ -55,7 +55,7 @@
                 Regulamin
               </nuxt-link>
             </li> -->
-            <li>
+            <!-- <li>
               <nuxt-link to="/kontakt">
                 Kontakt
               </nuxt-link>
@@ -69,7 +69,7 @@
               <nuxt-link to="/">
                 Strona Główna
               </nuxt-link>
-            </li>
+            </li> -->
             <li>
               <nuxt-link to="/">
                 Rejestracja
