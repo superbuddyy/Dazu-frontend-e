@@ -3,6 +3,7 @@
     <div class="title">
       <h1>Dodaj ogłoszenie</h1>
     </div>
+
     <div class="container">
       <OfferForm
         v-if="Object.keys(attributes).length !== 0"
@@ -46,6 +47,7 @@ export default {
       if (result.status === 200) {
         this.attributes = result.data
         this.loading = false
+        console.log(123)
       }
     },
     async getCategories () {

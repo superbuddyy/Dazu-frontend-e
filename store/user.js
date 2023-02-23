@@ -2,6 +2,7 @@ import { login, register, completeRegistration, getUser, logout } from '@/api/au
 import { updateProfile } from '@/api/user'
 import { isLogged, setLogged, removeToken } from '@/utils/auth'
 
+
 export const state = () => ({
   id: null,
   user: null,
