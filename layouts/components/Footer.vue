@@ -21,7 +21,7 @@
       </div>
       <div class="menu">
         <div class="container">
-          <!-- <ul>
+          <ul>
             <li v-for="(item, index) in pages" :key="item.id">
               <template v-if="oddEven(index) ==='odd' ">
                 <nuxt-link :to="'/strony/' + item.id">
@@ -38,7 +38,7 @@
                 </nuxt-link>
               </template>
             </li>
-          </ul> -->
+          </ul>
           <ul>
             <!-- <li>
               <nuxt-link to="/">
@@ -55,7 +55,7 @@
                 Regulamin
               </nuxt-link>
             </li> -->
-            <!-- <li>
+            <li>
               <nuxt-link to="/kontakt">
                 Kontakt
               </nuxt-link>
@@ -69,7 +69,7 @@
               <nuxt-link to="/">
                 Strona Główna
               </nuxt-link>
-            </li> -->
+            </li>
             <li>
               <nuxt-link to="/">
                 Rejestracja
