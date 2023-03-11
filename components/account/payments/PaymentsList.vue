@@ -78,8 +78,7 @@ export default {
     },
     async generateInvoice (id) {
       const result = await invoice(id)
-      console.log(result)
-      // window.open(result, '_blank')
+      window.open(result, '_blank')
     },
     moneyFormatter (value) {
       return (parseInt(value.total) / 100).toFixed(2) + ' pln'
