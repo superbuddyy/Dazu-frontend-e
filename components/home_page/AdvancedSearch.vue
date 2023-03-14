@@ -4,14 +4,14 @@
       <div class="label">
         Szukam
       </div>
-      <el-cascader
+      <!-- <el-cascader
         v-model="search.category"
         :options="filters.categories"
         :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
         clearable
         popper-class="category-dropdown"
         @change="handleChange"
-      />
+      /> -->
       <treeselect
         v-model="search.category"
         :multiple="true"
