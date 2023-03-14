@@ -183,8 +183,7 @@
         </el-tag>
       </div>
       <div class="text">
-        <p>
-          v-html="offer.description"
+        <p v-html="offer.description">
         </p>
       </div>
       <div class="stats">
