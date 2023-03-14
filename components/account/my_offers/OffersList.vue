@@ -490,6 +490,7 @@ export default {
     async refreshUI (slug, gateway) {
       this.loading = true
       const result = await refresh(slug, gateway)
+      console.log(result);
       if (result.status === 204) {
         this.$message({
           message: 'Odświeżono ogłoszenie pomyślnie',
