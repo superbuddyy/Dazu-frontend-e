@@ -136,7 +136,7 @@
                 class="refresh-btn"
                 round
                 icon="el-icon-refresh-right"
-                @click="refresh(offer.slug)"
+                @click="refreshUI(offer.slug)"
               >
                 Odśwież
               </el-button>
@@ -226,7 +226,7 @@
                 v-if="offer.is_expired && offer.refresh_price === 0"
                 type="text"
                 icon="el-icon-refresh-right"
-                @click="refresh(offer.slug)"
+                @click="refreshUI(offer.slug)"
               >
                 Odśwież ({{ offer.refresh_price / 100 }} pln)
               </el-button>
@@ -299,7 +299,7 @@
 <!--            PayPal-->
 <!--          </div>-->
 <!--        </el-button>-->
-        <el-button @click="refresh(refreshSlug, 'tpay')">
+        <el-button @click="refreshUI(refreshSlug, 'tpay')">
           <div class="tpay">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
             Tpay
@@ -487,7 +487,7 @@ export default {
     getCheckedIndex (id) {
       return this.checked_offers.indexOf(id)
     },
-    async refresh (slug, gateway) {
+    async refreshUI (slug, gateway) {
       this.loading = true
       const result = await refresh(slug, gateway)
       if (result.status === 204) {
