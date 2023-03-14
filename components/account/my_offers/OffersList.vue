@@ -156,7 +156,7 @@
                     type="warning"
                     round
                     icon="el-icon-upload2"
-                    @click="raise(offer.slug, true)"
+                    @click="raiseUI(offer.slug, true)"
                   >
                     Podbij
                   </el-button>
@@ -165,7 +165,7 @@
                     type="warning"
                     round
                     icon="el-icon-upload2"
-                    @click="raise(offer.slug, false)"
+                    @click="raiseUI(offer.slug, false)"
                   >
                     Podbij
                   </el-button>
@@ -510,12 +510,13 @@ export default {
       }
       this.loading = false
     },
-    async raise (slug, isReduce) {
+    async raiseUI (slug, isReduce) {
       this.loading = true
       if (isReduce) {
         slug = slug + '?reduce_raise=true'
       }
       const result = await raise(slug)
+      console.log(result)
       if (result.status === 204) {
         this.$message({
           message: 'Podbito ogłoszenie pomyślnie',
