@@ -4,8 +4,7 @@
       <h1>{{ post.title }}</h1>
     </div>
     <div class="container">
-      <p>
-        {{post.content}}
+      <p v-html="post.content">
       </p>
     </div>
   </div>
