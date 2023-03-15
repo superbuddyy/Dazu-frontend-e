@@ -160,7 +160,7 @@ export default {
         return false
       }
       if (url.protocol === 'http:' || url.protocol === 'https:') {
-        return url.hostname === 'youtu.be'
+        return url.hostname === 'youtu.be' || url.hostname === 'www.youtube.com'
       } else {
         return true
       }
