@@ -5,7 +5,7 @@
     </div>
     <div class="container">
       <p>
-        {{post.name}}
+        {{post.content}}
       </p>
     </div>
   </div>
