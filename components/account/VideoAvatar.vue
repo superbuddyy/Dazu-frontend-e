@@ -102,9 +102,7 @@ export default {
         const avatarLink = user.videoAvatar
         const url = new URL(avatarLink)
         const hostname = url.hostname
-        if (hostname === 'youtu.be') {
-          return generatePhotoFromYoutubeLink(avatarLink)
-        }
+        return generatePhotoFromYoutubeLink(avatarLink)
       }
 
       return ''

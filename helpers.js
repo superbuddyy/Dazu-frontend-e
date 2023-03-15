@@ -251,6 +251,14 @@ export function setSearchDefaultData () {
 }
 
 export function generatePhotoFromYoutubeLink (videoLink) {
-  const parts = videoLink.split('/')
-  return 'https://img.youtube.com/vi/' + parts[parts.length - 1] + '/0.jpg'
+  if (videoLink.includes('youtu.be')){
+    const parts = videoLink.split('/')
+    return 'https://img.youtube.com/vi/' + parts[parts.length - 1] + '/0.jpg'
+  }else if (videoLink.includes('www.youtube.com')){
+    const parts = videoLink.split('/')
+    return 'https://img.youtube.com/vi/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length) + '/0.jpg'
+  }else{
+    return videoLink
+  }
+  
 }
