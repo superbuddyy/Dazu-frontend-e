@@ -60,6 +60,7 @@
       />
       <Filters
         :visible="filtersVisible"
+        :filters="filters"
         :refresh-filters="refreshFilters"
         @refreshed="refreshFilters = false"
         @close-filters="filtersVisible = false"
@@ -79,6 +80,7 @@ import Filters from '@/components/search/Filters'
 import SaveFilters from '@/components/search/SaveFilters'
 import MapSearch from '@/components/search/MapSearch'
 import { search, postrecentsearch } from '@/api/search'
+import { getFilters } from '@/api/search'
 
 export default {
   name: 'SearchResults',
@@ -106,7 +108,8 @@ export default {
       2: { order_by: 'created_at', order: 'ASC' },
       3: { order_by: 'price', order: 'ASC' },
       4: { order_by: 'price', order: 'DESC' }
-    }
+    },
+    filters: this.getFilters(),
   }),
   computed: {
     filtersExists () {
@@ -127,8 +130,30 @@ export default {
   },
   mounted () {
     this.searchOffers(1, this.$route.query)
+
   },
   methods: {
+    async getFilters () {
+      const result = await getFilters()
+      if (result.status === 200) {
+        // this.filters = result.data
+        result.data.categories = await result.data.categories.map((item) => {
+          item.label = item.name
+          item.id = item.slug
+          if (item.children && item.children.length) {
+            item.children.map((child) => {
+              child.label = child.name
+              child.id = child.slug
+              return child
+            })
+          } else {
+            item.children = []
+          }
+          return item
+        })
+        this.filters = result.data
+      }
+    },
     sortResults () {
       const queryWithSearch = Object.assign(this.$data.sorting[this.filter], this.$route.query)
       this.searchOffers(1, queryWithSearch)
