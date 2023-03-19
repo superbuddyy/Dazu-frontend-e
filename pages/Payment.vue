@@ -62,7 +62,7 @@
             icon="el-icon-sold-out"
             @click="paymentDialog = true"
           >
-            Zamaiam i płacęaaa
+            Zamaiam i płacę
           </el-button>
         </div>
       </div>
