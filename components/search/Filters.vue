@@ -150,9 +150,7 @@ export default {
       locationsLoading: false,
       locations: [],
       filters: getFilters(),
-      search: {
-        category: null
-      },
+      search: {},
       location: ''
     }
   },
