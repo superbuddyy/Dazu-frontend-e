@@ -16,12 +16,12 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            <!-- <treeselect
+            <treeselect
               v-model="search.category"
               :multiple="true"
               :options="filters.categories"
               placeholder="Wybierz"
-            /> -->
+            />
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
@@ -149,7 +149,18 @@ export default {
       excludedIds: [1, 2, 3, 4, 5, 9, 14, 21, 22, 23, 24, 25, 26, 27, 28],
       locationsLoading: false,
       locations: [],
-      filters: this.getFilters(),
+      filters: {
+        price: {
+          min: [],
+          max: []
+        },
+        attributes: {
+          metraz: {
+            min: [],
+            max: []
+          }
+        }
+      },
       search: {},
       location: ''
     }
@@ -167,6 +178,8 @@ export default {
     }
   },
   mounted () {
+    this.getFilters()
+
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
       this.locations = [{
