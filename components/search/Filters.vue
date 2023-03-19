@@ -161,7 +161,9 @@ export default {
           }
         }
       },
-      search: {},
+      search: {
+        category: null
+      },
       location: ''
     }
   },
