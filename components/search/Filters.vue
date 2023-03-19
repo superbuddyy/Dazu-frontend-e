@@ -19,7 +19,7 @@
             <treeselect
               v-model="search.category"
               :multiple="true"
-              :options="filters.categories"
+              :options="filterss.categories"
               placeholder="Wybierz"
             />
           </el-form-item>
