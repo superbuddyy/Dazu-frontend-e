@@ -16,12 +16,12 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            <treeselect
+            <!-- <treeselect
               v-model="search.category"
               :multiple="true"
               :options="filters.categories"
               placeholder="Wybierz"
-            />
+            /> -->
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
