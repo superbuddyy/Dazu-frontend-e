@@ -6,14 +6,15 @@
       :before-close="close"
       class="filter-dialog"
     >
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-        <div class="first-line">
-          <treeselect
+    <treeselect
               v-model="search.category"
               :multiple="true"
               :options="filters.categories"
               placeholder="Wybierz"
             />
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+        <div class="first-line">
+          
           <el-form-item label="Kategoria" prop="category" class="category">
             <!-- <el-cascader
               v-model="search.category"
