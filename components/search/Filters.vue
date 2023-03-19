@@ -8,7 +8,7 @@
     <treeselect
               v-model="search.category"
               :multiple="true"
-              :options="filterss.categories"
+              :options="Array.from(filterss.categories)"
               placeholder="Wybierz"
             />
       <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
