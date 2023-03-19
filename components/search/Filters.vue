@@ -209,9 +209,7 @@ export default {
           }
           return item
         })
-        return result.data
-      } else {
-        return null
+        this.filters = result.data
       }
     },
     async getLocations (locationName) {
