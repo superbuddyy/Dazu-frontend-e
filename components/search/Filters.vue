@@ -21,7 +21,7 @@
             <treeselect
               v-model="search.category"
               :multiple="true"
-              :options="Array.from(filterss.categories)"
+              :options="filters.categories"
               placeholder="Wybierz"
             />
           </el-form-item>
