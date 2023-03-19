@@ -142,12 +142,6 @@ export default {
         return false
       }
     },
-    filters: {
-      type: Object,
-      default () {
-        return null
-      }
-    }
   },
   data () {
     return {
@@ -155,9 +149,67 @@ export default {
       excludedIds: [1, 2, 3, 4, 5, 9, 14, 21, 22, 23, 24, 25, 26, 27, 28],
       locationsLoading: false,
       locations: [],
-      // filters: this.getFilters(),
+      filters: this.getFilters(),
       search: {},
-      location: ''
+      location: '',
+      filterss: {
+        categories:[
+          {
+            id: 2,
+            name: 'asdf',
+            children: [
+              {
+                id: 4,
+                name: 'asdfsaf'
+              },
+              {
+                id: 5,
+                name: 'asdfsaf'
+              },
+              {
+                id: 6,
+                name: 'asdfsaf'
+              },
+            ]
+          },
+          {
+            id: 7,
+            name: 'asdf',
+            children: [
+              {
+                id: 8,
+                name: 'asdfsaf'
+              },
+              {
+                id: 9,
+                name: 'asdfsaf'
+              },
+              {
+                id: 10,
+                name: 'asdfsaf'
+              },
+            ]
+          },
+          {
+            id: 8,
+            name: 'asdf',
+            children: [
+              {
+                id: 11,
+                name: 'asdfsaf'
+              },
+              {
+                id: 12,
+                name: 'asdfsaf'
+              },
+              {
+                id: 13,
+                name: 'asdfsaf'
+              },
+            ]
+          },
+        ]
+      }
     }
   },
   watch: {
