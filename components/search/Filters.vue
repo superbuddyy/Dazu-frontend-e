@@ -22,6 +22,9 @@
               :options="filters.categories"
               placeholder="Wybierz"
             />
+            <el-select v-model="search.typ" clearable>
+              <el-option v-for="type in filters.categories" :key="type.slug" :label="type.name" :value="type.slug"/>
+            </el-select>
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
@@ -149,7 +152,7 @@ export default {
       excludedIds: [1, 2, 3, 4, 5, 9, 14, 21, 22, 23, 24, 25, 26, 27, 28],
       locationsLoading: false,
       locations: [],
-      filters: getFilters(),
+      filters: this.getFilters(),
       search: {},
       location: ''
     }
