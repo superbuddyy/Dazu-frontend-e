@@ -149,18 +149,7 @@ export default {
       excludedIds: [1, 2, 3, 4, 5, 9, 14, 21, 22, 23, 24, 25, 26, 27, 28],
       locationsLoading: false,
       locations: [],
-      filters: {
-        price: {
-          min: [],
-          max: []
-        },
-        attributes: {
-          metraz: {
-            min: [],
-            max: []
-          }
-        }
-      },
+      filters: getFilters(),
       search: {
         category: null
       },
@@ -180,7 +169,6 @@ export default {
     }
   },
   mounted () {
-    this.getFilters()
 
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
@@ -221,7 +209,9 @@ export default {
           }
           return item
         })
-        this.filters = result.data
+        return result.data
+      } else {
+        return null
       }
     },
     async getLocations (locationName) {
