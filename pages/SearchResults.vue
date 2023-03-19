@@ -109,7 +109,18 @@ export default {
       3: { order_by: 'price', order: 'ASC' },
       4: { order_by: 'price', order: 'DESC' }
     },
-    filters: this.getFilters(),
+    filters: {
+      price: {
+          min: [],
+          max: []
+        },
+      attributes: {
+        metraz: {
+          min: [],
+          max: []
+        }
+      }
+    },
   }),
   computed: {
     filtersExists () {
@@ -130,6 +141,7 @@ export default {
   },
   mounted () {
     this.searchOffers(1, this.$route.query)
+    this.getFilters()
 
   },
   methods: {
