@@ -4,24 +4,24 @@
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
-      class="filter-dialog"
     >
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-        <div class="first-line">
-          <el-form-item label="Kategoria" prop="category" class="category">
-            <!-- <el-cascader
-              v-model="search.category"
-              :options="filters.categories"
-              :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
-              popper-class="category-dropdown"
-              clearable
-            /> -->
-            <treeselect
+    <treeselect
               v-model="search.category"
               :multiple="true"
               :options="filterss.categories"
               placeholder="Wybierz"
             />
+      <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+        <div class="first-line">
+          <el-form-item label="Kategoria" prop="category" class="category">
+            <el-cascader
+              v-model="search.category"
+              :options="filters.categories"
+              :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
+              popper-class="category-dropdown"
+              clearable
+            />
+            
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
@@ -110,7 +110,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
-      </span>
+      </span> -->
     </el-dialog>
   </div>
 </template>
@@ -156,37 +156,37 @@ export default {
         categories:[
           {
             id: 2,
-            name: 'asdf',
+            label: 'asdf',
             children: [
               {
                 id: 4,
-                name: 'asdfsaf'
+                label: 'asdfsaf'
               },
               {
                 id: 5,
-                name: 'asdfsaf'
+                label: 'asdfsaf'
               },
               {
                 id: 6,
-                name: 'asdfsaf'
+                label: 'asdfsaf'
               },
             ]
           },
           {
             id: 7,
-            name: 'asdf',
+            label: 'asdf',
             children: [
               {
                 id: 8,
-                name: 'asdfsaf'
+                label: 'asdfsaf'
               },
               {
                 id: 9,
-                name: 'asdfsaf'
+                label: 'asdfsaf'
               },
               {
                 id: 10,
-                name: 'asdfsaf'
+                label: 'asdfsaf'
               },
             ]
           },
