@@ -119,64 +119,64 @@ export default {
       },
       search: {},
       location: '',
-      filterss: {
-        categories: [
-          {
-            id: 2,
-            label: 'asdf',
-            children: [
-              {
-                id: 4,
-                label: 'asdfsaf'
-              },
-              {
-                id: 5,
-                label: 'asdfsaf'
-              },
-              {
-                id: 6,
-                label: 'asdfsaf'
-              },
-            ]
-          },
-          {
-            id: 7,
-            label: 'asdf',
-            children: [
-              {
-                id: 8,
-                label: 'asdfsaf'
-              },
-              {
-                id: 9,
-                label: 'asdfsaf'
-              },
-              {
-                id: 10,
-                label: 'asdfsaf'
-              },
-            ]
-          },
-          {
-            id: 8,
-            name: 'asdf',
-            children: [
-              {
-                id: 11,
-                name: 'asdfsaf'
-              },
-              {
-                id: 12,
-                name: 'asdfsaf'
-              },
-              {
-                id: 13,
-                name: 'asdfsaf'
-              },
-            ]
-          },
-        ]
-      }
+      // filterss: {
+      //   categories: [
+      //     {
+      //       id: 2,
+      //       label: 'asdf',
+      //       children: [
+      //         {
+      //           id: 4,
+      //           label: 'asdfsaf'
+      //         },
+      //         {
+      //           id: 5,
+      //           label: 'asdfsaf'
+      //         },
+      //         {
+      //           id: 6,
+      //           label: 'asdfsaf'
+      //         },
+      //       ]
+      //     },
+      //     {
+      //       id: 7,
+      //       label: 'asdf',
+      //       children: [
+      //         {
+      //           id: 8,
+      //           label: 'asdfsaf'
+      //         },
+      //         {
+      //           id: 9,
+      //           label: 'asdfsaf'
+      //         },
+      //         {
+      //           id: 10,
+      //           label: 'asdfsaf'
+      //         },
+      //       ]
+      //     },
+      //     {
+      //       id: 8,
+      //       name: 'asdf',
+      //       children: [
+      //         {
+      //           id: 11,
+      //           name: 'asdfsaf'
+      //         },
+      //         {
+      //           id: 12,
+      //           name: 'asdfsaf'
+      //         },
+      //         {
+      //           id: 13,
+      //           name: 'asdfsaf'
+      //         },
+      //       ]
+      //     },
+      //   ]
+      // }
     }
   },
   watch: {
