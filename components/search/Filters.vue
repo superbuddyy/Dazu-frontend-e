@@ -1,13 +1,10 @@
 <template>
   <div class="filters">
-    <!-- <el-dialog
+    <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
-    > -->
-
-    <div class="filter-dialog" v-if="visible
-    ">
+    >
       <el-form :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
@@ -72,8 +69,7 @@
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
       </span>
-    </div>
-
+    </el-dialog>
   </div>
 </template>
 
