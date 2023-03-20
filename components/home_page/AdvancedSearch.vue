@@ -179,8 +179,7 @@ export default {
     }
   },
   mounted() {
-    console.log("Search:  " + search.category)
-    console.log("filters.categories:  " + filters.categories)
+
     if (this.onlyAdvanced) {
       this.toggleAdvanced()
     }
@@ -199,6 +198,8 @@ export default {
       this.location = this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name
       this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
     }
+    console.log("Search:  " + search.category)
+    console.log("filters.categories:  " + filters.categories)
   },
   methods: {
     setAttributeValue(slug, value) {

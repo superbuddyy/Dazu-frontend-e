@@ -188,8 +188,7 @@ export default {
     }
   },
   mounted() {
-    console.log("Search:  " + search.category)
-    console.log("filters.categories:  " + filters.categories)
+    
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
       this.locations = [{
@@ -199,6 +198,8 @@ export default {
       }]
       this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
     }
+    console.log("Search:  " + search.category)
+    console.log("filters.categories:  " + filters.categories)
   },
   methods: {
     setAttributeValue(slug, value) {
