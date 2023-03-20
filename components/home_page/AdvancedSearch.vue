@@ -179,6 +179,7 @@ export default {
     }
   },
   mounted() {
+    console.log(123123)
 
     if (this.onlyAdvanced) {
       this.toggleAdvanced()

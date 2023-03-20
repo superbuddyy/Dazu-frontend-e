@@ -188,6 +188,7 @@ export default {
     }
   },
   mounted() {
+    console.log(123123)
     
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
