@@ -6,16 +6,16 @@
       :before-close="close"
     >
     <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+      <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
-            <!-- <el-cascader
+            <el-cascader
               v-model="search.category"
               :options="filters.categories"
               :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
               popper-class="category-dropdown"
               clearable
-            /> -->
+            />
             
           </el-form-item>
           <el-form-item label="Typ" prop="type">
@@ -65,7 +65,7 @@
             </div>
           </div>
         </div>
-      </el-form>
+      </el-form> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
