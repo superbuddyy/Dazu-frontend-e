@@ -3,10 +3,10 @@
     
     <el-dialog
       title="Ustaw filtry"
-      :visible.sync="visible"
+      :visible="visible"
       :before-close="close"
     >
-    <treeselect v-model="search.category" :load-options="loadOptions" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+    <treeselect v-model="search.category" :multiple="true" :options="filterss.categories" placeholder="Wybierz" />
       <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
@@ -112,6 +112,11 @@ export default {
       locationsLoading: false,
       locations: [],
       filters: this.getFilters(),
+      filterss: {
+        categories: [
+
+        ]
+      },
       search: {},
       location: '',
       filterss: {
@@ -199,7 +204,7 @@ export default {
   },
   methods: {
     loadOptions({ action, parentNode, callback }) {
-      
+
     },
     setAttributeValue(slug, value) {
       this.search[slug] = value
