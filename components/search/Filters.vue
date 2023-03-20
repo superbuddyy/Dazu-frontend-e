@@ -320,6 +320,7 @@ export default {
 <style lang="scss">
 .filters {
   .filter-dialog {
+    max-height: unset;
     .el-dialog {
       @media only screen and (max-width: 1300px) {
         width: 90%;
