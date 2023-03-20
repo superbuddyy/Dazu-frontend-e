@@ -199,8 +199,8 @@ export default {
       }]
       this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
     }
-    console.log("Search:  " + search.category)
-    console.log("filters.categories:  " + filters.categories)
+    console.log("Search:  " + this.search.category)
+    console.log("filters.categories:  " + this.filters.categories)
   },
   methods: {
     setAttributeValue(slug, value) {
