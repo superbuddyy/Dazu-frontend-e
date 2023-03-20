@@ -50,6 +50,8 @@ export default {
         const hostname = url.hostname
         if (hostname === 'youtu.be') {
           return this.videoYT(this.link)
+        } else if(hostname === 'youtube.com'){
+          return this.videoRawYT(this.link)
         }
       }
       return ''
@@ -62,7 +64,11 @@ export default {
     videoYT (videoLink) {
       const parts = videoLink.split('/')
       return 'https://www.youtube.com/embed/' + parts[parts.length - 1]
-    }
+    },
+    videoRawYT (videoLink) {
+      const parts = videoLink.split('/')
+      return 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length)
+    },
   }
 }
 </script>
