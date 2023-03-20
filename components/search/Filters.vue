@@ -84,6 +84,7 @@ import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocation } from '@/api/osm'
 import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
+import { getCategories } from '@/api/search'
 
 
 export default {
@@ -189,16 +190,18 @@ export default {
   },
   mounted() {
     console.log(123123)
-    
-    this.search = fromSearchQueryStringToFromData(this.$route.query)
-    if (this.search.location.lat !== null && this.search.location.lon !== null) {
-      this.locations = [{
-        lat: this.search.location.lat,
-        lon: this.search.location.lon,
-        display_name: this.search.location.display_name
-      }]
-      this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
-    }
+
+    // this.search = fromSearchQueryStringToFromData(this.$route.query)
+    // if (this.search.location.lat !== null && this.search.location.lon !== null) {
+    //   this.locations = [{
+    //     lat: this.search.location.lat,
+    //     lon: this.search.location.lon,
+    //     display_name: this.search.location.display_name
+    //   }]
+    //   this.setLocation(this.locations[0].lat + '*' + this.locations[0].lon + '*' + this.locations[0].display_name)
+    // }
+    this.getCategories()
+    this.getFilters()
     console.log("Search:  " + this.search.category)
     console.log("filters.categories:  " + this.filters.categories)
   },
@@ -212,6 +215,13 @@ export default {
     save() {
       this.$emit('save', buildSearchQuery(this.search))
       this.$emit('close-filters')
+    },
+    async getCategories() {
+      const result = await this.getCategories()
+      console.log(result)
+      if (result.status === 200) {
+        console.log(result)
+      }
     },
     async getFilters() {
       const result = await getFilters()
