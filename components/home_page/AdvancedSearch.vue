@@ -1,5 +1,5 @@
 <template>
-  <div :style="[visible ? {'max-height': 'unset'} : {'max-height': '100px'}]" class="advanced-search">
+  <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="advanced-search">
     <div class="first-line">
       <div class="label">
         Szukam
@@ -12,33 +12,14 @@
         popper-class="category-dropdown"
         @change="handleChange"
       /> -->
-      <treeselect
-        v-model="search.category"
-        :multiple="true"
-        :options="filters.categories"
-        placeholder="Wybierz"
-      />
+      <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
       <el-select v-model="search.typ">
         <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
       </el-select>
-      <el-select
-        v-model="location"
-        class="location-input"
-        filterable
-        remote
-        placeholder="Lokalizacja"
-        :remote-method="getLocations"
-        :loading="locationsLoading"
-        :debounce="500"
-        clearable
-        @change="setLocation"
-      >
-        <el-option
-          v-for="loc in locations"
-          :key="loc.osm_id"
-          :label="loc.display_name"
-          :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
-        />
+      <el-select v-model="location" class="location-input" filterable remote placeholder="Lokalizacja"
+        :remote-method="getLocations" :loading="locationsLoading" :debounce="500" clearable @change="setLocation">
+        <el-option v-for="loc in locations" :key="loc.osm_id" :label="loc.display_name"
+          :value="loc.lat + '*' + loc.lon + '*' + loc.display_name" />
         <el-button v-if="isClearButton" class="clr-margin-btn" @click="clearRecentSearch">
           wyczyść
         </el-button>
@@ -46,22 +27,12 @@
       <el-button type="primary plain" @click="onSearch">
         Szukaj
       </el-button>
-      <el-button
-        v-if="!visible && !onlyAdvanced"
-        class="advanced-btn"
-        type="plain"
-        icon="el-icon-caret-bottom"
-        @click="toggleAdvanced"
-      >
+      <el-button v-if="!visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-bottom"
+        @click="toggleAdvanced">
         Zaawansowane
       </el-button>
-      <el-button
-        v-if="visible && !onlyAdvanced"
-        class="advanced-btn"
-        type="plain"
-        icon="el-icon-caret-top"
-        @click="toggleAdvanced"
-      >
+      <el-button v-if="visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-top"
+        @click="toggleAdvanced">
         Podstawowe
       </el-button>
     </div>
@@ -73,20 +44,12 @@
               Cena
             </div>
             <el-select v-model="search.price.min" placeholder="Minimalna" filterable clearable>
-              <el-option
-                v-for="item in priceMinFilters"
-                :key="item"
-                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                :value="item"
-              />
+              <el-option v-for="item in priceMinFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
             <el-select v-model="search.price.max" placeholder="Maksymalna" filterable clearable>
-              <el-option
-                v-for="item in priceMaxFilters"
-                :key="item"
-                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                :value="item"
-              />
+              <el-option v-for="item in priceMaxFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
           </div>
           <div class="meters">
@@ -94,31 +57,17 @@
               Powierzchnia
             </div>
             <el-select v-model="search['metraz'].min" placeholder="Minimalna" filterable clearable>
-              <el-option
-                v-for="item in metrazMinFilters"
-                :key="item"
-                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                :value="item"
-              />
+              <el-option v-for="item in metrazMinFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
             <el-select v-model="search['metraz'].max" placeholder="Maksymalna" filterable clearable>
-              <el-option
-                v-for="item in metrazMaxFilters"
-                :key="item"
-                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                :value="item"
-              />
+              <el-option v-for="item in metrazMaxFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
           </div>
           <div v-for="filter in filters.attributes2" :key="filter.id" class="attr-filter">
-            <AttributeFilter
-              v-if="!excludedIds.includes(filter.id)"
-              :type="filter.type"
-              :name="filter.name"
-              :slug="filter.slug"
-              :options="filter.options"
-              @change="setAttributeValue(filter.slug, $event)"
-            />
+            <AttributeFilter v-if="!excludedIds.includes(filter.id)" :type="filter.type" :name="filter.name"
+              :slug="filter.slug" :options="filter.options" @change="setAttributeValue(filter.slug, $event)" />
           </div>
         </div>
       </div>
@@ -129,12 +78,14 @@
 <script>
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import {getCategories} from '@/api/search'
+import { getCategories } from '@/api/search'
 import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocationReverse, getLocation } from '@/api/osm'
 import * as Cookies from 'js-cookie'
 import { buildSearchQuery } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
+
+
 
 export default {
   name: 'AdvancedSearch',
@@ -145,12 +96,12 @@ export default {
   props: {
     onlyAdvanced: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     }
   },
-  data () {
+  data() {
     return {
       excludedIds: [1, 2, 3, 4, 5, 14, 21, 22, 23, 24, 25, 26, 27, 28],
       getLocationOptions: {
@@ -202,32 +153,34 @@ export default {
     }
   },
   computed: {
-    priceMaxFilters () {
+    priceMaxFilters() {
       if (this.search.price.min === null) {
         return this.$store.state.storage.filters.price.max
       }
       return this.filters.price.max.filter(price => price >= this.search.price.min)
     },
-    priceMinFilters () {
+    priceMinFilters() {
       if (this.search.price.max === null) {
         return this.$store.state.storage.filters.price.min
       }
       return this.filters.price.min.filter(price => price <= this.search.price.max)
     },
-    metrazMaxFilters () {
+    metrazMaxFilters() {
       if (this.search.metraz.min === null) {
         return this.$store.state.storage.filters.attributes.metraz.max
       }
       return this.filters.attributes.metraz.max.filter(size => size >= this.search.metraz.min)
     },
-    metrazMinFilters () {
+    metrazMinFilters() {
       if (this.search.metraz.max === null) {
         return this.$store.state.storage.filters.attributes.metraz.min
       }
       return this.filters.attributes.metraz.min.filter(size => size <= this.search.metraz.max)
     }
   },
-  mounted () {
+  mounted() {
+    console.log("Search:  " + search.category)
+    console.log("filters.categories:  " + filters.categories)
     if (this.onlyAdvanced) {
       this.toggleAdvanced()
     }
@@ -238,7 +191,7 @@ export default {
     }
     this.getCategories()
     this.getFilters()
-    
+
     if (!Cookies.getJSON('user-location')) {
       navigator.geolocation.getCurrentPosition(this.successGetLocation, this.errorGetLocation, this.getLocationOptions)
     } else {
@@ -248,21 +201,21 @@ export default {
     }
   },
   methods: {
-    setAttributeValue (slug, value) {
+    setAttributeValue(slug, value) {
       this.search[slug] = value
     },
-    handleChange (e) {
+    handleChange(e) {
       console.log(e)
     },
-    successGetLocation (pos) {
+    successGetLocation(pos) {
       const lat = pos.coords.latitude
       const lon = pos.coords.longitude
       this.getLocationsReverse(lat, lon)
     },
-    errorGetLocation (err) {
+    errorGetLocation(err) {
       console.log(err)
     },
-    async getLocationsReverse (lat, lon) {
+    async getLocationsReverse(lat, lon) {
       const locationsNames = await getLocationReverse(lat, lon)
       let city = ''
       // eslint-disable-next-line no-prototype-builtins
@@ -283,7 +236,7 @@ export default {
       this.setLocation(this.location)
       Cookies.set('user-location', this.locations, { expires: 1 })
     },
-    async getLocations (locationName) {
+    async getLocations(locationName) {
       if (locationName !== '') {
         this.locationsLoading = true
         const locations = await getLocation(locationName)
@@ -298,7 +251,7 @@ export default {
         this.locations = []
       }
     },
-    setLocation (e) {
+    setLocation(e) {
       if (e) {
         const coords = e.split('*')
         this.search.location.lat = coords[0]
@@ -310,17 +263,17 @@ export default {
         this.search.location.display_name = null
       }
     },
-    toggleAdvanced () {
+    toggleAdvanced() {
       this.visible = !this.visible
     },
-    async getCategories(){
+    async getCategories() {
       const result = await this.getCategories()
       console.log(result)
-      if (result.status === 200){
+      if (result.status === 200) {
         console.log(result)
       }
     },
-    async getFilters () {
+    async getFilters() {
       const result = await getFilters()
       if (result.status === 200) {
         // result.data.categories = await result.data.categories.map((value) => {
@@ -345,33 +298,33 @@ export default {
         this.filters = result.data
       }
     },
-    onSearch () {
+    onSearch() {
       this.$router.push({ path: 'szukaj', query: buildSearchQuery(this.search) })
       this.$emit('close')
     },
-    async getRecentSearch () {
+    async getRecentSearch() {
       const result = await getrecentsearch()
       if (result.status === 200) {
         this.locations = result.data
         this.isClearButton = true
       }
     },
-    getLocalRecentSearch () {
+    getLocalRecentSearch() {
       const localData = localStorage.getItem('recent_search') ? JSON.parse(localStorage.getItem('recent_search')) : []
       if (localData && localData.length) {
         this.locations = localData
         this.isClearButton = true
       }
     },
-    async deleteRecentSearch () {
+    async deleteRecentSearch() {
       const result = await deleterecentsearch()
       console.log(result.status)
       console.log(result.data)
     },
-    deleteLocalRecentSearch () {
+    deleteLocalRecentSearch() {
       localStorage.removeItem('recent_search')
     },
-    clearRecentSearch () {
+    clearRecentSearch() {
       if (this.$store.state.user.isLogged) {
         this.deleteRecentSearch()
       } else {
@@ -386,17 +339,20 @@ export default {
 <style lang="scss">
 .category-dropdown {
   .el-cascader-node {
-    .radio__input  {
+    .radio__input {
       width: 100%;
     }
+
     label {
       position: absolute;
       width: 100%;
       padding: 10px;
     }
+
     .el-radio__inner {
       display: none;
     }
+
     input {
       position: absolute;
       left: 0;
@@ -408,6 +364,7 @@ export default {
     }
   }
 }
+
 .advanced-search {
   background-color: rgba(4, 30, 21, .8);
   display: flex;
@@ -429,12 +386,13 @@ export default {
 
   @media only screen and (max-width: 1100px) {
     width: 60vw;
-    max-height: unset!important;
+    max-height: unset !important;
   }
 
   @media only screen and (max-width: 834px) {
     width: 90vw;
   }
+
   .vue-treeselect {
     width: 23% !important;
   }
@@ -453,7 +411,9 @@ export default {
 
     @media only screen and (max-width: 1100px) {
       flex-direction: column;
-      .el-cascader, .el-select {
+
+      .el-cascader,
+      .el-select {
         margin-bottom: 5px;
         width: 100%;
       }
@@ -463,22 +423,27 @@ export default {
         text-transform: uppercase;
       }
 
-      button, .advanced-btn {
-        width: 100%!important;
+      button,
+      .advanced-btn {
+        width: 100% !important;
         margin-bottom: 10px;
         margin-left: 0;
       }
     }
 
     @media only screen and (max-width: 834px) {
-      .el-cascader, .el-select {
+
+      .el-cascader,
+      .el-select {
         margin-bottom: 10px;
       }
     }
 
     .advanced-btn {
       width: 163px;
-      &:focus, &:hover {
+
+      &:focus,
+      &:hover {
         color: #000000;
       }
     }
@@ -497,7 +462,7 @@ export default {
       min-width: 180px;
 
       @media only screen and (max-width: 430px) {
-        width: 100%!important;
+        width: 100% !important;
       }
     }
   }
@@ -509,7 +474,9 @@ export default {
     justify-content: center;
     align-items: center;
 
-    .price, .meters, .other {
+    .price,
+    .meters,
+    .other {
       margin: 4px 15px;
     }
 
@@ -525,9 +492,15 @@ export default {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+
       @media only screen and (max-width: 560px) {
-        .attr-filter, .price, .meters, .other {
+
+        .attr-filter,
+        .price,
+        .meters,
+        .other {
           width: 100%;
+
           .el-select {
             width: 100%;
           }
@@ -540,11 +513,13 @@ export default {
     }
   }
 }
+
 .clr-margin-btn {
   margin: 18px !important;
   border-radius: 25px;
   border: 1px solid red;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: 1s;

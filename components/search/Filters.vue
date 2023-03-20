@@ -5,7 +5,7 @@
       :visible.sync="visible"
       :before-close="close"
     > -->
-    
+
     <div class="filter-dialog" v-if="visible
     ">
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
@@ -18,37 +18,18 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            <treeselect
-              v-model="search.category"
-              :multiple="true"
-              :options="filters.categories"
-              placeholder="Wybierz"
-            />
+            <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
-              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
+              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
             </el-select>
           </el-form-item>
           <el-form-item label="Lokalizacja" prop="location">
-            <el-select
-              v-model="location"
-              class="location-input"
-              filterable
-              remote
-              placeholder="Lokalizacja"
-              :remote-method="getLocations"
-              :loading="locationsLoading"
-              :debounce="500"
-              clearable
-              @change="setLocation"
-            >
-              <el-option
-                v-for="loc in locations"
-                :key="loc.osm_id"
-                :label="loc.display_name"
-                :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
-              />
+            <el-select v-model="location" class="location-input" filterable remote placeholder="Lokalizacja"
+              :remote-method="getLocations" :loading="locationsLoading" :debounce="500" clearable @change="setLocation">
+              <el-option v-for="loc in locations" :key="loc.osm_id" :label="loc.display_name"
+                :value="loc.lat + '*' + loc.lon + '*' + loc.display_name" />
             </el-select>
           </el-form-item>
         </div>
@@ -59,20 +40,12 @@
                 Cena
               </div>
               <el-select v-model="search.price.min" placeholder="Minimalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.price.min"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
+                <el-option v-for="item in filters.price.min" :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
               </el-select>
               <el-select v-model="search.price.max" placeholder="Maksymalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.price.max"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
+                <el-option v-for="item in filters.price.max" :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
               </el-select>
             </div>
             <div class="meters">
@@ -80,31 +53,17 @@
                 Metraż
               </div>
               <el-select v-model="search['metraz'].min" placeholder="Minimalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.attributes['metraz'].min"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
+                <el-option v-for="item in filters.attributes['metraz'].min" :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
               </el-select>
               <el-select v-model="search['metraz'].max" placeholder="Maksymalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.attributes['metraz'].max"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
+                <el-option v-for="item in filters.attributes['metraz'].max" :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
               </el-select>
             </div>
             <div v-for="filter in filters.attributes2" :key="filter.id" class="attr-filter">
-              <AttributeFilter
-                v-if="!excludedIds.includes(filter.id)"
-                :type="filter.type"
-                :name="filter.name"
-                :slug="filter.slug"
-                :options="filter.options"
-                @change="setAttributeValue(filter.slug, $event)"
-              />
+              <AttributeFilter v-if="!excludedIds.includes(filter.id)" :type="filter.type" :name="filter.name"
+                :slug="filter.slug" :options="filter.options" @change="setAttributeValue(filter.slug, $event)" />
             </div>
           </div>
         </div>
@@ -126,6 +85,7 @@ import { getLocation } from '@/api/osm'
 import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
 
+
 export default {
   name: 'Filters',
   components: {
@@ -135,18 +95,18 @@ export default {
   props: {
     visible: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     },
     refreshFilters: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     },
   },
-  data () {
+  data() {
     return {
       // excludedIds: [1, 3, 4, 9, 14],
       excludedIds: [1, 2, 3, 4, 5, 9, 14, 21, 22, 23, 24, 25, 26, 27, 28],
@@ -156,7 +116,7 @@ export default {
       search: {},
       location: '',
       filterss: {
-        categories:[
+        categories: [
           {
             id: 2,
             label: 'asdf',
@@ -216,7 +176,7 @@ export default {
     }
   },
   watch: {
-    refreshFilters (value) {
+    refreshFilters(value) {
       if (value) {
         // this.search = {}
         this.search = fromSearchQueryStringToFromData({})
@@ -227,8 +187,9 @@ export default {
       }
     }
   },
-  mounted () {
-
+  mounted() {
+    console.log("Search:  " + search.category)
+    console.log("filters.categories:  " + filters.categories)
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
       this.locations = [{
@@ -240,17 +201,17 @@ export default {
     }
   },
   methods: {
-    setAttributeValue (slug, value) {
+    setAttributeValue(slug, value) {
       this.search[slug] = value
     },
-    close () {
+    close() {
       this.$emit('close-filters')
     },
-    save () {
+    save() {
       this.$emit('save', buildSearchQuery(this.search))
       this.$emit('close-filters')
     },
-    async getFilters () {
+    async getFilters() {
       const result = await getFilters()
       if (result.status === 200) {
         // this.filters = result.data
@@ -271,7 +232,7 @@ export default {
         this.filters = result.data
       }
     },
-    async getLocations (locationName) {
+    async getLocations(locationName) {
       if (locationName !== '') {
         this.locationsLoading = true
         const locations = await getLocation(locationName)
@@ -285,7 +246,7 @@ export default {
         this.locations = []
       }
     },
-    setLocation (e) {
+    setLocation(e) {
       this.search.location = {}
       this.location = e
       if (e) {
@@ -299,7 +260,7 @@ export default {
         this.search.location.display_name = null
       }
     },
-    async getRecentSearch () {
+    async getRecentSearch() {
       console.log('test')
       const result = await getrecentsearch()
       console.log(result.status)
@@ -308,7 +269,7 @@ export default {
         this.locations = result.data
       }
     },
-    async deleteRecentSearch () {
+    async deleteRecentSearch() {
       const result = await deleterecentsearch()
       console.log(result.status)
       console.log(result.data)
@@ -321,12 +282,18 @@ export default {
 .filters {
   .filter-dialog {
     max-height: unset;
+
     .el-dialog {
       @media only screen and (max-width: 1300px) {
         width: 90%;
       }
+
       @media only screen and (max-width: 560px) {
-        .attr-filter, .price, .meters, .other {
+
+        .attr-filter,
+        .price,
+        .meters,
+        .other {
           width: 100%;
 
           .el-select {
@@ -341,6 +308,7 @@ export default {
     display: flex;
     justify-content: space-around;
   }
+
   .category {
     width: 28%;
   }
@@ -365,7 +333,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
 
-    .price, .meters, .other {
+    .price,
+    .meters,
+    .other {
       margin: 4px 15px;
     }
   }
