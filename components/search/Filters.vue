@@ -95,6 +95,10 @@ import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
 import { getCategories } from '@/api/search'
 
+import { ref } from 'vue'
+
+const value = ref()
+
 const data = [
   {
     value: '1',
