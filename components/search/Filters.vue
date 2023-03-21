@@ -9,6 +9,7 @@
         check-strictly
         check-on-click-node
       />
+    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
     
     <el-dialog
       title="Ustaw filtry"
