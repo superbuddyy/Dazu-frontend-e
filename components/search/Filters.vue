@@ -1,5 +1,5 @@
 <template>
-  <div class="filters">
+  <div>
     <el-tree-select
         v-model="value"
         :data="data"
