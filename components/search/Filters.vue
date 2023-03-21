@@ -4,7 +4,7 @@
         v-model="search.category"
         :data="filters.categories"
         multiple
-        :render-after-expand="false"
+        :render-after-expand="true"
         show-checkbox
         check-strictly
         check-on-click-node
