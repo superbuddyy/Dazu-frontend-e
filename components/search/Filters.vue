@@ -3,19 +3,20 @@
     
     <el-dialog
       title="Ustaw filtry"
-      :visible="visible"
+      :visible.sync="visible"
       :before-close="close"
     >
       <!-- <treeselect v-model="search.category" :multiple="true" :options="filterss.categories" placeholder="Wybierz" /> -->
       <el-tree-select
         v-model="search.category"
-        :data="filters.categories"
+        :data="filterss.data"
         multiple
         :render-after-expand="false"
         show-checkbox
         check-strictly
         check-on-click-node
       />
+      <span>234234234234234</span>
       <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
@@ -188,6 +189,77 @@ export default {
       //     },
       //   ]
       // }
+
+      filterss: {data:[
+      {
+        value: '1',
+        label: 'Level one 1',
+        children: [
+          {
+            value: '1-1',
+            label: 'Level two 1-1',
+            children: [
+              {
+                value: '1-1-1',
+                label: 'Level three 1-1-1',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        value: '2',
+        label: 'Level one 2',
+        children: [
+          {
+            value: '2-1',
+            label: 'Level two 2-1',
+            children: [
+              {
+                value: '2-1-1',
+                label: 'Level three 2-1-1',
+              },
+            ],
+          },
+          {
+            value: '2-2',
+            label: 'Level two 2-2',
+            children: [
+              {
+                value: '2-2-1',
+                label: 'Level three 2-2-1',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        value: '3',
+        label: 'Level one 3',
+        children: [
+          {
+            value: '3-1',
+            label: 'Level two 3-1',
+            children: [
+              {
+                value: '3-1-1',
+                label: 'Level three 3-1-1',
+              },
+            ],
+          },
+          {
+            value: '3-2',
+            label: 'Level two 3-2',
+            children: [
+              {
+                value: '3-2-1',
+                label: 'Level three 3-2-1',
+              },
+            ],
+          },
+        ],
+      },
+    ]}
     }
   },
   watch: {
