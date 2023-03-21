@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-tree-select
-        v-model="value"
-        :data="data"
+        v-model="search.category"
+        :data="filters.categories"
         multiple
         :render-after-expand="false"
         show-checkbox
@@ -95,9 +95,6 @@ import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
 import { getCategories } from '@/api/search'
 
-import { ref } from 'vue'
-
-const value = ref()
 
 const data = [
   {
