@@ -1,5 +1,14 @@
 <template>
   <div class="filters">
+    <el-tree-select
+        v-model="value"
+        :data="data"
+        multiple
+        :render-after-expand="false"
+        show-checkbox
+        check-strictly
+        check-on-click-node
+      />
     
     <el-dialog
       title="Ustaw filtry"
@@ -9,18 +18,8 @@
       <!-- <treeselect v-model="search.category" :multiple="true" :options="filterss.categories" placeholder="Wybierz" /> -->
 
       <span>234234234234234</span>
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-              <el-tree-select
-        v-model="value"
-        :data="data"
-        multiple
-        :render-after-expand="false"
-        show-checkbox
-        check-strictly
-        check-on-click-node
-      />
-      </el-form>
-        <!-- <div class="first-line">
+      <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+        <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
             <el-cascader
               v-model="search.category"
