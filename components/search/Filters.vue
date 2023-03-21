@@ -6,7 +6,16 @@
       :visible="visible"
       :before-close="close"
     >
-    <treeselect v-model="search.category" :multiple="true" :options="filterss.categories" placeholder="Wybierz" />
+      <!-- <treeselect v-model="search.category" :multiple="true" :options="filterss.categories" placeholder="Wybierz" /> -->
+      <el-tree-select
+        v-model="search.category"
+        :data="filters.categories"
+        multiple
+        :render-after-expand="false"
+        show-checkbox
+        check-strictly
+        check-on-click-node
+      />
       <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
@@ -293,40 +302,40 @@ export default {
 </script>
 
 <style lang="scss">
-// .filters {
-//   .filter-dialog {
-//     max-height: unset;
+.filters {
+  .filter-dialog {
+    max-height: unset;
 
-//     .el-dialog {
-//       @media only screen and (max-width: 1300px) {
-//         width: 90%;
-//       }
+    .el-dialog {
+      @media only screen and (max-width: 1300px) {
+        width: 90%;
+      }
 
-//       @media only screen and (max-width: 560px) {
+      @media only screen and (max-width: 560px) {
 
-//         .attr-filter,
-//         .price,
-//         .meters,
-//         .other {
-//           width: 100%;
+        .attr-filter,
+        .price,
+        .meters,
+        .other {
+          width: 100%;
 
-//           .el-select {
-//             width: 100%;
-//           }
-//         }
-//       }
-//     }
-//   }
+          .el-select {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 
-//   .first-line {
-//     display: flex;
-//     justify-content: space-around;
-//   }
+  .first-line {
+    display: flex;
+    justify-content: space-around;
+  }
 
-//   .category {
-//     width: 28%;
-//   }
-// }
+  .category {
+    width: 28%;
+  }
+}
 
 .other-filters {
   display: flex;
