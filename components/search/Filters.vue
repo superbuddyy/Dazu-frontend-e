@@ -293,40 +293,40 @@ export default {
 </script>
 
 <style lang="scss">
-.filters {
-  .filter-dialog {
-    max-height: unset;
+// .filters {
+//   .filter-dialog {
+//     max-height: unset;
 
-    .el-dialog {
-      @media only screen and (max-width: 1300px) {
-        width: 90%;
-      }
+//     .el-dialog {
+//       @media only screen and (max-width: 1300px) {
+//         width: 90%;
+//       }
 
-      @media only screen and (max-width: 560px) {
+//       @media only screen and (max-width: 560px) {
 
-        .attr-filter,
-        .price,
-        .meters,
-        .other {
-          width: 100%;
+//         .attr-filter,
+//         .price,
+//         .meters,
+//         .other {
+//           width: 100%;
 
-          .el-select {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
+//           .el-select {
+//             width: 100%;
+//           }
+//         }
+//       }
+//     }
+//   }
 
-  .first-line {
-    display: flex;
-    justify-content: space-around;
-  }
+//   .first-line {
+//     display: flex;
+//     justify-content: space-around;
+//   }
 
-  .category {
-    width: 28%;
-  }
-}
+//   .category {
+//     width: 28%;
+//   }
+// }
 
 .other-filters {
   display: flex;
