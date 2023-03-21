@@ -1,5 +1,6 @@
 <template>
   <div>
+    <client-only>
     <el-tree-select
         v-model="search.category"
         :data="filters.categories"
@@ -9,7 +10,7 @@
         check-strictly
         check-on-click-node
       />
-    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+    </client-only>
     
     <el-dialog
       title="Ustaw filtry"
