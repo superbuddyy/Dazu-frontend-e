@@ -10,13 +10,6 @@
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
-            <el-cascader
-              v-model="search.category"
-              :options="filters.categories"
-              :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
-              popper-class="category-dropdown"
-              clearable
-            />
             <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
           </el-form-item>
@@ -390,17 +383,21 @@ export default {
       }
     }
   }
-
+  .vue-treeselect {
+      width: 23% !important;
+  }
   .first-line {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    height: 40%;
   }
 
   .category {
     width: 28%;
-    .vue-treeselect {
-      width: 23% !important;
-    }
+    
   }
 }
 
