@@ -1,26 +1,13 @@
 <template>
   <div>
-    <client-only>
-    <el-tree-select
-        v-model="search.category"
-        :data="filters.categories"
-        multiple
-        :render-after-expand="false"
-        show-checkbox
-        check-strictly
-        check-on-click-node
-      />
-    </client-only>
     
     <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
     >
-      <!-- <treeselect v-model="search.category" :multiple="true" :options="filterss.categories" placeholder="Wybierz" /> -->
 
-      <span>234234234234234</span>
-      <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
             <el-cascader
@@ -30,7 +17,8 @@
               popper-class="category-dropdown"
               clearable
             />
-            
+            <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
@@ -79,7 +67,7 @@
             </div>
           </div>
         </div>
-      </el-form> -->
+      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
@@ -410,6 +398,9 @@ export default {
 
   .category {
     width: 28%;
+    .vue-treeselect {
+      width: 23% !important;
+    }
   }
 }
 
