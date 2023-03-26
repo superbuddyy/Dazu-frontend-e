@@ -6,13 +6,14 @@
       :visible.sync="visible"
       :before-close="close"
     >
+    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+      <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
-          <!-- <el-form-item label="Kategoria" prop="category"> -->
+          <el-form-item label="Kategoria" prop="category">
             <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
-          <!-- </el-form-item> -->
+          </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
               <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
@@ -60,7 +61,7 @@
             </div>
           </div>
         </div>
-      </el-form>
+      </el-form> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
@@ -364,23 +365,30 @@ export default {
     max-height: unset;
 
     .el-dialog {
-      @media only screen and (max-width: 1300px) {
-        width: 90%;
-      }
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 90%;
+      margin: 0 auto;
+      height: 40%;
 
-      @media only screen and (max-width: 560px) {
+      // @media only screen and (max-width: 1300px) {
+      //   width: 90%;
+      // }
 
-        .attr-filter,
-        .price,
-        .meters,
-        .other {
-          width: 100%;
+      // @media only screen and (max-width: 560px) {
 
-          .el-select {
-            width: 100%;
-          }
-        }
-      }
+      //   .attr-filter,
+      //   .price,
+      //   .meters,
+      //   .other {
+      //     width: 100%;
+
+      //     .el-select {
+      //       width: 100%;
+      //     }
+      //   }
+      // }
     }
   }
   .vue-treeselect {
