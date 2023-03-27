@@ -1,23 +1,16 @@
 <template>
   <div>
-    <!-- <el-dialog
+    <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
-      :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]"
-    > -->
-    <div
-    :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]"
-    class="advanced-search"
     >
-    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
-
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
-    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         
         <div class="first-line">
           
           <el-form-item label="Kategoria" prop="category">
+            <!-- <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" /> -->
 
           </el-form-item>
           <el-form-item label="Typ" prop="type">
@@ -72,7 +65,7 @@
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
       </span>
-    </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -366,7 +359,7 @@ export default {
 </script>
 
 <style lang="scss">
-.advanced-search {
+.form {
   background-color: rgba(4, 30, 21, .8);
   display: flex;
   flex-direction: column;
@@ -439,16 +432,6 @@ export default {
       }
     }
   }
-
-.other-filters {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  .el-select {
-    width: 90%;
-  }
-}
 
 .third-line-filters {
   display: flex;
