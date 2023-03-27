@@ -256,62 +256,12 @@ export default {
 </script>
 
 <style lang="scss">
-.filters {
-  .filter-dialog {
-    .el-dialog {
-      @media only screen and (max-width: 1300px) {
-        width: 90%;
-      }
-      @media only screen and (max-width: 560px) {
-        .attr-filter, .price, .meters, .other {
-          width: 100%;
 
-          .el-select {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-
-  .el-dialog__body {
+.el-dialog__body {
     padding: 0;
   }
   .vue-treeselect {
     height: 100%;
   }
 
-  .first-line {
-    display: flex;
-    justify-content: space-around;
-  }
-  .category {
-    width: 28%;
-  }
-}
-
-.other-filters {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  .el-select {
-    width: 90%;
-  }
-}
-
-.third-line-filters {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .attribute-filters {
-    display: flex;
-    flex-wrap: wrap;
-
-    .price, .meters, .other {
-      margin: 4px 15px;
-    }
-  }
-}
 </style>
