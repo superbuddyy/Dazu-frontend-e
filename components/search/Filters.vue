@@ -280,10 +280,10 @@ export default {
   .first-line {
     display: flex;
     justify-content: space-around;
-    max-height: unset;
   }
   .category {
     width: 28%;
+    max-height: unset;
   }
 }
 
