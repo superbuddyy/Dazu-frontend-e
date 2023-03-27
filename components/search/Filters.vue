@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="filters">
     <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
+      class="filter-dialog"
       :before-close="close"
     >
     <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
