@@ -249,21 +249,35 @@ export default {
 
 <style lang="scss">
 .filters {
-  .filter-dialog {
-    .el-dialog {
-      @media only screen and (max-width: 1300px) {
-        width: 90%;
-      }
-      @media only screen and (max-width: 560px) {
-        .attr-filter, .price, .meters, .other {
-          width: 100%;
+  background-color: rgba(4, 30, 21, .8);
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 86px 0 20px 0;
+  color: #fff;
+  padding: 30px;
+  transition: 0.5s ease;
+  // overflow: hidden;
 
-          .el-select {
-            width: 100%;
-          }
-        }
-      }
-    }
+  @media only screen and (max-width: 1640px) {
+    width: 90%;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    padding: 20px 10px;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    width: 60vw;
+    max-height: unset !important;
+  }
+
+  @media only screen and (max-width: 834px) {
+    width: 90vw;
+  }
+
+  .vue-treeselect {
+    width: 23% !important;
   }
 
   .first-line {
