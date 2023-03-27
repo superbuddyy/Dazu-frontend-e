@@ -6,14 +6,8 @@
       :before-close="close"
       class="filter-dialog"
     > -->
-      <treeselect
-              v-model="search.category"
-              :multiple="true"
-              :options="filters.categories"
-              placeholder="Wybierz"
-            />
+      
         <div class="first-line">
-          <el-form-item label="Kategoria" prop="category" class="category">
             <!-- <el-cascader
               v-model="search.category"
               :options="filters.categories"
@@ -21,14 +15,15 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            
-          </el-form-item>
-          <el-form-item label="Typ" prop="type">
+            <treeselect
+              v-model="search.category"
+              :multiple="true"
+              :options="filters.categories"
+              placeholder="Wybierz"
+            />
             <el-select v-model="search.typ" clearable>
               <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
-          </el-form-item>
-          <el-form-item label="Lokalizacja" prop="location">
             <el-select
               v-model="location"
               class="location-input"
@@ -48,7 +43,6 @@
                 :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
               />
             </el-select>
-          </el-form-item>
         </div>
         <div class="third-line-filters">
           <div class="attribute-filters">
@@ -254,14 +248,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-.el-dialog__body {
-    padding: 0;
-  }
-  .vue-treeselect {
-    height: 100%;
-  }
-
 .filters {
   .filter-dialog {
     .el-dialog {
