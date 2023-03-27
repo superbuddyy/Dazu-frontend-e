@@ -2,12 +2,10 @@
   <div>
     
     <div
-      
       :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]"
     >
-    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
-      <!-- <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category">
             <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
@@ -60,11 +58,11 @@
             </div>
           </div>
         </div>
-      </el-form> -->
-      <!-- <span slot="footer" class="dialog-footer">
+      </el-form>
+      <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
-      </span> -->
+      </span>
     </div>
   </div>
 </template>
