@@ -60,13 +60,7 @@
       />
       
 
-          
-    </div>
-    <SaveFilters
-      :visible="saveFiltersVisible"
-      @close="saveFiltersVisible = false"
-    />
-    <div v-if="filtersVisible" class="search-popup">
+          <div v-if="filtersVisible" class="search-popup">
         <div class="popup-container">
           <div class="close-btn" @click="filtersVisible = false">
             <i class="el-icon-circle-close" />
@@ -80,6 +74,11 @@
           />
         </div>
       </div>
+    </div>
+    <SaveFilters
+      :visible="saveFiltersVisible"
+      @close="saveFiltersVisible = false"
+    />
   </div>
 </template>
 <script>
