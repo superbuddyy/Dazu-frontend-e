@@ -6,12 +6,12 @@
       class="filter-dialog"
       :before-close="close"
     >
-    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
         
         <div class="first-line">
           
           <el-form-item label="Kategoria" prop="category">
+            <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
             
 
           </el-form-item>
@@ -362,9 +362,10 @@ export default {
 <style lang="scss">
 .filters {
   .filter-dialog {
-    max-height: unset;
 
     .el-dialog {
+      max-height: unset;
+
       display: flex;
       justify-content: space-around;
       align-items: center;
