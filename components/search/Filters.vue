@@ -13,9 +13,24 @@
               :options="filters.categories"
               placeholder="Wybierz"
             />
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+        <div class="first-line">
+          <el-form-item label="Kategoria" prop="category" class="category">
+            <!-- <el-cascader
+              v-model="search.category"
+              :options="filters.categories"
+              :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
+              popper-class="category-dropdown"
+              clearable
+            /> -->
+            
+          </el-form-item>
+          <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
               <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
+          </el-form-item>
+          <el-form-item label="Lokalizacja" prop="location">
             <el-select
               v-model="location"
               class="location-input"
@@ -35,8 +50,8 @@
                 :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
               />
             </el-select>
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-        
+          </el-form-item>
+        </div>
         <div class="third-line-filters">
           <div class="attribute-filters">
             <div class="price">
