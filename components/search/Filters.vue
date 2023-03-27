@@ -10,7 +10,7 @@
         <div class="first-line">
           
           <el-form-item label="Kategoria" prop="category">
-            <!-- <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" /> -->
+            <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
           </el-form-item>
           <el-form-item label="Typ" prop="type">
