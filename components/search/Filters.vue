@@ -1,11 +1,12 @@
 <template>
-  <div class="filters">
-    <el-dialog
+  <div class="filters" :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]">
+    <!-- <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
       class="filter-dialog"
-    >
+    > -->
+    <div>
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
@@ -111,7 +112,7 @@
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
       </span>
-    </el-dialog>
+    </div>
   </div>
 </template>
 
@@ -264,4 +265,55 @@ export default {
     height: 100%;
   }
 
+.filters {
+  .filter-dialog {
+    .el-dialog {
+      @media only screen and (max-width: 1300px) {
+        width: 90%;
+      }
+      @media only screen and (max-width: 560px) {
+        .attr-filter, .price, .meters, .other {
+          width: 100%;
+
+          .el-select {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .first-line {
+    display: flex;
+    justify-content: space-around;
+  }
+  .category {
+    width: 28%;
+  }
+}
+
+.other-filters {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .el-select {
+    width: 90%;
+  }
+}
+
+.third-line-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .attribute-filters {
+    display: flex;
+    flex-wrap: wrap;
+
+    .price, .meters, .other {
+      margin: 4px 15px;
+    }
+  }
+}
 </style>

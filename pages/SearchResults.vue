@@ -58,13 +58,22 @@
         @load-more="loadMore"
         @fetch-offers="saveFilters"
       />
-      <Filters
+      
+
+          <div v-if="filtersVisible" class="search-popup">
+        <div class="popup-container">
+          <div class="close-btn" @click="filtersVisible = false">
+            <i class="el-icon-circle-close" />
+          </div>
+          <Filters
             :visible="filtersVisible"
             :refresh-filters="refreshFilters"
             @refreshed="refreshFilters = false"
             @close-filters="filtersVisible = false"
             @save="saveFilters"
           />
+        </div>
+      </div>
     </div>
     <SaveFilters
       :visible="saveFiltersVisible"
