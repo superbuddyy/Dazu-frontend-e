@@ -274,20 +274,16 @@ export default {
     }
   }
 
+  .el-dialog__body {
+    padding: 0;
+  }
+  .vue-treeselect {
+    height: 100%;
+  }
+
   .first-line {
     display: flex;
     justify-content: space-around;
-    .el-form-item category{
-      height: unset;
-      .el-form-item__content{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 90%;
-        margin: 0 auto;
-        height: 40%;
-      }
-    }
   }
   .category {
     width: 28%;
