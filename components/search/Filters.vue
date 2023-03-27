@@ -364,15 +364,17 @@ export default {
   max-height: unset;
 
   .filter-dialog {
+    max-height: unset;
 
     .el-dialog {
+      max-height: unset;
 
       display: flex;
       justify-content: space-around;
       align-items: center;
       width: 90%;
       margin: 0 auto;
-      height: 40%;
+      // height: 40%;
 
       // @media only screen and (max-width: 1300px) {
       //   width: 90%;
