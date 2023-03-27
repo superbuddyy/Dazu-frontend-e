@@ -6,11 +6,11 @@
       class="filter-dialog"
       :before-close="close"
     >
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         
         <div class="first-line">
           
-          <el-form-item label="Kategoria" prop="category">
+          <el-form-item label="Kategoria" prop="category" class="category">
             <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
             
 
@@ -361,51 +361,30 @@ export default {
 </script>
 <style lang="scss">
 .filters {
-
   .filter-dialog {
-    max-height: unset;
-
     .el-dialog {
+      @media only screen and (max-width: 1300px) {
+        width: 90%;
+      }
+      @media only screen and (max-width: 560px) {
+        .attr-filter, .price, .meters, .other {
+          width: 100%;
 
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 90%;
-      margin: 0 auto;
-      // height: 40%;
-
-      // @media only screen and (max-width: 1300px) {
-      //   width: 90%;
-      // }
-
-      // @media only screen and (max-width: 560px) {
-
-      //   .attr-filter,
-      //   .price,
-      //   .meters,
-      //   .other {
-      //     width: 100%;
-
-      //     .el-select {
-      //       width: 100%;
-      //     }
-      //   }
-      // }
+          .el-select {
+            width: 100%;
+          }
+        }
+      }
     }
   }
-  .vue-treeselect {
-      width: 23% !important;
-      z-index: 2023;
-  }
+
   .first-line {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
-    height: 40%;
   }
-
+  .category {
+    width: 28%;
+  }
 }
 
 .other-filters {
@@ -427,9 +406,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
 
-    .price,
-    .meters,
-    .other {
+    .price, .meters, .other {
       margin: 4px 15px;
     }
   }
