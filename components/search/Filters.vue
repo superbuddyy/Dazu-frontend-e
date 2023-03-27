@@ -3,28 +3,50 @@
     <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
-      class="filter-dialog"
       :before-close="close"
+      class="filter-dialog"
     >
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-        
         <div class="first-line">
-          
           <el-form-item label="Kategoria" prop="category" class="category">
-            <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
-            
-
+            <!-- <el-cascader
+              v-model="search.category"
+              :options="filters.categories"
+              :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
+              popper-class="category-dropdown"
+              clearable
+            /> -->
+            <treeselect
+              v-model="search.category"
+              :multiple="true"
+              :options="filters.categories"
+              placeholder="Wybierz"
+            />
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
-              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
+              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
           </el-form-item>
           <el-form-item label="Lokalizacja" prop="location">
-            <el-select v-model="location" class="location-input" filterable remote placeholder="Lokalizacja"
-              :remote-method="getLocations" :loading="locationsLoading" :debounce="500" clearable @change="setLocation">
-              <el-option v-for="loc in locations" :key="loc.osm_id" :label="loc.display_name"
-                :value="loc.lat + '*' + loc.lon + '*' + loc.display_name" />
+            <el-select
+              v-model="location"
+              class="location-input"
+              filterable
+              remote
+              placeholder="Lokalizacja"
+              :remote-method="getLocations"
+              :loading="locationsLoading"
+              :debounce="500"
+              clearable
+              @change="setLocation"
+            >
+              <el-option
+                v-for="loc in locations"
+                :key="loc.osm_id"
+                :label="loc.display_name"
+                :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
+              />
             </el-select>
           </el-form-item>
         </div>
@@ -35,12 +57,20 @@
                 Cena
               </div>
               <el-select v-model="search.price.min" placeholder="Minimalna" filterable clearable>
-                <el-option v-for="item in filters.price.min" :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
+                <el-option
+                  v-for="item in filters.price.min"
+                  :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
+                  :value="item"
+                />
               </el-select>
               <el-select v-model="search.price.max" placeholder="Maksymalna" filterable clearable>
-                <el-option v-for="item in filters.price.max" :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
+                <el-option
+                  v-for="item in filters.price.max"
+                  :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
+                  :value="item"
+                />
               </el-select>
             </div>
             <div class="meters">
@@ -48,17 +78,31 @@
                 Metraż
               </div>
               <el-select v-model="search['metraz'].min" placeholder="Minimalna" filterable clearable>
-                <el-option v-for="item in filters.attributes['metraz'].min" :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
+                <el-option
+                  v-for="item in filters.attributes['metraz'].min"
+                  :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
+                  :value="item"
+                />
               </el-select>
               <el-select v-model="search['metraz'].max" placeholder="Maksymalna" filterable clearable>
-                <el-option v-for="item in filters.attributes['metraz'].max" :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
+                <el-option
+                  v-for="item in filters.attributes['metraz'].max"
+                  :key="item"
+                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
+                  :value="item"
+                />
               </el-select>
             </div>
             <div v-for="filter in filters.attributes2" :key="filter.id" class="attr-filter">
-              <AttributeFilter v-if="!excludedIds.includes(filter.id)" :type="filter.type" :name="filter.name"
-                :slug="filter.slug" :options="filter.options" @change="setAttributeValue(filter.slug, $event)" />
+              <AttributeFilter
+                v-if="!excludedIds.includes(filter.id)"
+                :type="filter.type"
+                :name="filter.name"
+                :slug="filter.slug"
+                :options="filter.options"
+                @change="setAttributeValue(filter.slug, $event)"
+              />
             </div>
           </div>
         </div>
@@ -78,80 +122,6 @@ import { getFilters, getrecentsearch, deleterecentsearch } from '@/api/search'
 import { getLocation } from '@/api/osm'
 import { buildSearchQuery, fromSearchQueryStringToFromData } from '@/helpers'
 import AttributeFilter from '@/components/Filters/AttributeFilter'
-import { getCategories } from '@/api/search'
-
-
-const data = [
-  {
-    value: '1',
-    label: 'Level one 1',
-    children: [
-      {
-        value: '1-1',
-        label: 'Level two 1-1',
-        children: [
-          {
-            value: '1-1-1',
-            label: 'Level three 1-1-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: '2',
-    label: 'Level one 2',
-    children: [
-      {
-        value: '2-1',
-        label: 'Level two 2-1',
-        children: [
-          {
-            value: '2-1-1',
-            label: 'Level three 2-1-1',
-          },
-        ],
-      },
-      {
-        value: '2-2',
-        label: 'Level two 2-2',
-        children: [
-          {
-            value: '2-2-1',
-            label: 'Level three 2-2-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: '3',
-    label: 'Level one 3',
-    children: [
-      {
-        value: '3-1',
-        label: 'Level two 3-1',
-        children: [
-          {
-            value: '3-1-1',
-            label: 'Level three 3-1-1',
-          },
-        ],
-      },
-      {
-        value: '3-2',
-        label: 'Level two 3-2',
-        children: [
-          {
-            value: '3-2-1',
-            label: 'Level three 3-2-1',
-          },
-        ],
-      },
-    ],
-  },
-]
-
 
 export default {
   name: 'Filters',
@@ -162,95 +132,30 @@ export default {
   props: {
     visible: {
       type: Boolean,
-      default() {
+      default () {
         return false
       }
     },
     refreshFilters: {
       type: Boolean,
-      default() {
+      default () {
         return false
       }
-    },
+    }
   },
-  data() {
+  data () {
     return {
       // excludedIds: [1, 3, 4, 9, 14],
       excludedIds: [1, 2, 3, 4, 5, 9, 14, 21, 22, 23, 24, 25, 26, 27, 28],
       locationsLoading: false,
       locations: [],
       filters: this.getFilters(),
-      filterss: {
-        categories: [
-
-        ]
-      },
-      search: {
-        category: null
-      },
-      location: '',
-      // filterss: {
-      //   categories: [
-      //     {
-      //       id: 2,
-      //       label: 'asdf',
-      //       children: [
-      //         {
-      //           id: 4,
-      //           label: 'asdfsaf'
-      //         },
-      //         {
-      //           id: 5,
-      //           label: 'asdfsaf'
-      //         },
-      //         {
-      //           id: 6,
-      //           label: 'asdfsaf'
-      //         },
-      //       ]
-      //     },
-      //     {
-      //       id: 7,
-      //       label: 'asdf',
-      //       children: [
-      //         {
-      //           id: 8,
-      //           label: 'asdfsaf'
-      //         },
-      //         {
-      //           id: 9,
-      //           label: 'asdfsaf'
-      //         },
-      //         {
-      //           id: 10,
-      //           label: 'asdfsaf'
-      //         },
-      //       ]
-      //     },
-      //     {
-      //       id: 8,
-      //       name: 'asdf',
-      //       children: [
-      //         {
-      //           id: 11,
-      //           name: 'asdfsaf'
-      //         },
-      //         {
-      //           id: 12,
-      //           name: 'asdfsaf'
-      //         },
-      //         {
-      //           id: 13,
-      //           name: 'asdfsaf'
-      //         },
-      //       ]
-      //     },
-      //   ]
-      // }
+      search: {},
+      location: ''
     }
   },
   watch: {
-    refreshFilters(value) {
+    refreshFilters (value) {
       if (value) {
         // this.search = {}
         this.search = fromSearchQueryStringToFromData({})
@@ -261,7 +166,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.search = fromSearchQueryStringToFromData(this.$route.query)
     if (this.search.location.lat !== null && this.search.location.lon !== null) {
       this.locations = [{
@@ -273,27 +178,17 @@ export default {
     }
   },
   methods: {
-    loadOptions({ action, parentNode, callback }) {
-
-    },
-    setAttributeValue(slug, value) {
+    setAttributeValue (slug, value) {
       this.search[slug] = value
     },
-    close() {
+    close () {
       this.$emit('close-filters')
     },
-    save() {
+    save () {
       this.$emit('save', buildSearchQuery(this.search))
       this.$emit('close-filters')
     },
-    async getCategories() {
-      const result = await this.getCategories()
-      console.log(result)
-      if (result.status === 200) {
-        console.log(result)
-      }
-    },
-    async getFilters() {
+    async getFilters () {
       const result = await getFilters()
       if (result.status === 200) {
         // this.filters = result.data
@@ -314,7 +209,7 @@ export default {
         this.filters = result.data
       }
     },
-    async getLocations(locationName) {
+    async getLocations (locationName) {
       if (locationName !== '') {
         this.locationsLoading = true
         const locations = await getLocation(locationName)
@@ -328,7 +223,7 @@ export default {
         this.locations = []
       }
     },
-    setLocation(e) {
+    setLocation (e) {
       this.search.location = {}
       this.location = e
       if (e) {
@@ -342,7 +237,7 @@ export default {
         this.search.location.display_name = null
       }
     },
-    async getRecentSearch() {
+    async getRecentSearch () {
       console.log('test')
       const result = await getrecentsearch()
       console.log(result.status)
@@ -351,7 +246,7 @@ export default {
         this.locations = result.data
       }
     },
-    async deleteRecentSearch() {
+    async deleteRecentSearch () {
       const result = await deleterecentsearch()
       console.log(result.status)
       console.log(result.data)
@@ -359,6 +254,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 .filters {
   .filter-dialog {
