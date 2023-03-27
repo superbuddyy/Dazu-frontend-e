@@ -4,13 +4,15 @@
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
+      class="Filtersform"
     >
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
         
         <div class="first-line">
           
           <el-form-item label="Kategoria" prop="category">
-            <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+            
 
           </el-form-item>
           <el-form-item label="Typ" prop="type">
@@ -359,7 +361,7 @@ export default {
 </script>
 
 <style lang="scss">
-.form {
+.Filtersform {
   background-color: rgba(4, 30, 21, .8);
   display: flex;
   flex-direction: column;
