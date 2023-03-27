@@ -1,26 +1,22 @@
 <template>
-  <div class="filters" :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]">
+  <div class="advanced-search" :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]">
     <!-- <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
       class="filter-dialog"
     > -->
-      
-        <div class="first-line">
-            <!-- <el-cascader
-              v-model="search.category"
-              :options="filters.categories"
-              :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
-              popper-class="category-dropdown"
-              clearable
-            /> -->
+    <div class="first-line">
+      <div class="label">
+        Szukam
+      </div>
             <treeselect
               v-model="search.category"
               :multiple="true"
               :options="filters.categories"
               placeholder="Wybierz"
             />
+        
             <el-select v-model="search.typ" clearable>
               <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
@@ -43,8 +39,8 @@
                 :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
               />
             </el-select>
-        </div>
-        <div class="third-line-filters">
+    </div>
+        <div class="third-line">
           <div class="attribute-filters">
             <div class="price">
               <div class="label">
@@ -248,7 +244,8 @@ export default {
 </script>
 
 <style lang="scss">
-.filters {
+
+.advanced-search {
   background-color: rgba(4, 30, 21, .8);
   display: flex;
   flex-direction: column;
@@ -283,34 +280,118 @@ export default {
   .first-line {
     display: flex;
     justify-content: space-around;
-  }
-  .category {
-    width: 28%;
-  }
-}
-
-.other-filters {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  .el-select {
+    align-items: center;
     width: 90%;
+    margin: 0 auto;
+    height: 40%;
+
+    @media only screen and (max-width: 1300px) {
+      width: 100%;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      flex-direction: column;
+
+      .el-cascader,
+      .el-select {
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+      .label {
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      button,
+      .advanced-btn {
+        width: 100% !important;
+        margin-bottom: 10px;
+        margin-left: 0;
+      }
+    }
+
+    @media only screen and (max-width: 834px) {
+
+      .el-cascader,
+      .el-select {
+        margin-bottom: 10px;
+      }
+    }
+
+    .advanced-btn {
+      width: 163px;
+
+      &:focus,
+      &:hover {
+        color: #000000;
+      }
+    }
   }
-}
 
-.third-line-filters {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .attribute-filters {
+  .second-line {
     display: flex;
     flex-wrap: wrap;
+    //justify-content: space-around;
+    align-items: center;
+    height: 40%;
+    margin: 30px 0 30px 0;
 
-    .price, .meters, .other {
+    .el-select {
+      width: 150px !important;
+      min-width: 180px;
+
+      @media only screen and (max-width: 430px) {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .third-line {
+    height: 20%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .price,
+    .meters,
+    .other {
       margin: 4px 15px;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .attribute-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      @media only screen and (max-width: 560px) {
+
+        .attr-filter,
+        .price,
+        .meters,
+        .other {
+          width: 100%;
+
+          .el-select {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .el-checkbox {
+      color: #ffffff;
     }
   }
 }
+
 </style>
