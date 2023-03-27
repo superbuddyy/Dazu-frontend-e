@@ -361,10 +361,11 @@ export default {
 </script>
 <style lang="scss">
 .filters {
+  max-height: unset;
+
   .filter-dialog {
 
     .el-dialog {
-      max-height: unset;
 
       display: flex;
       justify-content: space-around;
