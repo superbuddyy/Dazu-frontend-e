@@ -8,6 +8,7 @@
     > -->
     <div
     :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]"
+    class="advanced-search"
     >
 
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
@@ -364,44 +365,37 @@ export default {
 </script>
 
 <style lang="scss">
-.filters {
-  .filter-dialog {
-    max-height: unset;
+.advanced-search {
+  background-color: rgba(4, 30, 21, .8);
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 86px 0 20px 0;
+  color: #fff;
+  padding: 30px;
+  transition: 0.5s ease;
+  // overflow: hidden;
 
-    // .el-dialog {
-      // display: flex;
-      // justify-content: space-around;
-      // align-items: center;
-      // width: 90%;
-      // margin: 0 auto;
-      // height: 40%;
-
-      // @media only screen and (max-width: 1300px) {
-      //   width: 90%;
-      // }
-
-      // @media only screen and (max-width: 560px) {
-
-      //   .attr-filter,
-      //   .price,
-      //   .meters,
-      //   .other {
-      //     width: 100%;
-
-      //     .el-select {
-      //       width: 100%;
-      //     }
-      //   }
-      // }
-    // }
+  @media only screen and (max-width: 1640px) {
+    width: 90%;
   }
+
+  @media only screen and (max-width: 1300px) {
+    padding: 20px 10px;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    width: 60vw;
+    max-height: unset !important;
+  }
+
+  @media only screen and (max-width: 834px) {
+    width: 90vw;
+  }
+
   .vue-treeselect {
-      width: 23% !important;
+    width: 23% !important;
   }
-  
-
-}
-
 .first-line {
     display: flex;
     justify-content: space-around;
@@ -444,7 +438,7 @@ export default {
       }
     }
   }
-  
+
 .other-filters {
   display: flex;
   justify-content: space-around;
@@ -470,5 +464,6 @@ export default {
       margin: 4px 15px;
     }
   }
+}
 }
 </style>
