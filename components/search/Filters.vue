@@ -366,13 +366,13 @@ export default {
   .filter-dialog {
     max-height: unset;
 
-    .el-dialog {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 90%;
-      margin: 0 auto;
-      height: 40%;
+    // .el-dialog {
+      // display: flex;
+      // justify-content: space-around;
+      // align-items: center;
+      // width: 90%;
+      // margin: 0 auto;
+      // height: 40%;
 
       // @media only screen and (max-width: 1300px) {
       //   width: 90%;
@@ -391,7 +391,7 @@ export default {
       //     }
       //   }
       // }
-    }
+    // }
   }
   .vue-treeselect {
       width: 23% !important;
