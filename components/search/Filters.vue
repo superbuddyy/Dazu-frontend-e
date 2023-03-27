@@ -9,14 +9,13 @@
     <div
     :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]"
     >
-    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
         
         <div class="first-line">
           
           <el-form-item label="Kategoria" prop="category">
-            
+    <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
           </el-form-item>
           <el-form-item label="Typ" prop="type">
@@ -406,6 +405,40 @@ export default {
     width: 90%;
     margin: 0 auto;
     height: 40%;
+
+    @media only screen and (max-width: 1300px) {
+      width: 100%;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      flex-direction: column;
+
+      .el-cascader,
+      .el-select {
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+      .label {
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      button,
+      .advanced-btn {
+        width: 100% !important;
+        margin-bottom: 10px;
+        margin-left: 0;
+      }
+    }
+
+    @media only screen and (max-width: 834px) {
+
+      .el-cascader,
+      .el-select {
+        margin-bottom: 10px;
+      }
+    }
   }
 
 }
