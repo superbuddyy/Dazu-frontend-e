@@ -7,7 +7,6 @@
       class="filter-dialog"
     > -->
     <div>
-          <el-form-item label="Kategoria" prop="category">
             <!-- <el-cascader
               v-model="search.category"
               :options="filters.categories"
@@ -21,13 +20,9 @@
               :options="filters.categories"
               placeholder="Wybierz"
             />
-          </el-form-item>
-          <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
               <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
-          </el-form-item>
-          <el-form-item label="Lokalizacja" prop="location">
             <el-select
               v-model="location"
               class="location-input"
@@ -47,7 +42,6 @@
                 :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
               />
             </el-select>
-          </el-form-item>
         <div class="third-line-filters">
           <div class="attribute-filters">
             <div class="price">
