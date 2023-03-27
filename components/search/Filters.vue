@@ -1,10 +1,9 @@
 <template>
   <div>
     
-    <el-dialog
-      title="Ustaw filtry"
-      :visible.sync="visible"
-      :before-close="close"
+    <div
+      
+      :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]"
     >
     <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
 
@@ -66,7 +65,7 @@
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
       </span>
-    </el-dialog>
+    </div>
   </div>
 </template>
 
