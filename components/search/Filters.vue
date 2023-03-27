@@ -6,7 +6,6 @@
       :before-close="close"
       class="filter-dialog"
     > -->
-    <div class="first-line">
       <div class="label">
         Szukam
       </div>
@@ -39,7 +38,6 @@
                 :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
               />
             </el-select>
-    </div>
         <div class="third-line">
           <div class="attribute-filters">
             <div class="price">
