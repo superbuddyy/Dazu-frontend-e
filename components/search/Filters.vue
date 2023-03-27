@@ -277,6 +277,7 @@ export default {
   .first-line {
     display: flex;
     justify-content: space-around;
+    height: unset;
   }
   .category {
     width: 28%;
