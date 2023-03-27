@@ -398,7 +398,11 @@ export default {
   .vue-treeselect {
       width: 23% !important;
   }
-  .first-line {
+  
+
+}
+
+.first-line {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -440,9 +444,7 @@ export default {
       }
     }
   }
-
-}
-
+  
 .other-filters {
   display: flex;
   justify-content: space-around;
