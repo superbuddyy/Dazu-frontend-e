@@ -361,32 +361,7 @@ export default {
 </script>
 <style lang="scss">
 .filters {
-  background-color: rgba(4, 30, 21, .8);
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin: 86px 0 20px 0;
-  color: #fff;
-  padding: 30px;
-  transition: 0.5s ease;
-  // overflow: hidden;
 
-  @media only screen and (max-width: 1640px) {
-    width: 90%;
-  }
-
-  @media only screen and (max-width: 1300px) {
-    padding: 20px 10px;
-  }
-
-  @media only screen and (max-width: 1100px) {
-    width: 60vw;
-    max-height: unset !important;
-  }
-
-  @media only screen and (max-width: 834px) {
-    width: 90vw;
-  }
   .filter-dialog {
     max-height: unset;
 
