@@ -60,8 +60,8 @@
       />
       
 
-          <div v-if="filtersVisible" class="search-popup">
-        <div class="popup-container">
+          <div v-if="filtersVisible">
+        <div>
           <div class="close-btn" @click="filtersVisible = false">
             <i class="el-icon-circle-close" />
           </div>
