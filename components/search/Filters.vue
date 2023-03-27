@@ -7,6 +7,15 @@
       class="filter-dialog"
     > -->
     <div>
+      <treeselect
+              v-model="search.category"
+              :multiple="true"
+              :options="filters.categories"
+              placeholder="Wybierz"
+            />
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+        <div class="first-line">
+          <el-form-item label="Kategoria" prop="category" class="category">
             <!-- <el-cascader
               v-model="search.category"
               :options="filters.categories"
@@ -14,15 +23,14 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            <treeselect
-              v-model="search.category"
-              :multiple="true"
-              :options="filters.categories"
-              placeholder="Wybierz"
-            />
+            
+          </el-form-item>
+          <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
               <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
+          </el-form-item>
+          <el-form-item label="Lokalizacja" prop="location">
             <el-select
               v-model="location"
               class="location-input"
@@ -42,6 +50,8 @@
                 :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
               />
             </el-select>
+          </el-form-item>
+        </div>
         <div class="third-line-filters">
           <div class="attribute-filters">
             <div class="price">
@@ -98,6 +108,7 @@
             </div>
           </div>
         </div>
+      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
