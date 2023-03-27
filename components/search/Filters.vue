@@ -1,11 +1,14 @@
 <template>
   <div>
-    
-    <div
+    <el-dialog
+      title="Ustaw filtry"
+      :visible.sync="visible"
+      :before-close="close"
       :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]"
     >
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
     <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+
+      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
         
         <div class="first-line">
           
@@ -65,7 +68,7 @@
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
       </span>
-    </div>
+    </el-dialog>
   </div>
 </template>
 
