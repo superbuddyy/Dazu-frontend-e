@@ -61,10 +61,10 @@
           </div>
         </div>
       </el-form> -->
-      <span slot="footer" class="dialog-footer">
+      <!-- <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
-      </span>
+      </span> -->
     </div>
   </div>
 </template>
