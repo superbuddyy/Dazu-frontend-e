@@ -7,9 +7,7 @@
       class="filter-dialog"
     > -->
     <div>
-      
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-          <el-form-item label="Kategoria" prop="category" class="category">
+          <el-form-item label="Kategoria" prop="category">
             <!-- <el-cascader
               v-model="search.category"
               :options="filters.categories"
@@ -106,7 +104,6 @@
             </div>
           </div>
         </div>
-      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
