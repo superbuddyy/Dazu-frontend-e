@@ -4,7 +4,6 @@
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
-      class="Filtersform"
     >
     <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters">
@@ -359,81 +358,61 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
-.Filtersform {
-  background-color: rgba(4, 30, 21, .8);
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin: 86px 0 20px 0;
-  color: #fff;
-  padding: 30px;
-  transition: 0.5s ease;
-  // overflow: hidden;
+.filters {
+  .filter-dialog {
+    max-height: unset;
 
-  @media only screen and (max-width: 1640px) {
-    width: 90%;
+    .el-dialog {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 90%;
+      margin: 0 auto;
+      height: 40%;
+
+      // @media only screen and (max-width: 1300px) {
+      //   width: 90%;
+      // }
+
+      // @media only screen and (max-width: 560px) {
+
+      //   .attr-filter,
+      //   .price,
+      //   .meters,
+      //   .other {
+      //     width: 100%;
+
+      //     .el-select {
+      //       width: 100%;
+      //     }
+      //   }
+      // }
+    }
   }
-
-  @media only screen and (max-width: 1300px) {
-    padding: 20px 10px;
-  }
-
-  @media only screen and (max-width: 1100px) {
-    width: 60vw;
-    max-height: unset !important;
-  }
-
-  @media only screen and (max-width: 834px) {
-    width: 90vw;
-  }
-
   .vue-treeselect {
-    width: 23% !important;
+      width: 23% !important;
   }
-.first-line {
+  .first-line {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 90%;
     margin: 0 auto;
     height: 40%;
-
-    @media only screen and (max-width: 1300px) {
-      width: 100%;
-    }
-
-    @media only screen and (max-width: 1100px) {
-      flex-direction: column;
-
-      .el-cascader,
-      .el-select {
-        margin-bottom: 5px;
-        width: 100%;
-      }
-
-      .label {
-        margin-bottom: 10px;
-        text-transform: uppercase;
-      }
-
-      button,
-      .advanced-btn {
-        width: 100% !important;
-        margin-bottom: 10px;
-        margin-left: 0;
-      }
-    }
-
-    @media only screen and (max-width: 834px) {
-
-      .el-cascader,
-      .el-select {
-        margin-bottom: 10px;
-      }
-    }
   }
+
+}
+
+.other-filters {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .el-select {
+    width: 90%;
+  }
+}
 
 .third-line-filters {
   display: flex;
@@ -450,6 +429,5 @@ export default {
       margin: 4px 15px;
     }
   }
-}
 }
 </style>
