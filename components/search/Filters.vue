@@ -16,6 +16,25 @@
             <el-select v-model="search.typ" clearable>
               <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
             </el-select>
+            <el-select
+              v-model="location"
+              class="location-input"
+              filterable
+              remote
+              placeholder="Lokalizacja"
+              :remote-method="getLocations"
+              :loading="locationsLoading"
+              :debounce="500"
+              clearable
+              @change="setLocation"
+            >
+              <el-option
+                v-for="loc in locations"
+                :key="loc.osm_id"
+                :label="loc.display_name"
+                :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
+              />
+            </el-select>
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
