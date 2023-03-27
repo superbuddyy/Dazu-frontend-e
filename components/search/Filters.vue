@@ -361,13 +361,11 @@ export default {
 </script>
 <style lang="scss">
 .filters {
-  max-height: unset;
 
   .filter-dialog {
     max-height: unset;
 
     .el-dialog {
-      max-height: unset;
 
       display: flex;
       justify-content: space-around;
@@ -397,6 +395,7 @@ export default {
   }
   .vue-treeselect {
       width: 23% !important;
+      z-index: 2023;
   }
   .first-line {
     display: flex;
