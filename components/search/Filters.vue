@@ -280,6 +280,24 @@ export default {
   }
   .category {
     width: 28%;
+    height: unset;
+    background-color: rgba(4, 30, 21, .8);
+    display: flex;
+    flex-direction: column;
+    margin: 86px 0 20px 0;
+    color: #fff;
+    padding: 30px;
+    transition: 0.5s ease;
+
+
+    .el-form-item__content{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 90%;
+      margin: 0 auto;
+      height: 40%;
+    }
   }
 }
 
