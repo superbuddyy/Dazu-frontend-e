@@ -1,18 +1,11 @@
 <template>
-  <div class="filters" :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]">
-    <!-- <el-dialog
+  <div class="filters">
+    <el-dialog
       title="Ustaw filtry"
       :visible.sync="visible"
       :before-close="close"
       class="filter-dialog"
-    > -->
-    <div>
-      <treeselect
-              v-model="search.category"
-              :multiple="true"
-              :options="filters.categories"
-              placeholder="Wybierz"
-            />
+    >
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
@@ -23,7 +16,12 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            
+            <treeselect
+              v-model="search.category"
+              :multiple="true"
+              :options="filters.categories"
+              placeholder="Wybierz"
+            />
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
@@ -113,7 +111,7 @@
         <el-button @click="close()">Zamknij</el-button>
         <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
       </span>
-    </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -258,7 +256,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .filters {
   .filter-dialog {
     .el-dialog {
