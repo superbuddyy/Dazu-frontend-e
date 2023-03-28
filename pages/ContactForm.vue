@@ -1,7 +1,7 @@
 <template>
   <div class="page-contact-form">
     <div class="container">
-      <h1>Kontaktppppppasdasdasdasdpppp</h1>
+      <h1>Kontakt</h1>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="Temat" prop="topic">
           <el-select v-model="form.topic" placeholder="Wybierz" clearable class="select-topic">
