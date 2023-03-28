@@ -58,14 +58,15 @@
         @load-more="loadMore"
         @fetch-offers="saveFilters"
       />
-      <Filters
+      
+    </div>
+    <Filters
         :visible="filtersVisible"
         :refresh-filters="refreshFilters"
         @refreshed="refreshFilters = false"
         @close-filters="filtersVisible = false"
         @save="saveFilters"
       />
-    </div>
     <SaveFilters
       :visible="saveFiltersVisible"
       @close="saveFiltersVisible = false"
