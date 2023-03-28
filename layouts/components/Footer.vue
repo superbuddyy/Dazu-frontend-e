@@ -197,12 +197,7 @@ export default {
             color: #000000;
             font-weight: bold;
           }
-          .login {
-            cursor: pointer;
-            &:hover {
-              color: #ff19b7;
-            }
-          }
+          
         }
       }
       .newsletter {
@@ -233,6 +228,12 @@ export default {
           align-items: flex-start;
           @media only screen and (max-width: 640px) {
             align-items: center;
+          }
+          .login {
+            cursor: pointer;
+            &:hover {
+              color: #ff19b7;
+            }
           }
           ul {
             list-style: none;
