@@ -280,8 +280,8 @@ export default {
   }
   .category {
     width: 28% !important;
-    .vue-treeselect {
-      width: 23% !important;
+    .el-form-item__content{
+      line-height: unset !important;
     }
   }
 }
