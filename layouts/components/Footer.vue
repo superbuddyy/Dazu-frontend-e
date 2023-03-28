@@ -197,6 +197,12 @@ export default {
             color: #000000;
             font-weight: bold;
           }
+          .login {
+            cursor: pointer;
+            &:hover {
+              color: #ff19b7;
+            }
+          }
         }
       }
       .newsletter {

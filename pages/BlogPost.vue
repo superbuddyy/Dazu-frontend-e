@@ -4,7 +4,7 @@
       <h1>{{ post.title }}</h1>
     </div>
     <div class="container">
-      <p v-html-safe="post.content">
+      <p v-html="post.content">
         
       </p>
       <OtherPosts
