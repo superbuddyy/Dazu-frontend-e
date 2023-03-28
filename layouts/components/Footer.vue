@@ -71,14 +71,9 @@
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/">
-                Rejestracja
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/">
-                Logowanie
-              </nuxt-link>
+              <div v-if="!user.isLogged" class="login" @click="toggleLogin">
+                Logowanie/Rejestracja
+              </div>
             </li>
           </ul>
         </div>
@@ -92,19 +87,35 @@
         All Right reserved Dazu.pl 2020
       </div>
     </div>
+    <Login
+      :visible="loginVisible"
+      @toggle-popup="toggleLogin"
+      @toggle-register-popup="toggleRegister"
+    />
+    <Register
+      :visible="registerVisible"
+      @toggle-popup="toggleRegister"
+      @toggle-login-popup="toggleLogin"
+    />
   </div>
 </template>
 
 <script>
 import { store } from '@/api/newsleter'
 import { index } from '@/api/footers'
-
+import Login from '@/components/auth/Login'
+import Register from '@/components/auth/Register'
 export default {
   name: 'Footer',
+  components: {
+    Login,
+    Register,
+  },
   data: () => ({
     newsletterEmail: null,
     oldUrl: '',
-    pages: []
+    pages: [],
+    user: ''
   }),
   watch: {
     '$route.path' (value) {
@@ -114,9 +125,13 @@ export default {
     }
   },
   mounted () {
+    this.user = this.$store.state.user;
     this.getPages()
   },
   methods: {
+    toggleLogin () {
+      this.$store.dispatch('user/setLoginFirst', !this.loginVisible)
+    },
     oddEven (ind) {
       ind = ind + 1
       if (ind % 2 === 0) {
