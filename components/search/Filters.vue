@@ -7,12 +7,6 @@
       class="filter-dialog"
     >
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-        <treeselect
-              v-model="search.category"
-              :multiple="true"
-              :options="filters.categories"
-              placeholder="Wybierz"
-            />
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
             <!-- <el-cascader
@@ -22,7 +16,12 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            
+            <treeselect
+              v-model="search.category"
+              :multiple="true"
+              :options="filters.categories"
+              placeholder="Wybierz"
+            />
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
@@ -280,7 +279,29 @@ export default {
     justify-content: space-around;
   }
   .category {
-    width: 28%;
+    width: 28% !important;
+    height: unset !important;
+    background-color: rgba(4, 30, 21, .8) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 70% !important;
+    margin: 86px 0 20px 0 !important;
+    color: #fff !important;
+    padding: 30px !important;
+    transition: 0.5s ease !important;
+
+    .el-form-item__content{
+      display: flex !important;
+      justify-content: space-around !important;
+      align-items: center !important;
+      width: 90% !important;
+      margin: 0 auto !important;
+      height: 40% !important;
+
+      .vue-treeselect {
+        width: 23% !important;
+      }
+    }
   }
 }
 
