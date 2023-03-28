@@ -7,19 +7,19 @@
           <el-select v-model="filter" @change="sortResults($event)">
             <el-option
               label="Najnowsze"
-              :value="3"
-            />
-            <el-option
-              label="Najstarsze"
-              :value="4"
-            />
-            <el-option
-              label="Cena rosnąca"
               :value="1"
             />
             <el-option
-              label="Cena malejąco"
+              label="Najstarsze"
               :value="2"
+            />
+            <el-option
+              label="Cena rosnąca"
+              :value="3"
+            />
+            <el-option
+              label="Cena malejąco"
+              :value="4"
             />
           </el-select>
         </div>
