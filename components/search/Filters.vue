@@ -280,27 +280,8 @@ export default {
   }
   .category {
     width: 28% !important;
-    height: unset !important;
-    background-color: rgba(4, 30, 21, .8) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    width: 70% !important;
-    margin: 86px 0 20px 0 !important;
-    color: #fff !important;
-    padding: 30px !important;
-    transition: 0.5s ease !important;
-
-    .el-form-item__content{
-      display: flex !important;
-      justify-content: space-around !important;
-      align-items: center !important;
-      width: 90% !important;
-      margin: 0 auto !important;
-      height: 40% !important;
-
-      .vue-treeselect {
-        width: 23% !important;
-      }
+    .vue-treeselect {
+      width: 23% !important;
     }
   }
 }
