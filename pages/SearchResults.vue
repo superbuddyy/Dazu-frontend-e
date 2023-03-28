@@ -108,7 +108,7 @@ export default {
     currentPage: 1,
     loading: true,
     filtersVisible: false,
-    filter: 'Cena rosnąca',
+    filter: 'Najnowsze',
     refreshFilters: false,
     sorting: {
       1: { order_by: 'created_at', order: 'DESC' },
