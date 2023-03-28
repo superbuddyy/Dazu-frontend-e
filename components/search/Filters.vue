@@ -7,6 +7,12 @@
       class="filter-dialog"
     >
       <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
+        <treeselect
+              v-model="search.category"
+              :multiple="true"
+              :options="filters.categories"
+              placeholder="Wybierz"
+            />
         <div class="first-line">
           <el-form-item label="Kategoria" prop="category" class="category">
             <!-- <el-cascader
@@ -16,12 +22,7 @@
               popper-class="category-dropdown"
               clearable
             /> -->
-            <treeselect
-              v-model="search.category"
-              :multiple="true"
-              :options="filters.categories"
-              placeholder="Wybierz"
-            />
+            
           </el-form-item>
           <el-form-item label="Typ" prop="type">
             <el-select v-model="search.typ" clearable>
@@ -280,24 +281,6 @@ export default {
   }
   .category {
     width: 28%;
-    height: unset;
-    background-color: rgba(4, 30, 21, .8);
-    display: flex;
-    flex-direction: column;
-    margin: 86px 0 20px 0;
-    color: #fff;
-    padding: 30px;
-    transition: 0.5s ease;
-
-
-    .el-form-item__content{
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 90%;
-      margin: 0 auto;
-      height: 40%;
-    }
   }
 }
 
