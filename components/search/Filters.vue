@@ -256,6 +256,39 @@ export default {
 </script>
 
 <style lang="scss">
+.el-form-item__label {
+  font-weight: bold;
+}
+
+.el-form-item__content {
+  display: flex;
+  align-items: center;
+}
+
+.el-form-item__content .vue-treeselect__input {
+  flex: 1;
+}
+
+.el-form-item__content .vue-treeselect__control {
+  width: 100%;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.el-form-item__content .vue-treeselect__multi-value__label {
+  background-color: #409eff;
+  color: #fff;
+  border-radius: 2px;
+  padding: 2px 4px;
+  margin-right: 4px;
+}
+
+.el-form-item__content .vue-treeselect__multi-value__remove {
+  color: #409eff;
+  cursor: pointer;
+}
+
 .filters {
   .filter-dialog {
     .el-dialog {
