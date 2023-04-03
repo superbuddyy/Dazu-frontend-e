@@ -1,117 +1,77 @@
 <template>
-  <div class="filters">
-    <el-dialog
-      title="Ustaw filtry"
-      :visible.sync="visible"
-      :before-close="close"
-      class="filter-dialog"
-    >
-      <el-form v-if="Object.keys(filters).length > 0" :label-position="'top'" :model="filters" class="form">
-        <div class="first-line">
-          <el-form-item label="Kategoria" prop="category" class="category">
-            <!-- <el-cascader
-              v-model="search.category"
-              :options="filters.categories"
-              :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
-              popper-class="category-dropdown"
-              clearable
-            /> -->
-            <treeselect
-              v-model="search.category"
-              :multiple="true"
-              :options="filters.categories"
-              placeholder="Wybierz"
-            />
-          </el-form-item>
-          <el-form-item label="Typ" prop="type">
-            <el-select v-model="search.typ" clearable>
-              <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug"/>
+  <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="advanced-search">
+    <div class="first-line">
+      <div class="label">
+        Szukam
+      </div>
+      <!-- <el-cascader
+        v-model="search.category"
+        :options="filters.categories"
+        :props="{ expandTrigger: 'hover', label: 'name', value: 'slug', children: 'children', checkStrictly: true }"
+        clearable
+        popper-class="category-dropdown"
+        @change="handleChange"
+      /> -->
+      <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+      <el-select v-model="search.typ">
+        <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
+      </el-select>
+      <el-select v-model="location" class="location-input" filterable remote placeholder="Lokalizacja"
+        :remote-method="getLocations" :loading="locationsLoading" :debounce="500" clearable @change="setLocation">
+        <el-option v-for="loc in locations" :key="loc.osm_id" :label="loc.display_name"
+          :value="loc.lat + '*' + loc.lon + '*' + loc.display_name" />
+        <el-button v-if="isClearButton" class="clr-margin-btn" @click="clearRecentSearch">
+          wyczyść
+        </el-button>
+      </el-select>
+      <el-button type="primary plain" @click="onSearch">
+        Szukaj
+      </el-button>
+      <el-button v-if="!visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-bottom"
+        @click="toggleAdvanced">
+        Zaawansowane
+      </el-button>
+      <el-button v-if="visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-top"
+        @click="toggleAdvanced">
+        Podstawowe
+      </el-button>
+    </div>
+    <transition name="fade" mode="out-in">
+      <div v-show="visible || onlyAdvanced" class="third-line">
+        <div class="attribute-filters">
+          <div class="price">
+            <div class="label">
+              Cena
+            </div>
+            <el-select v-model="search.price.min" placeholder="Minimalna" filterable clearable>
+              <el-option v-for="item in priceMinFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
-          </el-form-item>
-          <el-form-item label="Lokalizacja" prop="location">
-            <el-select
-              v-model="location"
-              class="location-input"
-              filterable
-              remote
-              placeholder="Lokalizacja"
-              :remote-method="getLocations"
-              :loading="locationsLoading"
-              :debounce="500"
-              clearable
-              @change="setLocation"
-            >
-              <el-option
-                v-for="loc in locations"
-                :key="loc.osm_id"
-                :label="loc.display_name"
-                :value="loc.lat + '*' + loc.lon + '*' + loc.display_name"
-              />
+            <el-select v-model="search.price.max" placeholder="Maksymalna" filterable clearable>
+              <el-option v-for="item in priceMaxFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
-          </el-form-item>
-        </div>
-        <div class="third-line-filters">
-          <div class="attribute-filters">
-            <div class="price">
-              <div class="label">
-                Cena
-              </div>
-              <el-select v-model="search.price.min" placeholder="Minimalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.price.min"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
-              </el-select>
-              <el-select v-model="search.price.max" placeholder="Maksymalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.price.max"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
-              </el-select>
+          </div>
+          <div class="meters">
+            <div class="label">
+              Powierzchnia
             </div>
-            <div class="meters">
-              <div class="label">
-                Metraż
-              </div>
-              <el-select v-model="search['metraz'].min" placeholder="Minimalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.attributes['metraz'].min"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
-              </el-select>
-              <el-select v-model="search['metraz'].max" placeholder="Maksymalna" filterable clearable>
-                <el-option
-                  v-for="item in filters.attributes['metraz'].max"
-                  :key="item"
-                  :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
-                  :value="item"
-                />
-              </el-select>
-            </div>
-            <div v-for="filter in filters.attributes2" :key="filter.id" class="attr-filter">
-              <AttributeFilter
-                v-if="!excludedIds.includes(filter.id)"
-                :type="filter.type"
-                :name="filter.name"
-                :slug="filter.slug"
-                :options="filter.options"
-                @change="setAttributeValue(filter.slug, $event)"
-              />
-            </div>
+            <el-select v-model="search['metraz'].min" placeholder="Minimalna" filterable clearable>
+              <el-option v-for="item in metrazMinFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
+            </el-select>
+            <el-select v-model="search['metraz'].max" placeholder="Maksymalna" filterable clearable>
+              <el-option v-for="item in metrazMaxFilters" :key="item"
+                :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
+            </el-select>
+          </div>
+          <div v-for="filter in filters.attributes2" :key="filter.id" class="attr-filter">
+            <AttributeFilter v-if="!excludedIds.includes(filter.id)" :type="filter.type" :name="filter.name"
+              :slug="filter.slug" :options="filter.options" @change="setAttributeValue(filter.slug, $event)" />
           </div>
         </div>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="close()">Zamknij</el-button>
-        <el-button type="primary" icon="el-icon-right" @click="save()">Szukaj</el-button>
-      </span>
-    </el-dialog>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -256,38 +216,196 @@ export default {
 </script>
 
 <style lang="scss">
-.el-form-item__label {
-  font-weight: bold;
+.category-dropdown {
+  .el-cascader-node {
+    .radio__input {
+      width: 100%;
+    }
+
+    label {
+      position: absolute;
+      width: 100%;
+      padding: 10px;
+    }
+
+    .el-radio__inner {
+      display: none;
+    }
+
+    input {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -14px;
+      bottom: 0;
+      width: 100%;
+      height: 22px;
+    }
+  }
 }
 
-.el-form-item__content {
+.advanced-search {
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
-  align-items: center;
-}
-
-.el-form-item__content .vue-treeselect__input {
-  flex: 1;
-}
-
-.el-form-item__content .vue-treeselect__control {
-  width: 100%;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  box-shadow: none;
-}
-
-.el-form-item__content .vue-treeselect__multi-value__label {
-  background-color: #409eff;
+  flex-direction: column;
+  width: 70%;
+  margin: 86px 0 20px 0;
   color: #fff;
-  border-radius: 2px;
-  padding: 2px 4px;
-  margin-right: 4px;
+  padding: 30px;
+  transition: 0.5s ease;
+  // overflow: hidden;
+
+  @media only screen and (max-width: 1640px) {
+    width: 90%;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    padding: 20px 10px;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    width: 60vw;
+    max-height: unset !important;
+  }
+
+  @media only screen and (max-width: 834px) {
+    width: 90vw;
+  }
+
+  .vue-treeselect {
+    width: 23% !important;
+  }
+
+  .first-line {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    height: 40%;
+
+    @media only screen and (max-width: 1300px) {
+      width: 100%;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      flex-direction: column;
+
+      .el-cascader,
+      .el-select {
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+      .label {
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      button,
+      .advanced-btn {
+        width: 100% !important;
+        margin-bottom: 10px;
+        margin-left: 0;
+      }
+    }
+
+    @media only screen and (max-width: 834px) {
+
+      .el-cascader,
+      .el-select {
+        margin-bottom: 10px;
+      }
+    }
+
+    .advanced-btn {
+      width: 163px;
+
+      &:focus,
+      &:hover {
+        color: #000000;
+      }
+    }
+  }
+
+  .second-line {
+    display: flex;
+    flex-wrap: wrap;
+    //justify-content: space-around;
+    align-items: center;
+    height: 40%;
+    margin: 30px 0 30px 0;
+
+    .el-select {
+      width: 150px !important;
+      min-width: 180px;
+
+      @media only screen and (max-width: 430px) {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .third-line {
+    height: 20%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .price,
+    .meters,
+    .other {
+      margin: 4px 15px;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .attribute-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      @media only screen and (max-width: 560px) {
+
+        .attr-filter,
+        .price,
+        .meters,
+        .other {
+          width: 100%;
+
+          .el-select {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .el-checkbox {
+      color: #ffffff;
+    }
+  }
 }
 
-.el-form-item__content .vue-treeselect__multi-value__remove {
-  color: #409eff;
-  cursor: pointer;
+.clr-margin-btn {
+  margin: 18px !important;
+  border-radius: 25px;
+  border: 1px solid red;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: 1s;
+}
 
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

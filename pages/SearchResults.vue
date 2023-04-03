@@ -58,18 +58,29 @@
         @load-more="loadMore"
         @fetch-offers="saveFilters"
       />
-      <Filters
+      <!-- <Filters
         :visible="filtersVisible"
         :refresh-filters="refreshFilters"
         @refreshed="refreshFilters = false"
         @close-filters="filtersVisible = false"
         @save="saveFilters"
-      />
+      /> -->
     </div>
     <SaveFilters
       :visible="saveFiltersVisible"
       @close="saveFiltersVisible = false"
     />
+    <div v-if="filtersVisible" class="search-popup">
+      <div class="popup-container">
+        <div class="close-btn" @click="filtersVisible = false">
+          <i class="el-icon-circle-close" />
+        </div>
+        <AdvancedSearch
+          :only-advanced="true"
+          @close="filtersVisible = false"
+        />
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -259,5 +270,45 @@ export default {
       }
     }
   }
+
+  .search-popup {
+  background: rgb(0 0 0 / 75%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+
+  .popup-container {
+    position: relative;
+    width: 82%;
+
+    @media only screen and (max-width: 1100px) {
+      width: 90%;
+    }
+
+    .close-btn {
+      position: absolute;
+      color: white;
+      top: 34px;
+      right: -15px;
+      font-size: 40px;
+      cursor: pointer;
+
+      @media only screen and (max-width: 840px) {
+        top: -20px;
+      }
+    }
+
+    .advanced-search {
+      width: 100%;
+    }
+  }
+}
 }
 </style>
