@@ -2,7 +2,7 @@
   <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="advanced-search">
     <div class="first-line">
       <div class="label">
-        Szukam
+        Kategoria
       </div>
       <!-- <el-cascader
         v-model="search.category"
@@ -13,9 +13,15 @@
         @change="handleChange"
       /> -->
       <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+      <div class="label">
+        Typ
+      </div>
       <el-select v-model="search.typ">
         <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
       </el-select>
+      <div class="label">
+        Lokalizacja
+      </div>
       <el-select v-model="location" class="location-input" filterable remote placeholder="Lokalizacja"
         :remote-method="getLocations" :loading="locationsLoading" :debounce="500" clearable @change="setLocation">
         <el-option v-for="loc in locations" :key="loc.osm_id" :label="loc.display_name"
@@ -24,9 +30,7 @@
           wyczyść
         </el-button>
       </el-select>
-      <el-button type="primary plain" @click="onSearch">
-        Szukaj
-      </el-button>
+      
       <el-button v-if="!visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-bottom"
         @click="toggleAdvanced">
         Zaawansowane
@@ -69,6 +73,9 @@
             <AttributeFilter v-if="!excludedIds.includes(filter.id)" :type="filter.type" :name="filter.name"
               :slug="filter.slug" :options="filter.options" @change="setAttributeValue(filter.slug, $event)" />
           </div>
+          <el-button type="primary plain" @click="onSearch">
+            Szukaj
+          </el-button>
         </div>
       </div>
     </transition>
@@ -245,12 +252,12 @@ export default {
 }
 
 .advanced-search {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   width: 70%;
   margin: 86px 0 20px 0;
-  color: #fff;
+  color: #3a3a3a;
   padding: 30px;
   transition: 0.5s ease;
   // overflow: hidden;
@@ -388,7 +395,7 @@ export default {
     }
 
     .el-checkbox {
-      color: #ffffff;
+      color: #3a3a3a;
     }
   }
 }
