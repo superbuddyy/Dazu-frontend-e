@@ -75,7 +75,7 @@
         <div class="close-btn" @click="filtersVisible = false">
           <i class="el-icon-circle-close" />
         </div>
-        <AdvancedSearch
+        <Filters
           :only-advanced="true"
           @close="filtersVisible = false"
         />
@@ -86,6 +86,7 @@
 <script>
 import OffersCarousel from '@/components/OffersCarousel'
 import SearchOffers from '@/components/search/SearchOffers'
+import AdvancedSearch from '@/components/home_page/AdvancedSearch'
 import Filters from '@/components/search/Filters'
 import SaveFilters from '@/components/search/SaveFilters'
 import MapSearch from '@/components/search/MapSearch'
