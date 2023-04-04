@@ -1,5 +1,5 @@
 <template>
-  <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="Filter-popup">
+  <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="advanced-search">
     <div class="first-line">
       <div class="label">
         Kategoria
