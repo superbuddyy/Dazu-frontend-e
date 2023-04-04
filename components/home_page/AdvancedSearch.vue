@@ -301,7 +301,7 @@ export default {
       }
     },
     onSearch() {
-      this.$router.push({ path: '/szukaj', query: buildSearchQuery({phrase: this.search}) })
+      this.$router.push({ path: '/szukaj', query: buildSearchQuery( this.search) })
       this.$emit('close')
     },
     async getRecentSearch() {
