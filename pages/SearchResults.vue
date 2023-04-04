@@ -75,7 +75,7 @@
         <div class="close-btn" @click="filtersVisible = false">
           <i class="el-icon-circle-close" />
         </div>
-        <Filters
+        <AdvancedSearch
           :only-advanced="true"
           @close="filtersVisible = false"
         />
