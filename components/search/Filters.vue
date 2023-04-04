@@ -1,5 +1,5 @@
 <template>
-  <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="advanced-search">
+  <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="Filter-popup">
     <div class="first-line">
       <div class="label">
         Kategoria
@@ -251,7 +251,7 @@ export default {
   }
 }
 
-.advanced-search {
+.Filter-popup {
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
