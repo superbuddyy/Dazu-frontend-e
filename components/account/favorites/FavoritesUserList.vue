@@ -13,6 +13,9 @@
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'user' ? 'activated-btn' : '']" @click="sortResults('user')">
         Deweloperzy
       </el-tag>
+      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'private' ? 'activated-btn' : '']" @click="sortResults('private')">
+        Prywatni
+      </el-tag>
     </div>
     <div v-if="!loading && favorites.length === 0" class="empty">
       <p>Brak ulubionych użytkowników</p>
