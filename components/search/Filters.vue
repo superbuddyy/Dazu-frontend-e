@@ -251,7 +251,7 @@ export default {
   }
 }
 
-.Filter-popup {
+.advanced-search {
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
