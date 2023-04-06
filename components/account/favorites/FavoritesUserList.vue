@@ -10,10 +10,10 @@
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'company' ? 'activated-btn' : '']" @click="sortResults('company')">
         Agencje
       </el-tag>
-      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'user' ? 'activated-btn' : '']" @click="sortResults('user')">
+      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'user' ? 'activated-btn' : '']" @click="sortResults('company')">
         Deweloperzy
       </el-tag>
-      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'private' ? 'activated-btn' : '']" @click="sortResults('private')">
+      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'private' ? 'activated-btn' : '']" @click="sortResults('user')">
         Prywatni
       </el-tag>
     </div>
