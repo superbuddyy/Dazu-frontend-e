@@ -36,7 +36,7 @@ export default {
         this.$store.dispatch('user/logout')
         this.$router.push('/')
         this.$message({
-          message: 'Konto zostanie usunięte za 60dni',
+          message: 'Konto zostanie usunięte do 60dni',
           type: 'success',
           duration: 3000
         })
