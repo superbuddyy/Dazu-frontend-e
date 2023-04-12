@@ -12,6 +12,11 @@
       </div>
     </div>
     <div class="account-info">
+      <div>
+        <h3>Account Info</h3>
+        <el-input v-model="email" placeholder="Imię lub nazwa firmy" class="input" />
+        <el-input v-model="type" placeholder="Imię lub nazwa firmy" class="input" />
+      </div>
       <el-form label-position="right" label-width="100px" :model="form" class="form">
         <h3>Edytuj informacje</h3>
         <el-input v-model="form.name" placeholder="Imię lub nazwa firmy" class="input" />
@@ -47,6 +52,8 @@ import { updateProfile, toggleNewsletter } from '@/api/user'
 export default {
   name: 'EditAccountForm',
   data: () => ({
+    email: '',
+    type: '',
     form: {
       name: '',
       phone: '',
@@ -65,6 +72,8 @@ export default {
   },
   mounted () {
     const user = this.$store.state.user
+    this.email = this.$store.state.user.email
+    this.type = this.$store.state.user.roles[0]
     this.form = {
       name: user.name,
       phone: user.phone,
