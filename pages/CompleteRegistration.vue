@@ -29,7 +29,7 @@ export default {
         this.$message({
           message: 'Konto zostało aktywowane',
           type: 'success',
-          duration: 1500
+          duration: 3000
         })
       })
     }
