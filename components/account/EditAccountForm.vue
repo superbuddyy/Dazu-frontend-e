@@ -14,8 +14,8 @@
     <div class="account-info">
       <div>
         <h3>Account Info</h3>
-        <el-input v-model="email" placeholder="Imię lub nazwa firmy" class="input" />
-        <el-input v-model="type" placeholder="Imię lub nazwa firmy" class="input" />
+        <el-input v-model="email" disabled placeholder="Imię lub nazwa firmy" class="input" />
+        <el-input v-model="type" disabled placeholder="Imię lub nazwa firmy" class="input" />
       </div>
       <el-form label-position="right" label-width="100px" :model="form" class="form">
         <h3>Edytuj informacje</h3>
