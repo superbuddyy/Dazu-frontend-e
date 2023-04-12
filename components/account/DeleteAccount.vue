@@ -60,6 +60,7 @@ export default {
   left: 0;
   display: flex;
   justify-content: center;
+  z-index: 1;
 
   .delete-container {
     display: flex;
