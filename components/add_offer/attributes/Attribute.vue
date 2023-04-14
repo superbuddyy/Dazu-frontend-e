@@ -124,6 +124,12 @@ export default {
         return ''
       }
     },
+    disabled: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
     // eslint-disable-next-line vue/require-default-prop
     value: {
       type: [Number, String, Array, Boolean]
