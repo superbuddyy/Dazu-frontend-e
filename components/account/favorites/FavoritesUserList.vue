@@ -10,10 +10,10 @@
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'company' ? 'activated-btn' : '']" @click="sortResults('company')">
         Agencje
       </el-tag>
-      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'user' ? 'activated-btn' : '']" @click="sortResults('company')">
+      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'developer' ? 'activated-btn' : '']" @click="sortResults('developer')">
         Deweloperzy
       </el-tag>
-      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'private' ? 'activated-btn' : '']" @click="sortResults('user')">
+      <el-tag type="info" class="tag-btn" :class="[isTagActive == 'private' ? 'activated-btn' : '']" @click="sortResults('private')">
         Prywatni
       </el-tag>
     </div>
@@ -121,7 +121,12 @@ export default {
       this.isTagActive = type
       if (type === 'all') {
         type = ''
+      } else if (type === 'developer') {
+        type = 'company'
+      } else if (type === 'private') {
+        type = 'user'
       }
+      
       this.loading = true
       this.getFavorites(type, 1)
     }
