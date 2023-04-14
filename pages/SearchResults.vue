@@ -151,10 +151,10 @@ export default {
       this.searchOffers(1, queryWithSearch)
     },
     resetFilters () {
+      filter = 'Najnowsze';
       this.$router.replace('/szukaj')
-      // const queryWithSearch = Object.assign(this.$data.sorting[this.filter], this.$route.query)
-      // this.searchOffers(1, queryWithSearch)
-      // this.refreshFilters = true
+      this.searchOffers(1, {})
+      this.refreshFilters = true
     },
     openSaveFilters () {
       if (!this.$store.state.user.isLogged) {
