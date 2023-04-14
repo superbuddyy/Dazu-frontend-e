@@ -118,14 +118,13 @@ export default {
       this.getFavorites(this.isTagActive, 1)
     },
     sortResults (type) {
+      this.isTagActive = type
+
       if (type === 'developer') {
         type = 'company'
       } else if (type === 'private') {
         type = 'user'
       }
-      
-      this.isTagActive = type
-      
       if (type === 'all') {
         type = ''
       }
