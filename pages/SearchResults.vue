@@ -151,7 +151,7 @@ export default {
       this.searchOffers(1, queryWithSearch)
     },
     resetFilters () {
-      filter = 'Najnowsze';
+      this.filter = 'Najnowsze';
       this.$router.replace('/szukaj')
       this.searchOffers(1, {})
       this.refreshFilters = true
