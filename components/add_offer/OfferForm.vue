@@ -33,6 +33,7 @@
             append-info="zł"
             inputType="text"
             inputMode="numeric"
+            :disabled="form.attributes[8]"
             :value="formattedPrice"
             @set-value="formattedPrice = $event"
           />
@@ -47,7 +48,6 @@
             :value="formattedAttributePrice"
             inputType="text"
             inputMode="numeric"
-            :disabled="true"
             @set-value="formattedAttributePrice = $event"
           />
         </el-col>
