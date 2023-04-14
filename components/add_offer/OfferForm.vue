@@ -47,7 +47,7 @@
             :value="formattedAttributePrice"
             inputType="text"
             inputMode="numeric"
-            :disabled="form.attributes['_8']"
+            :disabled="true"
             @set-value="formattedAttributePrice = $event"
           />
         </el-col>
