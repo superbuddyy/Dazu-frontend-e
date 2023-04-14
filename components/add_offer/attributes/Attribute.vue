@@ -7,7 +7,7 @@
       v-if="type === 'input' && inputMode === 'numeric'"
       :type="inputType"
       min="0"
-      :disabled="disabled"
+      :disabled="true"
       :inputmode="inputMode"
       v-model="local_value"
       :placeholder="placeholder"
