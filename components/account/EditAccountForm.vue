@@ -13,7 +13,7 @@
     </div>
     <div class="account-info">
       <div>
-        <h3>Account Info</h3>
+        <h3>informacje o koncie</h3>
         <el-input v-model="email" disabled placeholder="Imię lub nazwa firmy" class="input" />
         <el-input v-model="type" disabled placeholder="Imię lub nazwa firmy" class="input" />
       </div>
