@@ -33,7 +33,7 @@
             append-info="zł"
             inputType="text"
             inputMode="numeric"
-            :disabled="form.attributes[8]"
+            :disabled="(form.attributes[1] == 'sell' || form.attributes[1] == 'rent')? false : form.attributes[8]"
             :value="formattedPrice"
             @set-value="formattedPrice = $event"
           />
