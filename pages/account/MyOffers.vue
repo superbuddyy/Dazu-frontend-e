@@ -24,10 +24,10 @@ export default {
     user: ''
   }),
   mounted () {
-    console.log('mounted')
+    console.log('test')
+    console.log(this.$store)
+    console.log('test1')
     this.user = this.$store.state.user;
-    console.log(this.user)
-    console.log('mountedend')
   },
   methods: {
     //
