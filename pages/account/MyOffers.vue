@@ -13,6 +13,7 @@ import AccountMenu from '@/components/account/AccountMenu'
 import OffersList from '@/components/account/my_offers/OffersList'
 
 export default {
+  middleware: 'authenticated',
   name: 'MyOffers',
   components: {
     AccountMenu,
@@ -20,8 +21,10 @@ export default {
   },
   data: () => ({
     //
+    state: {}
   }),
   mounted () {
+    this.state = this.$store.state;
   },
   methods: {
     //
