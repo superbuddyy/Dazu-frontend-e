@@ -24,7 +24,10 @@ export default {
     user: ''
   }),
   mounted () {
+    console.log('mounted')
     this.user = this.$store.state.user;
+    console.log(this.user)
+    console.log('mountedend')
   },
   methods: {
     //
