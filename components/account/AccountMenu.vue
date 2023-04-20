@@ -38,6 +38,7 @@ export default {
   }),
   mounted() {
     this.user = this.$store.state.user;
+    console.log('test', this.user, 'test2')
   }
 }
 </script>
