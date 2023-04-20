@@ -34,7 +34,9 @@ export default {
     }
   },
   data: () => ({
-    user: ''
+    user: {
+      roles: []
+    }
   }),
   mounted() {
     this.user = this.$store.state.user;

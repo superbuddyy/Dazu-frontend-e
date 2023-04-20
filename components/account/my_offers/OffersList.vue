@@ -331,7 +331,9 @@ export default {
     OfferStats
   },
   data: () => ({
-    user: '',
+    user: {
+      roles: []
+    },
     deactivateOnePopoverVisible: false,
     deactivatePopoverVisible: false,
     checked_offers: [],
