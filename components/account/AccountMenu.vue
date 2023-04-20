@@ -11,7 +11,7 @@
         Moje ogłoszenia
       </nuxt-link>
       <nuxt-link
-        v-if="$store.state.user.roles.includes('company')"
+        v-if="user.roles.includes('company')"
         to="/agenci"
         :class="[ active === 'agents' ? 'menu-item active' : 'menu-item' ]"
       >
@@ -32,6 +32,12 @@ export default {
       default: 'settings',
       type: String
     }
+  },
+  data: () => ({
+    user: ''
+  }),
+  mounted() {
+    this.user = this.$store.state.user;
   }
 }
 </script>

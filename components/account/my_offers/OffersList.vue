@@ -36,11 +36,11 @@
       <!-- <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked" class="mr-5">
         Odśwież
       </el-button> -->
-      <span v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')">
+      <span v-if="!user.roles.includes('user') && !user.roles.includes('agent')">
         Filtruj wg. agentów:
       </span>
       <el-select
-        v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')"
+        v-if="!user.roles.includes('user') && !user.roles.includes('agent')"
         v-model="current_agent"
         class="mr-5"
         filterable
@@ -102,7 +102,7 @@
                 <el-button type="text" @click="showStats(offer.slug)">
                   Zobacz statystyki
                 </el-button>
-                <el-button v-if="!$store.state.user.roles.includes('user') && !$store.state.user.roles.includes('agent')" type="info">
+                <el-button v-if="!user.roles.includes('user') && !user.roles.includes('agent')" type="info">
                   {{ offer.user_name }}
                 </el-button>
               </div>
@@ -331,6 +331,7 @@ export default {
     OfferStats
   },
   data: () => ({
+    user: '',
     deactivateOnePopoverVisible: false,
     deactivatePopoverVisible: false,
     checked_offers: [],
@@ -392,6 +393,7 @@ export default {
   }),
   mounted () {
     this.getOffers('')
+    this.user = this.$store.state.user;
   },
   methods: {
     toolTipText (offer) {
