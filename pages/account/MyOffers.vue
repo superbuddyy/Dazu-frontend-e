@@ -21,10 +21,10 @@ export default {
   },
   data: () => ({
     //
-    state: {}
+    user: ''
   }),
   mounted () {
-    this.state = this.$store.state;
+    this.user = this.$store.state.user;
   },
   methods: {
     //
