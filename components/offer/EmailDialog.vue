@@ -93,6 +93,12 @@ export default {
         return ''
       }
     },
+    offerTargetEmail: {
+      type: String,
+      default () {
+        return ''
+      }
+    },
     userId: {
       type: String,
       default () {
@@ -110,7 +116,8 @@ export default {
         wantToSee: false,
         recaptcha: null,
         date: '',
-        time: ''
+        time: '',
+        targetEmail: ''
       },
       isShowForm: true,
       isDisabled: false
@@ -150,6 +157,7 @@ export default {
   methods: {
     default () {
       this.form.wantToSee = true
+      this.form.targetEmail = this.offerTargetEmail
     },
     active (option) {
       if (option === 2) {
