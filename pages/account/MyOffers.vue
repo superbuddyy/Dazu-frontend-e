@@ -24,14 +24,6 @@ export default {
     user: ''
   }),
   mounted () {
-    console.log('test')
-    console.log(this.$store)
-    console.log('test1')
-    console.log(this.$store.state)
-    console.log('test2')
-    console.log(this.$store.state.user)
-    console.log('test3')
-
     this.user = this.$store.state.user;
   },
   methods: {
