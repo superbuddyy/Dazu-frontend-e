@@ -4,7 +4,7 @@
       active="offers"
     />
     <div class="container">
-      <OffersList />
+      <!-- <OffersList /> -->
     </div>
   </div>
 </template>
