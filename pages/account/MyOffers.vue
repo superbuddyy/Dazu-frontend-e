@@ -1,22 +1,22 @@
 <template>
   <div class="my-offers">
-    <AccountMenu
+    <!-- <AccountMenu
       active="offers"
-    />
+    /> -->
     <div class="container">
       <!-- <OffersList /> -->
     </div>
   </div>
 </template>
 <script>
-import AccountMenu from '@/components/account/AccountMenu'
+// import AccountMenu from '@/components/account/AccountMenu'
 // import OffersList from '@/components/account/my_offers/OffersList'
 
 export default {
   middleware: 'authenticated',
   name: 'MyOffers',
   components: {
-    AccountMenu,
+    // AccountMenu,
     // OffersList
   },
   data: () => ({
