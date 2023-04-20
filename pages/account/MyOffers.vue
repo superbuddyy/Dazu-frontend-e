@@ -13,7 +13,6 @@
 // import OffersList from '@/components/account/my_offers/OffersList'
 
 export default {
-  middleware: 'authenticated',
   name: 'MyOffers',
   components: {
     // AccountMenu,

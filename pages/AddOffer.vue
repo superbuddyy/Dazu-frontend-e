@@ -27,7 +27,6 @@ import { index as categoryIndex } from '@/api/categories'
 
 export default {
   name: 'AddOffer',
-  middleware: 'authenticated',
   components: {
     OfferForm
   },
