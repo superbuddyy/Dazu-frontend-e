@@ -1,22 +1,22 @@
 <template>
   <div class="my-offers">
-    <!-- <AccountMenu
+    <AccountMenu
       active="offers"
-    /> -->
+    />
     <div class="container">
-      <!-- <OffersList /> -->
+      <OffersList />
     </div>
   </div>
 </template>
 <script>
-// import AccountMenu from '@/components/account/AccountMenu'
-// import OffersList from '@/components/account/my_offers/OffersList'
+import AccountMenu from '@/components/account/AccountMenu'
+import OffersList from '@/components/account/my_offers/OffersList'
 
 export default {
   name: 'MyOffers',
   components: {
-    // AccountMenu,
-    // OffersList
+    AccountMenu,
+    OffersList
   },
   data: () => ({
     //
