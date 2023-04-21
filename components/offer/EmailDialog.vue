@@ -202,6 +202,7 @@ export default {
         return
       }
       
+      let format_valid = true
       this.$refs.emailForm.validate((valid) => {
         if (!valid) {
           this.$message({
@@ -209,9 +210,13 @@ export default {
             type: 'error',
             duration: 3000
           })
+          format_valid = false
           return
         }
       })
+
+      if(!format_valid)
+        return
 
       this.$emit('close-dialog')
       if (this.userId !== '' || this.offerSlug === '') {
