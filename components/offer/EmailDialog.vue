@@ -5,7 +5,7 @@
       :visible.sync="dialogVisible"
       :before-close="close"
     >
-      <el-form v-if="isShowForm" :label-position="'left'" :model="form" class="form">
+      <el-form v-if="isShowForm" ref="emailForm" :label-position="'left'" :model="form" class="form" :rules="rules">
         <el-row :span="24">
           <el-col :span="12">
             <el-form-item label="Imię">
@@ -120,7 +120,14 @@ export default {
         targetEmail: ''
       },
       isShowForm: true,
-      isDisabled: false
+      isDisabled: false,
+      rules: {
+        email: [
+          { required: true, message: 'Email jest wymagany', trigger: 'change' },
+          { type: 'email', message: 'Niepoprawny adres email', trigger: ['blur', 'change'] }
+        ],
+        name: { required: true, message: 'Nazwa firmy lub imię jest wymagane', trigger: 'change' }
+      }
     }
   },
   computed: {
@@ -177,11 +184,23 @@ export default {
       this.$emit('close-dialog')
     },
     showAlertDialog () {
-      if (this.form.email === this.$store.state.user.email) {
-        this.send()
-      } else {
-        this.isShowForm = false
-      }
+      // if (this.form.email === this.$store.state.user.email) {
+        // this.send()
+      // } else {
+      //   this.isShowForm = false
+      // }
+      this.$refs.emailForm.validate((valid) => {
+        if (!valid) {
+          this.$message({
+            message: 'Proszę, popraw formularz rejestracji',
+            type: 'error',
+            duration: 3000
+          })
+          return false
+        } else {
+          this.send()
+        }
+      })
     },
     async send () {
       let result = {}
