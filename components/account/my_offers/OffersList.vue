@@ -503,8 +503,8 @@ export default {
         })
       } else if (result.status === 200) {
         this.refreshPaymentDialog = false
-      //   window.location.href = result.data
-      // } else if (result.status === 200) {
+        window.location.href = result.data
+      } else if (result.status === 200) {
         this.$message({
           message: 'Odświeżono ogłoszenie pomyślnie',
           type: 'success',
@@ -528,8 +528,8 @@ export default {
           duration: 3000
         })
       } else if (result.status === 200) {
-        // window.location.href = result.data
-      // } else if (result.status === 200) {
+        window.location.href = result.data
+      } else if (result.status === 200) {
         this.$message({
           message: 'Podbito ogłoszenie pomyślnie',
           type: 'success',
