@@ -8,12 +8,12 @@
       <el-form v-if="isShowForm" ref="emailForm" :label-position="'left'" :model="form" class="form" :rules="rules">
         <el-row :span="24">
           <el-col :span="12">
-            <el-form-item label="Imię">
+            <el-form-item label="Imię" prop="name">
               <el-input v-model="form.name" placeholder="Imię" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Email">
+            <el-form-item label="Email" prop="email">
               <el-input v-model="form.email" :disabled="isDisabled" placeholder="Email" />
             </el-form-item>
           </el-col>
