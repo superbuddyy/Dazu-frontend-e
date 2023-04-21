@@ -189,18 +189,7 @@ export default {
       // } else {
       //   this.isShowForm = false
       // }
-      this.$refs.emailForm.validate((valid) => {
-        if (!valid) {
-          this.$message({
-            message: 'Proszę, popraw formularz rejestracji',
-            type: 'error',
-            duration: 3000
-          })
-          return false
-        } else {
-          this.send()
-        }
-      })
+      this.send()
     },
     async send () {
       let result = {}
@@ -212,6 +201,18 @@ export default {
         })
         return
       }
+      
+      this.$refs.emailForm.validate((valid) => {
+        if (!valid) {
+          this.$message({
+            message: 'Proszę, popraw formularz rejestracji',
+            type: 'error',
+            duration: 3000
+          })
+          return
+        }
+      })
+
       this.$emit('close-dialog')
       if (this.userId !== '' || this.offerSlug === '') {
         result = await sendProfileEmail(this.userId, this.form)
