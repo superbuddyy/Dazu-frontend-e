@@ -493,31 +493,26 @@ export default {
     },
     async refreshUI (slug, gateway) {
       this.loading = true
-      console.log('test refresh')
-
       const result = await refresh(slug, gateway)
-      console.log('test refresh end')
-      
-      console.log(result)
 
-      // if (result.status === 204) {
-      //   this.$message({
-      //     message: 'Odświeżono ogłoszenie pomyślnie',
-      //     type: 'success',
-      //     duration: 3000
-      //   })
-      // } else if (result.status === 200) {
-      //   this.refreshPaymentDialog = false
-      //   window.location.href = result.data
-      // } else if (result.status === 200) {
-      //   this.$message({
-      //     message: 'Odświeżono ogłoszenie pomyślnie',
-      //     type: 'success',
-      //     duration: 3000
-      //   })
-      //   this.offers = result.data.data
-      // }
-      // this.loading = false
+      if (result.status === 204) {
+        this.$message({
+          message: 'Odświeżono ogłoszenie pomyślnie',
+          type: 'success',
+          duration: 3000
+        })
+      } else if (result.status === 200) {
+        this.refreshPaymentDialog = false
+        window.location.href = result.data
+      } else if (result.status === 200) {
+        this.$message({
+          message: 'Odświeżono ogłoszenie pomyślnie',
+          type: 'success',
+          duration: 3000
+        })
+        this.offers = result.data.data
+      }
+      this.loading = false
     },
     async raiseUI (slug, isReduce) {
       this.loading = true
@@ -533,7 +528,8 @@ export default {
           duration: 3000
         })
       } else if (result.status === 200) {
-        window.location.href = result.data
+        console.log('test result', result)
+        // window.location.href = result.data
       } else if (result.status === 200) {
         this.$message({
           message: 'Podbito ogłoszenie pomyślnie',
