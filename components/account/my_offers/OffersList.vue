@@ -493,8 +493,13 @@ export default {
     },
     async refreshUI (slug, gateway) {
       this.loading = true
+      console.log('test refresh')
+
       const result = await refresh(slug, gateway)
-      console.log(result);
+      console.log('test refresh end')
+      
+      console.log(result)
+
       if (result.status === 204) {
         this.$message({
           message: 'Odświeżono ogłoszenie pomyślnie',
