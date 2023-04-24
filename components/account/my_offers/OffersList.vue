@@ -448,9 +448,7 @@ export default {
       this.loading = true
       const result = await raise(this.paymentSlug, gateway)
       this.paymentDialog = false
-      console.log('test result pay', result)
-
-      // window.location.href = result.data
+      window.location.href = result.data
       this.loading = false
     },
     async getOffers (query) {
@@ -505,9 +503,7 @@ export default {
         })
       } else if (result.status === 200) {
         this.refreshPaymentDialog = false
-      console.log('test result refresh', result)
-
-        // window.location.href = result.data
+        window.location.href = result.data
       } else if (result.status === 200) {
         this.$message({
           message: 'Odświeżono ogłoszenie pomyślnie',
@@ -533,7 +529,9 @@ export default {
         })
       } else if (result.status === 200) {
         console.log('test result', result)
-        // window.location.href = result.data
+        if(typeof result.data === 'string'){
+          window.location.href = result.data
+        }
       } else if (result.status === 200) {
         this.$message({
           message: 'Podbito ogłoszenie pomyślnie',
