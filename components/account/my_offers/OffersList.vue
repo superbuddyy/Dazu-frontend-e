@@ -502,15 +502,19 @@ export default {
           duration: 3000
         })
       } else if (result.status === 200) {
-        this.refreshPaymentDialog = false
-        window.location.href = result.data
-      } else if (result.status === 200) {
-        this.$message({
-          message: 'Odświeżono ogłoszenie pomyślnie',
-          type: 'success',
-          duration: 3000
-        })
-        this.offers = result.data.data
+        
+        if(typeof result.data === 'string'){
+          this.refreshPaymentDialog = false
+          window.location.href = result.data
+        } else {
+          this.$message({
+            message: 'Odświeżono ogłoszenie pomyślnie',
+            type: 'success',
+            duration: 3000
+          })
+          this.offers = result.data.data
+        }
+        
       }
       this.loading = false
     },
@@ -531,14 +535,14 @@ export default {
         console.log('test result', result)
         if(typeof result.data === 'string'){
           window.location.href = result.data
-        }
-      } else if (result.status === 200) {
-        this.$message({
-          message: 'Podbito ogłoszenie pomyślnie',
-          type: 'success',
-          duration: 3000
-        })
-        this.offers = result.data.data
+        } else {
+          this.$message({
+            message: 'Podbito ogłoszenie pomyślnie',
+            type: 'success',
+            duration: 3000
+          })
+          this.offers = result.data.data
+        } 
       }
       this.loading = false
     },
