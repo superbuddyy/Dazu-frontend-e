@@ -448,7 +448,9 @@ export default {
       this.loading = true
       const result = await raise(this.paymentSlug, gateway)
       this.paymentDialog = false
-      window.location.href = result.data
+      console.log('test result pay', result)
+
+      // window.location.href = result.data
       this.loading = false
     },
     async getOffers (query) {
@@ -503,7 +505,9 @@ export default {
         })
       } else if (result.status === 200) {
         this.refreshPaymentDialog = false
-        window.location.href = result.data
+      console.log('test result refresh', result)
+
+        // window.location.href = result.data
       } else if (result.status === 200) {
         this.$message({
           message: 'Odświeżono ogłoszenie pomyślnie',
