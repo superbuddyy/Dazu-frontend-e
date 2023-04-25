@@ -534,6 +534,52 @@ export default {
       width: 20%;
     }
 
+    .third-line-filters {
+    height: 20%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .price,
+    .meters,
+    .other {
+      margin: 4px 15px;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .attribute-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      @media only screen and (max-width: 560px) {
+
+        .attr-filter,
+        .price,
+        .meters,
+        .other {
+          width: 100%;
+
+          .el-select {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .el-checkbox {
+      color: #ffffff;
+    }
+  }
+
     .advanced {
       width: 100%;
       display: flex;
