@@ -131,7 +131,6 @@ export default {
       this.defaultAvatar = this.user.default_avatar
     },
     openPhotoDialog () {
-      console.log('test', this.videoUrl)
       this.photoDialog = true
       if (this.videoAvatar) {
         this.avatarVideo = this.videoAvatar

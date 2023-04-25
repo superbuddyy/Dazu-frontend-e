@@ -45,6 +45,9 @@ export default {
   },
   computed: {
     ytLink () {
+      console.log('youtu link is', this.link)
+      console.log('youtu image is', this.imgPath)
+
       if (this.link) {
         const url = new URL(this.link)
         const hostname = url.hostname
@@ -59,6 +62,7 @@ export default {
   },
   mounted () {
     console.log('youtu link is', this.link)
+      console.log('youtu image is', this.imgPath)
   },
   methods: {
     close () {
