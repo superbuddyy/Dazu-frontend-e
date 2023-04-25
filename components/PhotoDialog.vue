@@ -45,10 +45,8 @@ export default {
   },
   computed: {
     ytLink () {
-      console.log('youtu link1 is', this.link)
-      console.log('youtu image1 is', this.imgPath)
 
-      if (this.link) {
+      if (this.link !== '') {
         const url = new URL(this.link)
         const hostname = url.hostname
         if (hostname === 'youtu.be') {
