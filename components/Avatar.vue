@@ -96,6 +96,7 @@ export default {
       if (this.isCompanyUser && this.company) {
         this.userVideoAvatar = this.company.video_avatar ? generatePhotoFromYoutubeLink(this.company.video_avatar) : null
         this.userVideoUrl = this.company.video_avatar ? this.company.video_avatar : this.company.avatar
+        console.log(this.userVideoUrl)
         // this.userVideoAvatar = this.company.video_avatar
         this.userAvatar = this.company.avatar
         this.defaultAvatar = this.company.default_avatar
