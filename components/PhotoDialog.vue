@@ -63,11 +63,16 @@ export default {
     },
     videoYT (videoLink) {
       const parts = videoLink.split('/')
-      return 'https://www.youtube.com/embed/' + parts[parts.length - 1]
+      const result_link = 'https://www.youtube.com/embed/' + parts[parts.length - 1]
+      console.log('youtu link is', result_link)
+      return result_link
     },
     videoRawYT (videoLink) {
+      console.log('youtu link is', )
       const parts = videoLink.split('/')
-      return 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length)
+      const result_link = 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length)
+      console.log('youtu link is', result_link)
+      return result_link
     },
   }
 }
