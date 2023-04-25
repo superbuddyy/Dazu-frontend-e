@@ -45,11 +45,16 @@ export default {
   },
   computed: {
     ytLink () {
+      console.log('youtu link0 is', this.link)
 
       if (this.link !== '') {
+        console.log('youtu link1 is', this.link)
+
         const url = new URL(this.link)
         const hostname = url.hostname
         if (hostname === 'youtu.be') {
+          console.log('youtu link2 is', this.link)
+
           return this.videoYT(this.link)
         } else if(hostname === 'youtube.com'){
           console.log('test result', this.videoRawYT(this.link))
