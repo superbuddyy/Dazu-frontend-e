@@ -66,7 +66,6 @@ export default {
     if (this.$route.query.token) {
       this.verifyToken()
     }
-    console.log('offer', this.offer)
   },
   methods: {
     setFavorite (e) {

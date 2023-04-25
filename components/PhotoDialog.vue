@@ -45,7 +45,6 @@ export default {
   },
   computed: {
     ytLink () {
-      console.log('youtu link is', this.link)
       if (this.link) {
         const url = new URL(this.link)
         const hostname = url.hostname
@@ -58,6 +57,9 @@ export default {
       return ''
     }
   },
+  mounted () {
+    console.log('youtu link is', this.link)
+  },
   methods: {
     close () {
       this.$emit('close')
@@ -65,14 +67,12 @@ export default {
     videoYT (videoLink) {
       const parts = videoLink.split('/')
       const result_link = 'https://www.youtube.com/embed/' + parts[parts.length - 1]
-      console.log('youtu link is', result_link)
       return result_link
     },
     videoRawYT (videoLink) {
       console.log('youtu link is', )
       const parts = videoLink.split('/')
       const result_link = 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length)
-      console.log('youtu link is', result_link)
       return result_link
     },
   }
