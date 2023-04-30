@@ -111,7 +111,7 @@ export default {
     currentPage: 1,
     loading: true,
     filtersVisible: false,
-    filter: 'Najnowsze',
+    filter: 1,
     refreshFilters: false,
     sorting: {
       1: { order_by: 'created_at', order: 'DESC' },
@@ -141,10 +141,10 @@ export default {
     }
   },
   mounted () {
-    this.filter = 'Najnowsze'
+    this.filter = 1
     const queryWithSearch = Object.assign(this.$data.sorting[this.filter], this.$route.query)
     this.searchOffers(1, queryWithSearch)
-    this.getFilters()
+    // this.getFilters()
 
   },
   methods: {
@@ -154,7 +154,6 @@ export default {
     },
     resetFilters () {
       this.$router.replace('/szukaj')
-      this.searchOffers(1, {})
       this.refreshFilters = true
     },
     openSaveFilters () {
