@@ -141,7 +141,9 @@ export default {
     }
   },
   mounted () {
-    this.searchOffers(1, this.$route.query)
+    this.filter = 'Najnowsze'
+    const queryWithSearch = Object.assign(this.$data.sorting[this.filter], this.$route.query)
+    this.searchOffers(1, queryWithSearch)
     this.getFilters()
 
   },
@@ -151,10 +153,8 @@ export default {
       this.searchOffers(1, queryWithSearch)
     },
     resetFilters () {
-      this.filter = 'Najnowsze';
       this.$router.replace('/szukaj')
-      const queryWithSearch = Object.assign(this.$data.sorting[this.filter], this.$route.query)
-      this.searchOffers(1, queryWithSearch)
+      this.searchOffers(1, {})
       this.refreshFilters = true
     },
     openSaveFilters () {
