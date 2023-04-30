@@ -153,7 +153,9 @@ export default {
       this.searchOffers(1, queryWithSearch)
     },
     resetFilters () {
-      this.$router.replace('/szukaj')
+      this.filter = 1
+      const queryWithSearch = Object.assign(this.$data.sorting[this.filter], this.$route.query)
+      this.searchOffers(1, queryWithSearch)
       this.refreshFilters = true
     },
     openSaveFilters () {
