@@ -11,7 +11,7 @@
       </div>
       <div class="right">
         <el-button
-          v-if="$store.state.user.isLogged && $store.state.user.id === offer.user_id"
+          v-if="user.isLogged && user.id === offer.user_id"
           type="primary"
           icon="el-icon-top-right"
           round
@@ -31,7 +31,7 @@
     </div>
     <div class="info-body">
       <div class="personal-data">
-        <template v-if="($store.state.user.isLogged && $store.state.user.id === offer.user_id) || !offer.is_expired">
+        <template v-if="(user.isLogged && user.id === offer.user_id) || !offer.is_expired">
           <div v-if="offer.company && (offer.user.type === 'company' || offer.user.type === 'agent')" class="avatar">
             <Avatar
               :company="offer.company"
@@ -52,7 +52,7 @@
             />
           </div>
         </template>
-        <template v-if="($store.state.user.isLogged && $store.state.user.id === offer.user_id) || !offer.is_expired">
+        <template v-if="(user.isLogged && user.id === offer.user_id) || !offer.is_expired">
           <div v-if="offer.user" class="right-data">
             <div v-if="offer.company && offer.user.type === 'company'" class="company-name">
               <nuxt-link :to="'/profil/' + offer.user.id">
@@ -86,7 +86,7 @@
               </div>
             </div>
             <div
-              v-if="isPreview && !$store.state.user.isLogged"
+              v-if="isPreview && !user.isLogged"
               class="agent"
             >
               <b
@@ -116,10 +116,10 @@
             </div>
           </div>
         </template>
-        <template v-else-if="isPreview && !$store.state.user.isLogged">
+        <template v-else-if="isPreview && !user.isLogged">
           <div class="right-data">
             <div
-              v-if="isPreview && !$store.state.user.isLogged"
+              v-if="isPreview && !user.isLogged"
               class="agent"
             >
               <b
@@ -309,7 +309,8 @@ export default {
       recaptcha: null,
       phone: null,
       videoAvatarAvailable: false,
-      localData: {}
+      localData: {},
+      user
     }
   },
   computed: {
@@ -342,7 +343,8 @@ export default {
     }
   },
   mounted () {
-    if (this.isPreview && !this.$store.state.user.isLogged) {
+    this.user = this.user
+    if (this.isPreview && !this.user.isLogged) {
       this.localData = localStorage.getItem('offer') ? JSON.parse(localStorage.getItem('offer')) : null
     }
   },
