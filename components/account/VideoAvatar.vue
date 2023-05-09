@@ -150,6 +150,7 @@ export default {
       const formData = new FormData()
       formData.append('avatar', this.videoLink)
       formData.append('avatar_type', 'video_url')
+      this.$store.dispatch('user/setVideoAvatar', this.videoLink)
       const result = await storeAvatar(formData)
       if (result.status === 200) {
         window.location.href = result.data
