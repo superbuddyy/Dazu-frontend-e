@@ -52,8 +52,8 @@
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button icon="el-icon-back" @click="close()">Rezygnije</el-button>
-        <el-button type="primary" icon="el-icon-sold-out" @click="pay()">Zamaiam i płacę</el-button>
+        <el-button icon="el-icon-back" @click="close()">Rezygnuję</el-button>
+        <el-button type="primary" icon="el-icon-sold-out" @click="pay()">Zamawiam i płacę</el-button>
       </span>
     </el-dialog>
   </div>
@@ -85,7 +85,7 @@ export default {
   data: () => ({
     loading: false,
     subscriptions: [],
-    selectedItem: null,
+    selectedItem: 0,
     gateway: null,
     paymentDialog: true,
     form: {},
