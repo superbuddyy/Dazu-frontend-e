@@ -15,11 +15,11 @@
         :offer="offer"
         :attributes="attributes"
       />
-      <!-- <OfferInfo
+      <OfferInfo
         :offer="offer"
         :attributes="attributes"
         @set-favorite="setFavorite"
-      /> -->
+      />
     </div>
     <OffersCarousel />
     <PreviewBar
