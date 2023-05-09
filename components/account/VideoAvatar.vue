@@ -5,8 +5,8 @@
     </div>
     <div class="img">
       <a
-        v-if="$store.state.user.videoAvatar"
-        :href="$store.state.user.videoAvatar"
+        v-if="userVideoAvatar"
+        :href="userVideoAvatar"
         target="_blank"
       >
         <div class="video-avatar-block">
@@ -14,7 +14,7 @@
           <el-avatar :size="60" :src="videoAvatarUrl" />
         </div>
       </a>
-      <div v-if="!$store.state.user.videoAvatar" class="video-avatar-block">
+      <div v-if="!userVideoAvatar" class="video-avatar-block">
         <i class="el-icon-video-play video-icon" />
         <el-avatar :size="60" :src="videoAvatarUrl" />
       </div>
@@ -92,6 +92,7 @@ export default {
     checkValue: 'photo',
     checkStatus: false,
     user: null,
+    userVideoAvatar: null,
     avatarLimitMsg: '',
     avatarPrice: ''
   }),
@@ -117,6 +118,8 @@ export default {
     }
   },
   async mounted () {
+    this.userVideoAvatar = this.$store.state.user.videoAvatar
+    console.log('test', this.userVideoAvatar)
     this.checkDefaultAvatar()
     if (this.$store.state.user.isLogged) {
       this.getProfile()
