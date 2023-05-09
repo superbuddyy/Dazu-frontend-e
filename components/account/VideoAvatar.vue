@@ -199,7 +199,7 @@ export default {
         if (result.status === 200) {
           this.$store.dispatch('user/setDefaultAvatar', 'video')
           this.$message({
-            message: 'Changed avatar status',
+            message: 'Zmieniono avatara',
             type: 'success',
             duration: 3000
           })
