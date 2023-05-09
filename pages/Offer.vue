@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading" class="offer-page">
-    <Breadcrumbs
+    <!-- <Breadcrumbs
       :path-elements="getPathName()"
     />
     <el-alert
@@ -9,7 +9,7 @@
       type="warning"
       show-icon
       center
-    />
+    /> -->
     <div class="container">
       <OfferDetails
         :offer="offer"
