@@ -343,7 +343,7 @@ export default {
     }
   },
   mounted () {
-    this.user = this.user
+    this.user = this.$store.state.user
     if (this.isPreview && !this.user.isLogged) {
       this.localData = localStorage.getItem('offer') ? JSON.parse(localStorage.getItem('offer')) : null
     }
