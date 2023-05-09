@@ -310,7 +310,7 @@ export default {
       phone: null,
       videoAvatarAvailable: false,
       localData: {},
-      user: null
+      user: {}
     }
   },
   computed: {
