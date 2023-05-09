@@ -285,7 +285,8 @@ export default {
       default () {
         return {
           user: {
-            name: ''
+            name: '',
+            email: ''
           }
         }
       }
