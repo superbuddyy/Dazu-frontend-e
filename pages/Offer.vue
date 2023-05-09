@@ -20,12 +20,12 @@
         :attributes="attributes"
         @set-favorite="setFavorite"
       />
-    </div>
+    </div> -->
     <OffersCarousel />
     <PreviewBar
       v-if="isPreview"
       :offer-slug="offer.slug"
-    /> -->
+    />
   </div>
 </template>
 <script>
@@ -58,14 +58,14 @@ export default {
     }
   },
   mounted () {
-    // if (this.isPreview && !this.$store.state.user.isLogged) {
-    //   this.getOfferPreviewFromApi()
-    // } else {
-    //   this.getOfferFromApi()
-    // }
-    // if (this.$route.query.token) {
-    //   this.verifyToken()
-    // }
+    if (this.isPreview && !this.$store.state.user.isLogged) {
+      this.getOfferPreviewFromApi()
+    } else {
+      this.getOfferFromApi()
+    }
+    if (this.$route.query.token) {
+      this.verifyToken()
+    }
   },
   methods: {
     setFavorite (e) {
