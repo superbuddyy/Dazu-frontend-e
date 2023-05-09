@@ -222,7 +222,7 @@
       :dialog-visible="emailVisible"
       :offer-slug="offer.slug"
       :offer-title="offer.title"
-      :offer-target-email="offer.title"
+      :offer-target-email="offer.user.avatar"
       @close-dialog="emailVisible = false"
     />
     <SubscriptionsDialog
