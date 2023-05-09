@@ -3,7 +3,7 @@
     <Breadcrumbs
       :path-elements="getPathName()"
     />
-    <!-- <el-alert
+    <el-alert
       v-if="offer.status !== 'active'"
       title="Ogłoszenie jest nieaktywne. (Widoczne tylko dla Ciebie)"
       type="warning"
@@ -15,12 +15,12 @@
         :offer="offer"
         :attributes="attributes"
       />
-      <OfferInfo
+      <!-- <OfferInfo
         :offer="offer"
         :attributes="attributes"
         @set-favorite="setFavorite"
-      />
-    </div> -->
+      /> -->
+    </div>
     <OffersCarousel />
     <PreviewBar
       v-if="isPreview"
