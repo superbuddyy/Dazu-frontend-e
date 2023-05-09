@@ -3,7 +3,7 @@
     <Breadcrumbs
       :path-elements="getPathName()"
     />
-    <el-alert
+    <!-- <el-alert
       v-if="offer.status !== 'active'"
       title="Ogłoszenie jest nieaktywne. (Widoczne tylko dla Ciebie)"
       type="warning"
@@ -25,7 +25,7 @@
     <PreviewBar
       v-if="isPreview"
       :offer-slug="offer.slug"
-    />
+    /> -->
   </div>
 </template>
 <script>
@@ -58,11 +58,11 @@ export default {
     }
   },
   mounted () {
-    if (this.isPreview && !this.$store.state.user.isLogged) {
-      this.getOfferPreviewFromApi()
-    } else {
-      this.getOfferFromApi()
-    }
+    // if (this.isPreview && !this.$store.state.user.isLogged) {
+    //   this.getOfferPreviewFromApi()
+    // } else {
+    //   this.getOfferFromApi()
+    // }
     // if (this.$route.query.token) {
     //   this.verifyToken()
     // }
