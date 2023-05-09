@@ -85,7 +85,7 @@ export default {
   data: () => ({
     loading: false,
     subscriptions: [],
-    selectedItem: 0,
+    selectedItem: null,
     gateway: null,
     paymentDialog: true,
     form: {},
@@ -119,6 +119,14 @@ export default {
       if (this.selectedItem === null) {
         this.$message({
           message: 'Proszę wybrać opcję promowania ogłoszenia',
+          type: 'error',
+          duration: 3000
+        })
+        return
+      }
+      if (this.gateway === null) {
+        this.$message({
+          message: 'Wybierz metodę płatności',
           type: 'error',
           duration: 3000
         })
