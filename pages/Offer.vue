@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading" class="offer-page">
-    <!-- <Breadcrumbs
+    <Breadcrumbs
       :path-elements="getPathName()"
     />
     <el-alert
@@ -9,7 +9,7 @@
       type="warning"
       show-icon
       center
-    /> -->
+    />
     <div class="container">
       <OfferDetails
         :offer="offer"
@@ -63,9 +63,9 @@ export default {
     } else {
       this.getOfferFromApi()
     }
-    if (this.$route.query.token) {
-      this.verifyToken()
-    }
+    // if (this.$route.query.token) {
+    //   this.verifyToken()
+    // }
   },
   methods: {
     setFavorite (e) {
