@@ -323,7 +323,6 @@ export default {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.videoAvatarAvailable = true
         return generatePhotoFromYoutubeLink(this.offer.company.video_avatar)
-        console.log(this.videoAvatar)
       }
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.videoAvatarAvailable = false
