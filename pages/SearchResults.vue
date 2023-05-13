@@ -161,7 +161,7 @@ export default {
 
       this.filter = 1
       this.$router.replace('/szukaj')
-      this.searchOffers(1, this.$data.sorting[this.filter])
+      this.searchOffers(1, this.sorting[this.filter])
       this.refreshFilters = true
     },
     openSaveFilters () {
