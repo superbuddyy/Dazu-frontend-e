@@ -88,7 +88,7 @@ import AttributeFilter from '@/components/Filters/AttributeFilter'
 
 
 export default {
-  name: 'AdvancedSearch',
+  name: 'AdvancedSearch1',
   components: {
     Treeselect,
     AttributeFilter
