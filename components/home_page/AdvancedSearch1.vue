@@ -2,7 +2,7 @@
   <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="advanced-search">
     <div class="first-line">
       <div class="label">
-        Szukam
+        Szukam1
       </div>
       <!-- <el-cascader
         v-model="search.category"
@@ -302,7 +302,7 @@ export default {
     },
     onSearch() {
       // this.$router.replace({ path: '/szukaj', query: buildSearchQuery( this.search) })
-      this.$router.push({ path: '/szukaj', query: buildSearchQuery( this.search) })
+      this.$emit('save', buildSearchQuery(this.search))
       this.$emit('close')
     },
     async getRecentSearch() {
