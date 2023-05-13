@@ -136,9 +136,9 @@ export default {
     '$route.query.phrase' () {
       this.searchOffers(1, this.$route.query)
     },
-    '$route.query' () {
-      this.searchOffers(1, this.$route.query)
-    }
+    // '$route.query' () {
+    //   this.searchOffers(1, this.$route.query)
+    // }
   },
   mounted () {
     this.filter = 1
