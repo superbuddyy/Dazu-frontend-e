@@ -32,7 +32,7 @@
         Przypomnienie hasła
       </div>
       <div class="link" @click="openResendMail">
-        Wyślij email ponownie
+        Wyślij ponownie email aktywacyjny konta
       </div>
     </span>
   </el-dialog>
