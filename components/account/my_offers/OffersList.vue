@@ -147,7 +147,7 @@
                 icon="el-icon-refresh-right"
                 @click="openRefreshPaymentDialog(offer.slug)"
               >
-                Odśwież ({{ offer.refresh_price / 100 }} pln)
+                Odśwież ({{ offer.subscriptions[0].refresh_price / 100 }} pln)
               </el-button>
               <div class="promo-btn">
                 <el-tooltip :content="toolTipText(offer)" placement="top">
