@@ -37,13 +37,13 @@
                     <span v-else-if='subscription.number_of_refreshes > 1 && subscription.number_of_refreshes < 5'>darmowe odświeżenia</span>
                     <span v-else-if='subscription.number_of_refreshes >= 5'>darmowych odświeżeń</span>
                   </div>
-                  <!-- <div class="list-item" v-if="subscription.featured_on_search_results_and_categories === true">
+                  <div class="list-item" v-if="subscription.featured_on_search_results_and_categories === true">
                     <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii w wynikach wyszukiwań i kategoriach
                   </div>
                   <div class="list-item" v-if="subscription.featured_on_homepage === true">
                     <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii na stronie, głównej w wynikach
                     wyszukiwań i kategoriach
-                  </div> -->
+                  </div>
                   <div class="list-item" v-if="subscription.bargain_price / 100 === 0">
                     <i class="el-icon-star-on" /> Żółta ramka z napisem "OKAZJA"
                   </div>
