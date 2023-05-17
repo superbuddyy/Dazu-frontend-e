@@ -136,7 +136,8 @@ export default {
       const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem], gateway: this.gateway } : { gateway: this.gateway }
       const result = await buy(this.selectedItem, this.offerSlug, formInput)
       if (result.status === 200) {
-        window.location.href = result.data
+        console.log('test')
+        // window.location.href = result.data
         this.loading = false
         this.close()
       } else {
