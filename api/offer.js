@@ -29,11 +29,11 @@ export function deactivate (data) {
 }
 
 export function refresh (slug, gateway) {
-  return apiClient.patch('/api/offers/refresh/' + slug + '?gateway=' + gateway)
+  return apiClient.patch('/api/offers/refresh/' + slug + '?gateway=' + gateway + '?platform=desktop')
 }
 
 export function raise (slug, gateway) {
-  return apiClient.patch('/api/offers/raise/' + slug + '?gateway=' + gateway)
+  return apiClient.patch('/api/offers/raise/' + slug + '?gateway=' + gateway + '?platform=desktop')
 }
 
 export function store (data) {
@@ -45,7 +45,7 @@ export function update (offerSlug, data) {
 }
 
 export function charge (slug, data) {
-  return apiClient.post('/api/offers/charge/' + slug, data)
+  return apiClient.post('/api/offers/charge/' + slug, {...data, platform: 'desktop'})
 }
 
 export function getImageBlob (url) {

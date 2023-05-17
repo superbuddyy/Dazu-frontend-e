@@ -5,5 +5,5 @@ export function index () {
 }
 
 export function buy (id, offerSlug, data) {
-  return apiClient.post('/api/subscriptions/' + id + '/' + offerSlug, data)
+  return apiClient.post('/api/subscriptions/' + id + '/' + offerSlug, {...data, platform: 'desktop'} )
 }
