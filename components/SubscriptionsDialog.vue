@@ -110,7 +110,6 @@ export default {
     },
     setSubscriptionPackage (form) {
       this.form = form
-      console.log(this.form)
     },
     setGateway (gateway) {
       this.gateway = gateway
