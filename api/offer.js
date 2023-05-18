@@ -29,11 +29,11 @@ export function deactivate (data) {
 }
 
 export function refresh (slug, gateway) {
-  return apiClient.patch('/api/offers/refresh/' + slug + '?gateway=' + gateway + '?platform=desktop')
+  return apiClient.patch('/api/offers/refresh/' + slug + '?gateway=' + gateway + '&platform=desktop')
 }
 
 export function raise (slug, gateway) {
-  return apiClient.patch('/api/offers/raise/' + slug + '?gateway=' + gateway + '?platform=desktop')
+  return apiClient.patch('/api/offers/raise/' + slug + '?gateway=' + gateway + '&platform=desktop')
 }
 
 export function store (data) {
