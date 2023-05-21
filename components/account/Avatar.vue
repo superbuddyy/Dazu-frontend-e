@@ -112,12 +112,11 @@ export default {
   }),
   computed: {
     avatarUrl () {
-      const user = this.$store.state.user
       const defaultAvatar = this.$config.baseUrl + '/svg/avatar.svg'
-      if (user == null) {
+      if (this.user == null) {
         return defaultAvatar
       }
-      return user.avatar ? user.avatar : defaultAvatar
+      return this.user.avatar ? this.user.avatar : defaultAvatar
     },
     expireTime () {
       return this.user && this.user.avatar_expire_time ? this.user.avatar_expire_time : null
