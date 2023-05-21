@@ -81,7 +81,7 @@
           Usuń
         </el-button>
       </div>
-      <el-button v-if="store_user !== null" slot="reference" type="danger" plain class="avatar-btn">
+      <el-button v-if="store_user.avatar !== null" slot="reference" type="danger" plain class="avatar-btn">
         Usuń
       </el-button>
     </el-popover>
@@ -166,9 +166,6 @@ export default {
       }
     },
     checkDefaultAvatar () {
-      console.log('user local')
-      console.log(user)
-      console.log(user.default_avatar === 'photo')
       if (store_user.default_avatar === 'photo') {
         this.checkStatus = true
       } else {
