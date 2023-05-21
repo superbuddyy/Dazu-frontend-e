@@ -29,7 +29,7 @@ export function storeAgent (data) {
 }
 
 export function storeAvatar (data) {
-  return apiClient.post('/api/user/avatar', {...data, platform: 'desktop'}, { headers: { 'Content-Type': 'multipart/form-data' } })
+  return apiClient.post('/api/user/avatar', data, { headers: { 'Content-Type': 'multipart/form-data' } })
 }
 
 export function deleteAvatar (type) {

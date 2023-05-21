@@ -146,6 +146,7 @@ export default {
       formData.append('avatar', this.avatarFile.raw)
       formData.append('avatar_type', 'photo')
       formData.append('gateway', gateway)
+      formData.append('platform', 'desktop')
       const result = await storeAvatar(formData)
       if (result.status === 200) {
         window.location.href = result.data
