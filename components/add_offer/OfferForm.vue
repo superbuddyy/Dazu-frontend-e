@@ -784,8 +784,6 @@ export default {
       if (url.protocol === 'http:' || url.protocol === 'https:') {
         if (url.hostname === 'youtu.be' || url.hostname === 'vimeo.com') {
           callback()
-        } else if (url.hostname.includes('m.')) {
-          console.log('validate', 'yes')
         } else {
           callback()
         }
@@ -923,6 +921,14 @@ export default {
     mapStyle () {
       return this.$config.mapStyle
     },
+    formattedUrl: {
+      get () {
+        return this.form.links.video
+      },
+      set (newValue) {
+        this.form.links.video = newValue.replace('://m.', '://')
+      }
+    },
     formattedPrice: {
       get () {
         return this.form.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
@@ -950,26 +956,6 @@ export default {
     isPreview () {
       return Object.prototype.hasOwnProperty.call(this.$route.query, 'preview') && this.$route.query.preview
     }
-  },
-  watch: {
-    'form.links.video' (value) {
-      if(value.includes('://start')){
-        console.log('watch', value)
-        this.form.links.video.replace('://start', '://')
-      }
-    },
-    
-    'form.links.video_2' (value) {
-      if(value.includes('://start')){
-        this.form.links.video_2.replace('://start', '://')
-      }
-    },
-
-    'form.links.walk_video' (value) {
-      if(value.includes('://start')){
-        this.form.links.walk_video.replace('://start', '://')
-      }
-    },
   },
   async mounted () {
     this.addOfferForm = this.$store.state.addOfferForm;
