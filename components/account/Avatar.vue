@@ -151,6 +151,7 @@ export default {
       if (result.status === 200) {
         window.location.href = result.data
       }
+      this.deleteAvatarVisible = true
     },
     async removeAvatar () {
       const result = await deleteAvatar('photo')
