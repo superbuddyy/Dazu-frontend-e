@@ -82,7 +82,7 @@
           :class="[(current_agent === '' || offer.user_name === current_agent) ? 'offer' : 'offer-hide']"
         >
           <div class="subscription-badge">
-            {{ offer.subscriptions[0].name?offer.subscriptions[0].name : 'Darmowe' }}
+            {{ offer.subscriptions[0]?offer.subscriptions[0].name : 'Darmowe' }}
           </div>
           <div class="left">
             <div class="checkbox">
