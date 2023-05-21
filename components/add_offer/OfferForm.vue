@@ -283,8 +283,8 @@
           name="Link"
           slug="links.video"
           placeholder="do youtube, vimeo"
-          :value="form.links.video"
-          @set-value="form.links.video = $event"
+          :value="formattedVideo"
+          @set-value="formattedVideo = $event"
         />
       </el-tooltip>
       <el-tooltip :content="linkLimitMsg" placement="top">
@@ -292,8 +292,8 @@
           name="Link"
           slug="links.video_2"
           placeholder="do youtube, vimeo"
-          :value="form.links.video_2"
-          @set-value="form.links.video_2 = $event"
+          :value="formattedVideo2"
+          @set-value="formattedVideo2 = $event"
         />
       </el-tooltip>
       <el-tooltip :content="linkLimitMsg" placement="top">
@@ -301,8 +301,8 @@
           name="Link"
           slug="links.walk_video"
           placeholder="wirtualnego spaceru"
-          :value="form.links.walk_video"
-          @set-value="form.links.walk_video = $event"
+          :value="formattedWalkVideo"
+          @set-value="formattedWalkVideo = $event"
         />
       </el-tooltip>
       <el-row>
@@ -921,12 +921,28 @@ export default {
     mapStyle () {
       return this.$config.mapStyle
     },
-    formattedUrl: {
+    formattedVideo: {
       get () {
         return this.form.links.video
       },
       set (newValue) {
         this.form.links.video = newValue.replace('://m.', '://')
+      }
+    },
+    formattedVideo2: {
+      get () {
+        return this.form.links.video_2
+      },
+      set (newValue) {
+        this.form.links.video_2 = newValue.replace('://m.', '://')
+      }
+    },
+    formattedWalkVideo: {
+      get () {
+        return this.form.links.walk_video
+      },
+      set (newValue) {
+        this.form.links.walk_video = newValue.replace('://m.', '://')
       }
     },
     formattedPrice: {
