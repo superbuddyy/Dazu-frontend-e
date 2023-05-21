@@ -949,6 +949,25 @@ export default {
       return Object.prototype.hasOwnProperty.call(this.$route.query, 'preview') && this.$route.query.preview
     }
   },
+  watch: {
+    'form.links.video' (value) {
+      if(value.includes('://start')){
+        this.form.links.video.replace('://start', '://')
+      }
+    },
+    
+    'form.links.video_2' (value) {
+      if(value.includes('://start')){
+        this.form.links.video_2.replace('://start', '://')
+      }
+    },
+
+    'form.links.walk_video' (value) {
+      if(value.includes('://start')){
+        this.form.links.walk_video.replace('://start', '://')
+      }
+    },
+  },
   async mounted () {
     this.addOfferForm = this.$store.state.addOfferForm;
     this.user = this.$store.state.user;
