@@ -81,7 +81,7 @@
           Usuń
         </el-button>
       </div>
-      <el-button v-if="$store.state.user.avatar !== null" slot="reference" type="danger" plain class="avatar-btn">
+      <el-button v-if="store_user !== null" slot="reference" type="danger" plain class="avatar-btn">
         Usuń
       </el-button>
     </el-popover>
@@ -107,30 +107,31 @@ export default {
     checkValue: 'photo',
     checkStatus: false,
     user: null,
+    store_user: null,
     avatarLimitMsg: '',
     avatarPrice: ''
   }),
   computed: {
     avatarUrl () {
-      const user = this.$store.state.user
       const defaultAvatar = this.$config.baseUrl + '/svg/avatar.svg'
-      if (this.user == null) {
+      if (this.store_user == null) {
         return defaultAvatar
       }
-      return this.user.avatar ? this.user.avatar : defaultAvatar
+      return this.store_user.avatar ? this.store_user.avatar : defaultAvatar
     },
     expireTime () {
       return this.user && this.user.avatar_expire_time ? this.user.avatar_expire_time : null
     }
   },
   watch: {
-    '$store.state.user.default_avatar' () {
+    'store_user.default_avatar' () {
       this.checkDefaultAvatar()
     }
   },
   async mounted () {
+    this.store_user = this.$store.state.user
     this.checkDefaultAvatar()
-    if (this.$store.state.user.isLogged) {
+    if (this.store_user.isLogged) {
       this.getProfile()
     }
     await this.getSettingsValues()
@@ -151,12 +152,11 @@ export default {
       if (result.status === 200) {
         window.location.href = result.data
       }
-      this.deleteAvatarVisible = true
     },
     async removeAvatar () {
       const result = await deleteAvatar('photo')
       if (result.status === 204) {
-        // this.deleteAvatarVisible = false
+        this.deleteAvatarVisible = false
         await this.$store.dispatch('user/setAvatar', null)
         this.$message({
           message: 'Usunięto avatar',
@@ -166,11 +166,10 @@ export default {
       }
     },
     checkDefaultAvatar () {
-      const user = this.$store.state.user
       console.log('user local')
       console.log(user)
       console.log(user.default_avatar === 'photo')
-      if (user.default_avatar === 'photo') {
+      if (store_user.default_avatar === 'photo') {
         this.checkStatus = true
       } else {
         this.checkStatus = false
