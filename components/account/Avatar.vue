@@ -81,7 +81,7 @@
           Usuń
         </el-button>
       </div>
-      <el-button v-if="store_user.avatar !== null" slot="reference" type="danger" plain class="avatar-btn">
+      <el-button v-if="user.avatar !== null" slot="reference" type="danger" plain class="avatar-btn">
         Usuń
       </el-button>
     </el-popover>
@@ -107,31 +107,30 @@ export default {
     checkValue: 'photo',
     checkStatus: false,
     user: null,
-    store_user: null,
     avatarLimitMsg: '',
     avatarPrice: ''
   }),
   computed: {
     avatarUrl () {
+      const user = this.$store.state.user
       const defaultAvatar = this.$config.baseUrl + '/svg/avatar.svg'
-      if (this.store_user == null) {
+      if (user == null) {
         return defaultAvatar
       }
-      return this.store_user.avatar ? this.store_user.avatar : defaultAvatar
+      return user.avatar ? user.avatar : defaultAvatar
     },
     expireTime () {
       return this.user && this.user.avatar_expire_time ? this.user.avatar_expire_time : null
     }
   },
   watch: {
-    'store_user.default_avatar' () {
+    '$store.state.user.default_avatar' () {
       this.checkDefaultAvatar()
     }
   },
   async mounted () {
-    this.store_user = this.$store.state.user
     this.checkDefaultAvatar()
-    if (this.store_user.isLogged) {
+    if (this.$store.state.user.isLogged) {
       this.getProfile()
     }
     await this.getSettingsValues()
@@ -166,7 +165,11 @@ export default {
       }
     },
     checkDefaultAvatar () {
-      if (store_user.default_avatar === 'photo') {
+      const user = this.$store.state.user
+      console.log('user local')
+      console.log(user)
+      console.log(user.default_avatar === 'photo')
+      if (user.default_avatar === 'photo') {
         this.checkStatus = true
       } else {
         this.checkStatus = false
