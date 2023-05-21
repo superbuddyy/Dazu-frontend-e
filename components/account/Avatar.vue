@@ -114,7 +114,7 @@ export default {
     avatarUrl () {
       // const user = this.$store.state.user
       const defaultAvatar = this.$config.baseUrl + '/svg/avatar.svg'
-      if (user == null) {
+      if (this.user == null) {
         return defaultAvatar
       }
       return this.user.avatar ? this.user.avatar : defaultAvatar
