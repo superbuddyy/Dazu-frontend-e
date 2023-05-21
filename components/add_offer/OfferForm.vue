@@ -784,6 +784,8 @@ export default {
       if (url.protocol === 'http:' || url.protocol === 'https:') {
         if (url.hostname === 'youtu.be' || url.hostname === 'vimeo.com') {
           callback()
+        } else if (url.hostname.includes('m.')) {
+          console.log('validate', 'yes')
         } else {
           callback()
         }
@@ -952,6 +954,7 @@ export default {
   watch: {
     'form.links.video' (value) {
       if(value.includes('://start')){
+        console.log('watch', value)
         this.form.links.video.replace('://start', '://')
       }
     },
