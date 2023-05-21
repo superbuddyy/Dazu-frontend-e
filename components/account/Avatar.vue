@@ -112,7 +112,7 @@ export default {
   }),
   computed: {
     avatarUrl () {
-      // const user = this.$store.state.user
+      const user = this.$store.state.user
       const defaultAvatar = this.$config.baseUrl + '/svg/avatar.svg'
       if (this.user == null) {
         return defaultAvatar
@@ -153,11 +153,10 @@ export default {
       }
     },
     async removeAvatar () {
-      const result = await deleteAvatar()
+      const result = await deleteAvatar('photo')
       if (result.status === 204) {
         this.deleteAvatarVisible = false
         await this.$store.dispatch('user/setAvatar', null)
-        this.user.avatar = null
         this.$message({
           message: 'Usunięto avatar',
           type: 'success',
