@@ -157,6 +157,7 @@ export default {
       if (result.status === 204) {
         this.deleteAvatarVisible = false
         await this.$store.dispatch('user/setAvatar', null)
+        this.user.avatar = null
         this.$message({
           message: 'Usunięto avatar',
           type: 'success',
