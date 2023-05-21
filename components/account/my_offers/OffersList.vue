@@ -186,7 +186,9 @@
                 </el-button>
               </nuxt-link>
               <div class="promo-btn">
-                <el-button class="promo" type="primary" round icon="el-icon-star-on" @click="openSubscriptionsDialog(offer.slug)">
+                <el-button class="promo" type="primary" round icon="el-icon-star-on" 
+                :disabled="offer.status=='in_active'"
+                @click="openSubscriptionsDialog(offer.slug)">
                   Promuj
                 </el-button>
               </div>
