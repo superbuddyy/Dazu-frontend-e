@@ -82,7 +82,7 @@
           :class="[(current_agent === '' || offer.user_name === current_agent) ? 'offer' : 'offer-hide']"
         >
           <div class="subscription-badge">
-            {{ offer.subscriptions[0].name }}
+            {{ offer.subscriptions[0].name?offer.subscriptions[0].name : 'Darmowe' }}
           </div>
           <div class="left">
             <div class="checkbox">
@@ -222,7 +222,7 @@
                 <i class="el-icon-warning-outline" />
                 Wygasło
               </div>
-              <el-button
+              <!-- <el-button
                 v-if="offer.is_expired && offer.refresh_price === 0"
                 type="text"
                 icon="el-icon-refresh-right"
@@ -237,7 +237,7 @@
                 @click="openRefreshPaymentDialog(offer.slug)"
               >
                 Odśwież ({{ offer.refresh_price / 100 }} pln)
-              </el-button>
+              </el-button> -->
               <el-button
                 v-if="offer.status === 'pending' && !offer.is_expired"
                 type="text"
