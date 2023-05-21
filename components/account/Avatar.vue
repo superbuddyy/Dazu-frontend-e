@@ -156,7 +156,7 @@ export default {
     async removeAvatar () {
       const result = await deleteAvatar('photo')
       if (result.status === 204) {
-        this.deleteAvatarVisible = false
+        // this.deleteAvatarVisible = false
         await this.$store.dispatch('user/setAvatar', null)
         this.$message({
           message: 'Usunięto avatar',
