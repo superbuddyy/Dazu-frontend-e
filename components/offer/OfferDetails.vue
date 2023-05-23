@@ -94,7 +94,8 @@ export default {
     },
     videoRawYT (videoLink) {
       const parts = videoLink.split('/')
-      return 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length)
+      const deep_parts = parts[parts.length - 1].split('&')
+      return 'https://www.youtube.com/embed/' + deep_parts[0].slice(8, deep_parts[0].length)
     },
     videoYT (videoLink) {
       const parts = videoLink.split('/')

@@ -71,9 +71,9 @@ export default {
       return result_link
     },
     videoRawYT (videoLink) {
-      console.log('youtu link is', )
       const parts = videoLink.split('/')
-      const result_link = 'https://www.youtube.com/embed/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length)
+      const deep_parts = parts[parts.length - 1].split('&')
+      const result_link = 'https://www.youtube.com/embed/' + deep_parts[0].slice(8, deep_parts[0].length)
       return result_link
     },
   }

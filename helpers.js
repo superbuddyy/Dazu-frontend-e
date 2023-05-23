@@ -256,7 +256,8 @@ export function generatePhotoFromYoutubeLink (videoLink) {
     return 'https://img.youtube.com/vi/' + parts[parts.length - 1] + '/0.jpg'
   }else if (videoLink.includes('www.youtube.com')){
     const parts = videoLink.split('/')
-    return 'https://img.youtube.com/vi/' + parts[parts.length - 1].slice(8, parts[parts.length - 1].length) + '/0.jpg'
+    const deep_parts = parts[parts.length - 1].split('&')
+    return 'https://img.youtube.com/vi/' + deep_parts[0].slice(8, deep_parts[0].length) + '/0.jpg'
   }else{
     return videoLink
   }
