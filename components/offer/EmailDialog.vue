@@ -147,11 +147,11 @@ export default {
       }
     },
     'form.wantToSee' (value) {
-      // if (value) {
+      if (value) {
         this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + '. Proponowane oglądanie jak najszybciej'
-      // } else {
-      //   this.form.message = ''
-      // }
+      } else {
+        this.form.message = ''
+      }
     }
   },
   mounted () {
