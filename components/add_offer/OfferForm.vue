@@ -648,9 +648,9 @@
           </el-button>
           <el-button
             type="plain"
-            :class="[ form.user.account_type === 'company' ? 'active' : '' ]"
+            :class="[ form.user.account_type === 'agency' ? 'active' : '' ]"
             disabled
-            @click="setUserType('company')"
+            @click="setUserType('agency')"
           >
             Agencją nieruchomości
           </el-button>
@@ -999,7 +999,10 @@ export default {
       }
     }
     if (this.user.isLogged) {
-      this.form.user.account_type = this.user.type;
+      this.form.user.account_type = this.user.roles[0];
+      if(this.form.user.account_type === 'company'){
+        this.form.user.account_type = this.user.type;
+      }
     }
     if (this.$route.params.slug) {
       let result = {}
