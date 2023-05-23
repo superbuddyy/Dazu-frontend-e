@@ -74,6 +74,21 @@ export default {
     const user = this.$store.state.user
     this.email = this.$store.state.user.email
     this.type = this.$store.state.user.roles[0]
+    //translate
+    switch(this.type){
+      case 'user':
+        this.type = 'Konto prywatne'
+        break;
+      case 'company':
+        if(this.$store.state.user.type === 'developer')
+          this.type = 'Deweloper'
+        else
+          this.type = 'Agencja'
+        break;
+      case 'agent':
+        this.type = 'Agent'
+        break;
+    }
     this.form = {
       name: user.name,
       phone: user.phone,
