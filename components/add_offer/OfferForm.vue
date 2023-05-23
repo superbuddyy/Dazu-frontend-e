@@ -638,35 +638,51 @@
       </div>
       <div v-if="user.isLogged" class="contact-form">
         <el-form-item label="Jestem">
+          <div
+            v-if="form.user.account_type !== 'agent'"
+          >
+            <el-button
+              type="plain"
+              :class="[ form.user.account_type === 'user' ? 'active' : '' ]"
+              disabled
+              @click="setUserType('user')"
+            >
+              Osobą prywatną
+            </el-button>
+            <el-button
+              type="plain"
+              :class="[ form.user.account_type === 'agency' ? 'active' : '' ]"
+              disabled
+              @click="setUserType('agency')"
+            >
+              Agencją nieruchomości
+            </el-button>
+            <el-button
+              type="plain"
+              :class="[ form.user.account_type === 'developer' ? 'active' : '' ]"
+              disabled
+              @click="setUserType('developer')"
+            >
+              Deweloperem
+            </el-button>
+          </div>
           <el-button
+            v-else
             type="plain"
-            :class="[ form.user.account_type === 'user' ? 'active' : '' ]"
+            class="active"
             disabled
             @click="setUserType('user')"
           >
-            Osobą prywatną
-          </el-button>
-          <el-button
-            type="plain"
-            :class="[ form.user.account_type === 'agency' ? 'active' : '' ]"
-            disabled
-            @click="setUserType('agency')"
-          >
-            Agencją nieruchomości
-          </el-button>
-          <el-button
-            type="plain"
-            :class="[ form.user.account_type === 'developer' ? 'active' : '' ]"
-            disabled
-            @click="setUserType('developer')"
-          >
-            Deweloperem
+            Agent
           </el-button>
         </el-form-item>
         <el-form-item v-if="form.user.account_type === 'user'" label="Imię">
           <el-input v-model="user.name" placeholder="Imię" disabled/>
         </el-form-item>
-        <el-form-item v-if="form.user.account_type !== 'user'" label="Nazwa Firmy">
+        <el-form-item v-if="form.user.account_type === 'agent'" label="W Firmie">
+          <el-input v-model="user.name" placeholder="W Firmie" disabled/>
+        </el-form-item>
+        <el-form-item v-if="form.user.account_type !== 'user' && form.user.account_type !== 'agent'" label="Nazwa Firmy">
           <el-input v-model="user.name" placeholder="Nazwa Firmy" disabled/>
         </el-form-item>
         <el-row class="contact">
