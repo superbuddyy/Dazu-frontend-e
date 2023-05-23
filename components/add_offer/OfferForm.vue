@@ -999,7 +999,7 @@ export default {
       }
     }
     if (this.user.isLogged) {
-      this.form.user.account_type = this.user.roles[0]
+      this.form.user.account_type = this.user.type;
     }
     if (this.$route.params.slug) {
       let result = {}

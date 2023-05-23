@@ -22,6 +22,7 @@ export const state = () => ({
   newsletter: false,
   introduction: '',
   roles: [],
+  type: '',
   permissions: [],
   subscriptions: null
 })
@@ -63,6 +64,9 @@ export const mutations = {
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
+  SET_TYPE: (state, type) => {
+    state.type = type
+  },
   SET_PERMISSIONS: (state, permissions) => {
     state.permissions = permissions
   },
@@ -91,6 +95,7 @@ export const actions = {
           commit('SET_NIP', response.data.nip)
           commit('SET_ADDRESS', response.data.address)
           commit('SET_ROLES', response.data.roles)
+          commit('SET_TYPE', response.data.type)
           commit('SET_PERMISSIONS', response.data.permissions)
           commit('SET_NAME', response.data.name)
           commit('SET_EMAIL', response.data.email)
