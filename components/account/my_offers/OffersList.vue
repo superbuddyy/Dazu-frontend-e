@@ -137,6 +137,7 @@
                 round
                 icon="el-icon-refresh-right"
                 @click="refreshUI(offer.slug)"
+                :disabled="offer.status=='in_active' || offer.status=='pending'"
               >
                 Odśwież
               </el-button>
@@ -145,6 +146,7 @@
                 type="primary"
                 round
                 icon="el-icon-refresh-right"
+                :disabled="offer.status=='in_active' || offer.status=='pending'"
                 @click="openRefreshPaymentDialog(offer.slug)"
               >
                 Odśwież ({{ offer.subscriptions[0].refresh_price / 100 }} pln)
