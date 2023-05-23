@@ -21,12 +21,9 @@
         <h3>Edytuj informacje</h3>
         <el-input v-model="form.name" placeholder="Imię lub nazwa firmy" class="input" />
         <el-input
-          type="number"
-          min="0"
           v-model="form.phone"
           placeholder="Telefon"
           class="input"
-          onkeyup="value = value.replace(/[^\d]/g, 0)"
         />
         <el-input v-model="form.street" placeholder="Ulica i numer domu/mieszkania" class="input" />
         <el-input v-model="form.zip_code" placeholder="Kod Pocztowy" class="input" />
