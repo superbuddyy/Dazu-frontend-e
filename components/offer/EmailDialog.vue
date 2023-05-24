@@ -163,8 +163,8 @@ export default {
   },
   methods: {
     default () {
-      this.form.wantToSee = true
-      this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + '. Proponowane oglądanie jak najszybciej'
+      // this.form.wantToSee = true
+      // this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + '. Proponowane oglądanie jak najszybciej'
       this.form.targetEmail = this.offerTargetEmail
     },
     active (option) {
