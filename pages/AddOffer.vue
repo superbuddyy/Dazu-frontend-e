@@ -1,7 +1,7 @@
 <template>
   <div class="add-offer-page">
     <div class="title">
-      <h1>Add an announcement</h1>
+      <h1>Post Ad</h1>
     </div>
 
     <div class="container">

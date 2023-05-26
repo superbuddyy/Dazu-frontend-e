@@ -320,20 +320,19 @@ a {
 }
 
 .nav {
-  padding: 24px;
-  padding-top:79px;
+  padding: 24px 24px 0 24px;
   right: 0;
   left: 0;
   position: absolute;
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 150px;
   background-color:white;
   .nav-brand-search {
     width:50%;
     display: flex;
     flex-direction:row;
+    align-items: center;
     .logo {
       color: #ff19b7;
       cursor: pointer;

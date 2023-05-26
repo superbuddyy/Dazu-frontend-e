@@ -369,7 +369,7 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="" class="visible-date">
-            <div>Chcesz aby ogłoszenie pojawiło się w innym terminie?</div>
+            <div>Do you want the ad to appear at a different date?</div>
             <div v-if="dateLimitMsg !== ''" class="el-form-item__error">{{dateLimitMsg}}</div>
             <el-date-picker
               v-model="form.visibleFromDate"
@@ -703,7 +703,7 @@
           Preview
         </el-button>
         <el-button v-if="viewType === 'create'" type="primary" @click="onSubmit(false)">
-          Add an announcement
+          Post Ad
         </el-button>
         <el-button v-if="viewType === 'update'" @click="cancelEdit">
           Cancel
@@ -715,7 +715,7 @@
           Preview
         </el-button>
         <el-button v-if="viewType === 'preview'" type="primary" @click="onSubmitPreview(false)">
-          Add an announcement
+          Post Ad
         </el-button>
       </el-form-item>
     </el-form>

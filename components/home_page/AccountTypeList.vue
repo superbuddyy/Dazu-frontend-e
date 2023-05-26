@@ -1,7 +1,7 @@
 <template>
   <div class="account-types-list-bg">
     <h2 class="title">
-      Add an announcement
+      Post Ad
     </h2>
     <div class="account-types-list">
       <SubscriptionsNew

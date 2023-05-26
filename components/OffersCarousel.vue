@@ -190,8 +190,9 @@ export default {
     margin: 0 10px;
     overflow: hidden;
     background-color: white;
+    border: 1px solid #f1f1f1!important;
     &:hover {
-      border: 1px solid #f1f1f1!important;
+      border: 2px solid #f1f1f1!important;
     }
 
     .bargain {

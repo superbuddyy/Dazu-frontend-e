@@ -1,5 +1,5 @@
 <template>
-  <el-form-item label="Announcement type">
+  <el-form-item label="Ad type">
     <el-button type="plain" :class="[ type === 'sell' ? 'active' : '' ]" @click="setType('sell')">
       I will sell
     </el-button>

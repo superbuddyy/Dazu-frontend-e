@@ -90,7 +90,10 @@ export default {
     mapAttributes (attributes) {
       const mappedAttributes = []
       for (const attr of attributes) {
-        if ([2, 5, 6, 7, 8, 13, 20].includes(attr.id)) {
+        // if ([2, 5, 6, 7, 8, 13, 20].includes(attr.id)) {
+        //   continue
+        // }
+        if ([].includes(attr.id)) {
           continue
         }
         if (attr.id in mappedAttributes) {
@@ -115,7 +118,7 @@ export default {
       const result = await verifyContact({ token: this.$route.query.token })
       if (result.status === 204 || result.status === 200) {
         this.$message({
-          message: 'Message was sent',
+          message: 'Wiadomość została wysłana',
           type: 'success',
           duration: 3000
         })

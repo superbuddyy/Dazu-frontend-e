@@ -172,6 +172,7 @@ export default {
 
   .min-img {
     height: 100px;
+    width:33.33333%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

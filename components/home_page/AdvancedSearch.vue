@@ -31,7 +31,7 @@
       </el-button>
       <el-button v-if="!visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-bottom"
         @click="toggleAdvanced">
-        More Option
+        More Options
       </el-button>
       <el-button v-if="visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-top"
         @click="toggleAdvanced">
@@ -45,7 +45,7 @@
             <div class="label">
               Cena
             </div>
-            <el-select v-model="search.price.min" placeholder="Minimal" filterable clearable>
+            <el-select v-model="search.price.min" placeholder="Minimal" filterable clearable :style="{marginRight: '24px'}">
               <el-option v-for="item in priceMinFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
@@ -58,7 +58,7 @@
             <div class="label">
               Surface
             </div>
-            <el-select v-model="search['metraz'].min" placeholder="Minimal" filterable clearable>
+            <el-select v-model="search['metraz'].min" placeholder="Minimal" filterable clearable :style="{marginRight: '24px'}">
               <el-option v-for="item in metrazMinFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>

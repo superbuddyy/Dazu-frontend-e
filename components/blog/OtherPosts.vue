@@ -1,10 +1,15 @@
 <template>
   <div class="other-posts">
-    <h2>Other entries</h2>
+    <h2>Other blog posts</h2>
     <div class="posts">
       <nuxt-link v-for="post in posts" :key="post.id" :to="'/blog/' + post.slug" class="post">
-        <img :src="post.main_photo_url" alt="">
-        <h3>{{ post.title }}</h3>
+        <div class="img">
+          <img :src="post.main_photo_url" alt="">
+        </div> 
+        <div class="post-info">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.created_at }}</p>
+        </div>
       </nuxt-link>
     </div>
   </div>
@@ -26,15 +31,12 @@ export default {
 
 <style lang="scss">
 .other-posts {
-  overflow-y: scroll;
-  width: 20%;
-  border-left: 1px solid #e2e2e2;
-  padding-left: 10px;
-
   h2 {
-    border-bottom: 1px solid #e2e2e2;
-    padding-bottom: 10px;
-    color: #000000;
+    font-family: 'Epilogue';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 30px;
   }
 
   .posts {
@@ -43,9 +45,8 @@ export default {
 
     .post {
       display: flex;
-      margin-top: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #e2e2e2;
+      margin-top: 25px;
+      background-color: white;
       cursor: pointer;
       &:hover {
         h3 {
@@ -53,16 +54,30 @@ export default {
         }
       }
 
-      img {
-        width: 100px;
-        height: 60px;
+      .img {
+        width: 270px;
+        height: 166.7px;
+        img {
+          width: 270px;
+          height: 166.7px;
+          object-fit: cover;
+          padding: 5px;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
       }
-
-      h3 {
-        margin-left: 10px;
-        font-size: 16px;
-        color: #000000;
-        text-underline: none;
+      .post-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        h3 {
+          font-size: 22px;
+          color: #000000;
+          text-underline: none;
+        }
+        p {
+          color: #353434;
+        }
       }
     }
   }

@@ -369,7 +369,6 @@ export default {
 }
 
 .advanced-search {
-  background-color: rgba(4, 30, 21, .8);
   display: flex;
   flex-direction: column;
   width: 70%;

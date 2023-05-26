@@ -142,7 +142,6 @@ export default {
     font-weight: bold;
   }
   .content {
-    background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
   }

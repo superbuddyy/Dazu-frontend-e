@@ -1,7 +1,7 @@
 <template>
   <div class="offer-info">
     <div class="header-section">
-      <div class="left">
+      <!-- <div class="left">
         <div class="date">
           {{ offer.created_at }}
         </div>
@@ -27,9 +27,46 @@
           @add-favorite="addFavorite"
           @remove-favorite="removeFavorite"
         />
-      </div>
+      </div> -->
     </div>
     <div class="info-body">
+      <div class="price-tags">
+        <div class="price">
+          <b><Money :money="offer.price" /></b>
+        </div>
+        <div class="tags">
+          <el-tag v-if="offer.is_urgent" type="danger" class="urgent_label">
+            URGENT
+          </el-tag>
+          <el-tag v-if="offer.is_promoted" type="warn" class="offer_label">
+            OPPORTUNITY
+          </el-tag>
+          <el-tag v-if="offer.is_installments" type="info">
+            In installments
+          </el-tag>
+          <el-tag v-if="offer.is_for_negotiations" type="info">
+            To negotiate
+          </el-tag>
+          <el-tag v-if="offer.is_with_bills" type="info">
+            Bills included
+          </el-tag>
+          <el-tag v-if="offer.is_per_month" type="info">
+            PLN/month
+          </el-tag>
+          <el-tag v-if="offer.is_free" type="info">
+            Free
+          </el-tag>
+          <el-tag v-if="offer.is_available_now" type="info">
+            Available immediately
+          </el-tag>
+        </div>
+      </div>
+      <div class="text">
+        <h1>{{ offer.title }}</h1>
+      </div>
+      <div class="text">
+        <p v-if="offer.location">{{ offer.location.name }}</p>
+      </div>
       <div class="personal-data">
         <template v-if="(user.isLogged && user.id === offer.user_id) || !offer.is_expired">
           <div v-if="offer.company && (offer.user.type === 'company' || offer.user.type === 'agent')" class="avatar">
@@ -58,14 +95,15 @@
               <nuxt-link :to="'/profil/' + offer.user.id">
                 {{ offer.company.name }}
               </nuxt-link>
-              <div class="fvt-usr-btn">
+              <el-button type="default" class="fvt-usr-btn">
+                Save
                 <FavoriteUser
                   class="favorite-btn"
                   :userSlug="offer.user.id"
                   :isFavoriteUser="offer.user.is_favorite_user"
                   size="20"
                 />
-              </div>
+              </el-button>
             </div>
             <div
               v-if="(offer.user.type === 'user' || offer.user.type === 'agent' || offer.user.type === 'admin')"
@@ -77,6 +115,7 @@
                 <nuxt-link :to="'/profil/' + offer.user.id">{{ offer.user.name }}</nuxt-link>
               </b>
               <div class="fvt-usr-btn">
+                Save
                 <FavoriteUser
                   class="favorite-btn"
                   :userSlug="offer.user.id"
@@ -95,6 +134,7 @@
                 {{ localData.user.name }}
               </b>
               <div class="fvt-usr-btn">
+                Save
                 <FavoriteUser
                   class="favorite-btn"
                   :userSlug="offer.user.id"
@@ -104,10 +144,10 @@
               </div>
             </div>
             <div class="buttons">
-              <el-button v-if="offer.user && offer.user.phone" type="plain" round @click="showPhone">
+              <el-button v-if="offer.user && offer.user.phone" type="plain" @click="showPhone" :style="{width: '150px'}">
                 Call
               </el-button>
-              <el-button type="primary" round @click="emailVisible = true">
+              <el-button type="primary" class="black-button" @click="emailVisible = true" :style="{width: '150px'}">
                 Send an email
               </el-button>
             </div>
@@ -125,9 +165,10 @@
               <b
                 class="agent-name"
               >
-                {{ localData.user.name }}
+                <!-- {{ localData.user.name }} -->
               </b>
               <div class="fvt-usr-btn">
+                Save
                 <FavoriteUser
                   class="favorite-btn"
                   :userSlug="offer.user.id"
@@ -151,38 +192,6 @@
         </template>
       </div>
       <div class="text">
-        <h1>{{ offer.title }}</h1>
-      </div>
-      <div class="price">
-        Cena: <b><Money :money="offer.price" /></b>
-      </div>
-      <div class="tags">
-        <el-tag v-if="offer.is_urgent" type="danger" class="urgent_label">
-          URGENT
-        </el-tag>
-        <el-tag v-if="offer.is_promoted" type="warn" class="offer_label">
-          OPPORTUNITY
-        </el-tag>
-        <el-tag v-if="offer.is_installments" type="info">
-          In installments
-        </el-tag>
-        <el-tag v-if="offer.is_for_negotiations" type="info">
-          To negotiate
-        </el-tag>
-        <el-tag v-if="offer.is_with_bills" type="info">
-          Bills included
-        </el-tag>
-        <el-tag v-if="offer.is_per_month" type="info">
-          PLN/month
-        </el-tag>
-        <el-tag v-if="offer.is_free" type="info">
-          Free
-        </el-tag>
-        <el-tag v-if="offer.is_available_now" type="info">
-          Available immediately
-        </el-tag>
-      </div>
-      <div class="text">
         <p v-html="offer.description">
         </p>
       </div>
@@ -193,12 +202,12 @@
         >
           <el-table-column
             prop="name"
-            label="Atrybut"
+            label="Attribute"
             width="200px"
           />
           <el-table-column
             prop="result"
-            label="Wartość"
+            label="Value"
           />
         </el-table>
       </div>
@@ -387,6 +396,13 @@ export default {
     display: flex;
     justify-content: center;
   }
+  .black-button {
+    background-color: black;
+    border: none;
+  }
+  .black-button:hover {
+    background-color: #424242;
+  }
   .offer-info {
     padding: 0 40px;
     .header-section {
@@ -415,8 +431,10 @@ export default {
 
     .info-body {
       .agent {
+        width:100%;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         margin-bottom: 10px;
         .agent-avatar-img {
           width: 42px;
@@ -431,7 +449,7 @@ export default {
       }
 
       .personal-data {
-        // background: #f5f5f5;
+        background-color: #f1f1f1;
         padding: 19px 10px;
         margin: 20px 0 20px 0;
         display: flex;
@@ -453,8 +471,8 @@ export default {
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
+            background-color: white;
             border-radius: 12px;
-            background-color: #f5f5f5;
           }
         }
 
@@ -487,6 +505,11 @@ export default {
               color: #000000;
             }
           }
+          .company-name {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+          }
           .fvt-usr-btn {
             display: flex;
             margin-left: 15px;
@@ -497,27 +520,32 @@ export default {
       .text {
         margin: 20px 0;
       }
-      .price {
-        margin-bottom: 6px;
-        .el-badge__content.is-fixed {
-          top: -4px;
+      .price-tags{
+        display: flex;
+        align-items: center;
+        .price {
+          .el-badge__content.is-fixed {
+            top: -4px;
+          }
+          b {
+            color: #000000;
+            font-size: 25px;
+          }
         }
-        b {
-          color: #ff19b7;
+        .tags {
+          display:flex;
+          align-items: center;
+          .el-tag {
+            margin-left: 10px;
+            color: #000000;
+          }
         }
       }
-
-      .tags {
-        margin-bottom: 30px;
-
-        .el-tag {
-          color: #000000;
-        }
-      }
-
       .text {
         h1 {
           font-size: 20px;
+          text-align: left;
+          margin-bottom:10px;
         }
         p {
           margin: 10px 0;
