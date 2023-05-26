@@ -3,36 +3,41 @@
     <flickity v-if="offers.length > 0" ref="flickity" :options="flickityOptions" @init="onInit">
       <div v-for="(offer, index) in offers" :key="index" class="carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote') ) ? 'featured_l' : '' ]">
         <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer-link">
-          <span class="featured_img_label" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
+          <!-- <span class="featured_img_label" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
             <img src="~/assets/Star.svg" style="width: 24px;">
+          </span> -->
+          <span class="featured_img_label">
+            <el-button v-if="offer.type" class="badge button_offer_type" size="mini">{{offer.type}}</el-button>
           </span>
-          <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Okazja</span>
-          <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Pilne</span>
           <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + store_settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
           </div>
           <div v-if="offer.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}">
           </div>
-          <div class="description">
-            {{ offer.title }}
-          </div>
           <div class="info">
-            <div class="price">
+            <div class="price-and-badge">
               <Money
                 :money="offer.price"
               />
+              <el-button v-if="offer.is_with_bills" class="badge button_bill_included" size="mini">Bills included</el-button>
+              <!-- <span v-if="offer.is_promoted" class="badge">Opportunity</span> -->
+              
+              <el-button v-if="offer.is_urgent" class="badge button_urgent" size="mini">Urgent</el-button>
             </div>
-
-            <div v-if="offer.type" class="type">
-              {{ offer.type }}
+            <div class="description">
+              {{offer.title}}
             </div>
-            <div v-if="offer.is_with_bills" class="badge">
-              Rachunki wliczone
+            <div class="location">
+              {{ offer.location_name }}
             </div>
           </div>
         </nuxt-link>
         <div class="bottom">
-          <div class="location">
-            {{ offer.location_name }}
+          <div class="user-info">
+            <div class="user-img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}"></div>
+            <div class="user-name-company">
+              <p class="user-name">{{offer.user_name}}</p>
+              <p class="user-company">company</p>
+            </div>
           </div>
           <Favorite
             :offer-slug="offer.slug"
@@ -160,9 +165,8 @@ export default {
 
 <style lang="scss">
 .offers {
-  height: 340px;
-  margin: 80px 6vw 80px 6vw;
-
+  height: auto;
+  padding: 50px;
   .flickity-page-dots {
     .dot {
       width: 4px;
@@ -171,10 +175,10 @@ export default {
   }
 
   .carousel-cell {
-    height: 320px;
-    width: 300px;
-    padding: 14px;
-    max-width: 300px;
+    height: 592px;
+    width: 450px;
+    padding: 10px;
+    max-width: 592px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -185,6 +189,7 @@ export default {
     outline: 0 !important;
     margin: 0 10px;
     overflow: hidden;
+    background-color: white;
     &:hover {
       border: 1px solid #f1f1f1!important;
     }
@@ -193,14 +198,15 @@ export default {
       position: absolute;
       top: 0;
     }
-
+    
     .img {
-      height: 200px;
+      height: 367px;
       width: 100%;
       background-size: cover;
       background-position: center;
       position: relative;
       overflow: hidden;
+      border-radius: 5px;
 
       .img-label {
         -webkit-transform: rotate(-45deg);
@@ -228,34 +234,52 @@ export default {
 
     .description {
       margin: 4px 0;
+      font-weight: bold;
     }
 
     .info {
       color: #000000;
       display: flex;
+      flex-direction: column;
       justify-content: space-around;
-      align-items: center;
+      align-items: left;
       margin: 10px 0 0 0;
 
-      .type, .price {
+      .type, .price-and-badge {
         font-weight: bold;
         text-transform: uppercase;
+        display: flex;
       }
 
       .type {
         font-size: 13px;
       }
-
-      .badge {
-        text-align: center;
-        border-radius: 14px;
-        background: #f5f5f5;
-        padding: 4px 6px;
-        font-size: 13px;
-        text-transform: lowercase;
-      }
     }
-
+    .badge {
+      color: white;
+      font-weight: 500;
+      /* font-family: sans-serif; */
+      padding: 4px 8px;
+      margin-left: 10px;
+    }
+    .button_urgent {
+      background-color: #F50000;
+      
+    }
+    .button_bill_included {
+      background-color: #000000;
+    }
+    .button_offer_type {
+      background-color: #000000;
+    }
+    .location {
+      font-family: 'Inconsolata';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 21px;
+      color: #555555;
+    }
     .bottom {
       display: flex;
       justify-content: space-between;
@@ -263,12 +287,21 @@ export default {
       margin-top: 10px;
       text-align: left;
       width: 100%;
-      .location {
-        font-weight: bold;
-        font-size: 13px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      .user-info {
+        display: flex;
+        .user-img {
+          width: 78px;
+          height: 78px;
+          background-size: 100% auto;
+        }
+        .user-name-company {
+          display:flex;
+          flex-direction: column;
+          margin-left: 10px;
+          .user-name {
+            font-weight: bold;
+          }
+        }
       }
     }
 
@@ -279,11 +312,9 @@ export default {
     }
   }
   .carousel-cell.featured_l {
-    border: 2px solid #FFF8E2 !important;
     border-radius: 5px;
   }
   .carousel-cell.featured_l:hover {
-    border: 2px solid #FFF8E2 !important;
   }
   .carousel-cell span.featured_img_label {
     position: absolute;

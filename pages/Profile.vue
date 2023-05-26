@@ -10,10 +10,10 @@
       <div class="details">
         <div class="stats">
           <div class="stat">
-            Data rejestracji: <span>{{ user.created_at }}</span>
+            Date of registration: <span>{{ user.created_at }}</span>
           </div>
           <div class="stat">
-            Ilość ogłoszeń: <span>{{ user.offers_count }}</span>
+            Number of ads: <span>{{ user.offers_count }}</span>
           </div>
         </div>
         <div class="name">
@@ -33,11 +33,11 @@
             v-if="phone === null && user && user.phone"
             @click="recaptchaVisible = true"
           >
-            Pokaż numer
+            Show number
           </el-button>
           <b v-if="phone !== null">{{ phone }}</b>
           <el-button type="primary" @click="emailVisible = true">
-            Wyślij wiadomość
+            Send a message
           </el-button>
         </div>
       </div>
@@ -55,7 +55,7 @@
       @close-dialog="emailVisible = false"
     />
     <el-dialog
-      title="Zweryfikuj, że nie jesteś robotem, aby zobaczyć numer telefonu"
+      title="Please verify that you are not a robot to see the phone number"
       :visible.sync="recaptchaVisible"
       width="500px"
     >

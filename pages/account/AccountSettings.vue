@@ -6,7 +6,7 @@
         <Avatar />
         <VideoAvatar/>
         <div slot="tip" class="el-upload__tip fw-bld" v-if="$store.state.user.roles.includes('company')">
-          Uwaga! Aby poprawnie dodać link do wideo, prosimi zapoznać się z sekcja dotyczącą dodawania linków w
+          Attention! To properly add a link to a video, please refer to the section on adding links in
             <a
               href="/faq"
               target="_blank"
@@ -52,7 +52,7 @@ export default {
   mounted () {
     if (this.$route.query['payment-status'] === 'success') {
       this.$message({
-        message: 'Płatność została zrealizowana.',
+        message: 'The payment has been made.',
         type: 'success',
         duration: 3000
       })

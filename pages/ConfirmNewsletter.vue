@@ -1,9 +1,9 @@
 <template>
   <div class="confirm-newsletter">
     <div class="container">
-      <h1>Pomyslinie zapisano do newslettera</h1>
+      <h1>Successfully subscribed to the newsletter</h1>
       <p>
-        Za chwile zostaniesz przekierowany na stronę główną. Jeśli to nie nastąpi
+        You will be redirected to the home page in a moment. If that doesn't happen
         <nuxt-link :to="'/'">
           kliknij tutaj
         </nuxt-link>

@@ -4,16 +4,16 @@
       <div class="info">
         <div class="container">
           <h2>Dazu</h2>
-          <p>Ogłoszenia nieruchomości</p>
+          <p>Real Estate Ads</p>
         </div>
       </div>
       <div class="newsletter">
         <div class="container">
-          <b>Zapisz się do newslettera</b>
+          <b>Subscribe to the newsletter</b>
           <div style="margin-top: 15px;">
-            <el-input v-model="newsletterEmail" placeholder="Twój email" class="input-with-select">
+            <el-input v-model="newsletterEmail" placeholder="Your e-mail" class="input-with-select">
               <el-button slot="append" type="primary" @click="addToNewsletter">
-                Subskrybuj
+                Subscribe
               </el-button>
             </el-input>
           </div>
@@ -57,7 +57,7 @@
             </li> -->
             <li>
               <nuxt-link to="/kontakt">
-                Kontakt
+                Contact
               </nuxt-link>
             </li>
             <li>
@@ -67,12 +67,12 @@
             </li>
             <li>
               <nuxt-link to="/">
-                Strona Główna
+                Home
               </nuxt-link>
             </li>
             <li>
               <div v-if="!user.isLogged" class="login" @click="toggleLogin">
-                Logowanie/Rejestracja
+                Login/Registration
               </div>
             </li>
           </ul>
@@ -150,13 +150,13 @@ export default {
       const result = await store({ email: this.newsletterEmail })
       if (result.status === 204) {
         this.$message({
-          message: 'Potwierdź zapis do newslettera klikając w link wysłany na podany adres email.',
+          message: 'Confirm your subscription to the newsletter by clicking on the link sent to the e-mail address provided.',
           type: 'success',
           duration: 3000
         })
       } else if (result.status === 200) {
         this.$message({
-          message: 'Gratulujemy. Twój newsletter jest aktywny',
+          message: 'Congratulations. Your newsletter is active',
           type: 'success',
           duration: 3000
         })

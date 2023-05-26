@@ -6,7 +6,7 @@
       <el-table-column
         fixed
         prop="created_at"
-        label="Data dodania"
+        label="Delivery dates"
       />
       <el-table-column
         fixed
@@ -16,17 +16,17 @@
       <el-table-column
         fixed
         prop="description"
-        label="Tytuł"
+        label="Title"
       />
       <el-table-column
         fixed
         prop="total"
-        label="Suma"
+        label="Addition"
         :formatter="moneyFormatter"
       />
       <el-table-column
         fixed="right"
-        label="Akcje"
+        label="Actions"
       >
         <template slot-scope="scope">
           <el-button
@@ -34,7 +34,7 @@
             size="small"
             @click="generateInvoice(scope.row.id)"
           >
-            Faktura
+            Invoice
             <i class="el-icon-right el-icon-right" />
           </el-button>
         </template>

@@ -12,13 +12,13 @@
         <div class="logo" @click="$router.push('/')">
           Dazu
         </div>
-        <el-form-item label="Lokalizacja" class="location">
+        <el-form-item label="Location" class="location">
           <el-select
             v-model="location"
             class="location-input"
             filterable
             remote
-            placeholder="Lokalizacja"
+            placeholder="Location"
             :remote-method="getLocations"
             :loading="locationsLoading"
             :debounce="500"
@@ -34,7 +34,7 @@
           </el-select>
         </el-form-item>
         <el-form-item
-          label="Kategoria"
+          label="Category"
           class="category"
         >
           <!-- <el-cascader
@@ -47,7 +47,7 @@
             v-model="search.category"
             :multiple="true"
             :options="filters.categories"
-            placeholder="Wybierz"
+            placeholder="Choose"
           />
           <!-- :always-open="true" -->
         </el-form-item>
@@ -62,7 +62,7 @@
         <div class="search">
           <el-button @click="resetFilters">Wyczyść filtry</el-button>
           <el-button type="primary" @click="searchResults()">
-            Szukaj
+            Search
           </el-button>
           <el-button
             v-if="!advancedSearch"
@@ -70,7 +70,7 @@
             icon="el-icon-caret-bottom"
             @click="toggleAdvanced()"
           >
-            Więcej
+            More
           </el-button>
           <el-button
             v-if="advancedSearch"
@@ -78,7 +78,7 @@
             icon="el-icon-caret-top"
             @click="toggleAdvanced()"
           >
-            Zwiń
+            Collapse
           </el-button>
         </div>
       </div>
@@ -90,7 +90,7 @@
                 <div class="label">
                   Cena
                 </div>
-                <el-select v-model="search.price.min" placeholder="Minimalna" filterable clearable>
+                <el-select v-model="search.price.min" placeholder="Minimal" filterable clearable>
                   <el-option
                     v-for="item in filters.price.min"
                     :key="item"
@@ -98,7 +98,7 @@
                     :value="item"
                   />
                 </el-select>
-                <el-select v-model="search.price.max" placeholder="Maksymalna" filterable clearable>
+                <el-select v-model="search.price.max" placeholder="Maximal" filterable clearable>
                   <el-option
                     v-for="item in filters.price.max"
                     :key="item"
@@ -109,9 +109,9 @@
               </div>
               <div class="meters">
                 <div class="label">
-                  Metraż
+                  Yardage
                 </div>
-                <el-select v-model="search['metraz'].min" placeholder="Minimalna" filterable clearable>
+                <el-select v-model="search['metraz'].min" placeholder="Minimal" filterable clearable>
                   <el-option
                     v-for="item in filters.attributes['metraz'].min"
                     :key="item"
@@ -119,7 +119,7 @@
                     :value="item"
                   />
                 </el-select>
-                <el-select v-model="search['metraz'].max" placeholder="Maksymalna" filterable clearable>
+                <el-select v-model="search['metraz'].max" placeholder="Maximal" filterable clearable>
                   <el-option
                     v-for="item in filters.attributes['metraz'].max"
                     :key="item"
@@ -177,7 +177,7 @@
     <div v-if="offers && offersVisible" v-infinite-scroll="loadOffers" infinite-scroll-delay="500" class="map-offers">
       <div class="close" @click="closeOffers">
         <span>
-          Zamknij
+          Close
           <i class="el-icon-close" />
         </span>
       </div>
@@ -202,10 +202,10 @@
               </div>
               <div class="tags">
                 <el-tag v-if="offer.is_promoted" type="warn" class="offer_label">
-                  OKAZJA
+                  OPPORTUNITY
                 </el-tag>
                 <el-tag v-if="offer.is_urgent" type="danger" class="urgent_label">
-                  PILNE
+                  URGENT
                 </el-tag>
               </div>
               <div class="type">
@@ -222,22 +222,22 @@
             />
             <nuxt-link :to="'/ogloszenia/' + offer.slug">
               <el-button type="primary">
-                Zobacz
+                Look
               </el-button>
             </nuxt-link>
           </div>
         </div>
       </div>
       <p v-if="loadingMore" class="loading-more">
-        Ładowanie...
+        Landing...
       </p>
     </div>
     <div class="map-buttons">
       <el-button type="primary" @click="openSaveFilters">
-        Zapisz wyszukiwanie
+        Save the search
       </el-button>
       <el-button @click="closeMap">
-        Wyjdź z widoku mapy
+        Exit map view
       </el-button>
     </div>
     <SaveFilters

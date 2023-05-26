@@ -21,7 +21,7 @@
           <i class="el-icon-delete-solid" @click="removeImage(index)" />
           <img :src="element.url" alt="test">
           <div v-if="index === 0 && isProjectPlan === false" class="name">
-            Zdjęcie główne
+            Main photo
           </div>
         </div>
       </transition-group>
@@ -95,7 +95,7 @@ export default {
       const isLt5M = file.size / 1024 / 1024 < 5
       if (!isLt5M) {
         this.$message({
-          message: 'Zdjęcie nie może być większe niż 5MB',
+          message: 'The photo cannot be larger than 5MB',
           type: 'error',
           duration: 3000
         })
@@ -109,7 +109,7 @@ export default {
     },
     limitExceed () {
       this.$message({
-        message: 'Możesz dodać maksymalnie ' + this.limit + ' zdjęć!',
+        message: 'You can add max ' + this.limit + ' photos!',
         type: 'warning',
         duration: 3000
       })

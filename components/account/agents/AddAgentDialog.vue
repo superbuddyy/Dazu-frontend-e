@@ -1,7 +1,7 @@
 <template>
   <div v-loading="loading" class="report-dialog">
     <el-dialog
-      title="Dodaj agenta"
+      title="Add agent"
       :visible.sync="dialogVisible"
       width="40%"
       :before-close="close"
@@ -10,8 +10,8 @@
         <el-form-item label="Email" prop="email">
           <el-input v-model="form.email" placeholder="Email" />
         </el-form-item>
-        <el-form-item label="Imię" prop="name">
-          <el-input v-model="form.name" placeholder="Imię" />
+        <el-form-item label="Name" prop="name">
+          <el-input v-model="form.name" placeholder="Name" />
         </el-form-item>
         <!--        <vue-recaptcha-->
         <!--          ref="recaptcha"-->
@@ -61,7 +61,7 @@ export default {
       const result = await storeAgent(this.form)
       if (result.status === 200) {
         this.$message({
-          message: 'Na email agenta został wysłany link aktywacyjny',
+          message: 'An activation link has been sent to the agent\'s email',
           type: 'success',
           duration: 3000
         })

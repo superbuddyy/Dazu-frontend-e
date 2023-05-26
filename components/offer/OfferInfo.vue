@@ -6,7 +6,7 @@
           {{ offer.created_at }}
         </div>
         <div v-if="false" class="views">
-          Odwiedzeń: x
+          Visits: x
         </div>
       </div>
       <div class="right">
@@ -105,14 +105,14 @@
             </div>
             <div class="buttons">
               <el-button v-if="offer.user && offer.user.phone" type="plain" round @click="showPhone">
-                Zadzwoń
+                Call
               </el-button>
               <el-button type="primary" round @click="emailVisible = true">
-                Wyślij maila
+                Send an email
               </el-button>
             </div>
             <div v-if="phone !== null" class="phone">
-              Numer telefonu: {{ phone }}
+              Phone number: {{ phone }}
             </div>
           </div>
         </template>
@@ -138,14 +138,14 @@
             </div>
             <div class="buttons">
               <el-button v-if="offer.user && offer.user.phone" type="plain" round @click="showPhone">
-                Zadzwoń
+                Call
               </el-button>
               <el-button type="primary" round @click="emailVisible = true">
-                Wyślij maila
+                Send an email
               </el-button>
             </div>
             <div v-if="phone !== null" class="phone">
-              Numer telefonu: {{ phone }}
+              Phone number: {{ phone }}
             </div>
           </div>
         </template>
@@ -158,28 +158,28 @@
       </div>
       <div class="tags">
         <el-tag v-if="offer.is_urgent" type="danger" class="urgent_label">
-          PILNE
+          URGENT
         </el-tag>
         <el-tag v-if="offer.is_promoted" type="warn" class="offer_label">
-          OKAZJA
+          OPPORTUNITY
         </el-tag>
         <el-tag v-if="offer.is_installments" type="info">
-          Na raty
+          In installments
         </el-tag>
         <el-tag v-if="offer.is_for_negotiations" type="info">
-          Do negocjacji
+          To negotiate
         </el-tag>
         <el-tag v-if="offer.is_with_bills" type="info">
-          Rachunki wliczone
+          Bills included
         </el-tag>
         <el-tag v-if="offer.is_per_month" type="info">
-          Zł/mc
+          PLN/month
         </el-tag>
         <el-tag v-if="offer.is_free" type="info">
-          Darmowe
+          Free
         </el-tag>
         <el-tag v-if="offer.is_available_now" type="info">
-          Dostepne od zaraz
+          Available immediately
         </el-tag>
       </div>
       <div class="text">
@@ -204,7 +204,7 @@
       </div>
       <div class="report">
         <el-button type="text" @click="reportVisible = true">
-          Zgłoś to ogłoszenie
+          Report this ad
           <i class="el-icon-warning-outline" />
         </el-button>
       </div>
@@ -237,7 +237,7 @@
       @close="photoDialog = false"
     />
     <el-dialog
-      title="Zweryfikuj, że nie jesteś robotem, aby zobaczyć numer telefonu"
+      title="Please verify that you are not a robot to see the phone number"
       :visible.sync="recaptchaVisible"
     >
       <div class="captcha">

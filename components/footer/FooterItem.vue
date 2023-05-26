@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'FaqItem',
+  name: 'PageItem',
   props: {
     title: {
       type: String,

@@ -2,15 +2,15 @@
   <div class="delete-account">
     <div class="delete-container">
       <div class="texts">
-        <h3>Przykro nam, że odchodzisz, już tęskinimy.</h3>
-        <b>Czy na pewno chcesz usunąć konto?</b>
+        <h3>We're sorry you're leaving, we miss you already.</h3>
+        <b>Are you sure you want to delete your account?</b>
       </div>
       <div class="emoticon">
         <el-button type="info" class="sad" @click="softDelete">
-          Tak, usuń
+          Yes, delete
         </el-button>
         <el-button type="primary" class="happy" @click="cancel">
-          Anuluj, chcę tu zostać
+          Cancel, I want to stay here
         </el-button>
         <div class="smiley">
           <div class="eyes">
@@ -36,7 +36,7 @@ export default {
         this.$store.dispatch('user/logout')
         this.$router.push('/')
         this.$message({
-          message: 'Konto zostanie usunięte do 60dni',
+          message: 'The account will be deleted within 60 days',
           type: 'success',
           duration: 3000
         })

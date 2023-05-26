@@ -6,35 +6,35 @@
         <div class="left">
           <el-select v-model="filter" @change="sortResults($event)">
             <el-option
-              label="Najnowsze"
+              label="Latest"
               :value="1"
             />
             <el-option
-              label="Najstarsze"
+              label="The oldest"
               :value="2"
             />
             <el-option
-              label="Cena rosnąca"
+              label="Ascending price"
               :value="3"
             />
             <el-option
-              label="Cena malejąco"
+              label="Price descending"
               :value="4"
             />
           </el-select>
         </div>
         <div class="right">
           <el-button type="primary" @click="openSaveFilters">
-            Zapisz wyszukiwanie
+            Save the search
           </el-button>
           <el-button type="plane" @click="mapVisible = true">
-            Mapa <i class="el-icon-location-information" />
+            Map <i class="el-icon-location-information" />
           </el-button>
           <el-button type="plain" @click="filtersVisible = true" class="filters-btn">
             <div v-if="filtersExists" class="filters-exists" /> Filtry <img src="~/assets/filter-icon.svg" alt="">
           </el-button>
           <el-button type="plain" @click="resetFilters">
-            Wyczyść filtry
+            Clear filters
           </el-button>
         </div>
       </div>

@@ -64,7 +64,7 @@ export default {
           labels: result.data.labels,
           datasets: [
             {
-              label: 'Wyświetlenia',
+              label: 'Impressions',
               data: result.data.data,
               backgroundColor: 'transparent',
               borderColor: 'rgba(1, 116, 188, 0.50)',
@@ -84,7 +84,7 @@ export default {
           },
           title: {
             display: true,
-            text: 'Ilość odsłon od opublikowania'
+            text: 'Number of views since publication'
           }
         }
       }

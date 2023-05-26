@@ -1,16 +1,16 @@
 <template>
-  <el-form-item label="Typ Ogłoszenia">
+  <el-form-item label="Announcement type">
     <el-button type="plain" :class="[ type === 'sell' ? 'active' : '' ]" @click="setType('sell')">
-      Sprzedam
+      I will sell
     </el-button>
     <el-button type="plain" :class="[ type === 'rent' ? 'active' : '' ]" @click="setType('rent')">
-      Wynajmę
+      I will rent
     </el-button>
     <el-button type="plain" :class="[ type === 'exchange' ? 'active' : '' ]" @click="setType('exchange')">
-      Zamienię
+      I will replace
     </el-button>
     <el-button type="plain" :class="[ type === 'for_free' ? 'active' : '' ]" @click="setType('for_free')">
-      Oddam
+      I will give
     </el-button>
   </el-form-item>
 </template>

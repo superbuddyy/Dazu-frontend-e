@@ -19,7 +19,7 @@ export default {
         },
         title: {
           display: true,
-          text: 'Ilość odsłon od opublikowania'
+          text: 'Number of views since publication'
         }
       }
     }

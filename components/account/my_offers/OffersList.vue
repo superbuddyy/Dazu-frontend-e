@@ -3,41 +3,41 @@
     <div class="panel">
       <el-row class="search-row">
         <el-col :span="7">
-          <el-input v-model="searchTxt" clearable placeholder="Poszukaj ogłoszenia" @clear="searchOfferList" />
+          <el-input v-model="searchTxt" clearable placeholder="Search for an ad" @clear="searchOfferList" />
         </el-col>
         <el-col :span="2" class="search-box-btn">
           <el-button type="primary" class="login-btn" @click="searchOfferList">
-            Szukaj
+            Search
           </el-button>
         </el-col>
       </el-row>
     </div>
     <div class="panel">
       <el-checkbox class="check-box" @change="checkAll">
-        Zaznacz wszystkie
+        Select all
       </el-checkbox>
       <el-popover
         v-model="deactivatePopoverVisible"
         placement="bottom"
       >
-        <p>Czy na pewno chcesz zdezaktywować?</p>
+        <p>Are you sure you want to deactivate?</p>
         <div style="text-align: center; margin: 0">
           <el-button size="mini" type="text" @click="deactivatePopoverVisible = false">
-            Nie
+            No
           </el-button>
           <el-button type="primary" size="mini" @click="deactivateChecked">
-            Tak
+            Yes
           </el-button>
         </div>
         <el-button slot="reference" type="danger" round icon="el-icon-circle-close" class="mr-5">
-          Dezaktywuj
+          Deactivate
         </el-button>
       </el-popover>
       <!-- <el-button type="primary" round icon="el-icon-refresh-right" @click="refreshChecked" class="mr-5">
         Odśwież
       </el-button> -->
       <span v-if="!user.roles.includes('user') && !user.roles.includes('agent')">
-        Filtruj wg. agentów:
+        Filter by agents:
       </span>
       <el-select
         v-if="!user.roles.includes('user') && !user.roles.includes('agent')"
@@ -45,7 +45,7 @@
         class="mr-5"
         filterable
         clearable
-        placeholder="Wybierz tagi dla swojego artykułu"
+        placeholder="Choose tags for your article"
         @change="searchOfferList()"
       >
         <el-option
@@ -61,7 +61,7 @@
         v-model="changeOrder"
         class="location-input"
         filterable
-        placeholder="Wybierz opcje sortowania"
+        placeholder="Select sorting options"
         clearable
         @change="changeOfferList"
       >
@@ -82,7 +82,7 @@
           :class="[(current_agent === '' || offer.user_name === current_agent) ? 'offer' : 'offer-hide']"
         >
           <div class="subscription-badge">
-            {{ offer.subscriptions[0]?offer.subscriptions[0].name : 'Darmowe' }}
+            {{ offer.subscriptions[0]?offer.subscriptions[0].name : 'Free' }}
           </div>
           <div class="left">
             <div class="checkbox">
@@ -93,14 +93,14 @@
                 {{ offer.title }}
               </nuxt-link>
               <div class="location">
-                Lokalizacja: {{ offer.location_name }}
+                Location: {{ offer.location_name }}
               </div>
               <div class="stats">
                 <div class="views">
-                  <span>{{ offer.views }}</span> Odsłon
+                  <span>{{ offer.views }}</span> Views
                 </div>
                 <el-button type="text" @click="showStats(offer.slug)">
-                  Zobacz statystyki
+                  View statistics
                 </el-button>
                 <el-button v-if="!user.roles.includes('user') && !user.roles.includes('agent')" type="info">
                   {{ offer.user_name }}
@@ -117,18 +117,18 @@
                 v-model="offer.showDialog"
                 placement="bottom"
               >
-                <p>Czy na pewno chcesz zdezaktywować?</p>
+                <p>Are you sure you want to deactivate?</p>
                 <div style="text-align: center; margin: 0">
                   <el-button size="mini" type="text" @click="offer.showDialog = false">
-                    Nie
+                    No
                   </el-button>
                   <el-button type="primary" size="mini" @click="deactivateOne(offer.id)">
-                    Tak
+                    Yes
                   </el-button>
                 </div>
               </el-popover>
               <el-button slot="reference" type="danger" round icon="el-icon-circle-close" @click="offer.showDialog = true">
-                Dezaktywuj
+                Deactivate
               </el-button>
               <el-button
                 v-if="offer.refresh_price === 0"
@@ -139,7 +139,7 @@
                 @click="refreshUI(offer.slug)"
                 :disabled="offer.status=='in_active' || offer.status=='pending'"
               >
-                Odśwież
+                Refresh
               </el-button>
               <el-button
                 v-if="offer.refresh_price !== 0"
@@ -149,7 +149,7 @@
                 :disabled="offer.status=='in_active' || offer.status=='pending'"
                 @click="openRefreshPaymentDialog(offer.slug)"
               >
-                Odśwież ({{ offer.subscriptions[0].refresh_price / 100 }} pln)
+                Refresh ({{ offer.subscriptions[0].refresh_price / 100 }} pln)
               </el-button>
               <div class="promo-btn">
                 <el-tooltip :content="toolTipText(offer)" placement="top">
@@ -160,7 +160,7 @@
                     icon="el-icon-upload2"
                     @click="raiseUI(offer.slug, true)"
                   >
-                    Podbij
+                    Conquer
                   </el-button>
                   <el-button
                     v-else-if="offer.raise_price === 0"
@@ -169,7 +169,7 @@
                     icon="el-icon-upload2"
                     @click="raiseUI(offer.slug, false)"
                   >
-                    Podbij
+                    Conquer
                   </el-button>
                   <el-button
                     v-else-if="offer.raise_price !== 0"
@@ -178,53 +178,53 @@
                     icon="el-icon-upload2"
                     @click="openPaymentDialog(offer.slug)"
                   >
-                    Podbij
+                    Conquer
                   </el-button>
                 </el-tooltip>
               </div>
               <nuxt-link :to="'/moje-ogloszenia/edytuj-ogloszenie/' + offer.slug" class="edit-btn">
                 <el-button type="info" round icon="el-icon-edit">
-                  Edytuj
+                  Edit
                 </el-button>
               </nuxt-link>
               <div class="promo-btn">
                 <el-button class="promo" type="primary" round icon="el-icon-star-on" 
                 :disabled="offer.status=='in_active'"
                 @click="openSubscriptionsDialog(offer.slug)">
-                  Promuj
+                  Promote
                 </el-button>
               </div>
             </div>
             <div class="stats">
               <div v-if="offer.status === 'in_active' && !offer.is_expired" class="status-inactive">
                 <i class="el-icon-circle-close" />
-                Nieaktywne
+                Inactive
                 <span class="tip">
-                  (Oczekuje na akceptacje)
+                  (Awaiting approvals)
                 </span>
               </div>
               <div v-if="offer.status === 'in_active_by_user' && !offer.is_expired" class="status-inactive">
                 <i class="el-icon-circle-close" />
-                Nieaktywne
+                Inactive
                 <span class="tip">
-                  (dezaktywowane przez użytkownika)
+                  (Deactivated by the user)
                 </span>
               </div>
               <div v-if="offer.status === 'rejected' && !offer.is_expired" class="status-inactive">
                 <i class="el-icon-close" />
-                Odrzucone - {{ offer.note }}
+                Rejected - {{ offer.note }}
               </div>
               <div v-if="offer.status === 'active' && !offer.is_expired" class="status-active">
                 <i class="el-icon-circle-check" />
-                Aktywne
+                Active
               </div>
               <div v-if="offer.status === 'pending' && !offer.is_expired" class="status-pending">
                 <i class="el-icon-time" />
-                Oczekuje na płatność
+                Awaiting payment
               </div>
               <div v-if="offer.is_expired" class="status-expired">
                 <i class="el-icon-warning-outline" />
-                Wygasło
+                Expired
               </div>
               <!-- <el-button
                 v-if="offer.is_expired && offer.refresh_price === 0"
@@ -248,7 +248,7 @@
                 icon="el-icon-sold-out"
                 @click="redirectToPayPage(offer.slug, 'charge')"
               >
-                Opłać
+                Pay up
               </el-button>
             </div>
           </div>
@@ -271,7 +271,7 @@
     />
     <el-dialog
       v-loading="loading"
-      title="Wybierz metodę płatności"
+      title="Choose payment method"
       :visible.sync="paymentDialog"
       center
     >
@@ -292,7 +292,7 @@
     </el-dialog>
     <el-dialog
       v-loading="loading"
-      title="Wybierz metodę płatności"
+      title="Choose payment method"
       :visible.sync="refreshPaymentDialog"
       center
     >
@@ -362,37 +362,37 @@ export default {
     sortOptions: [
       {
         id: 1,
-        name: 'Najnowsze',
+        name: 'Latest',
         value: 'desc'
       },
       {
         id: 2,
-        name: 'Najstarsze',
+        name: 'The oldest',
         value: 'asc'
       },
       {
         id: 3,
-        name: 'Aktywne',
+        name: 'Active',
         value: 'active'
       },
       {
         id: 4,
-        name: 'Dezaktywowane',
+        name: 'Deactivated',
         value: 'in_active'
       },
       {
         id: 5,
-        name: 'Dezaktywowany przez użytkownika',
+        name: 'Deactivated by user',
         value: 'in_active_by_user'
       },
       {
         id: 6,
-        name: 'oczekuje na zatwierdzenie',
+        name: 'pending approval',
         value: 'pending'
       },
       {
         id: 7,
-        name: 'Odrzucony',
+        name: 'Rejected',
         value: 'rejected'
       }
     ]
@@ -404,7 +404,7 @@ export default {
   methods: {
     toolTipText (offer) {
       if (offer.total_raises !== 0) {
-        return '(' + offer.total_raises + ' podbicia)'
+        return '(' + offer.total_raises + ' raises)'
       } else {
         return '(' + (offer.raise_price / 100) + ' pln)'
       }
@@ -501,7 +501,7 @@ export default {
 
       if (result.status === 204) {
         this.$message({
-          message: 'Odświeżono ogłoszenie pomyślnie',
+          message: 'Ad refreshed successfully',
           type: 'success',
           duration: 3000
         })
@@ -512,7 +512,7 @@ export default {
           window.location.href = result.data
         } else {
           this.$message({
-            message: 'Odświeżono ogłoszenie pomyślnie',
+            message: 'Ad refreshed successfully',
             type: 'success',
             duration: 3000
           })
@@ -531,7 +531,7 @@ export default {
       console.log(result)
       if (result.status === 204) {
         this.$message({
-          message: 'Podbito ogłoszenie pomyślnie',
+          message: 'Advertisement successful',
           type: 'success',
           duration: 3000
         })
@@ -541,7 +541,7 @@ export default {
           window.location.href = result.data
         } else {
           this.$message({
-            message: 'Podbito ogłoszenie pomyślnie',
+            message: 'Advertisement successful',
             type: 'success',
             duration: 3000
           })
@@ -553,7 +553,7 @@ export default {
     refreshChecked () {
       if (this.checked_offers.length === 0) {
         this.$message({
-          message: 'Musisz zaznaczyć ofert do odświeżenia',
+          message: 'You must mark the offers to refresh',
           type: 'warning',
           duration: 3000
         })
@@ -574,7 +574,7 @@ export default {
         const result = await deactivate({ offers: this.checked_offers })
         if (result.status === 200) {
           this.$message({
-            message: 'Zaktualizowano pomyślnie',
+            message: 'Updated successfully',
             type: 'success',
             duration: 3000
           })
@@ -583,7 +583,7 @@ export default {
         }
       } else {
         this.$message({
-          message: 'Musisz zaznaczyć oferty do dezaktywowania',
+          message: 'You must mark the offers to deactivate',
           type: 'warning',
           duration: 3000
         })

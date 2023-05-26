@@ -4,15 +4,15 @@
       <div class="text">
         <i class="el-icon-warning-outline"></i>
         <p>
-          Podgląd ogłoszenia. Sprawdź wszytskie dane i zapisz ogłoszenie.
+          Announcement preview. Check all data and save the ad.
         </p>
       </div>
       <div class="buttons">
         <el-button type="plain" class="preview-btn" icon="el-icon-edit" @click="edit">
-          Edytuj
+          Edit
         </el-button>
         <el-button v-if="$store.state.user.isLogged" type="primary" class="preview-btn" icon="el-icon-check" @click="save">
-          Zapisz
+          Save
         </el-button>
       </div>
     </div>

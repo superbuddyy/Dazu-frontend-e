@@ -8,9 +8,9 @@
       trigger="manual"
     >
       <div class="login-required-popup">
-        <p>Musisz się zalogować aby dodać do ulubuinych</p>
+        <p>You must be logged in to add to favorites</p>
         <el-button type="primary" @click="openLoginPopup">
-          zaloguj się
+          log in
         </el-button>
       </div>
       <div v-if="!isFavoriteUser" slot="reference" class="favorite-users" @click="addFavorite">
@@ -91,7 +91,7 @@ export default {
           if (result.data.status) {
             this.isFavoriteUser = true
             this.$message({
-              message: 'Użytkownik został dodany do Twoich ulubionych',
+              message: 'The user has been added to your favorites',
               type: 'success',
               duration: 3000
             })
@@ -99,7 +99,7 @@ export default {
             this.isFavoriteUser = false
             this.$emit('remove-favorites', true)
             this.$message({
-              message: 'Użytkownik usunięty z ulubionych',
+              message: 'User removed from favorites',
               type: 'success',
               duration: 3000
             })
@@ -112,7 +112,7 @@ export default {
       if (result.status === 204) {
         this.$emit('remove-favorite', this.userSlug)
         this.$message({
-          message: 'Użytkownik usunięty z ulubionych',
+          message: 'User removed from favorites',
           type: 'success',
           duration: 3000
         })

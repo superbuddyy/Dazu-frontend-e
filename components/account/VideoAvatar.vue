@@ -1,7 +1,7 @@
 <template>
   <div v-loading="loading" class="avatar">
     <div class="title">
-      Wideo avatar
+      Video avatar
     </div>
     <div class="img">
       <a
@@ -22,7 +22,7 @@
         <el-checkbox v-model="checkStatus" @change="changeAvatarStatus" />
       </div>
       <div v-if="expireTime" class="expire-time">
-        <ExpireTime :expire-time="expireTime" text="Avatar wygasa za " />
+        <ExpireTime :expire-time="expireTime" text="Avatar video expires in " />
       </div>
     </div>
     <el-popover
@@ -37,18 +37,18 @@
       <div style="text-align: center; margin: 0">
         <el-input
           v-model="videoLink"
-          placeholder="Link do filmu na youtube (https://youtu.be/...)"
+          placeholder="Link to the movie on youtube (https://youtu.be/...)"
           class="link-input"
         />
         <el-button type="primary" size="mini" @click="addAvatar()">
-          Zapisz i zapłać
+          Save and pay
         </el-button>
         <el-button size="mini" type="text" @click="buyVisible = false">
-          Innym razem
+          Another time
         </el-button>
       </div>
       <el-button slot="reference" type="primary" plain class="avatar-btn">
-        Zmień
+        Change
       </el-button>
     </el-popover>
     <el-popover
@@ -58,17 +58,17 @@
     >
       <div style="text-align: center; margin: 0">
         <p style="margin: 14px">
-          Czy na pewno chcesz usunąć avatar?
+          Are you sure you want to delete the avatar?
         </p>
         <el-button type="primary" size="mini" plain @click="deleteAvatarVisible = false">
-          Anuluj
+          Cancel
         </el-button>
         <el-button type="danger" size="mini" plain @click="removeAvatar()">
-          Usuń
+          Delete
         </el-button>
       </div>
       <el-button v-if="$store.state.user.videoAvatar !== null" slot="reference" type="danger" plain class="avatar-btn">
-        Usuń
+        Delete
       </el-button>
     </el-popover>
   </div>
@@ -131,7 +131,7 @@ export default {
       this.videoLink = this.videoLink.trim()
       if (typeof this.videoLink === 'undefined' || this.videoLink === null || this.videoLink === '') {
         this.$message({
-          message: 'Wprowadź adres URL filmu',
+          message: 'Enter the URL of the video',
           type: 'error',
           duration: 3000
         })
@@ -139,7 +139,7 @@ export default {
       }
       if (!this.isValidHttpUrl(this.videoLink)) {
         this.$message({
-          message: 'Wprowadź adres URL filmu',
+          message: 'Enter the URL of the video',
           type: 'error',
           duration: 3000
         })
@@ -176,7 +176,7 @@ export default {
         this.deleteAvatarVisible = false
         await this.$store.dispatch('user/setVideoAvatar', null)
         this.$message({
-          message: 'Usunięto avatar',
+          message: 'Avatar removed',
           type: 'success',
           duration: 3000
         })
@@ -200,7 +200,7 @@ export default {
         if (result.status === 200) {
           this.$store.dispatch('user/setDefaultAvatar', 'video')
           this.$message({
-            message: 'Zmieniono avatara',
+            message: 'Avatar changed',
             type: 'success',
             duration: 3000
           })
@@ -220,7 +220,7 @@ export default {
       result.data.forEach((item, index) => {
         item.value = (item.value / 100).toFixed(2)
         if (item.name === 'avatar_video_url.price') {
-          this.avatarLimitMsg = `Dodanie lub zmiana avatara jest płatna - ${item.value}zł na 30dni`
+          this.avatarLimitMsg = `Adding or changing an avatar is paid - ${item.value}PLN for 30 days`
           this.avatarPrice = item.value
         }
       })

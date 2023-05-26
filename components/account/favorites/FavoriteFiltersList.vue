@@ -15,7 +15,7 @@
             </div>
           </div>
           <el-checkbox :value="searchFilter.notification" @change="updateNotification(searchFilter.id, searchFilter.notification, ind)">
-            Chcę otrzymywać powiadomienia email
+            I want to receive email notifications
           </el-checkbox>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default {
         case 'na-raty':
           return 'Na raty: ' + value
         case 'location':
-          if (value.display_name) { return 'Lokalizacja: ' + decodeURIComponent(value.display_name) }
+          if (value.display_name) { return 'Location: ' + decodeURIComponent(value.display_name) }
       }
     },
     transformedFilters (filters) {

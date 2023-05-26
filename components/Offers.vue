@@ -5,8 +5,8 @@
         <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer">
           <div class="content">
             <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + store_settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
-              <span v-if="offer.is_argent" class="argent-label img-label">Pilne</span>
-              <span v-if="offer.is_promoted" class="promoted-label img-label">Wyróżnione</span>
+              <span v-if="offer.is_argent" class="argent-label img-label">Urgent</span>
+              <span v-if="offer.is_promoted" class="promoted-label img-label">Featured</span>
             </div>
             <div v-if="offer.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}" />
             <div class="description">
@@ -23,7 +23,7 @@
                 {{ offer.type }}
               </div>
               <div v-if="offer.is_with_bills" class="badge">
-                Rachunki wliczone
+                Bills included
               </div>
             </div>
           </div>

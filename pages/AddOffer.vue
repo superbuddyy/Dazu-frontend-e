@@ -1,7 +1,7 @@
 <template>
   <div class="add-offer-page">
     <div class="title">
-      <h1>Dodaj ogłoszenie</h1>
+      <h1>Add an announcement</h1>
     </div>
 
     <div class="container">
@@ -15,7 +15,7 @@
       />
     </div>
     <nuxt-link :to="'/kontakt'" target="_blank" class="help-link">
-      Potrzebujesz pomocy graficznej?
+      Need graphical help?
       <img src="~/assets/lifebuoy.png" alt="">
     </nuxt-link>
   </div>

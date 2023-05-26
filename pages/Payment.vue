@@ -2,7 +2,7 @@
   <div class="bg">
     <div class="payment">
       <div class="content">
-        <h1>Opłać ogłoszenie</h1>
+        <h1>Pay for the ad</h1>
         <h4>{{ offerTitle }}</h4>
         <el-table
           :data="details"
@@ -20,7 +20,7 @@
           />
         </el-table>
         <div v-if="!hasSubscription" class="subscriptions">
-          <h3>Czy chcesz dodatkowy pakiet?</h3>
+          <h3>Do you want an extra package?</h3>
           <SubscriptionsNew
             v-if="!hasSubscription"
             :is-payment="isDialogNew"
@@ -31,28 +31,28 @@
         </div>
         <div class="invoice">
           <el-radio v-model="invoice" :label="false">
-            <b>Nie potrzebuję faktury</b>
+            <b>I don't need an invoice</b>
           </el-radio>
           <el-radio v-model="invoice" :label="true">
-            <b>Potrzebuję fakture</b>
+            <b>I need an invoice</b>
           </el-radio>
         </div>
         <div v-if="invoice" class="invoice-data">
           <el-form label-position="right" label-width="100px" :model="form" class="form">
-            <el-input v-model="form.name" placeholder="Imię lub nazwa firmy" class="input" />
-            <el-input v-model="form.phone" placeholder="Telefon" class="input" />
-            <el-input v-model="form.street" placeholder="Ulica i numer domu/mieszkania" class="input" />
-            <el-input v-model="form.zip_code" placeholder="Kod Pocztowy" class="input" />
-            <el-input v-model="form.city" placeholder="Miasto" class="input" />
-            <el-input v-model="form.country" placeholder="Kraj" class="input" />
+            <el-input v-model="form.name" placeholder="First name or company name" class="input" />
+            <el-input v-model="form.phone" placeholder="Telephone" class="input" />
+            <el-input v-model="form.street" placeholder="Street and house/apartment number" class="input" />
+            <el-input v-model="form.zip_code" placeholder="Zip code" class="input" />
+            <el-input v-model="form.city" placeholder="City" class="input" />
+            <el-input v-model="form.country" placeholder="End" class="input" />
             <el-input v-if="$store.state.user.roles.includes('company')" v-model="form.nip" placeholder="NIP" class="input" />
           </el-form>
         </div>
-        <h3>Suma: {{ (amount / 100).toFixed(2) }} pln</h3>
+        <h3>Addition: {{ (amount / 100).toFixed(2) }} pln</h3>
         <div class="buttons">
           <nuxt-link v-if="$store.state.user.isLogged" :to="'/moje-ogloszenia/edytuj-ogloszenie/' + this.$route.params.slug">
             <el-button>
-              Wróć do edycji
+              Go back to editing
             </el-button>
           </nuxt-link>
           <el-button
@@ -69,7 +69,7 @@
     </div>
     <el-dialog
       v-loading="loading"
-      title="Wybierz metodę płatności"
+      title="Choose payment method"
       :visible.sync="paymentDialog"
       width="30%"
       center

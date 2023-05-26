@@ -7,13 +7,13 @@ export default ({ app, store }) => {
     let message = ''
     switch (parseInt(error.response.status)) {
       case 500:
-        message = 'Wystąpił problem, spróbuj ponownie'
+        message = 'There was a problem, please try again'
         break
       case 401:
         if (error.response.data.error) {
           message = error.response.data.error
         } else {
-          message = 'Zaloguj się, aby mieć dostęp do tej strony'
+          message = 'Log in to access this page'
         }
         app.router.push('/')
         app.store.dispatch('user/resetToken')
@@ -21,16 +21,16 @@ export default ({ app, store }) => {
       case 400:
         if (error.response.data.error) {
           if (error.response.data.error === 'email_already_exist') {
-            message = 'Ten adres email jest już używany przez inne konto'
+            message = 'This email address is already in use by another account'
           } else {
             message = error.response.data.error
           }
         } else {
-          message = 'Wystąpił problem, spróbuj ponownie'
+          message = 'There was a problem, please try again'
         }
         break
       case 422:
-        message = 'Wystąpił problem, spróbuj ponownie'
+        message = 'There was a problem, please try again'
         app.router.push('/')
         break
       case 404:

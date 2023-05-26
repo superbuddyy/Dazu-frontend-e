@@ -30,7 +30,7 @@
             name="Cena"
             slug="price"
             placeholder="0"
-            append-info="zł"
+            append-info="zloty"
             inputType="text"
             inputMode="numeric"
             :disabled="(form.attributes[1] == 'sell' || form.attributes[1] == 'rent')? false : form.attributes[8]"
@@ -142,7 +142,7 @@
             :slug="attributes['_9'].slug"
             :options="attributes['_9'].options"
             :value="form.attributes[9]"
-            placeholder="Wybierz"
+            placeholder="Choose"
             type="select"
             @set-value="form.attributes[9] = $event"
           />
@@ -154,7 +154,7 @@
             :slug="attributes['_10'].slug"
             :options="attributes['_10'].options"
             :value="form.attributes[10]"
-            placeholder="Wybierz"
+            placeholder="Choose"
             type="select"
             @set-value="form.attributes[10] = $event"
           />
@@ -171,7 +171,7 @@
                 :slug="attributes['_11'].slug"
                 :options="attributes['_11'].options"
                 :value="form.attributes[11]"
-                placeholder="Wybierz"
+                placeholder="Choose"
                 type="select"
                 @set-value="form.attributes[11] = $event"
               />
@@ -183,7 +183,7 @@
                 :slug="attributes['_12'].slug"
                 :options="attributes['_12'].options"
                 :value="form.attributes[12]"
-                placeholder="Wybierz"
+                placeholder="Choose"
                 type="select"
                 @set-value="form.attributes[12] = $event"
               />
@@ -236,7 +236,7 @@
             :slug="attributes['_18'].slug"
             :options="attributes['_18'].options"
             :value="form.attributes[18]"
-            placeholder="Wybierz"
+            placeholder="Choose"
             type="select"
             @set-value="form.attributes[18] = $event"
           />
@@ -248,14 +248,14 @@
             :slug="attributes['_19'].slug"
             :options="attributes['_19'].options"
             :value="form.attributes[19]"
-            placeholder="Wybierz"
+            placeholder="Choose"
             type="select"
             @set-value="form.attributes[19] = $event"
           />
         </el-col>
       </el-row>
       <Attribute
-        name="Tytuł"
+        name="Title"
         slug="title"
         :value="form.title"
         @set-value="form.title = $event"
@@ -267,7 +267,7 @@
       <el-row class="fw-bld">
         <el-col :span="24">
           <el-form-item>
-            <span class="_error">UWAGA!</span> Aby dodać wideo lub spacer 3D prosimy używać skopiowanych linków z “udostępienia" a nie z paska adresu - więcej na
+            <span class="_error">ATTENTION!</span> To add a video or a 3D walk, please use the copied links from "share" and not from the address bar - more at
             <a
               href="/faq"
               target="_blank"
@@ -300,7 +300,7 @@
         <Attribute
           name="Link"
           slug="links.walk_video"
-          placeholder="wirtualnego spaceru"
+          placeholder="virtual walk"
           :value="formattedWalkVideo"
           @set-value="formattedWalkVideo = $event"
         />
@@ -308,7 +308,7 @@
       <el-row>
         <el-col :span="24">
           <PhotoAttribute
-            fileLabel="Zdjęcia"
+            fileLabel="Photos"
             :file-list="fileList"
             @on-change="handleChangeImages"
           />
@@ -324,7 +324,7 @@
       <el-row>
         <el-col :span="24">
           <PhotoAttribute
-            fileLabel="plan projektu"
+            fileLabel="Photos..."
             :file-list="projectFileList"
             :limit="2"
             :isProjectPlan="true"
@@ -332,13 +332,13 @@
           />
         </el-col>
       </el-row>
-      <el-form-item label="Lokalizacja" prop="location">
+      <el-form-item label="Location" prop="location">
         <el-select
           v-model="form.location"
           class="location-input"
           filterable
           remote
-          placeholder="Podaj lokalizacje"
+          placeholder="Provide locations"
           :remote-method="getLocations"
           :loading="locationsLoading"
           :debounce="500"
@@ -375,7 +375,7 @@
               v-model="form.visibleFromDate"
               type="datetime"
               :picker-options="datePickerOptions"
-              placeholder="Wybierz datę"
+              placeholder="Select a date"
               format="yyyy/MM/dd HH:mm"
               value-format="yyyy-MM-dd HH:mm"
             />
@@ -396,7 +396,7 @@
                 <div class="subscription-header">{{ subscription.name }}</div>
                 <div class="bottom clearfix">
                   <div class="price">
-                    <span>{{ subscription.price / 100 }} <sup> zł</sup></span>
+                    <span>{{ subscription.price / 100 }} <sup> zloty</sup></span>
                   </div>
                   <b>na {{ subscription.duration / 24 }} dni</b>
                   <div class="list subscription-options">
@@ -409,33 +409,33 @@
                     >
                       <div v-if="subscription.number_of_raises !== 0 && subscription.number_of_raises !== '0'" class="list-item">
                         <i class="el-icon-star-on"/> {{ subscription.number_of_raises }}
-                        <span v-if='subscription.number_of_raises === 1'>darmowe podbicie</span>
-                        <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>darmowe podbicia</span>
-                        <span v-else-if='subscription.number_of_raises >= 5'>darmowych podbić</span>
+                        <span v-if='subscription.number_of_raises === 1'>free raise</span>
+                        <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>free raises</span>
+                        <span v-else-if='subscription.number_of_raises >= 5'>free raises</span>
                       </div>
                       <div v-if="subscription.number_of_refreshes !== 0 && subscription.number_of_refreshes !== '0'" class="list-item">
                         <i class="el-icon-star-on"/> {{ subscription.number_of_refreshes }}
-                        <span v-if='subscription.number_of_refreshes === 1'>darmowe odświeżenie</span>
-                        <span v-else-if='subscription.number_of_refreshes > 1 && subscription.number_of_refreshes < 5'>darmowe odświeżenia</span>
-                        <span v-else-if='subscription.number_of_refreshes >= 5'>darmowych odświeżeń</span>
+                        <span v-if='subscription.number_of_refreshes === 1'>free refresh</span>
+                        <span v-else-if='subscription.number_of_refreshes > 1 && subscription.number_of_refreshes < 5'>free refreshes</span>
+                        <span v-else-if='subscription.number_of_refreshes >= 5'>free refreshes</span>
                       </div>
                       <div class="list-item" v-if="subscription.featured_on_search_results_and_categories === true">
-                        <i class="el-icon-star-on"/> wyróżnione w ruchomej galerii w wynikach wyszukiwań i kategoriach
+                        <i class="el-icon-star-on"/> featured in a moving gallery in search results and categories
                       </div>
                       <div class="list-item" v-if="subscription.featured_on_homepage === true">
-                        <i class="el-icon-star-on"/> wyróżnione w ruchomej galerii na stronie, głównej w wynikach
-                        wyszukiwań i kategoriach
+                        <i class="el-icon-star-on"/> highlighted in a moving gallery on the main page in the results
+                        searches and categories
                       </div>
                       <div class="list-item" v-if="subscription.bargain_price / 100 === 0">
-                        <i class="el-icon-star-on"/> Żółta ramka z napisem "OKAZJA"
+                        <i class="el-icon-star-on"/> Yellow frame with the words "Chance"
                       </div>
                     </div>
                     <el-row :class="[ subscription.bargain_price === 0 ? 'hidden' : '' ]">
                       <el-col :span="20">
                         <div class="grid-content bg-purple">
-                          Dodaj żółtą ramkę z napisem
+                          Add a yellow text frame
                           <el-button class="button_bargain" size="mini">OKAZJA</el-button>
-                          (za jedyne <strong>{{ subscription.bargain_price / 100 }} zł</strong>)
+                          (za jedyne <strong>{{ subscription.bargain_price / 100 }} zloty</strong>)
                         </div>
                       </el-col>
                       <el-col :span="4">
@@ -452,9 +452,9 @@
                     <el-row>
                       <el-col :span="20">
                         <div class="grid-content bg-purple">
-                          Dodaj czerwoną ramkę z napisem
-                          <el-button class="button_urgent" size="mini">PILNE</el-button>
-                          (za jedyne <strong>{{ subscription.urgent_price / 100 }} zł</strong>)
+                          Add a red frame with the inscription
+                          <el-button class="button_urgent" size="mini">URGENT</el-button>
+                          (for only <strong>{{ subscription.urgent_price / 100 }} zloty</strong>)
                         </div>
                       </el-col>
                       <el-col :span="4">
@@ -474,7 +474,7 @@
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price / 100 }}
-                          zł</strong></div>
+                          zloty</strong></div>
                       </el-col>
                       <el-col :span="4" :offset="4">
                         <div class="grid-content bg-purple-light subscription-switch-right">
@@ -492,7 +492,7 @@
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_three / 100 }}
-                          zł</strong></div>
+                          zloty</strong></div>
                       </el-col>
                       <el-col :span="4" :offset="4">
                         <div class="grid-content bg-purple-light subscription-switch-right">
@@ -510,7 +510,7 @@
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_ten / 100 }}
-                          zł</strong></div>
+                          zloty</strong></div>
                       </el-col>
                       <el-col :span="4" :offset="4">
                         <div class="grid-content bg-purple-light subscription-switch-right">
@@ -536,52 +536,52 @@
           <img v-if="form.attributes[20]" src="~/assets/house_urgent.svg" alt="">
         </div>
         <div class="urgent-text">
-          Spieszysz się? Aktywuj "<span>Pilne</span>"
+          Are you in a hurry? Activate "<span>Urgent</span>"
         </div>
         <toggle-button
           v-model="form.attributes[20]"
           color="#ff19b7"
           :value="form.attributes[20]"
           :sync="true"
-          :labels="{checked: 'Tak', unchecked: 'Nie'}"
+          :labels="{checked: 'Yes', unchecked: 'No'}"
           @change="setUrgentValue"
         />
       </div>
       <div v-if="!user.isLogged && viewType !== 'update'" class="contact-form">
-        <el-form-item label="Jestem">
+        <el-form-item label="I am">
           <el-button
             type="plain"
             :class="[ form.user.account_type === 'user' ? 'active' : '' ]"
                      @click="setUserType('user')">
-            Osobą prywatną
+            Private person
           </el-button>
           <el-button
             type="plain"
             :class="[ form.user.account_type === 'agency' ? 'active' : '' ]"
                      @click="setUserType('agency')">
-            Agencją nieruchomości
+            Real estate agency
           </el-button>
           <el-button
             type="plain"
             :class="[ form.user.account_type === 'developer' ? 'active' : '' ]"
                      @click="setUserType('developer')">
-            Deweloperem
+            Developer
           </el-button>
         </el-form-item>
-        <el-form-item v-if="form.user.account_type === 'user'" label="Imię" prop="user.name">
-          <el-input v-model="form.user.name" placeholder="Imię"/>
+        <el-form-item v-if="form.user.account_type === 'user'" label="Name" prop="user.name">
+          <el-input v-model="form.user.name" placeholder="Name"/>
         </el-form-item>
-        <el-form-item v-if="form.user.account_type !== 'user'" label="Nazwa Firmy" prop="user.name">
-          <el-input v-model="form.user.name" placeholder="Nazwa Firmy"/>
+        <el-form-item v-if="form.user.account_type !== 'user'" label="Company Namey" prop="user.name">
+          <el-input v-model="form.user.name" placeholder="Company Name"/>
         </el-form-item>
         <el-row class="contact">
           <el-col :span="12">
-            <el-form-item label="Numer telefonu">
+            <el-form-item label="Phone number">
               <el-input
                 type="number"
                 min="0"
                 v-model="form.user.phone"
-                placeholder="Numer telefonu"
+                placeholder="Phone number"
                 onkeyup="value = value.replace(/[^\d]/g, 0)"
               />
             </el-form-item>
@@ -602,14 +602,14 @@
             :file-list="avatars"
           >
             <el-button size="small" type="primary">
-              Kliknij aby dodać
+              Click to add
             </el-button>
             <div slot="tip" class="el-upload__tip">
               <!-- Płatne 5zł ważne na 30dni -->
               {{ avatarLimitMsg }}
             </div>
             <div slot="tip" class="el-upload__tip fw-bld">
-              <span class="_error">Uwaga!</span> Aby poprawnie dodać link do wideo, prosimi zapoznać się z sekcja dotyczącą dodawania linków w
+              <span class="_error">Attention!</span> To properly add a link to a video, please refer to the section on adding links in
                 <a
                   href="/faq"
                   target="_blank"
@@ -620,8 +620,8 @@
             </div>
           </el-upload>
         </el-form-item>
-        <el-form-item v-if="['agency', 'developer', 'user'].includes(form.user.account_type)" label="Wideo avatar">
-          <el-input v-model="form.user.videoAvatar" type="text" placeholder="Link do filmu na YouTube"/>
+        <el-form-item v-if="['agency', 'developer', 'user'].includes(form.user.account_type)" label="Video avatar">
+          <el-input v-model="form.user.videoAvatar" type="text" placeholder="Link to the movie on YouTube"/>
         </el-form-item>
         <el-row>
           <el-col :span="12">
@@ -647,7 +647,7 @@
               disabled
               @click="setUserType('user')"
             >
-              Osobą prywatną
+              Private person
             </el-button>
             <el-button
               type="plain"
@@ -655,7 +655,7 @@
               disabled
               @click="setUserType('agency')"
             >
-              Agencją nieruchomości
+              Real estate agency
             </el-button>
             <el-button
               type="plain"
@@ -676,19 +676,19 @@
             Agent
           </el-button>
         </el-form-item>
-        <el-form-item v-if="form.user.account_type === 'user'" label="Imię">
-          <el-input v-model="user.name" placeholder="Imię" disabled/>
+        <el-form-item v-if="form.user.account_type === 'user'" label="Name">
+          <el-input v-model="user.name" placeholder="Name" disabled/>
         </el-form-item>
-        <el-form-item v-if="form.user.account_type === 'agent'" label="W Firmie">
-          <el-input v-model="user.name" placeholder="W Firmie" disabled/>
+        <el-form-item v-if="form.user.account_type === 'agent'" label="In company">
+          <el-input v-model="user.name" placeholder="In company" disabled/>
         </el-form-item>
-        <el-form-item v-if="form.user.account_type !== 'user' && form.user.account_type !== 'agent'" label="Nazwa Firmy">
-          <el-input v-model="user.name" placeholder="Nazwa Firmy" disabled/>
+        <el-form-item v-if="form.user.account_type !== 'user' && form.user.account_type !== 'agent'" label="Company name">
+          <el-input v-model="user.name" placeholder="Company name" disabled/>
         </el-form-item>
         <el-row class="contact">
           <el-col :span="12">
-            <el-form-item label="Numer telefonu">
-              <el-input v-model="user.phone" placeholder="Numer telefonu" disabled/>
+            <el-form-item label="Phone number">
+              <el-input v-model="user.phone" placeholder="Phone number" disabled/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -700,22 +700,22 @@
       </div>
       <el-form-item class="add-btn">
         <el-button v-if="viewType === 'create'" type="primary" @click="onSubmit(true)">
-          Podgląd
+          Preview
         </el-button>
         <el-button v-if="viewType === 'create'" type="primary" @click="onSubmit(false)">
-          Dodaj ogłoszenie
+          Add an announcement
         </el-button>
         <el-button v-if="viewType === 'update'" @click="cancelEdit">
-          Anuluj
+          Cancel
         </el-button>
         <el-button v-if="viewType === 'update'" type="primary" @click="onSubmitEdit">
           Zapisz zmiany
         </el-button>
         <el-button v-if="viewType === 'preview'" type="primary" @click="onSubmitPreview(true)">
-          Podgląd
+          Preview
         </el-button>
         <el-button v-if="viewType === 'preview'" type="primary" @click="onSubmitPreview(false)">
-          Dodaj ogłoszenie
+          Add an announcement
         </el-button>
       </el-form-item>
     </el-form>
@@ -777,7 +777,7 @@ export default {
   data () {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Wpisz hasło'))
+        callback(new Error('Enter the password'))
       } else {
         if (this.form.password !== '') {
           this.$refs.form.validateField('rePassword')
@@ -794,7 +794,7 @@ export default {
       try {
         url = new URL(value)
       } catch (_) {
-        callback(new Error('Wprowadź adres URL filmu'))
+        callback(new Error('Enter the URL of the video'))
         return
       }
       if (url.protocol === 'http:' || url.protocol === 'https:') {
@@ -855,7 +855,7 @@ export default {
           walk_video: ''
         },
         attributes: {
-          1: 'sprzedaz',
+          1: 'sale',
           2: '',
           3: '',
           4: '',
@@ -895,7 +895,7 @@ export default {
         password: [
           { validator: validatePass, trigger: 'blur' }
         ],
-        category: { required: true, message: 'Kategoria jest wymagana', trigger: 'change' },
+        category: { required: true, message: 'Category is required', trigger: 'change' },
         'links.video': [
           { validator: validateUrl, trigger: 'blur' }
         ],
@@ -906,18 +906,18 @@ export default {
           { validator: validateUrl, trigger: 'blur' }
         ],
         price: [
-          { required: true, message: 'Cena jest wymagana', trigger: 'change' }
+          { required: true, message: 'Price is required', trigger: 'change' }
         ],
         title: [
-          { required: true, message: 'Tytuł jest wymagany', trigger: 'change' },
-          { max: 70, message: 'Tytuł może miec maksymalie 70 znaków', trigger: 'change' }
+          { required: true, message: 'Title is required', trigger: 'change' },
+          { max: 70, message: 'The title can be up to 70 characters long', trigger: 'change' }
         ],
-        location: { required: true, message: 'Lokacja jest wymagana', trigger: 'change' },
-        description: { required: true, message: 'Opis jest wymagany', trigger: 'change' },
-        'user.email': { required: true, message: 'Email jest wymagany', trigger: 'change' },
-        'user.password': { required: true, message: 'Hasło jest wymagane', trigger: 'change' },
-        'user.rePassword': { required: true, message: 'Powtórz hasło jest wymagane', trigger: 'change' },
-        'user.name': { required: true, message: 'Imię lub nazwa firmy jest wymagane', trigger: 'change' }
+        location: { required: true, message: 'Location is required', trigger: 'change' },
+        description: { required: true, message: 'Description is required', trigger: 'change' },
+        'user.email': { required: true, message: 'Email is required', trigger: 'change' },
+        'user.password': { required: true, message: 'Password is required', trigger: 'change' },
+        'user.rePassword': { required: true, message: 'Repeat password is required', trigger: 'change' },
+        'user.name': { required: true, message: 'First name or Company name is required', trigger: 'change' }
       },
       isPhotoLimitReached: true,
       settingData: [],
@@ -1078,7 +1078,7 @@ export default {
         if (!valid) {
           this.processing = false
           this.$message({
-            message: 'Popraw formularz dodawania ogłoszenia',
+            message: 'Correct the form for adding an advertisement',
             type: 'error',
             duration: 3000
           })
@@ -1094,7 +1094,7 @@ export default {
         if (!valid) {
           this.processing = false
           this.$message({
-            message: 'Popraw formularz dodawania ogłoszenia',
+            message: 'Correct the form for adding an advertisement',
             type: 'error',
             duration: 3000
           })
@@ -1144,7 +1144,7 @@ export default {
           await this.$router.push('/ogloszenia/' + offerSlug + '?preview=true')
         } else if (result.status === 201) {
           this.$message({
-            message: 'Dodano ogłoszenie',
+            message: 'Announcement added',
             type: 'success',
             duration: 3000
           })
@@ -1156,7 +1156,7 @@ export default {
             await this.$router.push('/moje-ogloszenia/oplac/' + offerSlug)
           } else {
             this.$message({
-              message: 'Na podany adres email został wysłany link do aktywacji konta i opłacenia ogłoszenia',
+              message: 'A link to activate the account and pay for the advertisement has been sent to the e-mail address provided',
               type: 'success',
               duration: 3000
             })
@@ -1193,7 +1193,7 @@ export default {
           await this.$router.push('/ogloszenia/' + offerSlug + '?preview=true')
         } else if (result.status === 201) {
           this.$message({
-            message: 'Dodano ogłoszenie',
+            message: 'Announcement added',
             type: 'success',
             duration: 3000
           })
@@ -1205,7 +1205,7 @@ export default {
             await this.$router.push('/moje-ogloszenia/oplac/' + offerSlug)
           } else {
             this.$message({
-              message: 'Na podany adres email został wysłany link do aktywacji konta i opłacenia ogłoszenia',
+              message: 'A link to activate the account and pay for the advertisement has been sent to the e-mail address provided',
               type: 'success',
               duration: 3000
             })
@@ -1235,7 +1235,7 @@ export default {
           // await this.$router.push('/moje-ogloszenia/oplac/' + result.data.offer_slug)
         } else {
           this.$message({
-            message: 'Na podany adres email został wysłany link do aktywacji konta i opłacenia ogłoszenia',
+            message: 'A link to activate the account and pay for the advertisement has been sent to the e-mail address provided',
             type: 'success',
             duration: 3000
           })
@@ -1243,7 +1243,7 @@ export default {
         }
       } else if (result.status === 200) {
         this.$message({
-          message: 'Ogłoszenie zaktualizowano',
+          message: 'Announcement updated',
           type: 'success',
           duration: 3000
         })
@@ -1385,19 +1385,19 @@ export default {
       this.settingData.forEach((item, index) => {
         item.value = (item.value / 100).toFixed(2)
         if (item.name === 'photo.price') {
-          this.photoLimitMsg = `pierwsze 3 zdjecia sa darmowe kazde kolejne ${item.value} zł`
+          this.photoLimitMsg = `the first 3 pictures are free after that ${item.value} zloty`
           this.photoPrice = item.value
         }
         if (item.name === 'link.price') {
-          this.linkLimitMsg = `Każdy link jest płatny ${item.value} zł`
+          this.linkLimitMsg = `Each link is paid ${item.value} zloty`
           this.linkPrice = item.value
         }
         if (item.name === 'visible_from_date.price') {
-          this.dateLimitMsg = `Ta opcja jest płatna ${item.value} zł`
+          this.dateLimitMsg = `This option is paid ${item.value} zloty`
           this.datePrice = item.value
         }
         if (item.name === 'avatar_photo.price') {
-          this.avatarLimitMsg = `Płatne ${item.value}zł ważne na 30dni`
+          this.avatarLimitMsg = `Paid ${item.value}PLN valid for 30 days`
           this.avatarPrice = item.value
         }
       })

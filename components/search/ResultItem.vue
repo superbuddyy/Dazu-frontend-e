@@ -4,10 +4,10 @@
       <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer-link" :event="isLinkActive ? 'click' : ''">
         <div class="tags pt-10 pb-10 new_custom-offer-div">
           <el-tag v-if="offer.is_urgent" type="danger" class="promoted-label img-label urgent_label custom-new-span1">
-            PILNE
+            URGENT
           </el-tag>
           <el-tag v-if="offer.is_promoted" type="warn" class="promoted-label img-label offer_label custom-new-span2" :class="[offer.is_urgent ? '' : 'add-offer-mrg']">
-            OKAZJA
+            OPPORTUNITY
           </el-tag>
         </div>
         <span class="featured_img_label custom-new-span3" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
@@ -35,7 +35,7 @@
         </div>
       </div>
       <el-tag v-if="offer.is_with_bills" type="info" class="custom-new-span4">
-        Rachunki wliczone
+        Bills included
       </el-tag>
       <div class="location mt-10">
         {{ offer.location_name }}

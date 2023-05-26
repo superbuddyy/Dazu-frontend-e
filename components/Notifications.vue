@@ -9,7 +9,7 @@
         <span @click="deactivate()">Oznacz jako przeczytane</span>
       </div>
       <div v-if="notifications.length === 0" class="no-notifications">
-        Brak nowych powiadomień
+        No new notifications
       </div>
       <div v-for="(notification, index) in notifications" :key="index+1" class="notification" @click="goTo(notification.link)">
         <div class="content">

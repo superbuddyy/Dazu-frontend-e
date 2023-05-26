@@ -2,7 +2,7 @@
   <div class="search-offers-list">
     <div class="search-offers-container">
       <div v-if="offers.length === 0">
-        Brak danych
+        No data
       </div>
       <div v-for="offer in offers" :key="offer.id" class="offer margin-box carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')) ? 'featured_l' : '' ]">
         <div class="content">
@@ -10,8 +10,8 @@
             <span class="featured_img_label" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
               <img src="~/assets/Star.svg" style="width: 24px;">
             </span>
-            <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Okazja</span>
-            <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Pilne</span>
+            <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Opportunity</span>
+            <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Urgent</span>
             <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
             </div>
             <div v-if="offer.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}" />
@@ -28,7 +28,7 @@
                 {{ offer.type }}
               </div>
               <div v-if="offer.is_with_bills" class="badge">
-                Rachunki wliczone
+                Bills included
               </div>
             </div>
           </nuxt-link>

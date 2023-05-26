@@ -47,13 +47,13 @@ export default {
   mounted () {
     this.$ga.page({
       page: '/',
-      title: 'Strona główna',
+      title: 'Home',
       location: window.location.href
     })
     this.checkAuth()
     if (this.$route.query['payment-status'] === 'fail') {
       this.$message({
-        message: 'Płatność nie została zrealizowana',
+        message: 'The payment has not been made',
         type: 'warning',
         duration: 3000
       })
@@ -61,7 +61,7 @@ export default {
     }
     if (this.$route.query['payment-status'] === 'success') {
       this.$message({
-        message: 'Płatność została zrealizowana.',
+        message: 'The payment has been made.',
         type: 'success',
         duration: 3000
       })
@@ -121,7 +121,7 @@ export default {
       const result = await verifyContact({ token: this.$route.query.token })
       if (result.status === 204 || result.status === 200) {
         this.$message({
-          message: 'Wiadomość została wysłana',
+          message: 'Message was sent',
           type: 'success',
           duration: 3000
         })
@@ -141,17 +141,22 @@ export default {
     color: #000000!important;
     font-weight: bold;
   }
+  .content {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+  }
   .header {
     width: 100%;
-    min-height: 50vh;
-    background-image: url('~assets/header-background.jpg');
+    min-height: 55vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('~assets/header-background.jpg');
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    background-color: rgba(0,0,0,0.5);
     @media only screen and (max-width: 1100px) {
       min-height: 100vh;
     }

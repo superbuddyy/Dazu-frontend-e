@@ -1,6 +1,6 @@
 <template>
   <div class="other-posts">
-    <h2>Inne wpisy</h2>
+    <h2>Other entries</h2>
     <div class="posts">
       <nuxt-link v-for="post in posts" :key="post.id" :to="'/blog/' + post.slug" class="post">
         <img :src="post.main_photo_url" alt="">

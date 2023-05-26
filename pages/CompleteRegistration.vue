@@ -1,13 +1,13 @@
 <template>
   <div class="complete-registration">
     <div class="container">
-      <h1>Zakończono proces rejestracji</h1>
+      <h1>The registration process has been completed</h1>
       <el-steps :active="3" align-center>
-        <el-step title="Krok 1" description="Rejestracja" />
-        <el-step title="Krok 2" description="Uzupałnij dane" />
-        <el-step title="Krok 3" description="Potwierdź maila" />
+        <el-step title="Step 1" description="Registration" />
+        <el-step title="Step 2" description="Complete the data" />
+        <el-step title="Step 3" description="Confirm email" />
       </el-steps>
-      <p>Proces rejestracji został pomyslnie zakończony. Przejdź do strony logowania aby się zalogować.</p>
+      <p>The registration process has been successfully completed. Go to the login page to log in.</p>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
       csrf().then(async () => {
         await this.$store.dispatch('user/completeRegistration', { token: this.$route.query.token })
         this.$message({
-          message: 'Konto zostało aktywowane',
+          message: 'The account has been activated',
           type: 'success',
           duration: 3000
         })

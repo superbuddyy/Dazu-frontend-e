@@ -1,7 +1,7 @@
 <template>
   <div class="account-types-list-bg">
     <h2 class="title">
-      Dodaj ogłoszenie
+      Add an announcement
     </h2>
     <div class="account-types-list">
       <SubscriptionsNew
@@ -14,7 +14,7 @@
         class="add-btn"
         @click="add"
       >
-        Dodaj
+        Add
       </el-button>
     </div>
   </div>

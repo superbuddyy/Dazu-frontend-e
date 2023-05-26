@@ -1,7 +1,7 @@
 <template>
   <div class="agents-list">
     <el-button type="primary" icon="el-icon-circle-plus-outline" class="add" @click="dialogVisible = true">
-      Dodaj Agenta
+      Add Agent
     </el-button>
     <el-table
       :data="agents"
@@ -41,7 +41,7 @@
             cancel-button-text="Nie"
             icon="el-icon-info"
             icon-color="red"
-            title="Jesteś pewny, że chcesz usunąć agenta?"
+            title="Are you sure you want to remove the agent?"
             @onConfirm="deleteAgent(scope.row.id)"
           >
             <el-button
@@ -101,7 +101,7 @@ export default {
       const result = await deleteAgent(id)
       if (result.status === 204) {
         this.$message({
-          message: 'Agent został usunięty',
+          message: 'The agent has been removed',
           type: 'success',
           duration: 3000
         })

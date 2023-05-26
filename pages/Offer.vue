@@ -5,7 +5,7 @@
     />
     <el-alert
       v-if="offer.status !== 'active'"
-      title="Ogłoszenie jest nieaktywne. (Widoczne tylko dla Ciebie)"
+      title="The ad is inactive. (Visible only to you)"
       type="warning"
       show-icon
       center
@@ -115,7 +115,7 @@ export default {
       const result = await verifyContact({ token: this.$route.query.token })
       if (result.status === 204 || result.status === 200) {
         this.$message({
-          message: 'Wiadomość została wysłana',
+          message: 'Message was sent',
           type: 'success',
           duration: 3000
         })

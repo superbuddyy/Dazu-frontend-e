@@ -1,87 +1,87 @@
 <template>
   <el-dialog
-    title="Zapisz filtry do ulubionych"
+    title="Save filters to favorites"
     :visible.sync="visible"
     class="save-filters"
     :modal="showBg"
     :before-close="handleClose"
   >
     <div v-if="filters.location">
-      Lokalizacja: <b>{{ filters.location.display_name }}</b>
+      Location: <b>{{ filters.location.display_name }}</b>
     </div>
     <div v-if="filters.type">
       Typ: <b>{{ filters.type }}</b>
     </div>
     <div v-if="filters.category">
-      Kategoria: <b>{{ filters.category }}</b>
+      Category: <b>{{ filters.category }}</b>
     </div>
     <div v-if="filters.price && filters.price.min">
-      Cena: od <b>{{ filters.price.min }}</b> do <b>{{ filters.price.max }}</b>
+      Cena: from <b>{{ filters.price.min }}</b> to <b>{{ filters.price.max }}</b>
     </div>
     <div v-if="filters.metraz && filters.metraz.min">
-      Metraż: od <b>{{ filters.metraz.min }}</b> do <b>{{ filters.metraz.max }}</b>
+      Yardage: from <b>{{ filters.metraz.min }}</b> to <b>{{ filters.metraz.max }}</b>
     </div>
     <div v-if="filters['rachunki-wliczone']">
-      Rachunki wliczone: <b>Tak</b>
+      Bills included: <b>Yes</b>
     </div>
     <div v-if="filters['na-raty']">
-      Na raty: <b>Tak</b>
+      In installments: <b>Yes</b>
     </div>
     <div v-if="filters.dodatkowe.garaz">
-      Garaż: <b>Tak</b>
+      Garage: <b>Yes</b>
     </div>
     <div v-if="filters.dodatkowe.umeblowane">
-      Umeblowane: <b>Tak</b>
+      Furnished: <b>Yes</b>
     </div>
     <div v-if="filters.dodatkowe.parking">
-      Parking: <b>Tak</b>
+      Parking: <b>Yes</b>
     </div>
     <div class="notifi-buttons">
-      <b>Powiadom mnie:</b>
+      <b>Notify me:</b>
       <div class="buttons">
         <el-button
           :class="[ selectedPeriod === null ? 'active' : '' ]"
           @click="select(null)"
         >
-          od razu
+          right away
         </el-button>
         <el-button
           :class="[ selectedPeriod === 1 ? 'active' : '' ]"
           @click="select(1)"
         >
-          codziennie
+          every day
         </el-button>
         <el-button
           :class="[ selectedPeriod === 3 ? 'active' : '' ]"
           @click="select(3)"
         >
-          3 dni
+          3 days
         </el-button>
         <el-button
           :class="[ selectedPeriod === 7 ? 'active' : '' ]"
           @click="select(7)"
         >
-          7 dni
+         7 days
         </el-button>
         <el-button
           :class="[ selectedPeriod === 14 ? 'active' : '' ]"
           @click="select(14)"
         >
-          14 dni
+          14 days
         </el-button>
         <el-button
           :class="[ selectedPeriod === 30 ? 'active' : '' ]"
           @click="select(30)"
         >
-          30 dni
+          30 days
         </el-button>
       </div>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-checkbox v-model="notification" class="notifications-checkbox">
-        Powiadomienia email
+        Email notifications
       </el-checkbox>
-      <el-button type="primary" @click="save">Zapisz</el-button>
+      <el-button type="primary" @click="save">Save</el-button>
     </span>
   </el-dialog>
 </template>
@@ -128,7 +128,7 @@ export default {
       const result = await store({ filters: this.$route.query, period: this.selectedPeriod, notification: this.notification })
       if (result.status === 201) {
         this.$message({
-          message: 'Dodano do ulubionych',
+          message: 'Added to favorites',
           type: 'success',
           duration: 3000
         })

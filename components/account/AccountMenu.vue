@@ -2,23 +2,23 @@
   <div class="account-menu-bg">
     <div class="account-menu">
       <nuxt-link to="/ustawienia-konta" :class="[ active === 'settings' ? 'menu-item active' : 'menu-item' ]">
-        Ustawienia
+        Settings
       </nuxt-link>
       <nuxt-link to="/ulubione" :class="[ active === 'favorites' ? 'menu-item active' : 'menu-item' ]">
-        Ulubione
+        Favorite
       </nuxt-link>
       <nuxt-link to="/moje-ogloszenia" :class="[ active === 'offers' ? 'menu-item active' : 'menu-item' ]">
-        Moje ogłoszenia
+        My ads
       </nuxt-link>
       <nuxt-link
         v-if="user.roles.includes('company')"
         to="/agenci"
         :class="[ active === 'agents' ? 'menu-item active' : 'menu-item' ]"
       >
-        Agenci
+        Agents
       </nuxt-link>
       <nuxt-link to="/faktury" :class="[ active === 'payments' ? 'menu-item active' : 'menu-item' ]">
-        Historia płatności
+        Payment history
       </nuxt-link>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="faq-page">
     <h1>FAQ</h1>
-    <h3>Najczęściej zadawane pytania</h3>
+    <h3>Frequently Asked Questions</h3>
     <el-collapse v-model="activeTab" class="faq-collapse" :accordion="true">
       <FaqItem
         v-for="(item, index) in faqItems"

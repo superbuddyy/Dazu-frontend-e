@@ -2,23 +2,23 @@
   <div class="favorites-user-list">
     <div class="left">
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'all' ? 'activated-btn' : '']" @click="sortResults('all')">
-        Wszyscy
+        All
       </el-tag>
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'agent' ? 'activated-btn' : '']" @click="sortResults('agent')">
-        Agenci
+        Agents
       </el-tag>
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'company' ? 'activated-btn' : '']" @click="sortResults('company')">
-        Agencje
+        Agencies
       </el-tag>
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'developer' ? 'activated-btn' : '']" @click="sortResults('developer')">
-        Deweloperzy
+        Developers
       </el-tag>
       <el-tag type="info" class="tag-btn" :class="[isTagActive == 'private' ? 'activated-btn' : '']" @click="sortResults('private')">
-        Prywatni
+        Private
       </el-tag>
     </div>
     <div v-if="!loading && favorites.length === 0" class="empty">
-      <p>Brak ulubionych użytkowników</p>
+      <p>No favorite users</p>
     </div>
     <div v-loading="loading" class="favorites-container">
       <el-row v-for="(row, rowIndex) in rowCount" :key="rowIndex">

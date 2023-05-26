@@ -13,7 +13,7 @@
           {{ offer.price | offerPrice }}
         </div>
         <div v-if="offer.is_with_bills" class="badge">
-          rachunki wliczone
+          Bills included
         </div>
       </div>
       <div class="col2">

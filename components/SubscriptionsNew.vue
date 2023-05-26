@@ -14,9 +14,9 @@
             </div>
             <div class="bottom clearfix">
               <div class="price">
-                <span>{{ subscription.price / 100 }} <sup> zł</sup></span>
+                <span>{{ subscription.price / 100 }} <sup> zloty</sup></span>
               </div>
-              <b>na {{ subscription.duration / 24 }} dni</b>
+              <b>already {{ subscription.duration / 24 }} days</b>
               <div class="list subscription-options">
                 <div
                   v-if="
@@ -27,33 +27,33 @@
                 >
                   <div v-if="subscription.number_of_raises !== 0 && subscription.number_of_raises !== '0'" class="list-item">
                     <i class="el-icon-star-on" /> {{ subscription.number_of_raises }}
-                    <span v-if='subscription.number_of_raises === 1'>darmowe podbicie</span>
-                    <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>darmowe podbicia</span>
-                    <span v-else-if='subscription.number_of_raises >= 5'>darmowych podbić</span>
+                    <span v-if='subscription.number_of_raises === 1'>free raise</span>
+                    <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>free raises</span>
+                    <span v-else-if='subscription.number_of_raises >= 5'>free raises</span>
                   </div>
                   <div v-if="subscription.number_of_refreshes !== 0 && subscription.number_of_refreshes !== '0'" class="list-item">
                     <i class="el-icon-star-on" /> {{ subscription.number_of_refreshes }}
-                    <span v-if='subscription.number_of_refreshes === 1'>darmowe odświeżenie</span>
-                    <span v-else-if='subscription.number_of_refreshes > 1 && subscription.number_of_refreshes < 5'>darmowe odświeżenia</span>
-                    <span v-else-if='subscription.number_of_refreshes >= 5'>darmowych odświeżeń</span>
+                    <span v-if='subscription.number_of_refreshes === 1'>free refresh</span>
+                    <span v-else-if='subscription.number_of_refreshes > 1 && subscription.number_of_refreshes < 5'>free refreshes</span>
+                    <span v-else-if='subscription.number_of_refreshes >= 5'>free refreshes</span>
                   </div>
                   <div class="list-item" v-if="subscription.name === 'Złote'">
-                    <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii w wynikach wyszukiwań i kategoriach
+                    <i class="el-icon-star-on" /> featured in a moving gallery in search results and categories
                   </div>
                   <div class="list-item" v-if="subscription.name === 'Złote' || subscription.name === 'Srebrne'">
-                    <i class="el-icon-star-on" /> wyróżnione w ruchomej galerii na stronie, głównej w wynikach
-                    wyszukiwań i kategoriach
+                    <i class="el-icon-star-on" /> highlighted in a moving gallery on the main page in the results
+                    Searches and categories
                   </div>
                   <div class="list-item" v-if="subscription.bargain_price / 100 === 0">
-                    <i class="el-icon-star-on" /> Żółta ramka z napisem "OKAZJA"
+                    <i class="el-icon-star-on" /> Yellow frame with the words "Chance"
                   </div>
                 </div>
                 <el-row :class="[ subscription.bargain_price === 0 ? 'hidden' : '' ]">
                   <el-col :span="20">
                     <div class="grid-content bg-purple">
-                      Dodaj żółtą ramkę z napisem
-                      <el-button class="button_bargain" size="mini">OKAZJA</el-button>
-                      (za jedyne <strong>{{ subscription.bargain_price / 100 }} zł</strong>)
+                      Add a yellow text frame
+                      <el-button class="button_bargain" size="mini">OPPORTUNITY</el-button>
+                      (for only <strong>{{ subscription.bargain_price / 100 }} zloty</strong>)
                     </div>
                   </el-col>
                   <el-col :span="4">
@@ -70,9 +70,9 @@
                 <el-row>
                   <el-col :span="20">
                     <div class="grid-content bg-purple">
-                      Dodaj czerwoną ramkę z napisem
-                      <el-button class="button_urgent" size="mini">PILNE</el-button>
-                      (za jedyne <strong>{{ subscription.urgent_price / 100 }} zł</strong>)
+                      Add a red frame with the inscription
+                      <el-button class="button_urgent" size="mini">Urgent</el-button>
+                      (for only <strong>{{ subscription.urgent_price / 100 }} zloty</strong>)
                     </div>
                   </el-col>
                   <el-col :span="4">
@@ -88,11 +88,11 @@
 
                 <el-row>
                   <el-col :span="8">
-                    <div class="grid-content bg-purple">1 podbicie</div>
+                    <div class="grid-content bg-purple">1 lining</div>
                   </el-col>
                   <el-col :span="8">
                     <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price / 100 }}
-                      zł</strong></div>
+                      zloty</strong></div>
                   </el-col>
                   <el-col :span="4" :offset="4">
                     <div class="grid-content bg-purple-light subscription-switch-right">
@@ -106,11 +106,11 @@
                 </el-row>
                 <el-row>
                   <el-col :span="8">
-                    <div class="grid-content bg-purple">3 podbicia</div>
+                    <div class="grid-content bg-purple">3 raises</div>
                   </el-col>
                   <el-col :span="8">
                     <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_three / 100 }}
-                      zł</strong></div>
+                      zloty</strong></div>
                   </el-col>
                   <el-col :span="4" :offset="4">
                     <div class="grid-content bg-purple-light subscription-switch-right">
@@ -124,11 +124,11 @@
                 </el-row>
                 <el-row>
                   <el-col :span="8">
-                    <div class="grid-content bg-purple">10 podbić</div>
+                    <div class="grid-content bg-purple">10 conquer</div>
                   </el-col>
                   <el-col :span="8">
                     <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_ten / 100 }}
-                      zł</strong></div>
+                      zloty</strong></div>
                   </el-col>
                   <el-col :span="4" :offset="4">
                     <div class="grid-content bg-purple-light subscription-switch-right">

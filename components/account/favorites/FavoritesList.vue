@@ -1,7 +1,7 @@
 <template>
   <div class="favorites-list">
     <div v-if="!loading && favorites.length === 0" class="empty">
-      <p>Brak ulubionych ogłoszeń</p>
+      <p>No favorite ads</p>
     </div>
     <div v-loading="loading" class="favorites-container">
       <div v-for="favorite in favorites" :key="favorite.id" class="offer">
@@ -38,7 +38,7 @@
           />
         </div>
         <div class="notifications">
-          <p>chcę otrzymywać email ze zmianą ceny</p>
+          <p>I want to receive an email with the price change</p>
           <el-tooltip content="Wyłącz/Włącz powiadomienia" placement="top">
             <toggle-button
               v-model="favorite.allow_notifications"
@@ -109,7 +109,7 @@ export default {
         const result = await activateNotifications(offerSlug)
         if (result.status === 204) {
           this.$message({
-            message: 'Aktywowano powiadomienia',
+            message: 'Notifications activated',
             type: 'success',
             duration: 3000
           })
@@ -118,7 +118,7 @@ export default {
         const result = await deactivateNotifications(offerSlug)
         if (result.status === 204) {
           this.$message({
-            message: 'Dezaktywowano powiadomienia',
+            message: 'Notifications have been deactivated',
             type: 'success',
             duration: 3000
           })

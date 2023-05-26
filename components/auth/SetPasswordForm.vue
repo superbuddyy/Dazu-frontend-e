@@ -1,11 +1,11 @@
 <template>
   <div class="set-password-form">
     <el-form ref="setPasswordForm" :model="setPasswordForm" :rules="rules" class="form">
-      <h3>Ustaw hasło</h3>
+      <h3>Set a password</h3>
       <el-form-item prop="password">
         <el-input
           v-model="setPasswordForm.password"
-          placeholder="Hasło"
+          placeholder="Password"
           class="input"
           type="password"
           autocomplete="off"
@@ -15,7 +15,7 @@
       <el-form-item prop="rePassword">
         <el-input
           v-model="setPasswordForm.rePassword"
-          placeholder="Powtórz hasło"
+          placeholder="Repeat password"
           class="input"
           type="password"
           autocomplete="off"
@@ -23,7 +23,7 @@
         />
       </el-form-item>
       <el-button type="primary" plain class="btn-save" @click="save">
-        Zapisz
+        Save
       </el-button>
     </el-form>
   </div>
@@ -37,7 +37,7 @@ export default {
   data () {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Wpisz hasło'))
+        callback(new Error('Enter the password'))
       } else {
         if (this.setPasswordForm.password !== '') {
           this.$refs.setPasswordForm.validateField('rePassword')
@@ -47,9 +47,9 @@ export default {
     }
     const validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Powtórz hasło'))
+        callback(new Error('Repeat password'))
       } else if (value !== this.setPasswordForm.password) {
-        callback(new Error('Hasła muszą być takie same'))
+        callback(new Error('The passwords must be the same'))
       } else {
         callback()
       }
@@ -62,7 +62,7 @@ export default {
       rules: {
         password: [
           { validator: validatePass, trigger: 'blur' },
-          { pattern: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$', message: 'Hasło musi posiadać co najmnie 6 znaków, 1 dużą literę i jedną liczbę', trigger: 'blur' }
+          { pattern: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$', message: 'The password must have at least 6 characters, 1 capital letter and one number', trigger: 'blur' }
         ],
         rePassword: [
           { validator: validatePass2, trigger: 'blur' }
@@ -77,7 +77,7 @@ export default {
         if (result.status === 204) {
           await this.$router.push('/')
           this.$message({
-            message: 'Hasło zostało ustawione. Możesz się zalogować',
+            message: 'The password has been set. You can log in',
             type: 'success',
             duration: 3000
           })
@@ -88,7 +88,7 @@ export default {
           if (result.status === 204) {
             await this.$router.push('/')
             this.$message({
-              message: 'Hasło zostało ustawione. Możesz się zalogować',
+              message: 'The password has been set. You can log in',
               type: 'success',
               duration: 3000
             })

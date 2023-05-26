@@ -1,122 +1,142 @@
 <template>
   <div>
     <div class="nav">
-      <n-link to="/" class="logo">
-        <!-- <h1>Dazu</h1> -->
-        <img src="~/assets/logo.svg" alt="">
-      </n-link>
-      <div class="search">
-        <el-input
-          v-model="search"
-          :class="[isHomePage ? 'search-input' : 'search-input black-text']"
-          placeholder="Szukaj"
-          prefix-icon="el-icon-search"
-          @keyup.enter.native="searchPhrase"
-        />
-        <el-button icon="el-icon-s-operation" @click="searchPopup = true">
-          Zaawonsowane
-        </el-button>
-      </div>
-      <div class="mobile-menu">
-        <i class="el-icon-s-fold" @click="mobileNav = !mobileNav" />
-        <el-drawer
-          size="50%"
-          :visible.sync="mobileNav"
-          :before-close="handleClose"
-        >
-          <nuxt-link to="/dodaj-ogloszenie">
-            <div class="nav-menu-item">
-              Dodaj ogłoszenie
-            </div>
-          </nuxt-link>
-          <nuxt-link v-if="user.isLogged" to="/ustawienia-konta">
-            <div class="nav-menu-item">
-              Ustawienia
-            </div>
-          </nuxt-link>
-          <nuxt-link v-if="user.isLogged" to="/ulubione">
-            <div class="nav-menu-item">
-              Ulubione
-            </div>
-          </nuxt-link>
-          <nuxt-link v-if="user.isLogged" to="/moje-ogloszenia">
-            <div class="nav-menu-item">
-              Moje Ogłoszenia
-            </div>
-          </nuxt-link>
-          <!-- <nuxt-link v-if="user.roles.includes('company')" to="/agenci">
-            <div class="nav-menu-item">
-              Agenci
-            </div>
-          </nuxt-link> -->
-          <nuxt-link v-if="user.isLogged" to="/faktury">
-            <div class="nav-menu-item">
-              Historia płatności
-            </div>
-          </nuxt-link>
-          <div v-if="!user.isLogged" @click="toggleLogin">
-            <div class="nav-menu-item">
-              Logowanie/Rejestracja
-            </div>
-          </div>
-          <div v-if="user.isLogged" @click="logout">
-            <div class="nav-menu-item">
-              Wyloguj
-            </div>
-          </div>
-        </el-drawer>
-      </div>
-      <div class="menu">
-        <div
-          v-if="user.isLogged"
-          class="icons"
-        >
-          <nuxt-link to="/ulubione">
-            <HeartIcon class="favourites" />
-          </nuxt-link>
-          <Notifications
-            :show-list="visibleNotifications"
-            @toggle="visibleNotifications = !visibleNotifications"
+      <div class="nav-brand-search">
+        <n-link to="/" class="logo">
+          <!-- <h1>Dazu</h1> -->
+          <img src="~/assets/logo.svg" alt="">
+        </n-link>
+        <div class="search">
+          <el-input
+            v-model="search"
+            :class="[isHomePage ? 'search-input' : 'search-input black-text']"
+            placeholder="Search"
+            prefix-icon="el-icon-search"
+            @keyup.enter.native="searchPhrase"
           />
+          <!-- <el-button icon="el-icon-s-operation" @click="searchPopup = true">
+            Advanced
+          </el-button> -->
         </div>
-        <div v-if="!user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
-          Logowanie/Rejestracja
-        </div>
-        <el-dropdown v-if="user.isLogged" @command="handleCommand">
-          <nuxt-link to="/ustawienia-konta">
-            <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
-              Moje konto
+      </div>
+      <div class="nav-links">
+        <div class="mobile-menu">
+          <i class="el-icon-s-fold" @click="mobileNav = !mobileNav" />
+          <el-drawer
+            size="50%"
+            :visible.sync="mobileNav"
+            :before-close="handleClose"
+          >
+            <nuxt-link to="/dodaj-ogloszenie">
+              <div class="nav-menu-item">
+                Post Ad
+              </div>
+            </nuxt-link>
+            <nuxt-link v-if="user.isLogged" to="/ustawienia-konta">
+              <div class="nav-menu-item">
+                Settings
+              </div>
+            </nuxt-link>
+            <nuxt-link v-if="user.isLogged" to="/ulubione">
+              <div class="nav-menu-item">
+                Favorite
+              </div>
+            </nuxt-link>
+            <nuxt-link v-if="user.isLogged" to="/moje-ogloszenia">
+              <div class="nav-menu-item">
+                My Announcements  
+              </div>
+            </nuxt-link>
+            <!-- <nuxt-link v-if="user.roles.includes('company')" to="/agenci">
+              <div class="nav-menu-item">
+                Agenci
+              </div>
+            </nuxt-link> -->
+            <nuxt-link v-if="user.isLogged" to="/faktury">
+              <div class="nav-menu-item">
+                Payment history
+              </div>
+            </nuxt-link>
+            <div v-if="!user.isLogged" @click="toggleLogin">
+              <div class="nav-menu-item">
+                Login/Registration
+              </div>
             </div>
+            <div v-if="user.isLogged" @click="logout">
+              <div class="nav-menu-item">
+                Log out
+              </div>
+            </div>
+          </el-drawer>
+        </div>
+        <div class="menu">
+          <div
+            v-if="user.isLogged"
+            class="icons"
+          >
+            <nuxt-link to="/ulubione">
+              <HeartIcon class="favourites" />
+            </nuxt-link>
+            <Notifications
+              :show-list="visibleNotifications"
+              @toggle="visibleNotifications = !visibleNotifications"
+            />
+          </div>
+          <div class="nav-link-items">
+            <nuxt-link to="/for-sale">
+              For Sale
+            </nuxt-link>
+            <nuxt-link to="/for-rent">
+              For Rent
+            </nuxt-link>
+            <nuxt-link to="/autctions">
+              Auctions
+            </nuxt-link>
+            <nuxt-link to="/swap">
+              Swap
+            </nuxt-link>
+          </div>
+          <div v-if="!user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
+            <el-button type="info" plain>
+              Login/Registration
+            </el-button>
+          </div>
+          <el-dropdown v-if="user.isLogged" @command="handleCommand">
+            <nuxt-link to="/ustawienia-konta">
+              <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
+                My account
+              </div>
+            </nuxt-link>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="settings">
+                Settings
+              </el-dropdown-item>
+              <el-dropdown-item command="favorites">
+                Favorite
+              </el-dropdown-item>
+              <el-dropdown-item command="ads">
+                My Announcements
+              </el-dropdown-item>
+              <el-dropdown-item
+                v-if="user.roles.includes('company')"
+                command="agents"
+              >
+                Agents
+              </el-dropdown-item>
+              <el-dropdown-item command="payments">
+                Payment history
+              </el-dropdown-item>
+              <el-dropdown-item command="logout" divided>
+                Log out
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+          <nuxt-link to="/dodaj-ogloszenie">
+            <el-button type="primary" class="add-offer pulse-add">
+              Post Ad
+            </el-button>
           </nuxt-link>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="settings">
-              Ustawienia
-            </el-dropdown-item>
-            <el-dropdown-item command="favorites">
-              Ulubione
-            </el-dropdown-item>
-            <el-dropdown-item command="ads">
-              Moje Ogłoszenia
-            </el-dropdown-item>
-            <el-dropdown-item
-              v-if="user.roles.includes('company')"
-              command="agents"
-            >
-              Agenci
-            </el-dropdown-item>
-            <el-dropdown-item command="payments">
-              Historia płatności
-            </el-dropdown-item>
-            <el-dropdown-item command="logout" divided>
-              Wyloguj
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <nuxt-link to="/dodaj-ogloszenie">
-          <el-button type="primary" round class="add-offer pulse-add">
-            Dodaj ogłoszenie
-          </el-button>
-        </nuxt-link>
+        </div>
       </div>
     </div>
     <Login
@@ -300,141 +320,166 @@ a {
 }
 
 .nav {
-  margin: 0 6vw;
+  padding: 24px;
+  padding-top:79px;
   right: 0;
   left: 0;
   position: absolute;
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
   align-items: center;
-  height: 80px;
-
-  .logo {
-    color: #ff19b7;
-    cursor: pointer;
-    width: 25%;
-    text-align: left;
-
-    @media only screen and (max-width: 1100px) {
-      width: 50%;
-    }
-    img {
-      width: 90px !important;
-    }
-  }
-
-  .search {
-    width: 40%;
-    position: relative;
-
-    @media only screen and (max-width: 1100px) {
-      display: none;
-    }
-
-    button {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: 8px;
-      padding: 2px 7px;
-    }
-
-    .black-text {
-      input {
-        color: #000000!important;
-      }
-    }
-
-    .search-input {
-      padding: 0 10px 0 0;
-
-      input {
-        background: transparent;
-        border: 0;
-        border-bottom: 1px solid #f5f5f5;
-        border-radius: 0;
-        color: #ffffff;
-        padding-left: 36px;
-      }
-    }
-  }
-
-  .mobile-menu {
-    width: 50%;
-    display: none;
-
-    i {
-      background: #fff;
-    }
-
-    @media only screen and (max-width: 1100px) {
-      display: flex;
-      justify-content: flex-end;
-      color: #000;
-      font-size: 24px;
-    }
-  }
-
-  .menu {
+  height: 150px;
+  background-color:white;
+  .nav-brand-search {
+    width:50%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 35%;
-
-    @media only screen and (max-width: 1100px) {
-      display: none;
+    flex-direction:row;
+    .logo {
+      color: #ff19b7;
+      cursor: pointer;
+      width: 25%;
+      text-align: left;
+  
+      @media only screen and (max-width: 1100px) {
+        width: 50%;
+      }
+      img {
+        width: 90px !important;
+      }
     }
-
-    a {
-      text-decoration: none;
-      outline: 0;
-    }
-
-    .icons {
+  
+    .search {
+      width: 306px;
+      height: 36px;
       position: relative;
-      display: flex;
-      @media only screen and (max-width: 1366px) {
+      background: #FFFFFF;
+      /* Grey Mid */
+  
+      border: 1px solid #A0A0A0;
+      border-radius: 4px;
+     
+      @media only screen and (max-width: 1100px) {
         display: none;
       }
-
-      .favourites, .notifications {
-        color: #999b97;
+  
+      button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 8px;
+        padding: 2px 7px;
+      }
+  
+      .black-text {
+        input {
+          color: #000000!important;
+        }
+      }
+  
+      .search-input {
+        padding: 0 10px 0 0;
+  
+        input {
+          background: transparent;
+          border: 0;
+          border-bottom: 1px solid #f5f5f5;
+          border-radius: 0;
+          color: rgba(26, 26, 26, 0.5);
+          padding-left: 36px;
+        }
+      }
+    }
+  }
+  .nav-links {
+    width:50%;
+    display:flex;
+    flex-direction: row;
+    .mobile-menu {
+      width: 50%;
+      display: none;
+  
+      i {
+        background: #fff;
+      }
+  
+      @media only screen and (max-width: 1100px) {
+        display: flex;
+        justify-content: flex-end;
+        color: #000;
+        font-size: 24px;
+      }
+    }
+  
+    .menu {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+  
+      @media only screen and (max-width: 1100px) {
+        display: none;
+      }
+      .nav-link-items{
+        width: 40%;
+        display:flex;
+        justify-content:space-between;
+        color: #0C0C0C;
+      }
+  
+      a {
+        text-decoration: none;
+        outline: 0;
+        color:#0C0C0C !important;
+      }
+  
+      .icons {
+        position: relative;
+        display: flex;
+        @media only screen and (max-width: 1366px) {
+          display: none;
+        }
+  
+        .favourites, .notifications {
+          color: #999b97;
+          cursor: pointer;
+  
+          &:hover {
+            color: #ff19b7;
+          }
+        }
+        .notifications {
+          margin: 0 0 0 18px;
+        }
+        .favourites {
+          margin: 0 18px 0 0;
+        }
+      }
+  
+      .login {
+        font-family: Mulish-Regular;
+        color: #ffffff !important;
         cursor: pointer;
-
+        padding: 13px 4px;
+        // text-transform: uppercase;
+        font-size: 14px;
+        outline: 0!important;
+  
         &:hover {
           color: #ff19b7;
         }
       }
-      .notifications {
-        margin: 0 0 0 18px;
+      .wht-clr {
+        color: #ffffff !important;
       }
-      .favourites {
-        margin: 0 18px 0 0;
+      .add-offer {
+        font-family: Mulish-Regular;
+        background: #ff19b7;
+        border-color: #ff19b7;
       }
-    }
-
-    .login {
-      font-family: Mulish-Regular;
-      color: #000000;
-      cursor: pointer;
-      padding: 13px 4px;
-      // text-transform: uppercase;
-      font-size: 14px;
-      outline: 0!important;
-
-      &:hover {
-        color: #ff19b7;
-      }
-    }
-    .wht-clr {
-      color: #ffffff !important;
-    }
-    .add-offer {
-      font-family: Mulish-Regular;
-      background: #ff19b7;
-      border-color: #ff19b7;
     }
   }
+  
+
 }
 </style>

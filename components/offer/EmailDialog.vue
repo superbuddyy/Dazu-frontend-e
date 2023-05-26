@@ -1,15 +1,15 @@
 <template>
   <div class="email-dialog">
     <el-dialog
-      title="Napisz wiadomość"
+      title="Write a message"
       :visible.sync="dialogVisible"
       :before-close="close"
     >
       <el-form v-if="isShowForm" ref="emailForm" :label-position="'left'" :model="form" class="form" :rules="rules">
         <el-row :span="24">
           <el-col :span="12">
-            <el-form-item label="Imię" prop="name">
-              <el-input v-model="form.name" placeholder="Imię" />
+            <el-form-item label="Name" prop="name">
+              <el-input v-model="form.name" placeholder="Name" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -18,23 +18,23 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="Wiadomość">
+        <el-form-item label="Message">
           <el-input v-model="form.message" type="textarea" class="text-area" />
         </el-form-item>
-        <el-checkbox v-if="offerSlug" v-model="form.wantToSee" label="Chcę obejrzeć nieruchomość" name="type" />
+        <el-checkbox v-if="offerSlug" v-model="form.wantToSee" label="I want to view the property" name="type" />
         <div v-if="offerSlug && form.wantToSee" class="check-buttons">
           <el-button :type="[datetimeForm ? 'blank' : 'primary']" @click="active(1)">
-            Jak najszybciej
+            As soon as possible
           </el-button>
           <el-button :type="[datetimeForm ? 'primary' : 'blank']" @click="active(2)">
-            O konkretnej porze
+            At a specific time
           </el-button>
         </div>
         <div v-if="datetimeForm && form.wantToSee" class="datatime-form">
-          <el-form-item label="Wybierz termin">
+          <el-form-item label="Choose a date">
             <el-form-item prop="date">
-              <el-date-picker v-model="form.date" value-format="yyyy-MM-dd" type="date" placeholder="Wybierz date" />
-              <el-time-picker v-model="form.time" value-format="hh:mm" placeholder="Wybierz godzinę" />
+              <el-date-picker v-model="form.date" value-format="yyyy-MM-dd" type="date" placeholder="Select a date" />
+              <el-time-picker v-model="form.time" value-format="hh:mm" placeholder="Select an hour" />
             </el-form-item>
           </el-form-item>
         </div>
@@ -47,11 +47,11 @@
         </div>
       </el-form>
       <span v-if="isShowForm" slot="footer" class="dialog-footer">
-        <el-button @click="close()">Zamknij</el-button>
+        <el-button @click="close()">Close</el-button>
         <el-button type="primary" icon="el-icon-right" @click="showAlertDialog()">Wyślj</el-button>
       </span>
       <div v-if="!isShowForm" class="alert-div">
-        Aby Twoja wiadomość została dostarczona, musisz kliknąć w link emaila jaki został podany w wiadomości.
+        In order for your message to be delivered, you must click on the email link provided in the message.
         <div class="alert-div-btn">
           <el-button
             type="primary"
@@ -123,10 +123,10 @@ export default {
       isDisabled: false,
       rules: {
         email: [
-          { required: true, message: 'Email jest wymagany', trigger: 'change' },
-          { type: 'email', message: 'Niepoprawny adres email', trigger: ['blur', 'change'] }
+          { required: true, message: 'Email is required', trigger: 'change' },
+          { type: 'email', message: 'Incorrect email address', trigger: ['blur', 'change'] }
         ],
-        name: { required: true, message: 'Nazwa firmy lub imię jest wymagane', trigger: 'change' }
+        name: { required: true, message: 'Company name or first name is required', trigger: 'change' }
       }
     }
   },
@@ -138,17 +138,17 @@ export default {
   watch: {
     'form.date' (value) {
       if (this.datetimeForm) {
-        this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + `. Proponowane oglądanie dnia ${value} o godzinie ${this.form.time}`
+        this.form.message = 'Reply to the ad ' + this.offerTitle + `. Suggested viewing of the day ${value} at ${this.form.time}`
       }
     },
     'form.time' (value) {
       if (this.datetimeForm) {
-        this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + `. Proponowane oglądanie dnia ${this.form.date} o godzinie ${value}`
+        this.form.message = 'Reply to the ad ' + this.offerTitle + `. Suggested viewing of the day ${this.form.date} at ${value}`
       }
     },
     'form.wantToSee' (value) {
       if (value) {
-        this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + '. Proponowane oglądanie jak najszybciej'
+        this.form.message = 'Reply to the ad ' + this.offerTitle + '. Recommended viewing as soon as possible'
       } else {
         this.form.message = ''
       }
@@ -164,16 +164,16 @@ export default {
   methods: {
     default () {
       // this.form.wantToSee = true
-      // this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + '. Proponowane oglądanie jak najszybciej'
+      // this.form.message = 'Reply to the ad ' + this.offerTitle + '. Proponowane oglądanie jak najszybciej'
       this.form.targetEmail = this.offerTargetEmail
     },
     active (option) {
       if (option === 2) {
         this.datetimeForm = true
-        this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + '. Proponowane oglądanie dnia {data} o godzinie {godzina}'
+        this.form.message = 'Reply to the ad ' + this.offerTitle + '. Suggested viewing of the day {data} at {godzina}'
       } else {
         this.datetimeForm = false
-        this.form.message = 'Odp na ogłoszenie ' + this.offerTitle + '. Proponowane oglądanie jak najszybciej'
+        this.form.message = 'Reply to the ad ' + this.offerTitle + '. Recommended viewing as soon as possible'
         this.form.date = ''
         this.form.time = ''
       }
@@ -196,7 +196,7 @@ export default {
       let result = {}
       if (this.form.recaptcha === null) {
         this.$message({
-          message: 'Proszę uzupełnij recaptche',
+          message: 'Please complete the recaptcha',
           type: 'error',
           duration: 3000
         })
@@ -207,7 +207,7 @@ export default {
       this.$refs.emailForm.validate((valid) => {
         if (!valid) {
           this.$message({
-            message: 'Proszę, popraw formularz rejestracji',
+            message: 'Please correct the registration form',
             type: 'error',
             duration: 3000
           })
@@ -228,7 +228,7 @@ export default {
       this.isShowForm = true
       if (result.status === 204) {
         this.$message({
-          message: 'Wiadomość została wysłana',
+          message: 'Message was sent',
           type: 'success',
           duration: 3000
         })
@@ -243,7 +243,7 @@ export default {
         // this.$emit('close-dialog')
       } else if (result.status === 200) {
         this.$message({
-          message: 'Gratulacje. Potwierdzić swoje konto. Kliknij w link przesłany na e-mail.',
+          message: 'Congratulations. Confirm your account. Click on the link sent to the e-mail.',
           type: 'success',
           duration: 3000
         })

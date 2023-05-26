@@ -1,7 +1,7 @@
 <template>
   <div class="category">
-    <el-form-item label="Kategoria" prop="category">
-      <el-select v-model="local_category" placeholder="Wybierz" clearable @change="setSubCategories($event)">
+    <el-form-item label="Category" prop="category">
+      <el-select v-model="local_category" placeholder="Choose" clearable @change="setSubCategories($event)">
         <template
           v-for="rootCategory in rootCategories"
         >
@@ -14,8 +14,8 @@
         </template>
       </el-select>
     </el-form-item>
-    <el-form-item v-if="category" label="Pod kategoria">
-      <el-select v-model="local_subcategory" placeholder="Wybierz" clearable @change="setSubCategory">
+    <el-form-item v-if="category" label="Sub category">
+      <el-select v-model="local_subcategory" placeholder="Choose" clearable @change="setSubCategory">
         <template
           v-for="subCat in subCategories"
         >

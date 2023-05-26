@@ -11,9 +11,9 @@
           <div class="subscription-header">{{ item.name }}</div>
           <div class="bottom clearfix">
             <div class="price">
-              <span>{{ item.price / 100 }} <sup>zł</sup></span>
+              <span>{{ item.price / 100 }} <sup>zloty</sup></span>
             </div>
-            <b>na {{ item.duration / 24 }} dni</b>
+            <b>already {{ item.duration / 24 }} days</b>
           </div>
           <div class="list">
             <div class="list-item" v-if="item.number_of_raises !== 0">

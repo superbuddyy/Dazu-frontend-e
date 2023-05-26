@@ -11,7 +11,7 @@
         <el-checkbox v-model="checkStatus" @change="changeAvatarStatus" />
       </div>
       <div v-if="expireTime" class="expire-time">
-        <ExpireTime :expire-time="expireTime" text="Avatar wygasa za " />
+        <ExpireTime :expire-time="expireTime" text="Avatar expires in " />
       </div>
     </div>
     <el-popover
@@ -32,20 +32,20 @@
           :file-list="avatar"
         >
           <el-button type="primary" size="mini" @click="buyVisible = false">
-            Wybierz avatar i zapłać
+            Choose an avatar and pay
           </el-button>
         </el-upload>
         <el-button size="mini" type="text" @click="buyVisible = false">
-          Innym razem
+          Another time
         </el-button>
       </div>
       <el-button slot="reference" type="primary" plain class="avatar-btn">
-        Zmień
+        Change
       </el-button>
     </el-popover>
     <el-dialog
       v-loading="loading"
-      title="Wybierz metodę płatności"
+      title="Choose payment method"
       :visible.sync="paymentDialog"
       width="30%"
       center
@@ -72,17 +72,17 @@
     >
       <div style="text-align: center; margin: 0">
         <p style="margin: 14px">
-          Czy na pewno chcesz usunąć avatar?
+          Are you sure you want to delete the avatar?
         </p>
         <el-button type="primary" size="mini" plain @click="deleteAvatarVisible = false">
-          Anuluj
+          Cancel
         </el-button>
         <el-button type="danger" size="mini" plain @click="removeAvatar()">
-          Usuń
+          Delete
         </el-button>
       </div>
       <el-button v-if="user.avatar !== null" slot="reference" type="danger" plain class="avatar-btn">
-        Usuń
+        Delete
       </el-button>
     </el-popover>
   </div>
@@ -157,7 +157,7 @@ export default {
         this.deleteAvatarVisible = false
         await this.$store.dispatch('user/setAvatar', null)
         this.$message({
-          message: 'Usunięto avatar',
+          message: 'Avatar removed',
           type: 'success',
           duration: 3000
         })
@@ -200,7 +200,7 @@ export default {
       result.data.forEach((item, index) => {
         item.value = (item.value / 100).toFixed(2)
         if (item.name === 'avatar_photo.price') {
-          this.avatarLimitMsg = `Dodanie lub zmiana avatara jest płatna - ${item.value}zł na 30dni`
+          this.avatarLimitMsg = `Adding or changing an avatar is paid - ${item.value}PLN for 30 days`
           this.avatarPrice = item.value
         }
       })

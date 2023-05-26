@@ -4,31 +4,31 @@
       <h3>Newsletter</h3>
       <div class="btns">
         <el-button type="primary" plain :class="[newsletter ? 'btn' : 'btn pulse']" :disabled="newsletter" @click="toggleNewsletter">
-          Aktywuj
+          Activate
         </el-button>
         <el-button type="info" plain class="btn" :disabled="!newsletter" @click="toggleNewsletter">
-          Dezaktywuj
+          Deactivate
         </el-button>
       </div>
     </div>
     <div class="account-info">
       <div>
-        <h3>informacje o koncie</h3>
-        <el-input v-model="email" disabled placeholder="Imię lub nazwa firmy" class="input" />
-        <el-input v-model="type" disabled placeholder="Imię lub nazwa firmy" class="input" />
+        <h3>Account information</h3>
+        <el-input v-model="email" disabled placeholder="First name or company name" class="input" />
+        <el-input v-model="type" disabled placeholder="First name or company name" class="input" />
       </div>
       <el-form label-position="right" label-width="100px" :model="form" class="form">
-        <h3>Edytuj informacje</h3>
-        <el-input v-model="form.name" placeholder="Imię lub nazwa firmy" class="input" />
+        <h3>Edit information</h3>
+        <el-input v-model="form.name" placeholder="First name or company name" class="input" />
         <el-input
           v-model="form.phone"
-          placeholder="Telefon"
+          placeholder="Telephone"
           class="input"
         />
-        <el-input v-model="form.street" placeholder="Ulica i numer domu/mieszkania" class="input" />
-        <el-input v-model="form.zip_code" placeholder="Kod Pocztowy" class="input" />
-        <el-input v-model="form.city" placeholder="Miasto" class="input" />
-        <el-input v-model="form.country" placeholder="Kraj" class="input" />
+        <el-input v-model="form.street" placeholder="Street and house/apartment number" class="input" />
+        <el-input v-model="form.zip_code" placeholder="Zip code" class="input" />
+        <el-input v-model="form.city" placeholder="City" class="input" />
+        <el-input v-model="form.country" placeholder="End" class="input" />
         <el-input
           v-if="$store.state.user.roles.includes('company')"
           v-model="form.nip"
@@ -36,7 +36,7 @@
           class="input"
         />
         <el-button type="primary" plain class="btn-save" @click="save">
-          Zapisz
+          Save
         </el-button>
       </el-form>
     </div>
@@ -104,7 +104,7 @@ export default {
         await this.$store.dispatch('user/setNewsletter', newsletter.data.newsletter)
         this.newsletter = newsletter.data.newsletter
         this.$message({
-          message: 'Newsletter został zaktualizowany',
+          message: 'The newsletter has been updated',
           type: 'success',
           duration: 3000
         })
@@ -114,7 +114,7 @@ export default {
       updateProfile(this.form)
       this.$store.dispatch('user/setProfile', this.form)
       this.$message({
-        message: 'Ustawienia zostały zapisane',
+        message: 'The settings have been saved',
         type: 'success',
         duration: 3000
       })

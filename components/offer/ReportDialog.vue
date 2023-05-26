@@ -1,12 +1,12 @@
 <template>
   <div class="report-dialog">
     <el-dialog
-      title="Zgłoś ogłoszenie"
+      title="Submit an ad"
       :visible.sync="dialogVisible"
       :before-close="close"
       class="report-dialog-box"
     >
-      <label>Opis zgłoszenia</label>
+      <label>Report description</label>
       <el-input v-model="message" type="textarea" class="text-area" />
       <div class="captcha">
         <vue-recaptcha
@@ -16,8 +16,8 @@
         />
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="close()">Zamknij</el-button>
-        <el-button type="primary" @click="send()">Zgłoś</el-button>
+        <el-button @click="close()">Close</el-button>
+        <el-button type="primary" @click="send()">Report</el-button>
       </span>
     </el-dialog>
   </div>
@@ -63,7 +63,7 @@ export default {
     async send () {
       if (this.recaptcha === null) {
         this.$message({
-          message: 'Proszę uzupełnij recaptche',
+          message: 'Please complete the recaptcha',
           type: 'error',
           duration: 3000
         })
@@ -74,7 +74,7 @@ export default {
 
       if (result.status === 204) {
         this.$message({
-          message: 'Zgłoszenie zostało wysłane',
+          message: 'The application has been sent',
           type: 'success',
           duration: 3000
         })

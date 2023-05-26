@@ -1,10 +1,10 @@
 <template>
   <div class="page-contact-form">
     <div class="container">
-      <h1>Kontakt</h1>
+      <h1>Contact</h1>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="Temat" prop="topic">
-          <el-select v-model="form.topic" placeholder="Wybierz" clearable class="select-topic">
+        <el-form-item label="Topic" prop="topic">
+          <el-select v-model="form.topic" placeholder="Choose" clearable class="select-topic">
             <el-option
               v-for="topic in topics"
               :key="topic"
@@ -16,15 +16,15 @@
         <el-form-item label="Email" prop="email">
           <el-input v-model="form.email" placeholder="Email" />
         </el-form-item>
-        <el-form-item label="Imię" prop="name">
-          <el-input v-model="form.name" placeholder="Imię" />
+        <el-form-item label="Name" prop="name">
+          <el-input v-model="form.name" placeholder="Name" />
         </el-form-item>
-        <el-form-item label="Wiadomość" prop="message">
+        <el-form-item label="Message" prop="message">
           <el-input
             v-model="form.message"
             type="textarea"
             :rows="5"
-            placeholder="Wiadomość"
+            placeholder="Message"
           />
         </el-form-item>
         <div class="captcha">
@@ -36,7 +36,7 @@
         </div>
         <div class="buttons">
           <el-button type="primary" icon="el-icon-right" @click="submit">
-            Wyślj
+            Send
           </el-button>
         </div>
       </el-form>
@@ -61,19 +61,19 @@ export default {
       recaptcha: null
     },
     topics: [
-      'Pytanie odnośnie ogłoszenia',
-      'Pomoc graficzna',
-      'Problem techniczny',
-      'Inne'
+      'Question about the announcement',
+      'Graphical help',
+      'Technical problem',
+      'Other'
     ],
     rules: {
-      topic: { required: true, message: 'Temat jest wymagany', trigger: 'change' },
-      message: { required: true, message: 'Wiadomość jest wymagana', trigger: 'change' },
+      topic: { required: true, message: 'Subject is required', trigger: 'change' },
+      message: { required: true, message: 'Message is required', trigger: 'change' },
       email: [
-        { required: true, message: 'Email jest wymagany', trigger: 'change' },
-        { type: 'email', message: 'Niepoprawny adres email', trigger: ['blur', 'change'] }
+        { required: true, message: 'Email is required', trigger: 'change' },
+        { type: 'email', message: 'Incorrect email address', trigger: ['blur', 'change'] }
       ],
-      name: { required: true, message: 'Imie jest wymagane', trigger: 'change' }
+      name: { required: true, message: 'Name is required', trigger: 'change' }
     }
   }),
   computed: {
@@ -92,7 +92,7 @@ export default {
       this.$refs.form.validate((valid) => {
         if (!valid) {
           this.$message({
-            message: 'Proszę, popraw formularz rejestracji',
+            message: 'Please correct the registration form',
             type: 'error',
             duration: 3000
           })
@@ -105,7 +105,7 @@ export default {
     async send () {
       if (this.form.recaptcha === null) {
         this.$message({
-          message: 'Proszę uzupełnij recaptche',
+          message: 'Please complete the recaptcha',
           type: 'error',
           duration: 3000
         })
@@ -115,7 +115,7 @@ export default {
       const result = await sendContactForm(this.form)
       if (result.status === 204) {
         this.$message({
-          message: 'Wiadomość została wysłana',
+          message: 'Message has been sent',
           type: 'success',
           duration: 3000
         })

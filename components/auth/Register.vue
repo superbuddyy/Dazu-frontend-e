@@ -1,19 +1,19 @@
 <template>
   <el-dialog title="" :visible.sync="localVisible" :close-on-click-modal="false" class="register-popup">
-    <h3>Rejestracja</h3>
+    <h3>Registration</h3>
     <el-form ref="registerForm" :model="registerForm" :rules="rules">
       <el-form-item label="" prop="type">
-        <el-select v-model="registerForm.type" placeholder="Jestem" clearable class="who-am-i">
+        <el-select v-model="registerForm.type" placeholder="I am" clearable class="who-am-i">
           <el-option
-            label="Osobą prywatną"
+            label="Private person"
             value="user"
           />
           <el-option
-            label="Agencją nieruchomości"
+            label="Real estate agency"
             value="agency"
           />
           <el-option
-            label="Deweloperem"
+            label="Developer"
             value="developer"
           />
         </el-select>
@@ -29,7 +29,7 @@
         <el-input
           v-model="registerForm.name"
           prefix-icon="el-icon-user"
-          placeholder="Nazwa firmy lub imię"
+          placeholder="Company name or first name"
         />
       </el-form-item>
       <el-form-item prop="password">
@@ -49,25 +49,25 @@
           autocomplete="off"
           show-password
           prefix-icon="el-icon-key"
-          placeholder="Powtórz hasło"
+          placeholder="Repeat password"
         />
       </el-form-item>
       <div class="captch" />
       <div class="rules">
         <el-form-item prop="tos">
           <el-checkbox v-model="registerForm.tos" name="tos">
-            Rejestrując się akceptujesz <nuxt-link to="/">
-              regulamin
+            By registering you accept <nuxt-link to="/">
+              statute
             </nuxt-link> Dazu.pl
           </el-checkbox>
         </el-form-item>
       </div>
       <div class="btns">
         <el-button type="primary" class="login-btn" @click="submit">
-          Załóż konto
+          Create an account
         </el-button>
         <el-button class="login-btn" @click="openLogin">
-          Zaloguj się
+          Log in
         </el-button>
       </div>
     </el-form>
@@ -87,7 +87,7 @@ export default {
   data () {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Wpisz hasło'))
+        callback(new Error('Enter the password'))
       } else {
         if (this.registerForm.password !== '') {
           this.$refs.registerForm.validateField('rePassword')
@@ -97,9 +97,9 @@ export default {
     }
     const validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Powtórz hasło'))
+        callback(new Error('Repeat password'))
       } else if (value !== this.registerForm.password) {
-        callback(new Error('Hasła muszą być takie same'))
+        callback(new Error('The passwords must be the same'))
       } else {
         callback()
       }
@@ -117,20 +117,20 @@ export default {
       rules: {
         password: [
           { validator: validatePass, trigger: 'blur' },
-          { pattern: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$', message: 'Hasło musi posiadać co najmnie 6 znaków, 1 dużą literę i jedną liczbę', trigger: 'blur' }
+          { pattern: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$', message: 'The password must have at least 6 characters, 1 capital letter and one number', trigger: 'blur' }
         ],
         rePassword: [
           { validator: validatePass2, trigger: 'blur' }
         ],
         tos: [
-          { required: true, message: 'Akceptacja regulaminu jest wymagana', trigger: 'change' }
+          { required: true, message: 'Acceptance of the regulations is required', trigger: 'change' }
         ],
-        type: { required: true, message: 'Wybierz kim jesteś?', trigger: 'change' },
+        type: { required: true, message: 'Choose who you are?', trigger: 'change' },
         email: [
-          { required: true, message: 'Email jest wymagany', trigger: 'change' },
-          { type: 'email', message: 'Niepoprawny adres email', trigger: ['blur', 'change'] }
+          { required: true, message: 'Email is required', trigger: 'change' },
+          { type: 'email', message: 'Incorrect email address', trigger: ['blur', 'change'] }
         ],
-        name: { required: true, message: 'Nazwa firmy lub imię jest wymagane', trigger: 'change' }
+        name: { required: true, message: 'Company name or first name is required', trigger: 'change' }
       }
     }
   },
@@ -154,7 +154,7 @@ export default {
       this.$refs.registerForm.validate((valid) => {
         if (!valid) {
           this.$message({
-            message: 'Proszę, popraw formularz rejestracji',
+            message: 'Please correct the registration form',
             type: 'error',
             duration: 3000
           })
@@ -169,7 +169,7 @@ export default {
         await this.$store.dispatch('user/register', this.registerForm)
         this.$emit('toggle-popup')
         this.$message({
-          message: 'Gratulacje. Prosimy aktywować konto. Kliknij w link wysłany na emaila.',
+          message: 'Congratulations. Please activate your account. Click on the link sent by e-mail.',
           type: 'success',
           duration: 5000
         })

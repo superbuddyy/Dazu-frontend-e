@@ -2,7 +2,7 @@
   <div :style="[visible ? { 'max-height': 'unset' } : { 'max-height': '100px' }]" class="advanced-search">
     <div class="first-line">
       <div class="label">
-        Szukam1
+        I am looking for1
       </div>
       <!-- <el-cascader
         v-model="search.category"
@@ -12,28 +12,28 @@
         popper-class="category-dropdown"
         @change="handleChange"
       /> -->
-      <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Wybierz" />
+      <treeselect v-model="search.category" :multiple="true" :options="filters.categories" placeholder="Choose" />
       <el-select v-model="search.typ">
         <el-option v-for="type in filters.types" :key="type.slug" :label="type.name" :value="type.slug" />
       </el-select>
-      <el-select v-model="location" class="location-input" filterable remote placeholder="Lokalizacja"
+      <el-select v-model="location" class="location-input" filterable remote placeholder="Location"
         :remote-method="getLocations" :loading="locationsLoading" :debounce="500" clearable @change="setLocation">
         <el-option v-for="loc in locations" :key="loc.osm_id" :label="loc.display_name"
           :value="loc.lat + '*' + loc.lon + '*' + loc.display_name" />
         <el-button v-if="isClearButton" class="clr-margin-btn" @click="clearRecentSearch">
-          wyczyść
+          Clear
         </el-button>
       </el-select>
       <el-button type="primary plain" @click="onSearch">
-        Szukaj
+        Search
       </el-button>
       <el-button v-if="!visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-bottom"
         @click="toggleAdvanced">
-        Zaawansowane
+        Advanced
       </el-button>
       <el-button v-if="visible && !onlyAdvanced" class="advanced-btn" type="plain" icon="el-icon-caret-top"
         @click="toggleAdvanced">
-        Podstawowe
+        Basic
       </el-button>
     </div>
     <transition name="fade" mode="out-in">
@@ -43,24 +43,24 @@
             <div class="label">
               Cena
             </div>
-            <el-select v-model="search.price.min" placeholder="Minimalna" filterable clearable>
+            <el-select v-model="search.price.min" placeholder="Minimal" filterable clearable>
               <el-option v-for="item in priceMinFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
-            <el-select v-model="search.price.max" placeholder="Maksymalna" filterable clearable>
+            <el-select v-model="search.price.max" placeholder="Maximal" filterable clearable>
               <el-option v-for="item in priceMaxFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
           </div>
           <div class="meters">
             <div class="label">
-              Powierzchnia
+              Surface
             </div>
-            <el-select v-model="search['metraz'].min" placeholder="Minimalna" filterable clearable>
+            <el-select v-model="search['metraz'].min" placeholder="Minimal" filterable clearable>
               <el-option v-for="item in metrazMinFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
-            <el-select v-model="search['metraz'].max" placeholder="Maksymalna" filterable clearable>
+            <el-select v-model="search['metraz'].max" placeholder="Maximal" filterable clearable>
               <el-option v-for="item in metrazMaxFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>

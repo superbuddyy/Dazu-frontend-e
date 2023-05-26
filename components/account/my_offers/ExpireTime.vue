@@ -16,7 +16,7 @@ export default {
     },
     text: {
       type: String,
-      default: () => 'ogłoszenie wygasa za '
+      default: () => 'ad expires in '
     }
   },
   computed: {
@@ -32,23 +32,23 @@ export default {
       let diff = endDate.diff(nowDate, 'minutes')
       let unit = ''
       if (diff < 60) {
-        unit = 'minut'
-        if (diff > 1 && diff < 5) { unit = 'minuty' }
+        unit = 'minutes'
+        if (diff > 1 && diff < 5) { unit = 'minutes' }
         if (diff === 1) {
-          unit = 'minutę'
+          unit = 'a minute'
         }
         return { value: diff, unit } // minutes
       }
       if (diff < 1440) {
         diff = endDate.diff(nowDate, 'hours')
-        unit = 'godziny'
-        if (diff < 23 && diff > 4) { unit = 'godzin' }
-        if (diff === 1) { unit = 'godzina' }
+        unit = 'hours'
+        if (diff < 23 && diff > 4) { unit = 'hours' }
+        if (diff === 1) { unit = 'hour' }
         return { value: diff, unit } // hours
       }
       diff = endDate.diff(nowDate, 'days')
-      unit = 'dni'
-      if (diff === 1) { unit = 'dzień' }
+      unit = 'days'
+      if (diff === 1) { unit = 'day' }
       return { value: diff, unit } // days
     }
   }

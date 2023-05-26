@@ -9,21 +9,21 @@
         :to="'/ogloszenia/'"
         @click="activePage = 'search'"
       >
-        Zapisane wyszukania
+        Saved searches
       </el-button>
       <el-button
         :class="[ activePage === 'offers' ? 'active sub-item' : 'sub-item' ]"
         :to="'/ogloszenia/'"
         @click="activePage = 'offers'"
       >
-        Ulubione
+        Favorite
       </el-button>
       <el-button
         :class="[ activePage === 'users' ? 'active sub-item' : 'sub-item' ]"
         :to="'/ogloszenia/'"
         @click="activePage = 'users'"
       >
-        Użytkownicy
+        Users
       </el-button>
     </div>
     <div class="container">

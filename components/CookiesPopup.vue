@@ -1,13 +1,13 @@
 <template>
   <div class="cookies-popup">
     <p>
-      Informujemy że ta strona używa ciasteczek (cookies), dzięki którym nasz serwis może działać lepiej.
-      Więcej na ten temat w dziale Cookies. Pragniemy Cię poinformować, że nasz serwis internetowy może
-      personalizować treści marketingowe do Twoich potrzeb. Wyrażenie zgody jest dobrowolne. Masz prawo do:
-      dostępu do Twoich danych, ich sprostowania oraz usunięcia. Więcej na ten znajdziesz w Polityce Prywatności.
+      Please be advised that this website uses cookies, thanks to which our website can work better.
+      More on this topic in the Cookies section. We would like to inform you that our website may
+      personalize marketing content to your needs. Consent is voluntary. You have the right to:
+      access to your data, rectification and deletion. More on this can be found in the Privacy Policy.
     </p>
     <el-button class="accept-btn" @click="accept">
-      Akceptuje
+      I accept
     </el-button>
   </div>
 </template>

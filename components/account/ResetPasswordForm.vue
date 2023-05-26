@@ -1,11 +1,11 @@
 <template>
   <div class="reset-form">
     <el-form ref="resetPasswordForm" :model="resetPasswordForm" :rules="rules" class="form">
-      <h3>Zmień hasło</h3>
+      <h3>Change Password</h3>
       <el-form-item prop="oldPassword">
         <el-input
           v-model="resetPasswordForm.oldPassword"
-          placeholder="Stare hasło"
+          placeholder="Old password"
           class="input"
           type="password"
           autocomplete="off"
@@ -15,7 +15,7 @@
       <el-form-item prop="password">
         <el-input
           v-model="resetPasswordForm.password"
-          placeholder="Nowe hasło"
+          placeholder="A new password"
           class="input"
           type="password"
           autocomplete="off"
@@ -25,7 +25,7 @@
       <el-form-item prop="rePassword">
         <el-input
           v-model="resetPasswordForm.rePassword"
-          placeholder="Powtórz nowe hasło"
+          placeholder="Repeat new password"
           class="input"
           type="password"
           autocomplete="off"
@@ -33,10 +33,10 @@
         />
       </el-form-item>
       <el-button type="primary" plain class="btn-save" @click="save">
-        Zapisz
+        Save
       </el-button>
       <el-button type="info" plain class="btn-delete" @click="softDelete">
-        Usuń konto
+        Delete account
       </el-button>
     </el-form>
   </div>
@@ -50,7 +50,7 @@ export default {
   data () {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Wpisz hasło'))
+        callback(new Error('Enter the password'))
       } else {
         if (this.resetPasswordForm.password !== '') {
           this.$refs.resetPasswordForm.validateField('rePassword')
@@ -60,9 +60,9 @@ export default {
     }
     const validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Powtórz hasło'))
+        callback(new Error('Repeat password'))
       } else if (value !== this.resetPasswordForm.password) {
-        callback(new Error('Hasła muszą być takie same'))
+        callback(new Error('The passwords must be the same'))
       } else {
         callback()
       }
@@ -90,7 +90,7 @@ export default {
         const response = await changePassword(this.resetPasswordForm)
         if (response.status === 204) {
           this.$message({
-            message: 'Hasło zostało zmienione',
+            message: 'Password has been changed',
             type: 'success',
             duration: 3000
           })

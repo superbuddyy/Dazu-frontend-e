@@ -3,7 +3,7 @@
     <img class="pageImg" src="~/assets/dazu_404.svg" alt="">
     <!-- <b>404</b>
     <div>Nie znaleziono strony</div> -->
-    <div><a href="/">Kliknij</a> aby wrócić na stronę główną</div>
+    <div><a href="/">Click</a> to return to the home page</div>
   </div>
 </template>
 <script>

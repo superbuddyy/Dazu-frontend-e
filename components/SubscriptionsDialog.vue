@@ -2,7 +2,7 @@
   <div class="subscriptions-dialog">
     <el-dialog
       v-loading="loading"
-      title="Proszę wybrać opcję promowania ogłoszenia"
+      title="Please select an option to promote your ad"
       :visible.sync="visible"
       :before-close="close"
     >
@@ -35,7 +35,7 @@
         </div> -->
       </div>
       <div v-if="selectedItem !== null" class="payments">
-        <p>Wybierz metodę płatności</p>
+        <p>Choose payment method</p>
         <div class="gateways">
 <!--          <el-button :class="[ gateway === 'paypal' ? 'active' : '' ]" @click="setGateway('paypal')">-->
 <!--            <div class="paypal">-->
@@ -52,7 +52,7 @@
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button icon="el-icon-back" @click="close()">Rezygnuję</el-button>
+        <el-button icon="el-icon-back" @click="close()">Resigns</el-button>
         <el-button type="primary" icon="el-icon-sold-out" @click="pay()">Zamawiam i płacę</el-button>
       </span>
     </el-dialog>
@@ -117,7 +117,7 @@ export default {
     async pay () {
       if (this.selectedItem === null) {
         this.$message({
-          message: 'Proszę wybrać opcję promowania ogłoszenia',
+          message: 'Please select an option to promote your ad',
           type: 'error',
           duration: 3000
         })
@@ -125,7 +125,7 @@ export default {
       }
       if (this.gateway === null) {
         this.$message({
-          message: 'Wybierz metodę płatności',
+          message: 'Choose payment method',
           type: 'error',
           duration: 3000
         })

@@ -6,7 +6,7 @@
           <h1>{{ post.title }}</h1>
           <nuxt-link :to="'/blog/' + post.slug">
             <el-button type="primary" icon="el-icon-view">
-              Zobacz więcej
+              See more
             </el-button>
           </nuxt-link>
         </div>

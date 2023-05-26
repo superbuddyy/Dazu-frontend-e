@@ -20,19 +20,19 @@
       />
       <div class="btns">
         <el-button type="primary" class="login-btn" @click="login">
-          Zaloguj się
+          Log in
         </el-button>
         <el-button class="login-btn" @click="openRegister">
-          Załóż konto
+          Create an account
         </el-button>
       </div>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <div class="link" @click="openRemindPassword">
-        Przypomnienie hasła
+        Password reminder
       </div>
       <div class="link" @click="openResendMail">
-        Wyślij ponownie email aktywacyjny konta
+        Resend your account activation email
       </div>
     </span>
   </el-dialog>
@@ -84,18 +84,18 @@ export default {
     },
     openRemindPassword () {
       this.$emit('toggle-popup')
-      this.$prompt('Prosimy o wpisanie swojego adresu email w celu zresetowania hasła', 'Przypominanie hasła', {
-        confirmButtonText: 'Wyślij',
-        cancelButtonText: 'Zamknij',
+      this.$prompt('Please enter your email address to reset your password', 'Password reminder', {
+        confirmButtonText: 'Send',
+        cancelButtonText: 'Close',
         inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-        inputErrorMessage: 'Nieprawidłowy adres email!',
+        inputErrorMessage: 'Incorrect e-mail address!',
         inputPlaceholder: 'Email'
       }).then(async ({ value }) => {
         const result = await remindPassword({ email: value })
         if (result.status === 204) {
           this.$message({
             type: 'success',
-            message: 'Na podany adres email został wysłany link do resetu hasła: ' + value,
+            message: 'A password reset link has been sent to the email address provided: ' + value,
             duration: 3000
           })
         }
@@ -104,18 +104,18 @@ export default {
     },
     openResendMail () {
       this.$emit('toggle-popup')
-      this.$prompt('Prosimy o wpisanie swojego adresu email w celu poczta aktywacyjna', 'Poczta aktywacyjna', {
-        confirmButtonText: 'Wyślij',
-        cancelButtonText: 'Zamknij',
+      this.$prompt('Please enter your email address for activation mail', 'Activation mail', {
+        confirmButtonText: 'Send',
+        cancelButtonText: 'Close',
         inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-        inputErrorMessage: 'Nieprawidłowy adres email!',
+        inputErrorMessage: 'Incorrect e-mail address!',
         inputPlaceholder: 'Email'
       }).then(async ({ value }) => {
         const result = await resendMail({ email: value })
         if (result.status === 204 || result.status === 200) {
           this.$message({
             type: 'success',
-            message: 'Na podany adres e-mail został wysłany link do maila aktywacyjnego: ' + value,
+            message: 'A password reset link has been sent to the email address provided: ' + value,
             duration: 3000
           })
         }
