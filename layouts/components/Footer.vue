@@ -115,7 +115,9 @@ export default {
     newsletterEmail: null,
     oldUrl: '',
     pages: [],
-    user: ''
+    user: '',
+    loginVisible: false,
+    registerVisible: false,
   }),
   watch: {
     '$route.path' (value) {

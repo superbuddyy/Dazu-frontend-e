@@ -87,6 +87,12 @@
             Tpay payment
           </div>
         </el-button>
+        <el-button @click="pay('stripe')">
+          <div class="stripe">
+            <img src="~/assets/stripe.svg" alt="">
+            Stripe payment
+          </div>
+        </el-button>
       </div>
     </el-dialog>
   </div>

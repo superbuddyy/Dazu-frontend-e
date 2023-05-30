@@ -1,16 +1,16 @@
 <template>
   <el-form-item label="Ad type">
     <el-button type="plain" :class="[ type === 'sell' ? 'active' : '' ]" @click="setType('sell')">
-      I will sell
+      For sell
     </el-button>
     <el-button type="plain" :class="[ type === 'rent' ? 'active' : '' ]" @click="setType('rent')">
-      I will rent
+      For rent
     </el-button>
     <el-button type="plain" :class="[ type === 'exchange' ? 'active' : '' ]" @click="setType('exchange')">
-      I will replace
+      For exchange
     </el-button>
     <el-button type="plain" :class="[ type === 'for_free' ? 'active' : '' ]" @click="setType('for_free')">
-      I will give
+      For free
     </el-button>
   </el-form-item>
 </template>

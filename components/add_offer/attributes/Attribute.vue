@@ -40,9 +40,15 @@
     >
       {{ name }}
     </el-checkbox>
+    <el-switch
+      v-if="type === 'switch'"
+      v-model="local_value">
+      {{ name }}
+    </el-switch>
     <el-checkbox-group
       v-if="type === 'checkbox_group'"
       v-model="local_value"
+      :style="direction === 'row' ? {display: 'flex'}: {}"
     >
       <div
         v-for="option in options"
@@ -51,11 +57,30 @@
         <el-checkbox
           v-if="option['offer_types'].includes(addOfferForm.type)"
           :label="option.slug"
+          :style="{marginRight: '20px'}"
         >
           {{ option.name }}
         </el-checkbox>
       </div>
     </el-checkbox-group>
+    <el-radio-group
+      v-if="type === 'radio_group'"
+      v-model="local_value"
+      :style="direction === 'row' ? {display: 'flex', paddingTop: '13px'}: {}"
+    >
+      <div
+        v-for="option in options"
+        :key="option.slug"
+      >
+        <el-radio
+          v-if="option['offer_types'].includes(addOfferForm.type)"
+          :label="option.slug"
+          :style="{marginRight: '20px'}"
+        >
+          {{ option.name }}
+        </el-radio>
+      </div>
+    </el-radio-group>
     <el-select
       v-if="type === 'select'"
       v-model="local_value"
@@ -133,6 +158,12 @@ export default {
     // eslint-disable-next-line vue/require-default-prop
     value: {
       type: [Number, String, Array, Boolean]
+    },
+    direction: {
+      type: String,
+      default () {
+        return 'column'
+      }
     }
   },
   data () {

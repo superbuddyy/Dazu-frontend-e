@@ -1,7 +1,13 @@
 <template>
   <div class="category">
     <el-form-item label="Category" prop="category">
-      <el-select v-model="local_category" placeholder="Choose" clearable @change="setSubCategories($event)">
+      <vue-cascader-select
+        :options="rootCategories"
+        @clear="(val) => value = ''"
+        @select="(selected) => value = selected.value"
+        :value="value"
+      />
+      <!-- <el-select v-model="local_category" placeholder="Choose" clearable @change="setSubCategories($event)">
         <template
           v-for="rootCategory in rootCategories"
         >
@@ -26,7 +32,7 @@
             :value="subCat.value"
           />
         </template>
-      </el-select>
+      </el-select> -->
     </el-form-item>
   </div>
 </template>
@@ -97,6 +103,26 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.vcs {
+  width: 20%;
+}
+.vcs__picker input,
+.vcs__select-menu {
+  background: white;
+  color: black;
+  z-index: 1000;
+  border-color: #282b34;
+}
+.vcs__arrow-container {
+  border-left: none !important;
+}
 
+.vcs__picker input::placeholder {
+  color: #bbb;
+}
+.vcs__option {
+  background-color: white;
+  color: black;
+}
 </style>

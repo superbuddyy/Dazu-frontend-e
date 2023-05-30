@@ -122,7 +122,154 @@
           type="checkbox"
           @set-value="form.attributes[8] = $event"
         />
+        <Attribute
+          v-if="addOfferForm.type === 'sell'"
+          :name="'New Build'"
+          :slug="'new-build'"
+          :value="form.attributes[38]"
+          type="checkbox"
+          @set-value="form.attributes[38] = $event"
+        />
       </el-row>
+      <el-row v-if="addOfferForm.type === 'sell'">
+        <el-col :span="4">
+          <Attribute
+            :name="'Chain-free'"
+            :slug="'chain-free'"
+            :value="form.attributes[39]"
+            type="checkbox"
+            @set-value="form.attributes[39] = $event"
+          />
+          <Attribute
+            :name="'Shared ownership'"
+            :slug="'shared-ownership'"
+            :value="form.attributes[40]"
+            type="checkbox"
+            @set-value="form.attributes[40] = $event"
+          />
+          <Attribute
+            :name="'Help to buy'"
+            :slug="'help-to-buy'"
+            :value="form.attributes[41]"
+            type="checkbox"
+            @set-value="form.attributes[41] = $event"
+          />
+        </el-col>
+        <el-col :span="4">
+          <Attribute
+            :name="'Leashold'"
+            :slug="'leashold'"
+            :value="form.attributes[42]"
+            type="checkbox"
+            @set-value="form.attributes[42] = $event"
+          />
+          <Attribute
+            :name="'Freehold'"
+            :slug="'freehold'"
+            :value="form.attributes[43]"
+            type="checkbox"
+            @set-value="form.attributes[43] = $event"
+          />
+        </el-col>
+      </el-row>
+      <Attribute
+        v-if="addOfferForm.type === 'sell'"
+        :name="'Energy and environment'"
+        :slug="'energy-and-environment'"
+        :value="form.attributes[44]"
+        :options="form.energyOption"
+        type="checkbox_group"
+        :direction="'row'"
+        @set-value="form.attributes[44] = $event"
+      />
+      <div v-if="addOfferForm.type === 'rent'">
+        <Attribute
+          :name="'Landlord live-out'"
+          :slug="'landlord-live-out'"
+          :value="form.attributes[29]"
+          type="checkbox"
+          @set-value="form.attributes[29] = $event"
+        />
+        <Attribute
+          :name="'En-suite or own bathroom'"
+          :slug="'en-suite-or-own-bathroom'"
+          :value="form.attributes[30]"
+          type="checkbox"
+          @set-value="form.attributes[30] = $event"
+        />
+        <Attribute
+          :name="'LGBT friendly'"
+          :slug="'lgbt-friendly'"
+          :value="form.attributes[31]"
+          type="checkbox"
+          @set-value="form.attributes[31] = $event"
+        />
+        <Attribute
+          :name="'Vegan/Vegatarian'"
+          :slug="'vegan-vegatarian'"
+          :value="form.attributes[32]"
+          type="checkbox"
+          @set-value="form.attributes[32] = $event"
+        />
+        <Attribute
+          :name="'Smoking OK'"
+          :slug="'smoking-ok'"
+          :value="form.attributes[33]"
+          :options="form.smokingOption"
+          type="radio_group"
+          :direction="'row'"
+          @set-value="form.attributes[33] = $event"
+        />
+        <Attribute
+          :name="'Pets Friendly'"
+          :slug="'pets-friendly'"
+          :value="form.attributes[34]"
+          :options="form.petsOption"
+          type="radio_group"
+          :direction="'row'"
+          @set-value="form.attributes[34] = $event"
+        />
+        <Attribute
+          :name="'Available for'"
+          :slug="'available-for'"
+          :value="form.attributes[35]"
+          :options="form.availableForOption"
+          type="checkbox_group"
+          :direction="'row'"
+          @set-value="form.attributes[35] = $event"
+        />
+        <Attribute
+          :name="''"
+          :slug="''"
+          :value="form.attributes[36]"
+          :options="form.genderOption"
+          type="radio_group"
+          :direction="'row'"
+          @set-value="form.attributes[36] = $event"
+        />
+        <el-row>
+          <el-col :span="4">
+            <Attribute
+              :name="'Available Now'"
+              :slug="'available-now'"
+              :value="form.attributes[37]"
+              type="switch"
+              @set-value="form.attributes[37] = $event"
+            />
+          </el-col>
+          <el-col :span="6">
+            <el-date-picker
+              v-model="form.availableNow"
+              type="datetime"
+              :picker-options="datePickerOptions"
+              placeholder="Select a date"
+              format="yyyy/MM/dd HH:mm"
+              value-format="yyyy-MM-dd HH:mm"
+              v-bind:disabled="form.attributes[37]"
+            />
+          </el-col>
+        </el-row>
+      </div>
       <el-row>
         <el-col :span="6">
           <Attribute
@@ -161,7 +308,7 @@
         </el-col>
         <el-col :span="6"/>
       </el-row>
-      <el-row>
+      <!-- <el-row>
         <el-col :span="24">
           <el-row>
             <el-col :span="6">
@@ -190,7 +337,7 @@
             </el-col>
           </el-row>
         </el-col>
-      </el-row>
+      </el-row> -->
       <el-row>
         <el-col :span="13">
           <Attribute
@@ -228,7 +375,7 @@
           />
         </el-col>
       </el-row>
-      <el-row>
+      <!-- <el-row>
         <el-col :span="12">
           <Attribute
             v-if="attributes['_18']['offer_types'].includes(addOfferForm.type)"
@@ -253,7 +400,7 @@
             @set-value="form.attributes[19] = $event"
           />
         </el-col>
-      </el-row>
+      </el-row> -->
       <Attribute
         name="Title"
         slug="title"
@@ -877,6 +1024,39 @@ export default {
           21: '',
           22: ''
         },
+        availableForOption: [
+          {name: 'professionals', slug: 'professionals', offer_types: 'rent'}, 
+          {name: 'students only', slug: 'students-only', offer_types: 'rent'}, 
+          {name: 'Accepting DSS', slug: 'accepting-dss', offer_types: 'rent'}, 
+          {name: 'Couples', slug: 'couples', offer_types: 'rent'}
+        ],
+        smokingOption: [
+          {name: 'I don\'t mind', slug: 0, offer_types: 'rent'},
+          {name: 'Yes', slug: 1, offer_types: 'rent'},
+          {name: 'No', slug: 2, offer_types: 'rent'},
+        ],
+        petsOption: [
+          {name: 'I don\'t mind', slug: 0, offer_types: 'rent'},
+          {name: 'Yes', slug: 1, offer_types: 'rent'},
+          {name: 'No', slug: 2, offer_types: 'rent'},
+        ],
+        genderOption: [
+          {name: 'Any gender', slug: 0, offer_types: 'rent'},
+          {name: 'Females Only', slug: 1, offer_types: 'rent'},
+          {name: 'Males Only', slug: 2, offer_types: 'rent'},
+        ],
+        energyOption: [
+          {name: 'Gas', slug: 'gas', offer_types: 'sell'},
+          {name: 'Electricity', slug: 'electricity', offer_types: 'sell'},
+          {name: 'Double glazing', slug: 'double-glazing', offer_types: 'sell'}, 
+          {name: 'Triple glazing', slug: 'triple-glazing', offer_types: 'sell'},
+          {name: 'Low carbon running', slug: 'low-carbon-running', offer_types: 'sell'},
+          {name: 'Insulated', slug: 'insulated', offer_types: 'sell'},
+          {name: 'Led pannels/lighing', slug: 'led-pannels', offer_types: 'sell'},
+          {name: 'Photovolcanic panels', slug: 'photovolcanic', offer_types: 'sell'},
+          {name: 'Solar Powered', slug: 'solar-powered', offer_types: 'sell'},
+          {name: 'Wind turbines', slug: 'wind-turbines', offer_types: 'sell'},
+        ],
         is_urgent: false,
         is_bargain: false,
         has_raise_one: false,
@@ -1177,7 +1357,7 @@ export default {
       if (preview && !this.user.isLogged) {
         console.log(this.form)
         console.log(formData)
-        localStorage.setItem('offer', JSON.stringify(this.form))
+        localStorage.setItem('offer', JSON.stringify(this.form))  
         // return
       }
       try {
@@ -1193,7 +1373,7 @@ export default {
           await this.$router.push('/ogloszenia/' + offerSlug + '?preview=true')
         } else if (result.status === 201) {
           this.$message({
-            message: 'Announcement added',
+            message: 'Ad added',
             type: 'success',
             duration: 3000
           })

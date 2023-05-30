@@ -30,6 +30,7 @@
     "v-click-outside": "^3.1.2",
     "vue": "^2.6.12",
     "vue-carousel": "^0.18.0",
+    "vue-cascader-select": "^1.2.0",
     "vue-chartjs": "^3.5.1",
     "vue-feather": "^1.0.1",
     "vue-feather-icons": "^5.1.0",

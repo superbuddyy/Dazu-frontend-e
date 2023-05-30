@@ -53,7 +53,7 @@
       <div class="payments">
 <!--        <el-button @click="pay('paypal')">-->
 <!--          <div class="paypal">-->
-<!--            <img src="~/assets/paypal.svg" alt="">-->
+           <img src="~/assets/paypal.svg" alt="">
 <!--            PayPal-->
 <!--          </div>-->
 <!--        </el-button>-->
@@ -61,6 +61,10 @@
           <div class="tpay" @click="pay('tpay')">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
             Tpay
+          </div>
+          <div class="stripe" @click="pay('stripe')">
+            <img src="~/assets/stripe.svg" alt="">
+            Stripe
           </div>
         </el-button>
       </div>

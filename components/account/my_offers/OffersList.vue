@@ -288,6 +288,12 @@
             Tpay
           </div>
         </el-button>
+        <el-button @click="pay('stripe')">
+          <div class="stripe">
+            <img src="~/assets/stripe.svg" alt="">
+            Stripe
+          </div>
+        </el-button>
       </div>
     </el-dialog>
     <el-dialog
@@ -307,6 +313,12 @@
           <div class="tpay">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
             Tpay
+          </div>
+        </el-button>
+        <el-button @click="refreshUI(refreshSlug, 'stripe')">
+          <div class="stripe">
+            <img src="~/assets/stripe.svg" alt="">
+            Stripe
           </div>
         </el-button>
       </div>

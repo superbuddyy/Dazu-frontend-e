@@ -49,11 +49,17 @@
               Tpay
             </div>
           </el-button>
+          <el-button :class="[ gateway === 'tpay' ? 'active' : '' ]" @click="setGateway('stripe')">
+            <div class="stripe">
+              <img src="~/assets/stripe.svg" alt="">
+              Stripe
+            </div>
+          </el-button>
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button icon="el-icon-back" @click="close()">Resigns</el-button>
-        <el-button type="primary" icon="el-icon-sold-out" @click="pay()">Zamawiam i płacę</el-button>
+        <el-button icon="el-icon-back" @click="close()">Close</el-button>
+        <el-button type="primary" icon="el-icon-sold-out" @click="pay()">Order and Pay</el-button>
       </span>
     </el-dialog>
   </div>
@@ -226,7 +232,7 @@ export default {
         .active {
           box-shadow: inset 0 0 0pt 2pt #ff19b7;
         }
-        .paypal, .tpay {
+        .paypal, .tpay, .stripe {
           display: flex;
           flex-direction: column;
           justify-content: center;
