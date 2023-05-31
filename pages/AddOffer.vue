@@ -61,7 +61,7 @@ export default {
 
         this.rootCategories = categories.data.map((category) => {
           const children = category.children.map((sub) => {
-            return {label: sub.name, value: sub.slug, id: sub.id, offer_types: sub.offer_types ? sub.offer_types : []}
+            return {label: sub.name, value: sub.slug, parent_value:category.slug, id: sub.id, offer_types: sub.offer_types ? sub.offer_types : []}
           })
           // return category
           return { label: category.name, value: category.slug, id: category.id, options: children,offer_types: category.offer_types ? category.offer_types : [] }

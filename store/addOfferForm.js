@@ -1,5 +1,5 @@
 export const state = () => ({
-  type: 'sell'
+  type: 'sell',
 })
 
 export const mutations = {

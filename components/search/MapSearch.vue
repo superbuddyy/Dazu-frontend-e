@@ -111,17 +111,17 @@
                 <div class="label">
                   Yardage
                 </div>
-                <el-select v-model="search['metraz'].min" placeholder="Minimal" filterable clearable>
+                <el-select v-model="search['meter'].min" placeholder="Minimal" filterable clearable>
                   <el-option
-                    v-for="item in filters.attributes['metraz'].min"
+                    v-for="item in filters.attributes['meter'].min"
                     :key="item"
                     :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
                     :value="item"
                   />
                 </el-select>
-                <el-select v-model="search['metraz'].max" placeholder="Maximal" filterable clearable>
+                <el-select v-model="search['meter'].max" placeholder="Maximal" filterable clearable>
                   <el-option
-                    v-for="item in filters.attributes['metraz'].max"
+                    v-for="item in filters.attributes['meter'].max"
                     :key="item"
                     :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')"
                     :value="item"
@@ -327,7 +327,7 @@ export default {
           max: []
         },
         attributes: {
-          metraz: {
+          meter: {
             min: [],
             max: []
           }
@@ -351,17 +351,17 @@ export default {
       }
       return this.filters.price.min.filter(price => price <= this.search.price.max)
     },
-    metrazMaxFilters () {
-      if (this.search.metraz.min === null) {
-        return this.$store.state.storage.filters.attributes.metraz.max
+    meterMaxFilters () {
+      if (this.search.meter.min === null) {
+        return this.$store.state.storage.filters.attributes.meter.max
       }
-      return this.filters.attributes.metraz.max.filter(size => size >= this.search.metraz.min)
+      return this.filters.attributes.meter.max.filter(size => size >= this.search.meter.min)
     },
-    metrazMinFilters () {
-      if (this.search.metraz.max === null) {
-        return this.$store.state.storage.filters.attributes.metraz.min
+    meterMinFilters () {
+      if (this.search.meter.max === null) {
+        return this.$store.state.storage.filters.attributes.meter.min
       }
-      return this.filters.attributes.metraz.min.filter(size => size <= this.search.metraz.max)
+      return this.filters.attributes.meter.min.filter(size => size <= this.search.meter.max)
     }
   },
   watch: {

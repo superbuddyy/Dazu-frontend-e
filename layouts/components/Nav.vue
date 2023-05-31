@@ -83,18 +83,18 @@
             />
           </div>
           <div class="nav-link-items">
-            <nuxt-link to="/for-sale">
+            <el-button @click="$event => showSearchModal('sale')">
               For Sale
-            </nuxt-link>
-            <nuxt-link to="/for-rent">
+            </el-button>
+            <el-button @click="$event => showSearchModal('rent')">
               For Rent
-            </nuxt-link>
-            <nuxt-link to="/autctions">
+            </el-button>
+            <el-button @click="$event => showSearchModal('auctions')">
               Auctions
-            </nuxt-link>
-            <nuxt-link to="/swap">
+            </el-button>
+            <el-button @click="$event => showSearchModal('swap')">
               Swap
-            </nuxt-link>
+            </el-button>
           </div>
           <div v-if="!user.isLogged" class="login" :class="[isHomePage ? 'wht-clr' : '']" @click="toggleLogin">
             <el-button type="info" plain>
@@ -457,7 +457,6 @@ a {
   
       .login {
         font-family: Mulish-Regular;
-        color: #ffffff !important;
         cursor: pointer;
         padding: 13px 4px;
         // text-transform: uppercase;

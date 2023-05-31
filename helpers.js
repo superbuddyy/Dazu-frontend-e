@@ -172,7 +172,7 @@ export function fromSearchQueryStringToFromData (query) {
       min: null,
       max: null
     },
-    metraz: {
+    meter: {
       min: null,
       max: null
     },
@@ -183,8 +183,8 @@ export function fromSearchQueryStringToFromData (query) {
     dodatkowe: {}
   }
 
-  if ('dodatkowe[garaz]' in query) {
-    search.dodatkowe.garaz = query['dodatkowe[garaz]'] === 'true'
+  if ('dodatkowe[garage]' in query) {
+    search.dodatkowe.garage = query['dodatkowe[garage]'] === 'true'
   }
 
   if ('dodatkowe[umeblowane]' in query) {
@@ -207,12 +207,12 @@ export function fromSearchQueryStringToFromData (query) {
     search.price.max = parseInt(query['price[max]'])
   }
 
-  if ('metraz[min]' in query) {
-    search.metraz.min = parseInt(query['metraz[min]'])
+  if ('meter[min]' in query) {
+    search.meter.min = parseInt(query['meter[min]'])
   }
 
-  if ('metraz[max]' in query) {
-    search.metraz.max = parseInt(query['metraz[max]'])
+  if ('meter[max]' in query) {
+    search.meter.max = parseInt(query['meter[max]'])
   }
 
   if ('location[lat]' in query) {
@@ -237,7 +237,7 @@ export function setSearchDefaultData () {
       min: null,
       max: null
     },
-    metraz: {
+    meter: {
       min: null,
       max: null
     },

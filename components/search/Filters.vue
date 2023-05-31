@@ -60,12 +60,12 @@
             <div class="label">
               Surface
             </div>
-            <el-select v-model="search['metraz'].min" placeholder="Minimal" filterable clearable>
-              <el-option v-for="item in metrazMinFilters" :key="item"
+            <el-select v-model="search['meter'].min" placeholder="Minimal" filterable clearable>
+              <el-option v-for="item in meterMinFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
-            <el-select v-model="search['metraz'].max" placeholder="Maximal" filterable clearable>
-              <el-option v-for="item in metrazMaxFilters" :key="item"
+            <el-select v-model="search['meter'].max" placeholder="Maximal" filterable clearable>
+              <el-option v-for="item in meterMaxFilters" :key="item"
                 :label="item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')" :value="item" />
             </el-select>
           </div>

@@ -17,12 +17,9 @@
         @set-type="setType"
       />
       <CategoryAttribute
-        :category.sync="form.category"
-        :subcategory="form.subcategory"
         :root-categories="rootCategories"
-        :root-sub-categories="rootSubCategories"
+        :offer-type="addOfferForm.type"
         @set-root-category="setCategory($event)"
-        @set-sub-category="form.subcategory = $event"
       />
       <el-row>
         <el-col :span="11">
@@ -183,70 +180,72 @@
         @set-value="form.attributes[44] = $event"
       />
       <div v-if="addOfferForm.type === 'rent'">
-        <Attribute
-          :name="'Landlord live-out'"
-          :slug="'landlord-live-out'"
-          :value="form.attributes[29]"
-          type="checkbox"
-          @set-value="form.attributes[29] = $event"
-        />
-        <Attribute
-          :name="'En-suite or own bathroom'"
-          :slug="'en-suite-or-own-bathroom'"
-          :value="form.attributes[30]"
-          type="checkbox"
-          @set-value="form.attributes[30] = $event"
-        />
-        <Attribute
-          :name="'LGBT friendly'"
-          :slug="'lgbt-friendly'"
-          :value="form.attributes[31]"
-          type="checkbox"
-          @set-value="form.attributes[31] = $event"
-        />
-        <Attribute
-          :name="'Vegan/Vegatarian'"
-          :slug="'vegan-vegatarian'"
-          :value="form.attributes[32]"
-          type="checkbox"
-          @set-value="form.attributes[32] = $event"
-        />
-        <Attribute
-          :name="'Smoking OK'"
-          :slug="'smoking-ok'"
-          :value="form.attributes[33]"
-          :options="form.smokingOption"
-          type="radio_group"
-          :direction="'row'"
-          @set-value="form.attributes[33] = $event"
-        />
-        <Attribute
-          :name="'Pets Friendly'"
-          :slug="'pets-friendly'"
-          :value="form.attributes[34]"
-          :options="form.petsOption"
-          type="radio_group"
-          :direction="'row'"
-          @set-value="form.attributes[34] = $event"
-        />
-        <Attribute
-          :name="'Available for'"
-          :slug="'available-for'"
-          :value="form.attributes[35]"
-          :options="form.availableForOption"
-          type="checkbox_group"
-          :direction="'row'"
-          @set-value="form.attributes[35] = $event"
-        />
-        <Attribute
-          :name="''"
-          :slug="''"
-          :value="form.attributes[36]"
-          :options="form.genderOption"
-          type="radio_group"
-          :direction="'row'"
-          @set-value="form.attributes[36] = $event"
-        />
+        <div v-if="attributes['_18']['offer_types'].includes(addOfferForm.type) && isYearAttributeVisible()">
+          <Attribute
+            :name="'Landlord live-out'"
+            :slug="'landlord-live-out'"
+            :value="form.attributes[29]"
+            type="checkbox"
+            @set-value="form.attributes[29] = $event"
+          />
+          <Attribute
+            :name="'En-suite or own bathroom'"
+            :slug="'en-suite-or-own-bathroom'"
+            :value="form.attributes[30]"
+            type="checkbox"
+            @set-value="form.attributes[30] = $event"
+          />
+          <Attribute
+            :name="'LGBT friendly'"
+            :slug="'lgbt-friendly'"
+            :value="form.attributes[31]"
+            type="checkbox"
+            @set-value="form.attributes[31] = $event"
+          />
+          <Attribute
+            :name="'Vegan/Vegatarian'"
+            :slug="'vegan-vegatarian'"
+            :value="form.attributes[32]"
+            type="checkbox"
+            @set-value="form.attributes[32] = $event"
+          />
+          <Attribute
+            :name="'Smoking OK'"
+            :slug="'smoking-ok'"
+            :value="form.attributes[33]"
+            :options="form.smokingOption"
+            type="radio_group"
+            :direction="'row'"
+            @set-value="form.attributes[33] = $event"
+          />
+          <Attribute
+            :name="'Pets Friendly'"
+            :slug="'pets-friendly'"
+            :value="form.attributes[34]"
+            :options="form.petsOption"
+            type="radio_group"
+            :direction="'row'"
+            @set-value="form.attributes[34] = $event"
+          />
+          <Attribute
+            :name="'Available for'"
+            :slug="'available-for'"
+            :value="form.attributes[35]"
+            :options="form.availableForOption"
+            type="checkbox_group"
+            :direction="'row'"
+            @set-value="form.attributes[35] = $event"
+          />
+          <Attribute
+            :name="''"
+            :slug="''"
+            :value="form.attributes[36]"
+            :options="form.genderOption"
+            type="radio_group"
+            :direction="'row'"
+            @set-value="form.attributes[35] = $event"
+          />
+        </div>
         <el-row>
           <el-col :span="4">
             <Attribute
@@ -263,9 +262,10 @@
               type="datetime"
               :picker-options="datePickerOptions"
               placeholder="Select a date"
-              format="yyyy/MM/dd HH:mm"
+              format="yyyy/MM/dd HH:mm" 
               value-format="yyyy-MM-dd HH:mm"
               v-bind:disabled="form.attributes[37]"
+              @set-value="form.attributes[38] = $event"
             />
           </el-col>
         </el-row>
@@ -361,6 +361,7 @@
             :value="form.attributes[16]"
             type="checkbox_group"
             @set-value="form.attributes[16] = $event"
+            @set-number-of-parkings="form.attributes[45] = $event"
           />
         </el-col>
         <el-col :md="12" :sm="24">
@@ -375,10 +376,10 @@
           />
         </el-col>
       </el-row>
-      <!-- <el-row>
+      <el-row>
         <el-col :span="12">
           <Attribute
-            v-if="attributes['_18']['offer_types'].includes(addOfferForm.type)"
+            v-if="attributes['_18']['offer_types'].includes(addOfferForm.type) && ['house','flat','comping-caravan','summer-holiday-property','room1', 'commercial', 'retirement-accomodation'].includes(this.form.category[0])"
             :name="attributes['_18'].name"
             :slug="attributes['_18'].slug"
             :options="attributes['_18'].options"
@@ -389,6 +390,7 @@
           />
         </el-col>
         <el-col :span="12">
+          
           <Attribute
             v-if="attributes['_19']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_19'].name"
@@ -400,7 +402,8 @@
             @set-value="form.attributes[19] = $event"
           />
         </el-col>
-      </el-row> -->
+      </el-row>
+
       <Attribute
         name="Title"
         slug="title"
@@ -469,13 +472,22 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="24">
+        <el-col :span="12">
           <PhotoAttribute
-            fileLabel="Photos..."
+            fileLabel="Project Plan"
             :file-list="projectFileList"
             :limit="2"
             :isProjectPlan="true"
             @on-change="handleChangeProjectImages"
+          />
+        </el-col>
+        <el-col :span="12">
+          <PhotoAttribute
+            fileLabel="Upload EPC Certificate"
+            :file-list="epcFileList"
+            :limit="2"
+            :isEpcCertificate="true"
+            @on-change="handleChangeEpcImages"
           />
         </el-col>
       </el-row>
@@ -545,7 +557,7 @@
                   <div class="price">
                     <span>{{ subscription.price / 100 }} <sup> zloty</sup></span>
                   </div>
-                  <b>na {{ subscription.duration / 24 }} dni</b>
+                  <b>already {{ subscription.duration / 24 }} days</b>
                   <div class="list subscription-options">
                     <div
                       v-if="
@@ -566,7 +578,7 @@
                         <span v-else-if='subscription.number_of_refreshes > 1 && subscription.number_of_refreshes < 5'>free refreshes</span>
                         <span v-else-if='subscription.number_of_refreshes >= 5'>free refreshes</span>
                       </div>
-                      <div class="list-item" v-if="subscription.featured_on_search_results_and_categories === true">
+                      <!-- <div class="list-item" v-if="subscription.featured_on_search_results_and_categories === true">
                         <i class="el-icon-star-on"/> featured in a moving gallery in search results and categories
                       </div>
                       <div class="list-item" v-if="subscription.featured_on_homepage === true">
@@ -575,14 +587,24 @@
                       </div>
                       <div class="list-item" v-if="subscription.bargain_price / 100 === 0">
                         <i class="el-icon-star-on"/> Yellow frame with the words "Chance"
+                      </div> -->
+                      <div class="list-item" v-if="subscription.name === 'Złote'">
+                        <i class="el-icon-star-on" /> featured in a moving gallery in search results and categories
+                      </div>
+                      <div class="list-item" v-if="subscription.name === 'Złote' || subscription.name === 'Srebrne'">
+                        <i class="el-icon-star-on" /> highlighted in a moving gallery on the main page in the results
+                        Searches and categories
+                      </div>
+                      <div class="list-item" v-if="subscription.bargain_price / 100 === 0">
+                        <i class="el-icon-star-on" /> Yellow frame with the words "Chance"
                       </div>
                     </div>
                     <el-row :class="[ subscription.bargain_price === 0 ? 'hidden' : '' ]">
                       <el-col :span="20">
                         <div class="grid-content bg-purple">
                           Add a yellow text frame
-                          <el-button class="button_bargain" size="mini">OKAZJA</el-button>
-                          (za jedyne <strong>{{ subscription.bargain_price / 100 }} zloty</strong>)
+                          <el-button class="button_bargain" size="mini">OPPORTUNITY</el-button>
+                          (for only <strong>{{ subscription.bargain_price / 100 }} zloty</strong>)
                         </div>
                       </el-col>
                       <el-col :span="4">
@@ -617,7 +639,7 @@
 
                     <el-row>
                       <el-col :span="8">
-                        <div class="grid-content bg-purple">1 podbicie</div>
+                        <div class="grid-content bg-purple">1 lining</div>
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price / 100 }}
@@ -635,7 +657,7 @@
                     </el-row>
                     <el-row>
                       <el-col :span="8">
-                        <div class="grid-content bg-purple">3 podbicia</div>
+                        <div class="grid-content bg-purple">3 raises</div>
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_three / 100 }}
@@ -653,7 +675,7 @@
                     </el-row>
                     <el-row>
                       <el-col :span="8">
-                        <div class="grid-content bg-purple">10 podbić</div>
+                        <div class="grid-content bg-purple">10 conquer</div>
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_ten / 100 }}
@@ -856,7 +878,7 @@
           Cancel
         </el-button>
         <el-button v-if="viewType === 'update'" type="primary" @click="onSubmitEdit">
-          Zapisz zmiany
+          Save Changes
         </el-button>
         <el-button v-if="viewType === 'preview'" type="primary" @click="onSubmitPreview(true)">
           Preview
@@ -987,6 +1009,7 @@ export default {
         mainImage: [],
         images: [],
         projectPlans: [],
+        epcCertificates: [],
         user: {
           account_type: 'user',
           name: '',
@@ -1022,7 +1045,24 @@ export default {
           19: '',
           20: false,
           21: '',
-          22: ''
+          22: '',
+          29: false,//landlord
+          30: false,//en-suite,
+          31: false,//lgbt
+          32: false,//vegan
+          33: [],//smoking
+          34: [],//pets
+          35: [],//available for
+          36: false,
+          37: true,
+          38: '',//date
+          39: false,//chain-free
+          40: false,//shared ownership
+          41: false,//help to buy,
+          42: false,//leashold,
+          43: false,//freehold
+          44: [],//energy
+          45: '',//number of parkings
         },
         availableForOption: [
           {name: 'professionals', slug: 'professionals', offer_types: 'rent'}, 
@@ -1068,6 +1108,7 @@ export default {
       disabled: false,
       fileList: [],
       projectFileList: [],
+      epcFileList: [],
       mainPhoto: [],
       marker: null,
       labelPosition: 'right',
@@ -1112,6 +1153,9 @@ export default {
       isLocalData: true,
       isGlobal: false
     }
+  },
+  updated() {
+    console.log(this.form)
   },
   computed: {
     mapStyle () {
@@ -1222,6 +1266,7 @@ export default {
         // this.form = eFormData
         this.fileList = this.form.images
         this.projectFileList = this.form.projectPlans
+        this.epcFileList = this.form.epcCertificates
         this.locations = [{
           lat: this.offer.location.lat,
           lon: this.offer.location.lon,
@@ -1242,7 +1287,23 @@ export default {
 
   },
   methods: {
+    isYearAttributeVisible() {
+      if(this.addOfferForm.type == 'rent') {
+        if (['house','flat','comping-caravan','summer-holiday-property','room1', 'commercial', 'retirement-accomodation'].includes(this.form.category[0]))
+          return true
+        else return false
+      } else if( this.addOfferForm.type == 'sale') {
+        if(['land1'].includes(this.form.category[0]))
+          return false
+        else return true
+      } else if ( this.addOfferForm.type == 'exchange') {
+        return true
+      } else if ( this.addOfferForm.type == 'free') {
+        return true
+      }
+    },
     setCategory (e) {
+      console.log(e)
       this.form.category = e
       if (this.viewType !== 'update') {
         this.form.subcategory = ''
@@ -1478,6 +1539,11 @@ export default {
           formData.append(`projectPlans[${image}]`, this.form.projectPlans[image].raw)
         }
       }
+      for (const image in this.form.epcCertificates) {
+        if( this.form.epcCertificates.hasOwnProperty(image)) {
+          formData.append(`epcCertificates[${image}]`, this.form.epcCertificates[image].raw)
+        }
+      }
       if (!this.user.isLogged) {
         formData.append('email', this.form.user.email)
         formData.append('password', this.form.user.password)
@@ -1548,6 +1614,9 @@ export default {
     },
     handleChangeProjectImages (files) {
       this.form.projectPlans = files
+    },
+    handleChangeEpcImages (files) {
+      this.form.epcCertificates = files
     },
     handleChangeAvatar (file) {
       this.form.user.avatar = file.raw

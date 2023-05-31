@@ -18,8 +18,8 @@
     <div v-if="filters.price && filters.price.min">
       Cena: from <b>{{ filters.price.min }}</b> to <b>{{ filters.price.max }}</b>
     </div>
-    <div v-if="filters.metraz && filters.metraz.min">
-      Yardage: from <b>{{ filters.metraz.min }}</b> to <b>{{ filters.metraz.max }}</b>
+    <div v-if="filters.meter && filters.meter.min">
+      Yardage: from <b>{{ filters.meter.min }}</b> to <b>{{ filters.meter.max }}</b>
     </div>
     <div v-if="filters['rachunki-wliczone']">
       Bills included: <b>Yes</b>
@@ -27,7 +27,7 @@
     <div v-if="filters['na-raty']">
       In installments: <b>Yes</b>
     </div>
-    <div v-if="filters.dodatkowe.garaz">
+    <div v-if="filters.dodatkowe.garage">
       Garage: <b>Yes</b>
     </div>
     <div v-if="filters.dodatkowe.umeblowane">

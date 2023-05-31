@@ -61,6 +61,9 @@
         >
           {{ option.name }}
         </el-checkbox>
+        <el-select v-if="option.slug === 'parking' && showParkingSelect" v-model="number_of_parkings" :placeholder="'Number Of Parkings'">
+          <el-option v-for="(item, i) in numberOfParkingsOption" :key="i" :label="item.label" :value="item.value"></el-option>
+        </el-select>
       </div>
     </el-checkbox-group>
     <el-radio-group
@@ -98,6 +101,8 @@
 </template>
 
 <script>
+import { throwStatement } from '@babel/types'
+
 export default {
   name: 'Attribute',
   props: {
@@ -169,7 +174,15 @@ export default {
   data () {
     return {
       local_value: '',
-      addOfferForm: {}
+      addOfferForm: {},
+      numberOfParkingsOption: [
+        {label: 'Off Street', value: '0'},
+        {label: '1 spaces', value: '1'},
+        {label: '2 spaces', value: '2'},
+        {label: '+3 spaces', value: '+3'}
+      ],
+      showParkingSelect: false,
+      number_of_parkings: ''
     }
   },
   watch: {
@@ -178,7 +191,13 @@ export default {
       this.$emit('set-value', value)
     },
     local_value (value) {
+      console.log(value)
+      if(value && value.includes('parking')) this.showParkingSelect = true
+      else this.showParkingSelect = false
       this.$emit('set-value', value)
+    },
+    number_of_parkings (value) {
+      this.$emit('set-number-of-parkings', value)
     }
   },
   mounted () {

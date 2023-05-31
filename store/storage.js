@@ -5,7 +5,7 @@ export const state = () => ({
       min: []
     },
     attributes: {
-      metraz: {
+      meter: {
         max: [],
         min: []
       }
