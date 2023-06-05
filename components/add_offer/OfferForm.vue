@@ -131,110 +131,110 @@
       <el-row v-if="addOfferForm.type === 'sell'">
         <el-col :span="4">
           <Attribute
-            :name="'Chain-free'"
-            :slug="'chain-free'"
-            :value="form.attributes[39]"
+            :name="attributes['_50'].name"
+            :slug="attributes['_50'].slug"
+            :value="form.attributes[50]"
             type="checkbox"
-            @set-value="form.attributes[39] = $event"
+            @set-value="form.attributes[50] = $event"
           />
           <Attribute
-            :name="'Shared ownership'"
-            :slug="'shared-ownership'"
-            :value="form.attributes[40]"
+            :name="attributes['_51'].name"
+            :slug="attributes['_51'].slug"
+            :value="form.attributes[51]"
             type="checkbox"
-            @set-value="form.attributes[40] = $event"
+            @set-value="form.attributes[51] = $event"
           />
           <Attribute
-            :name="'Help to buy'"
-            :slug="'help-to-buy'"
-            :value="form.attributes[41]"
+            :name="attributes['_52'].name"
+            :slug="attributes['_52'].slug"
+            :value="form.attributes[52]"
             type="checkbox"
-            @set-value="form.attributes[41] = $event"
+            @set-value="form.attributes[52] = $event"
           />
         </el-col>
         <el-col :span="4">
           <Attribute
-            :name="'Leashold'"
-            :slug="'leashold'"
-            :value="form.attributes[42]"
+            :name="attributes['_53'].name"
+            :slug="attributes['_53'].slug"
+            :value="form.attributes[53]"
             type="checkbox"
-            @set-value="form.attributes[42] = $event"
+            @set-value="form.attributes[53] = $event"
           />
           <Attribute
-            :name="'Freehold'"
-            :slug="'freehold'"
-            :value="form.attributes[43]"
+            :name="attributes['_54'].name"
+            :slug="attributes['_54'].slug"
+            :value="form.attributes[54]"
             type="checkbox"
-            @set-value="form.attributes[43] = $event"
+            @set-value="form.attributes[54] = $event"
           />
         </el-col>
       </el-row>
       <Attribute
         v-if="addOfferForm.type === 'sell'"
-        :name="'Energy and environment'"
-        :slug="'energy-and-environment'"
-        :value="form.attributes[44]"
+        :name="attributes['_49'].name"
+        :slug="attributes['_49'].slug"
+        :value="form.attributes[57]"
         :options="form.energyOption"
         type="checkbox_group"
         :direction="'row'"
-        @set-value="form.attributes[44] = $event"
+        @set-value="form.attributes[49] = $event"
       />
       <div v-if="addOfferForm.type === 'rent'">
         <div v-if="attributes['_18']['offer_types'].includes(addOfferForm.type) && isYearAttributeVisible()">
           <Attribute
-            :name="'Landlord live-out'"
-            :slug="'landlord-live-out'"
-            :value="form.attributes[29]"
+            :name="attributes['_42'].name"
+            :slug="attributes['_42'].slug"
+            :value="form.attributes[42]"
             type="checkbox"
-            @set-value="form.attributes[29] = $event"
+            @set-value="form.attributes[42] = $event"
           />
           <Attribute
-            :name="'En-suite or own bathroom'"
-            :slug="'en-suite-or-own-bathroom'"
-            :value="form.attributes[30]"
+            :name="attributes['_43'].name"
+            :slug="attributes['_43'].slug"
+            :value="form.attributes[43]"
             type="checkbox"
-            @set-value="form.attributes[30] = $event"
+            @set-value="form.attributes[43] = $event"
           />
           <Attribute
-            :name="'LGBT friendly'"
-            :slug="'lgbt-friendly'"
-            :value="form.attributes[31]"
+            :name="attributes['_44'].name"
+            :slug="attributes['_44'].slug"
+            :value="form.attributes[44]"
             type="checkbox"
-            @set-value="form.attributes[31] = $event"
+            @set-value="form.attributes[44] = $event"
           />
           <Attribute
-            :name="'Vegan/Vegatarian'"
-            :slug="'vegan-vegatarian'"
-            :value="form.attributes[32]"
+            :name="attributes['_45'].name"
+            :slug="attributes['_45'].slug"
+            :value="form.attributes[45]"
             type="checkbox"
-            @set-value="form.attributes[32] = $event"
+            @set-value="form.attributes[45] = $event"
           />
           <Attribute
-            :name="'Smoking OK'"
-            :slug="'smoking-ok'"
-            :value="form.attributes[33]"
+            :name="attributes['_46'].name"
+            :slug="attributes['_46'].name"
+            :value="form.attributes[46]"
             :options="form.smokingOption"
             type="radio_group"
             :direction="'row'"
-            @set-value="form.attributes[33] = $event"
+            @set-value="form.attributes[46] = $event"
           />
           <Attribute
-            :name="'Pets Friendly'"
-            :slug="'pets-friendly'"
-            :value="form.attributes[34]"
+            :name="attributes['_47'].name"
+            :slug="attributes['_47'].name"
+            :value="form.attributes[47]"
             :options="form.petsOption"
             type="radio_group"
             :direction="'row'"
-            @set-value="form.attributes[34] = $event"
+            @set-value="form.attributes[47] = $event"
           />
           <Attribute
-            :name="'Available for'"
-            :slug="'available-for'"
-            :value="form.attributes[35]"
+            :name="attributes['_48'].name"
+            :slug="attributes['_48'].name"
+            :value="form.attributes[48]"
             :options="form.availableForOption"
             type="checkbox_group"
             :direction="'row'"
-            @set-value="form.attributes[35] = $event"
+            @set-value="form.attributes[48] = $event"
           />
           <Attribute
             :name="''"
@@ -243,7 +243,7 @@
             :options="form.genderOption"
             type="radio_group"
             :direction="'row'"
-            @set-value="form.attributes[35] = $event"
+            @set-value="form.attributes[48] = $event"
           />
         </div>
         <el-row>
@@ -251,9 +251,9 @@
             <Attribute
               :name="'Available Now'"
               :slug="'available-now'"
-              :value="form.attributes[37]"
+              :value="form.attributes[49]"
               type="switch"
-              @set-value="form.attributes[37] = $event"
+              @set-value="form.attributes[49] = $event"
             />
           </el-col>
           <el-col :span="6">
@@ -264,8 +264,8 @@
               placeholder="Select a date"
               format="yyyy/MM/dd HH:mm" 
               value-format="yyyy-MM-dd HH:mm"
-              v-bind:disabled="form.attributes[37]"
-              @set-value="form.attributes[38] = $event"
+              v-bind:disabled="form.attributes[49]"
+              @set-value="form.attributes[55] = $event"
             />
           </el-col>
         </el-row>
@@ -1046,23 +1046,23 @@ export default {
           20: false,
           21: '',
           22: '',
-          29: false,//landlord
-          30: false,//en-suite,
-          31: false,//lgbt
-          32: false,//vegan
-          33: [],//smoking
-          34: [],//pets
-          35: [],//available for
-          36: false,
-          37: true,
-          38: '',//date
-          39: false,//chain-free
-          40: false,//shared ownership
-          41: false,//help to buy,
-          42: false,//leashold,
-          43: false,//freehold
-          44: [],//energy
-          45: '',//number of parkings
+          42: false,//landlord
+          43: false,//en-suite,name->En-suite or own bathroom
+          44: false,//lgbt:LGBT friendly
+          45: false,//vegan
+          46: [],//smoking:Smoking OK
+          47: [],//pets:Pets Friendly
+          48: [],//available for: Available For
+          49: false,
+          50: true,
+          51: '',//date
+          52: false,//chain-free
+          53: false,//shared-ownership
+          54: false,//help-to-buy,
+          55: false,//leashold,
+          56: false,//freehold
+          57: [],//energy:
+          58: '',//number-of-parkings
         },
         availableForOption: [
           {name: 'professionals', slug: 'professionals', offer_types: 'rent'}, 
