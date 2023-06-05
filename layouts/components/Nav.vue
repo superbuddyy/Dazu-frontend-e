@@ -104,8 +104,8 @@
           <el-dropdown v-if="user.isLogged" @command="handleCommand">
             <nuxt-link to="/ustawienia-konta">
               <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
-                <el-avatar :size="60" :src="this.$config.baseUrl + '/svg/avatar.svg'" />
-              </div>
+                <el-avatar class="account-avatar" :size="60" :src="this.$config.baseUrl + '/svg/avatar.svg'" />
+              </div>  
             </nuxt-link>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="settings">
@@ -620,10 +620,15 @@ a {
         outline: 0;
         color:#0C0C0C !important;
       }
-  
+      .account-avatar {
+        margin-right: 30px;
+        width: 35px;
+        height: 35px;
+      }
       .icons {
         position: relative;
         display: flex;
+        margin-right: 30px;
         @media only screen and (max-width: 1366px) {
           display: none;
         }
