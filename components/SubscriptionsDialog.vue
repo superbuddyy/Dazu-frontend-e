@@ -182,6 +182,7 @@ export default {
                 padding: 2px 20px;
                 i {
                   font-weight: bold;
+                  font-family: 'Inconsolata';
                   color: #ff19b7;
                 }
               }

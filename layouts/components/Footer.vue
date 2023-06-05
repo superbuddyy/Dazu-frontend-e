@@ -198,6 +198,7 @@ export default {
           p {
             color: #000000;
             font-weight: bold;
+            font-family: 'Inconsolata';
           }
           
         }

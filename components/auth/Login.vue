@@ -1,6 +1,6 @@
 <template>
   <el-dialog title="" :visible.sync="localVisible" :close-on-click-modal="false" :class="[failed ? 'login-popup shake' : 'login-popup']">
-    <h3>Logowanie</h3>
+    <h3>Login</h3>
     <el-form @submit.prevent="login">
       <el-input
         v-model="loginForm.email"
@@ -15,7 +15,7 @@
         autocomplete="off"
         show-password
         prefix-icon="el-icon-key"
-        placeholder="Hasło"
+        placeholder="Password"
         @keyup.enter.native="login"
       />
       <div class="btns">

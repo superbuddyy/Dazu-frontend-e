@@ -32,7 +32,7 @@ export default {
 <style lang="scss">
 .other-posts {
   h2 {
-    font-family: 'Epilogue';
+    font-family: 'Inconsolata';
     font-style: normal;
     font-weight: 900;
     font-size: 22px;

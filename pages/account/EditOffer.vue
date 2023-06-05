@@ -77,6 +77,7 @@ export default {
       background: #f5f5f5;
       text-align: center;
       font-size: 20px;
+      font-family: 'Inconsolata';
       padding: 10px;
     }
   }

@@ -39,7 +39,7 @@
           autocomplete="off"
           show-password
           prefix-icon="el-icon-key"
-          placeholder="Hasło"
+          placeholder="Password"
         />
       </el-form-item>
       <el-form-item prop="rePassword">

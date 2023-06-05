@@ -169,6 +169,7 @@ export default {
 
       .name {
         font-weight: bold;
+        font-family: 'Inconsolata';
       }
 
       .profile-buttons {

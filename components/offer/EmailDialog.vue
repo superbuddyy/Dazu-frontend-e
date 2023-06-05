@@ -286,6 +286,7 @@ export default {
     }
     .alert-div {
       font-weight: bolder;
+      font-family: 'Inconsolata';
     }
     .alert-div-btn {
       display: flex;

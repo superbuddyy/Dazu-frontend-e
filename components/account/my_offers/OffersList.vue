@@ -696,6 +696,7 @@ export default {
         padding: 4px 10px;
         color: #000000;
         font-size: 14px;
+        font-family: 'Inconsolata';
       }
 
       .checkbox {
@@ -722,6 +723,7 @@ export default {
           cursor: pointer;
           margin-bottom: 10px;
           font-weight: bold;
+          font-family: 'Inconsolata';
           color: #000000;
           text-decoration: none;
         }
@@ -731,6 +733,7 @@ export default {
         .stats {
           padding: 10px 0;
           font-size: 15px;
+          font-family: 'Inconsolata';
           display: flex;
           justify-content: center;
           align-items: flex-start;
@@ -739,6 +742,7 @@ export default {
             span {
               color: #ff19b7;
               font-weight: bold;
+              font-family: 'Inconsolata';
             }
           }
         }

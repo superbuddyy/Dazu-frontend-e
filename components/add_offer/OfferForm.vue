@@ -352,9 +352,9 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :md="12" :sm="24">
+        <el-col :md="12" :sm="24"
+          v-if="attributes['_16']['offer_types'].includes(addOfferForm.type) && showExtraCheckGroup()">
           <Attribute
-            v-if="attributes['_16']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_16'].name"
             :slug="attributes['_16'].slug"
             :options="attributes['_16'].options"
@@ -364,9 +364,9 @@
             @set-number-of-parkings="form.attributes[45] = $event"
           />
         </el-col>
-        <el-col :md="12" :sm="24">
+        <el-col :md="12" :sm="24"
+          v-if="attributes['_17']['offer_types'].includes(addOfferForm.type) && showNearbyCheckGroup()">
           <Attribute
-            v-if="attributes['_17']['offer_types'].includes(addOfferForm.type)"
             :name="attributes['_17'].name"
             :slug="attributes['_17'].slug"
             :options="attributes['_17'].options"
@@ -794,12 +794,12 @@
         </el-form-item>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="Hasło" prop="user.password">
+            <el-form-item label="Password" prop="user.password">
               <el-input v-model="form.user.password" type="password" placeholder=""/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Potwórz hasło" prop="user.rePassword">
+            <el-form-item label="Re-enter the password" prop="user.rePassword">
               <el-input v-model="form.user.rePassword" type="password" placeholder=""/>
             </el-form-item>
           </el-col>
@@ -1025,7 +1025,7 @@ export default {
           walk_video: ''
         },
         attributes: {
-          1: 'sale',
+          1: 'sell',
           2: '',
           3: '',
           4: '',
@@ -1287,24 +1287,41 @@ export default {
 
   },
   methods: {
+    showExtraCheckGroup() {
+      console.log(this.addOfferForm.type)
+      if( this.addOfferForm.type == 'sell') {
+        if(["development-opportunity","retirement-accomodation"].includes(this.form.category[0])) return true
+        else return false
+      } else {
+        return true
+      }
+    },
+    showNearbyCheckGroup() {
+      if( this.addOfferForm.type == 'sell') {
+        if(["camping-caravan", "commercial", "summer-holiday-property", "development-opportunity", "retirement-accomodation"].includes(this.form.category[0])) return true
+        else return false
+      } else {
+        return true
+      }
+    },
     isYearAttributeVisible() {
       if(this.addOfferForm.type == 'rent') {
         if (['house','flat','comping-caravan','summer-holiday-property','room1', 'commercial', 'retirement-accomodation'].includes(this.form.category[0]))
           return true
         else return false
-      } else if( this.addOfferForm.type == 'sale') {
+      } else if( this.addOfferForm.type == 'sell') {
         if(['land1'].includes(this.form.category[0]))
           return false
         else return true
       } else if ( this.addOfferForm.type == 'exchange') {
         return true
-      } else if ( this.addOfferForm.type == 'free') {
+      } else if ( this.addOfferForm.type == 'for_free') {
         return true
       }
     },
     setCategory (e) {
-      console.log(e)
-      this.form.category = e
+      console.log(e[e.length - 1])
+      this.form.category = e[e.length - 1]
       if (this.viewType !== 'update') {
         this.form.subcategory = ''
       }
@@ -1701,6 +1718,10 @@ export default {
 
   .el-form-item__label {
     font-weight: bold;
+    font-family: 'Inconsolata';
+  }
+  span {
+    font-family: 'Inconsolata' !important;
   }
 
   .location-input {
@@ -1760,6 +1781,7 @@ export default {
       span {
         color: red;
         font-weight: bold;
+        font-family: 'Inconsolata';
       }
     }
   }
@@ -1794,6 +1816,7 @@ export default {
           i {
             font-weight: bold;
             color: #ff9b2f;
+            font-family: 'Inconsolata';
           }
         }
       }
@@ -1813,12 +1836,14 @@ export default {
         .price {
           text-align: center;
           font-weight: bold;
+          font-family: 'Inconsolata';
           font-size: 36px;
           color: #FF19B7;
           padding: 10px;
 
           sup {
             font-size: 12px;
+            font-family: 'Inconsolata';
             color: #000000;
           }
         }
@@ -1838,6 +1863,7 @@ export default {
     background-color: #F50000;
     color: white;
     font-weight: 500;
+    font-family: 'Inconsolata';
     border-radius: 6px !important;
     /* font-family: sans-serif; */
     padding: 4px;
@@ -1847,6 +1873,7 @@ export default {
     background-color: #FFE122;
     color: black;
     font-weight: 500;
+    font-family: 'Inconsolata';
     border-radius: 6px !important;
     /* font-family: sans-serif; */
     padding: 4px;
@@ -1856,6 +1883,7 @@ export default {
     text-align: center;
     font-size: 18px;
     font-style: normal;
+    font-family: 'Inconsolata';
     font-weight: 700;
     line-height: 23px;
     letter-spacing: 1px;
@@ -1864,6 +1892,7 @@ export default {
   .subscription-options {
     font-size: 12px;
     font-style: normal;
+    font-family: 'Inconsolata';
     font-weight: 400;
     line-height: 15px;
     text-align: left;
@@ -1910,6 +1939,7 @@ export default {
   .upload-demo {
     .bld {
       font-weight: bold;
+      font-family: 'Inconsolata';
       color: #000000 !important
       ;
       text-decoration: underline !important;
@@ -1920,6 +1950,7 @@ export default {
   }
   .fw-bld {
     font-weight: bolder;
+    font-family: 'Inconsolata';
   }
   ._error {
     color: #F56C6C;

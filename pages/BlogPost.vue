@@ -13,7 +13,6 @@
     </div> -->
     <div class="container">
       <p class="post-content" v-html="post.content">
-        
       </p>
       <OtherPosts
         :posts="posts"
@@ -79,7 +78,7 @@ export default {
       align-items: center;
       h1 {
         color: #FF19B7;
-        font-family: 'Epilogue';
+        font-family: 'Inconsolata';
         font-style: normal;
         font-weight: 900;
         font-size: 52px;
@@ -111,6 +110,7 @@ export default {
       text-align: justify;
       background-color: white;
       line-height: 1.5;
+      font-family: 'Inconsolata';
       padding: 20px;
       h2 {
         margin:10px;

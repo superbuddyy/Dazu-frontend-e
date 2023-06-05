@@ -125,6 +125,7 @@ export default {
   background: #000000;
   width: 300px;
   font-weight: bold;
+  font-family: 'Inconsolata';
   display: flex;
   justify-content: center;
   align-items: center;

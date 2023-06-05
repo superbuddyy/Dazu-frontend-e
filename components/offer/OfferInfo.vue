@@ -411,6 +411,7 @@ export default {
       width: 100%;
 
       .views, .date {
+        font-family: 'Inconsolata';
         font-size: 13px;
       }
 
@@ -418,6 +419,7 @@ export default {
         // width: 50%;
         display: flex;
         align-items: center;
+        font-family: 'Inconsolata';
         font-weight: bold;
 
         .views, .favorite-btn {
@@ -488,6 +490,7 @@ export default {
             color: #ff19b7;
             font-size: 20px;
             font-weight: bold;
+            font-family: 'Inconsolata';
           }
         }
 
@@ -530,6 +533,7 @@ export default {
           b {
             color: #000000;
             font-size: 25px;
+            font-family: 'Inconsolata';
           }
         }
         .tags {
@@ -544,6 +548,7 @@ export default {
       .text {
         h1 {
           font-size: 20px;
+          font-family: 'Inconsolata';
           text-align: left;
           margin-bottom:10px;
         }

@@ -90,12 +90,14 @@ export default {
         }
         .bld {
           font-weight: bold;
+          font-family: 'Inconsolata';
           color: #000000 !important
           ;
           text-decoration: underline !important;
         }
         .fw-bld {
           font-weight: bolder;
+          font-family: 'Inconsolata';
           width: 150px;
           line-height: 1.5;
         }

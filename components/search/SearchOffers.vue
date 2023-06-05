@@ -252,6 +252,7 @@ export default {
     top: 60px;
     position: absolute;
     font-weight: 700;
+    font-family: 'Inconsolata';
     padding: 5px;
     width: 240px;
     display: inline-block;

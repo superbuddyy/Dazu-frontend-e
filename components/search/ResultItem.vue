@@ -290,6 +290,7 @@ span.offer_label.el-tag.el-tag--warn.el-tag--light{
   border-radius: 4px;
   border: 0px solid #fff;
   font-size: 11px;
+  font-family: 'Inconsolata';
   vertical-align: middle;
   text-align: center;
 }
@@ -299,6 +300,7 @@ span.urgent_label.el-tag.el-tag--danger.el-tag--light{
   border-radius: 4px;
   border: 0px solid #fff;
   font-size: 11px;
+  font-family: 'Inconsolata';
   vertical-align: middle;
   text-align: center;
 }

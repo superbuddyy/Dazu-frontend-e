@@ -256,6 +256,7 @@ export default {
 
   .el-form-item__label {
     font-weight: bold;
+    font-family: 'Inconsolata';
   }
 
   .location-input {
@@ -369,6 +370,7 @@ export default {
         .price {
           text-align: center;
           font-weight: bold;
+          font-family: 'Inconsolata';
           font-size: 36px;
           color: #FF19B7;
           padding: 10px;
@@ -412,6 +414,7 @@ export default {
     text-align: center;
     font-size: 18px;
     font-style: normal;
+    font-family: 'Inconsolata';
     font-weight: 700;
     line-height: 23px;
     letter-spacing: 1px;
@@ -421,6 +424,7 @@ export default {
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
+    font-family: 'Inconsolata';
     line-height: 15px;
     text-align: left;
   }

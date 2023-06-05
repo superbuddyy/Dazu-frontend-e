@@ -192,7 +192,7 @@ export default {
     },
     local_value (value) {
       console.log(value)
-      if(value && value.includes('parking')) this.showParkingSelect = true
+      if(value && Array.isArray(value) && value.includes('parking')) this.showParkingSelect = true
       else this.showParkingSelect = false
       this.$emit('set-value', value)
     },

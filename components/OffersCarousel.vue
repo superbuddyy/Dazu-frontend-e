@@ -217,6 +217,7 @@ export default {
         top: 30px;
         position: absolute;
         font-weight: bold;
+        font-family: 'Inconsolata';
         padding: 10px;
         width: 200px;
         display: inline-block;
@@ -236,6 +237,7 @@ export default {
     .description {
       margin: 4px 0;
       font-weight: bold;
+      font-family: 'Inconsolata';
     }
 
     .info {
@@ -254,6 +256,7 @@ export default {
 
       .type {
         font-size: 13px;
+        font-family: 'Inconsolata';
       }
     }
     .badge {
@@ -301,6 +304,7 @@ export default {
           margin-left: 10px;
           .user-name {
             font-weight: bold;
+            font-family: 'Inconsolata';
           }
         }
       }
@@ -329,6 +333,7 @@ export default {
     top: 60px;
     position: absolute;
     font-weight: 700;
+    font-family: 'Inconsolata';
     padding: 5px;
     width: 240px;
     display: inline-block;

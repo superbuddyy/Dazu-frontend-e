@@ -96,6 +96,7 @@ export default {
     width: 300px;
     background: #ffffff;
     font-size: 14px;
+    font-family: 'Inconsolata';
     color: #606266;
     border-radius: 3px;
     box-shadow: 0 0 2px 1px #000000;

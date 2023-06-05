@@ -79,6 +79,7 @@ export default {
 
         i {
           font-size: 35px;
+          font-family: 'Inconsolata';
           color: red;
           margin-right: 10px;
         }

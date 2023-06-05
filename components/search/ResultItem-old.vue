@@ -77,6 +77,7 @@ export default {
   }
   .title {
     font-size: 12px;
+    font-family: 'Inconsolata';
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -93,6 +94,7 @@ export default {
       .price {
         font-size: 12px;
         font-weight: bold;
+        font-family: 'Inconsolata';
       }
       .badge {
         height: 10px;

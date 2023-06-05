@@ -21,7 +21,7 @@ export default {
 <style lang="scss">
 html {
   font-family:
-    'Source Sans Pro',
+    'Inconsolata',
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',

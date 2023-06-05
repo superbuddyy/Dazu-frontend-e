@@ -19,16 +19,16 @@
           </el-button> -->
         </div>
         <div class="nav-search-items">
-          <el-button type="default" plain @click="$event => showSearchModal('sale')">
+          <el-button class="modal-button" type="default" plain @click="$event => showSearchModal('sale')">
             For Sale
           </el-button>
-          <el-button type="default" plain @click="$event => showSearchModal('rent')">
+          <el-button class="modal-button" type="default" plain @click="$event => showSearchModal('rent')">
             For Rent
           </el-button>
-          <el-button type="default" plain @click="$event => showSearchModal('auctions')">
+          <el-button class="modal-button" type="default" plain @click="$event => showSearchModal('auctions')">
             Auctions
           </el-button>
-          <el-button type="default" plain @click="$event => showSearchModal('swap')">
+          <el-button class="modal-button" type="default" plain @click="$event => showSearchModal('swap')">
             Swap
           </el-button>
         </div>
@@ -536,6 +536,7 @@ a {
       display:flex;
       justify-content:flex-end;
       color: #0C0C0C;
+      font-family: 'Inconsolata';
       button {
         border-color: transparent;
       }
@@ -659,7 +660,7 @@ a {
         color: #ffffff !important;
       }
       .add-offer {
-        font-family: Mulish-Regular;
+        font-family: 'Inconsolata';
         background: #ff19b7;
         border-color: #ff19b7;
       }
@@ -685,6 +686,10 @@ a {
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   border-radius: 10px;
+}
+.modal-button {
+  font-family: 'Inconsolata';
+  font-weight: bold;
 }
 .root-category:hover {
   background-color: rgb(228, 228, 228);

@@ -69,6 +69,7 @@ export default {
   position: relative;
   justify-content: center !important;
   font-size: 15px;
+  font-family: 'Inconsolata';
 
   .el-collapse-item__arrow {
     position: absolute;
