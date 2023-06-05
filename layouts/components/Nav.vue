@@ -104,7 +104,7 @@
           <el-dropdown v-if="user.isLogged" @command="handleCommand">
             <nuxt-link to="/ustawienia-konta">
               <div class="login account" :class="[isHomePage ? 'wht-clr' : '']">
-                My account
+                <el-avatar :size="60" :src="this.$config.baseUrl + '/svg/avatar.svg'" />
               </div>
             </nuxt-link>
             <el-dropdown-menu slot="dropdown">
