@@ -379,7 +379,7 @@
       <el-row>
         <el-col :span="12">
           <Attribute
-            v-if="attributes['_18']['offer_types'].includes(addOfferForm.type) && ['house','flat','comping-caravan','summer-holiday-property','room1', 'commercial', 'retirement-accomodation'].includes(this.form.category[0])"
+            v-if="attributes['_18']['offer_types'].includes(addOfferForm.type) && ['house','flat','comping-caravan','summer-holiday-property','room1', 'commercial', 'retirement-accomodation'].includes(this.form.category)"
             :name="attributes['_18'].name"
             :slug="attributes['_18'].slug"
             :options="attributes['_18'].options"
@@ -1290,7 +1290,7 @@ export default {
     showExtraCheckGroup() {
       console.log(this.addOfferForm.type)
       if( this.addOfferForm.type == 'sell') {
-        if(["development-opportunity","retirement-accomodation"].includes(this.form.category[0])) return true
+        if(["development-opportunity","retirement-accomodation"].includes(this.form.category)) return true
         else return false
       } else {
         return true
@@ -1298,7 +1298,7 @@ export default {
     },
     showNearbyCheckGroup() {
       if( this.addOfferForm.type == 'sell') {
-        if(["camping-caravan", "commercial", "summer-holiday-property", "development-opportunity", "retirement-accomodation"].includes(this.form.category[0])) return true
+        if(["camping-caravan", "commercial", "summer-holiday-property", "development-opportunity", "retirement-accomodation"].includes(this.form.category)) return true
         else return false
       } else {
         return true
@@ -1306,11 +1306,11 @@ export default {
     },
     isYearAttributeVisible() {
       if(this.addOfferForm.type == 'rent') {
-        if (['house','flat','comping-caravan','summer-holiday-property','room1', 'commercial', 'retirement-accomodation'].includes(this.form.category[0]))
+        if (['house','flat','comping-caravan','summer-holiday-property','room1', 'commercial', 'retirement-accomodation'].includes(this.form.category))
           return true
         else return false
       } else if( this.addOfferForm.type == 'sell') {
-        if(['land1'].includes(this.form.category[0]))
+        if(['land1'].includes(this.form.category))
           return false
         else return true
       } else if ( this.addOfferForm.type == 'exchange') {

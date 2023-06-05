@@ -43,15 +43,15 @@
 <!--              PayPal-->
 <!--            </div>-->
 <!--          </el-button>-->
-          <el-button :class="[ gateway === 'tpay' ? 'active' : '' ]" @click="setGateway('tpay')">
+          <!-- <el-button :class="[ gateway === 'tpay' ? 'active' : '' ]" @click="setGateway('tpay')">
             <div class="tpay">
               <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
               Tpay
             </div>
-          </el-button>
-          <el-button :class="[ gateway === 'tpay' ? 'active' : '' ]" @click="setGateway('stripe')">
+          </el-button> -->
+          <el-button :class="[ gateway === 'stripe' ? 'active' : '' ]" @click="setGateway('stripe')">
             <div class="stripe">
-              <img src="~/assets/stripe.svg" alt="">
+              <img src="~/assets/stripe.svg" alt="" width="50">
               Stripe
             </div>
           </el-button>
@@ -244,5 +244,11 @@ export default {
     .el-dialog {
       width: 75% !important;
     }
+  }
+  .stripe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 </style>
