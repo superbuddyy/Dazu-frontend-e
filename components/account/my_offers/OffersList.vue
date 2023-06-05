@@ -282,15 +282,15 @@
 <!--            PayPal-->
 <!--          </div>-->
 <!--        </el-button>-->
-        <el-button @click="pay('tpay')">
+        <!-- <el-button @click="pay('tpay')">
           <div class="tpay">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
             Tpay
           </div>
-        </el-button>
+        </el-button> -->
         <el-button @click="pay('stripe')">
           <div class="stripe">
-            <img src="~/assets/stripe.svg" alt="">
+            <img src="~/assets/stripe.svg" alt="" width="50">
             Stripe
           </div>
         </el-button>
@@ -309,15 +309,15 @@
 <!--            PayPal-->
 <!--          </div>-->
 <!--        </el-button>-->
-        <el-button @click="refreshUI(refreshSlug, 'tpay')">
+        <!-- <el-button @click="refreshUI(refreshSlug, 'tpay')">
           <div class="tpay">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
             Tpay
           </div>
-        </el-button>
+        </el-button> -->
         <el-button @click="refreshUI(refreshSlug, 'stripe')">
           <div class="stripe">
-            <img src="~/assets/stripe.svg" alt="">
+            <img src="~/assets/stripe.svg" alt="" width="50">
             Stripe
           </div>
         </el-button>
@@ -606,6 +606,12 @@ export default {
 </script>
 
 <style lang="scss">
+.stripe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .offers-list {
   width: 100%;
 

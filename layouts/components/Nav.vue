@@ -701,4 +701,7 @@ a {
 .col-with-border:last-child {
   //border-right: none; /* remove the border from the last column */
 }
+.account {
+  color: black;
+}
 </style>

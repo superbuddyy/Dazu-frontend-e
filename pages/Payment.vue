@@ -81,15 +81,15 @@
 <!--            PayPal-->
 <!--          </div>-->
 <!--        </el-button>-->
-        <el-button @click="pay('tpay')">
+        <!-- <el-button @click="pay('tpay')">
           <div class="tpay">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
             Tpay payment
           </div>
-        </el-button>
+        </el-button> -->
         <el-button @click="pay('stripe')">
           <div class="stripe">
-            <img src="~/assets/stripe.svg" alt="">
+            <img src="~/assets/stripe.svg" alt="" width="50">
             Stripe payment
           </div>
         </el-button>
@@ -332,6 +332,12 @@ export default {
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
+}
+.stripe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .payment {
   min-height: calc(100vh - 274px);
