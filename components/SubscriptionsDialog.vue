@@ -69,7 +69,7 @@
       :line-items="lineItems"
       :success-url="successURL"
       :cancel-url="cancelURL"
-      @loading="v => loading = v"
+      @loading="v => loadingStripe = v"
     />
   </div>
 </template>
@@ -109,7 +109,7 @@ export default {
     isDialogNew: true,
 
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    loading: false,
+    loadingStripe: false,
     lineItems: [
       {
         price: 'price_1NGeMAEspc22iNrV6HZCKtyd', // The id of the one-time price you created in your Stripe dashboard
