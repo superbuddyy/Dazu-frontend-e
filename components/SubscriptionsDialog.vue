@@ -62,17 +62,28 @@
         <el-button type="primary" icon="el-icon-sold-out" @click="pay()">Order and Pay</el-button>
       </span>
     </el-dialog>
+    <stripe-checkout
+      ref="checkoutRef"
+      mode="payment"
+      :pk="publishableKey"
+      :line-items="lineItems"
+      :success-url="successURL"
+      :cancel-url="cancelURL"
+      @loading="v => loading = v"
+    />
   </div>
 </template>
 
 <script>
 import { buy, index } from '@/api/subscriptions'
 import SubscriptionsNew from '@/components/SubscriptionsNew'
+import { StripeCheckout } from '@vue-stripe/vue-stripe'
 
 export default {
   name: 'SubscriptionsDialog',
   components: {
-    SubscriptionsNew
+    SubscriptionsNew,
+    StripeCheckout
   },
   props: {
     visible: {
@@ -95,7 +106,18 @@ export default {
     gateway: null,
     paymentDialog: true,
     form: {},
-    isDialogNew: true
+    isDialogNew: true,
+
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    loading: false,
+    lineItems: [
+      {
+        price: 'price_1NGeMAEspc22iNrV6HZCKtyd', // The id of the one-time price you created in your Stripe dashboard
+        quantity: 1,
+      },
+    ],
+    successURL: process.env.FRONT_URL + '?payment-status=success',
+    cancelURL: process.env.FRONT_URL + '?payment-status=fail'
   }),
   mounted () {
     // this.getSubscriptions()
@@ -137,16 +159,19 @@ export default {
         })
         return
       }
-      this.loading = true
-      const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem], gateway: this.gateway } : { gateway: this.gateway }
-      const result = await buy(this.selectedItem, this.offerSlug, formInput)
-      if (result.status === 200) {
-        window.location.href = result.data  
-        this.loading = false
-        this.close()
-      } else {
-        window.location.href = result.data.url
-      }
+
+      this.$refs.checkoutRef.redirectToCheckout();
+
+      // this.loading = true
+      // const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem], gateway: this.gateway } : { gateway: this.gateway }
+      // const result = await buy(this.selectedItem, this.offerSlug, formInput)
+      // if (result.status === 200) {
+      //   window.location.href = result.data  
+      //   this.loading = false
+      //   this.close()
+      // } else {
+      //   window.location.href = result.data.url
+      // }
     }
   }
 }
