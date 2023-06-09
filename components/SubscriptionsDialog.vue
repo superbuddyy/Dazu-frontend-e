@@ -67,8 +67,8 @@
       mode="payment"
       :pk="this.$config.stripePublishableKey"
       :line-items="lineItems"
-      :success-url="successURL"
-      :cancel-url="cancelURL"
+      :success-url="this.$config.frontUrl + '?payment-status=success'"
+      :cancel-url="this.$config.frontUrl + '?payment-status=fail'"
       @loading="v => loadingStripe = v"
     />
   </div>
@@ -115,10 +115,14 @@ export default {
         quantity: 1,
       },
     ],
-    successURL: this.$config.frontUrl + '?payment-status=success',
-    cancelURL: this.$config.frontUrl + '?payment-status=fail'
   }),
   mounted () {
+    this.lineItems = [
+      {
+        price: 'price_1NGeMAEspc22iNrV6HZCKtyd', // The id of the one-time price you created in your Stripe dashboard
+        quantity: 1,
+      },
+    ]
     // this.getSubscriptions()
   },
   methods: {
