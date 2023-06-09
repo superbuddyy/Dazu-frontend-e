@@ -65,7 +65,7 @@
     <stripe-checkout
       ref="checkoutRef"
       mode="payment"
-      :pk="publishableKey"
+      :pk="this.$config.stripePublishableKey"
       :line-items="lineItems"
       :success-url="successURL"
       :cancel-url="cancelURL"
@@ -108,7 +108,6 @@ export default {
     form: {},
     isDialogNew: true,
 
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     loadingStripe: false,
     lineItems: [
       {
