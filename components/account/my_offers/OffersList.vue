@@ -340,6 +340,7 @@ import OfferStats from '@/components/account/my_offers/OfferStats'
 import ExpireTime from './ExpireTime'
 
 export default {
+  middleware: 'authenticated',
   name: 'OffersList',
   components: {
     ExpireTime,
