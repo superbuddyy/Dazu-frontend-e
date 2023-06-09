@@ -115,8 +115,8 @@ export default {
         quantity: 1,
       },
     ],
-    successURL: process.env.FRONT_URL + '?payment-status=success',
-    cancelURL: process.env.FRONT_URL + '?payment-status=fail'
+    successURL: this.$config.frontUrl + '?payment-status=success',
+    cancelURL: this.$config.frontUrl + '?payment-status=fail'
   }),
   mounted () {
     // this.getSubscriptions()
