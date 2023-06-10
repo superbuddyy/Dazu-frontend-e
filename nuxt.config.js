@@ -97,7 +97,7 @@ export default {
     baseUrl: process.env.VUE_APP_BASE_API,
     mapStyle: process.env.VUE_APP_MAP_STYLE,
     recaptchaSiteKey: process.env.CAPTCHA_SITE_KEY,
-    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY_TEST,
     frontUrl: process.env.FRONT_URL,
     gtm: {
       id: 'GTM-KGXZ77W'
