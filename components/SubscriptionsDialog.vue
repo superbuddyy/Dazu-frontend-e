@@ -62,15 +62,6 @@
         <el-button type="primary" icon="el-icon-sold-out" @click="pay()">Order and Pay</el-button>
       </span>
     </el-dialog>
-    <stripe-checkout
-      ref="checkoutRef"
-      mode="payment"
-      :pk="this.$config.stripePublishableKey"
-      :line-items="lineItems"
-      :success-url="this.$config.frontUrl + '?payment-status=success'"
-      :cancel-url="this.$config.frontUrl + '?payment-status=fail'"
-      @loading="v => loadingStripe = v"
-    />
   </div>
 </template>
 
@@ -107,14 +98,6 @@ export default {
     paymentDialog: true,
     form: {},
     isDialogNew: true,
-
-    loadingStripe: false,
-    lineItems: [
-      {
-        price: '', // The id of the one-time price you created in your Stripe dashboard
-        quantity: 1,
-      },
-    ],
   }),
   mounted () {
     // this.getSubscriptions()
@@ -157,43 +140,16 @@ export default {
         return
       }
 
-      let priceId = '';
-      switch (this.selectedItem) {
-        case 1:
-          priceId = ''
-          break;
-        case 2:
-          priceId = 'price_1NHQFzEspc22iNrViiqBnHRQ'
-          break;
-        case 3:
-          priceId = 'price_1NHQGMEspc22iNrVLfRoveSH'
-          break;
-        case 4:
-          priceId = 'price_1NHQGcEspc22iNrVhiF5Hcij'
-          break;
-        default:
-          break;
+      this.loading = true
+      const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem], gateway: this.gateway } : { gateway: this.gateway }
+      const result = await buy(this.selectedItem, this.offerSlug, formInput)
+      if (result.status === 200) {
+        window.location.href = result.data  
+        this.loading = false
+        this.close()
+      } else {
+        window.location.href = result.data.url
       }
-
-      this.lineItems = [
-        {
-          price: priceId, // The id of the one-time price you created in your Stripe dashboard
-          quantity: 1,
-        },
-      ]
-
-      this.$refs.checkoutRef.redirectToCheckout();
-
-      // this.loading = true
-      // const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem], gateway: this.gateway } : { gateway: this.gateway }
-      // const result = await buy(this.selectedItem, this.offerSlug, formInput)
-      // if (result.status === 200) {
-      //   window.location.href = result.data  
-      //   this.loading = false
-      //   this.close()
-      // } else {
-      //   window.location.href = result.data.url
-      // }
     }
   }
 }
