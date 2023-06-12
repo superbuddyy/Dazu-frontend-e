@@ -1,12 +1,12 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'Dazu Darmowe Ogłoszenia Nieruchomosci dla osób prywatnych i agencji',
+    title: ' Fliq free property listings for individuals and agencies',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Serwis nieruchomosci online - mieszkania, domy, działki, lokale użytkowe, magazyny, kampingi, domy modularowe na sprzedaż, wynajem, zamianę » Dazu.pl' },
-      { hid: 'og:description', name: 'og:description', property:'og:description', content: 'Serwis nieruchomosci online - mieszkania, domy, działki, lokale użytkowe, magazyny, kampingi, domy modularowe na sprzedaż, wynajem, zamianę » Dazu.pl' }
+      { hid: 'description', name: 'description', content: 'Free online real estate portal - apartments, houses, plots, commercial premises, warehouses, campsites, modular houses for sale, rent, swap» Fliq.co.uk ' },
+      { hid: 'og:description', name: 'og:description', property:'og:description', content: 'Free online real estate portal - apartments, houses, plots, commercial premises, warehouses, campsites, modular houses for sale, rent, swap» Fliq.co.uk' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

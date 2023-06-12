@@ -540,7 +540,7 @@ export default {
       if (isReduce) {
         slug = slug + '?reduce_raise=true'
       }
-      const result = await raise(slug)
+      const result = await raise(slug, 'stripe')
       console.log(result)
       if (result.status === 204) {
         this.$message({
