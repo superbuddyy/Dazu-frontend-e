@@ -14,7 +14,7 @@
       <el-table-column
         fixed
         prop="name"
-        label="Imię"
+        label="Name"
       />
       <el-table-column
         fixed
@@ -24,7 +24,7 @@
       <el-table-column
         fixed
         prop="created_at"
-        label="Data dodania"
+        label="Data added"
       />
       <el-table-column
         fixed
@@ -33,7 +33,7 @@
       />
       <el-table-column
         fixed="right"
-        label="Akcje"
+        label="Action"
       >
         <template slot-scope="scope">
           <el-popconfirm

@@ -81,7 +81,7 @@ export default {
       window.open(result.data.url, '_blank')
     },
     moneyFormatter (value) {
-      return (parseInt(value.total) / 100).toFixed(2) + ' pln'
+      return (parseInt(value.total) / 100).toFixed(2) + ' £'
     }
   }
 }

@@ -45,7 +45,7 @@
         <div class="attribute-filters">
           <div class="price">
             <div class="label">
-              Cena
+              Price
             </div>
             <el-select v-model="search.price.min" placeholder="Minimal" filterable clearable>
               <el-option v-for="item in priceMinFilters" :key="item"
@@ -58,7 +58,7 @@
           </div>
           <div class="meters">
             <div class="label">
-              Surface
+              Sq.m
             </div>
             <el-select v-model="search['meter'].min" placeholder="Minimal" filterable clearable>
               <el-option v-for="item in meterMinFilters" :key="item"

@@ -11,7 +11,7 @@
           children: 'options'
         }"
         clearable
-        expand-trigger="hover"
+        expand-trigger="click"
         placeholder="Select options"
       />
     </el-form-item>

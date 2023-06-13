@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="Save filters to favorites"
+    title="Save search to favorites"
     :visible.sync="visible"
     class="save-filters"
     :modal="showBg"
@@ -10,16 +10,16 @@
       Location: <b>{{ filters.location.display_name }}</b>
     </div>
     <div v-if="filters.type">
-      Typ: <b>{{ filters.type }}</b>
+      Type of ad: <b>{{ filters.type }}</b>
     </div>
     <div v-if="filters.category">
       Category: <b>{{ filters.category }}</b>
     </div>
     <div v-if="filters.price && filters.price.min">
-      Cena: from <b>{{ filters.price.min }}</b> to <b>{{ filters.price.max }}</b>
+      Price: from <b>{{ filters.price.min }}</b> to <b>{{ filters.price.max }}</b>
     </div>
     <div v-if="filters.meter && filters.meter.min">
-      Yardage: from <b>{{ filters.meter.min }}</b> to <b>{{ filters.meter.max }}</b>
+      Sq.m: from <b>{{ filters.meter.min }}</b> to <b>{{ filters.meter.max }}</b>
     </div>
     <div v-if="filters['rachunki-wliczone']">
       Bills included: <b>Yes</b>
@@ -57,7 +57,7 @@
         >
           3 days
         </el-button>
-        <el-button
+        <!-- <el-button
           :class="[ selectedPeriod === 7 ? 'active' : '' ]"
           @click="select(7)"
         >
@@ -74,12 +74,12 @@
           @click="select(30)"
         >
           30 days
-        </el-button>
+        </el-button> -->
       </div>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-checkbox v-model="notification" class="notifications-checkbox">
-        Email notifications
+        Email me if have matched properties
       </el-checkbox>
       <el-button type="primary" @click="save">Save</el-button>
     </span>

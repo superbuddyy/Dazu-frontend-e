@@ -14,9 +14,9 @@
             </div>
             <div class="bottom clearfix">
               <div class="price">
-                <span>{{ subscription.price / 100 }} <sup> zloty</sup></span>
+                <span>{{ subscription.price / 100 }} <sup> £</sup></span>
               </div>
-              <b>already {{ subscription.duration / 24 }} days</b>
+              <b>For {{ subscription.duration / 24 }} days</b>
               <div class="list subscription-options">
                 <div
                   v-if="
@@ -27,9 +27,9 @@
                 >
                   <div v-if="subscription.number_of_raises !== 0 && subscription.number_of_raises !== '0'" class="list-item">
                     <i class="el-icon-star-on" /> {{ subscription.number_of_raises }}
-                    <span v-if='subscription.number_of_raises === 1'>free raise</span>
-                    <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>free raises</span>
-                    <span v-else-if='subscription.number_of_raises >= 5'>free raises</span>
+                    <span v-if='subscription.number_of_raises === 1'>free bump</span>
+                    <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>free bumps</span>
+                    <span v-else-if='subscription.number_of_raises >= 5'>free bumps</span>
                   </div>
                   <div v-if="subscription.number_of_refreshes !== 0 && subscription.number_of_refreshes !== '0'" class="list-item">
                     <i class="el-icon-star-on" /> {{ subscription.number_of_refreshes }}
@@ -51,9 +51,9 @@
                 <el-row :class="[ subscription.bargain_price === 0 ? 'hidden' : '' ]">
                   <el-col :span="20">
                     <div class="grid-content bg-purple">
-                      Add a yellow text frame
+                      Add a yellow badge
                       <el-button class="button_bargain" size="mini">OPPORTUNITY</el-button>
-                      (for only <strong>{{ subscription.bargain_price / 100 }} zloty</strong>)
+                      (for only <strong>{{ subscription.bargain_price / 100 }} £</strong>)
                     </div>
                   </el-col>
                   <el-col :span="4">
@@ -70,9 +70,9 @@
                 <el-row>
                   <el-col :span="20">
                     <div class="grid-content bg-purple">
-                      Add a red frame with the inscription
+                      Add a red badge
                       <el-button class="button_urgent" size="mini">Urgent</el-button>
-                      (for only <strong>{{ subscription.urgent_price / 100 }} zloty</strong>)
+                      (for only <strong>{{ subscription.urgent_price / 100 }} £</strong>)
                     </div>
                   </el-col>
                   <el-col :span="4">
@@ -88,11 +88,11 @@
 
                 <el-row>
                   <el-col :span="8">
-                    <div class="grid-content bg-purple">1 lining</div>
+                    <div class="grid-content bg-purple">1 bump</div>
                   </el-col>
                   <el-col :span="8">
                     <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price / 100 }}
-                      zloty</strong></div>
+                      £</strong></div>
                   </el-col>
                   <el-col :span="4" :offset="4">
                     <div class="grid-content bg-purple-light subscription-switch-right">
@@ -106,11 +106,11 @@
                 </el-row>
                 <el-row>
                   <el-col :span="8">
-                    <div class="grid-content bg-purple">3 raises</div>
+                    <div class="grid-content bg-purple">3 bumps</div>
                   </el-col>
                   <el-col :span="8">
                     <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_three / 100 }}
-                      zloty</strong></div>
+                      £</strong></div>
                   </el-col>
                   <el-col :span="4" :offset="4">
                     <div class="grid-content bg-purple-light subscription-switch-right">
@@ -124,11 +124,11 @@
                 </el-row>
                 <el-row>
                   <el-col :span="8">
-                    <div class="grid-content bg-purple">10 conquer</div>
+                    <div class="grid-content bg-purple">10 bumps</div>
                   </el-col>
                   <el-col :span="8">
                     <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_ten / 100 }}
-                      zloty</strong></div>
+                      £</strong></div>
                   </el-col>
                   <el-col :span="4" :offset="4">
                     <div class="grid-content bg-purple-light subscription-switch-right">

@@ -24,10 +24,10 @@
       <el-row>
         <el-col :span="11">
           <Attribute
-            name="Cena"
+            name="Price"
             slug="price"
             placeholder="0"
-            append-info="zloty"
+            append-info="£"
             inputType="text"
             inputMode="numeric"
             :disabled="(form.attributes[1] == 'sell' || form.attributes[1] == 'rent')? false : form.attributes[8]"
@@ -555,9 +555,9 @@
                 <div class="subscription-header">{{ subscription.name }}</div>
                 <div class="bottom clearfix">
                   <div class="price">
-                    <span>{{ subscription.price / 100 }} <sup> zloty</sup></span>
+                    <span>{{ subscription.price / 100 }} <sup> £</sup></span>
                   </div>
-                  <b>already {{ subscription.duration / 24 }} days</b>
+                  <b>For {{ subscription.duration / 24 }} days</b>
                   <div class="list subscription-options">
                     <div
                       v-if="
@@ -568,9 +568,9 @@
                     >
                       <div v-if="subscription.number_of_raises !== 0 && subscription.number_of_raises !== '0'" class="list-item">
                         <i class="el-icon-star-on"/> {{ subscription.number_of_raises }}
-                        <span v-if='subscription.number_of_raises === 1'>free raise</span>
-                        <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>free raises</span>
-                        <span v-else-if='subscription.number_of_raises >= 5'>free raises</span>
+                        <span v-if='subscription.number_of_raises === 1'>free bump</span>
+                        <span v-else-if='subscription.number_of_raises > 1 && subscription.number_of_refreshes < 5'>free bumps</span>
+                        <span v-else-if='subscription.number_of_raises >= 5'>free bumps</span>
                       </div>
                       <div v-if="subscription.number_of_refreshes !== 0 && subscription.number_of_refreshes !== '0'" class="list-item">
                         <i class="el-icon-star-on"/> {{ subscription.number_of_refreshes }}
@@ -602,9 +602,9 @@
                     <el-row :class="[ subscription.bargain_price === 0 ? 'hidden' : '' ]">
                       <el-col :span="20">
                         <div class="grid-content bg-purple">
-                          Add a yellow text frame
+                          Add a yellow badge
                           <el-button class="button_bargain" size="mini">OPPORTUNITY</el-button>
-                          (for only <strong>{{ subscription.bargain_price / 100 }} zloty</strong>)
+                          (for only <strong>{{ subscription.bargain_price / 100 }} £</strong>)
                         </div>
                       </el-col>
                       <el-col :span="4">
@@ -621,9 +621,9 @@
                     <el-row>
                       <el-col :span="20">
                         <div class="grid-content bg-purple">
-                          Add a red frame with the inscription
+                          Add a red badge
                           <el-button class="button_urgent" size="mini">URGENT</el-button>
-                          (for only <strong>{{ subscription.urgent_price / 100 }} zloty</strong>)
+                          (for only <strong>{{ subscription.urgent_price / 100 }} £</strong>)
                         </div>
                       </el-col>
                       <el-col :span="4">
@@ -639,11 +639,11 @@
 
                     <el-row>
                       <el-col :span="8">
-                        <div class="grid-content bg-purple">1 lining</div>
+                        <div class="grid-content bg-purple">1 bump</div>
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price / 100 }}
-                          zloty</strong></div>
+                          £</strong></div>
                       </el-col>
                       <el-col :span="4" :offset="4">
                         <div class="grid-content bg-purple-light subscription-switch-right">
@@ -657,11 +657,11 @@
                     </el-row>
                     <el-row>
                       <el-col :span="8">
-                        <div class="grid-content bg-purple">3 raises</div>
+                        <div class="grid-content bg-purple">3 bumps</div>
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_three / 100 }}
-                          zloty</strong></div>
+                          £</strong></div>
                       </el-col>
                       <el-col :span="4" :offset="4">
                         <div class="grid-content bg-purple-light subscription-switch-right">
@@ -675,11 +675,11 @@
                     </el-row>
                     <el-row>
                       <el-col :span="8">
-                        <div class="grid-content bg-purple">10 conquer</div>
+                        <div class="grid-content bg-purple">10 bumps</div>
                       </el-col>
                       <el-col :span="8">
                         <div class="grid-content bg-purple-light"><strong>{{ subscription.raise_price_ten / 100 }}
-                          zloty</strong></div>
+                          £</strong></div>
                       </el-col>
                       <el-col :span="4" :offset="4">
                         <div class="grid-content bg-purple-light subscription-switch-right">
@@ -806,7 +806,7 @@
         </el-row>
       </div>
       <div v-if="user.isLogged" class="contact-form">
-        <el-form-item label="Jestem">
+        <el-form-item label="I AM">
           <div
             v-if="form.user.account_type !== 'agent'"
           >
@@ -832,7 +832,7 @@
               disabled
               @click="setUserType('developer')"
             >
-              Deweloperem
+              Developer
             </el-button>
           </div>
           <el-button
@@ -1651,19 +1651,19 @@ export default {
       this.settingData.forEach((item, index) => {
         item.value = (item.value / 100).toFixed(2)
         if (item.name === 'photo.price') {
-          this.photoLimitMsg = `the first 3 pictures are free after that ${item.value} zloty`
+          this.photoLimitMsg = `the first 3 pictures are free after that ${item.value} £`
           this.photoPrice = item.value
         }
         if (item.name === 'link.price') {
-          this.linkLimitMsg = `Each link is paid ${item.value} zloty`
+          this.linkLimitMsg = `Each link is paid ${item.value} £`
           this.linkPrice = item.value
         }
         if (item.name === 'visible_from_date.price') {
-          this.dateLimitMsg = `This option is paid ${item.value} zloty`
+          this.dateLimitMsg = `This option is paid ${item.value} £`
           this.datePrice = item.value
         }
         if (item.name === 'avatar_photo.price') {
-          this.avatarLimitMsg = `Paid ${item.value}PLN valid for 30 days`
+          this.avatarLimitMsg = `Paid ${item.value}£ valid for 30 days`
           this.avatarPrice = item.value
         }
       })

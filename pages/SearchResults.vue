@@ -24,9 +24,9 @@
           </el-select>
         </div>
         <div class="right">
-          <el-button type="primary" @click="openSaveFilters">
+          <!-- <el-button type="primary" @click="openSaveFilters">
             Save the search
-          </el-button>
+          </el-button> -->
           <el-button type="plane" @click="mapVisible = true">
             Map <i class="el-icon-location-information" />
           </el-button>

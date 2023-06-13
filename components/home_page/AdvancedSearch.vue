@@ -43,7 +43,7 @@
         <div class="attribute-filters">
           <div class="price">
             <div class="label">
-              Cena
+              Price
             </div>
             <el-select v-model="search.price.min" placeholder="Minimal" filterable clearable :style="{marginRight: '24px'}">
               <el-option v-for="item in priceMinFilters" :key="item"
@@ -56,7 +56,7 @@
           </div>
           <div class="meters">
             <div class="label">
-              Surface
+              Sq.m
             </div>
             <el-select v-model="search['meter'].min" placeholder="Minimal" filterable clearable :style="{marginRight: '24px'}">
               <el-option v-for="item in meterMinFilters" :key="item"
@@ -105,7 +105,7 @@ export default {
   },
   data() {
     return {
-      excludedIds: [1, 2, 3, 4, 5, 14, 21, 22, 23, 24, 25, 26, 27, 28],
+      excludedIds: [1, 2, 3, 4, 5, 14, 19, 21, 22, 23, 24, 25, 26, 27, 28, 46, 47, 48, 55],
       getLocationOptions: {
         enableHighAccuracy: true,
         timeout: 5000,

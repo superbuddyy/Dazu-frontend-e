@@ -220,7 +220,7 @@ export default {
       result.data.forEach((item, index) => {
         item.value = (item.value / 100).toFixed(2)
         if (item.name === 'avatar_video_url.price') {
-          this.avatarLimitMsg = `Adding or changing an avatar is paid - ${item.value}PLN for 30 days`
+          this.avatarLimitMsg = `Adding or changing an avatar is paid - ${item.value}£ for 30 days`
           this.avatarPrice = item.value
         }
       })

@@ -1,6 +1,6 @@
 <template>
   <div class="money">
-    {{ preparedMoney }} PLN
+    {{ preparedMoney }} £
   </div>
 </template>
 
