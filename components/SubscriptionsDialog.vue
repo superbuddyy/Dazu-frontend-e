@@ -68,11 +68,13 @@
 <script>
 import { buy, index } from '@/api/subscriptions'
 import SubscriptionsNew from '@/components/SubscriptionsNew'
+import { StripeCheckout } from '@vue-stripe/vue-stripe'
 
 export default {
   name: 'SubscriptionsDialog',
   components: {
-    SubscriptionsNew
+    SubscriptionsNew,
+    StripeCheckout
   },
   props: {
     visible: {
@@ -95,7 +97,7 @@ export default {
     gateway: null,
     paymentDialog: true,
     form: {},
-    isDialogNew: true
+    isDialogNew: true,
   }),
   mounted () {
     // this.getSubscriptions()
@@ -137,6 +139,7 @@ export default {
         })
         return
       }
+
       this.loading = true
       const formInput = this.form.subscriptions[this.selectedItem] ? { subscriptions: this.form.subscriptions[this.selectedItem], gateway: this.gateway } : { gateway: this.gateway }
       const result = await buy(this.selectedItem, this.offerSlug, formInput)
