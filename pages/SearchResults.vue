@@ -162,7 +162,9 @@ export default {
 
       this.filter = 1
       this.$router.replace('/szukaj')
-      this.searchOffers(1, this.sorting[this.filter])
+      this.$data.sorting[this.filter] = { order_by: 'created_at', order: 'DESC' }
+      const queryWithSearch = Object.assign(this.$data.sorting[this.filter], '')
+      this.searchOffers(1, queryWithSearch)
       this.refreshFilters = true
     },
     openSaveFilters () {
