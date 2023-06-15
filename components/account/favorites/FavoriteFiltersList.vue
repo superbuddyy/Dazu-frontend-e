@@ -42,11 +42,11 @@ export default {
     showFilterValue (key, value) {
       switch (key) {
         case 'category':
-          return 'Kategoria: ' + value
+          return 'Category: ' + value
         case 'typ':
-          return 'Typ: ' + value
+          return 'Type of ad: ' + value
         case 'na-raty':
-          return 'Na raty: ' + value
+          return 'Not needed: ' + value
         case 'location':
           if (value.display_name) { return 'Location: ' + decodeURIComponent(value.display_name) }
       }

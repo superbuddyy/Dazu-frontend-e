@@ -51,7 +51,7 @@
             Bills included
           </el-tag>
           <el-tag v-if="offer.is_per_month" type="info">
-            PLN/month
+            £/month
           </el-tag>
           <el-tag v-if="offer.is_free" type="info">
             Free

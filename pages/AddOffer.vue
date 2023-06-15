@@ -64,7 +64,8 @@ export default {
             return {label: sub.name, value: sub.slug, parent_value:category.slug, id: sub.id, offer_types: sub.offer_types ? sub.offer_types : []}
           })
           // return category
-          return { label: category.name, value: category.slug, id: category.id, options: children,offer_types: category.offer_types ? category.offer_types : [] }
+          if(children.length != 0) return { label: category.name, value: category.slug, id: category.id, options: children,offer_types: category.offer_types ? category.offer_types : [] }
+          return { label: category.name, value: category.slug, id: category.id, offer_types: category.offer_types ? category.offer_types : [] }
         })
       }
     }

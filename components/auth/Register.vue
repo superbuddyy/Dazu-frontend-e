@@ -104,6 +104,13 @@ export default {
         callback()
       }
     }
+    const validateCheckbox = (rule, value, callback) => {
+      if (value) {
+        callback();
+      } else {
+        callback(new Error('You must agree to the terms and conditions'));
+      }
+    }
     return {
       tos: false,
       registerForm: {
@@ -112,7 +119,7 @@ export default {
         email: '',
         password: '',
         rePassword: '',
-        tos: ''
+        tos: false
       },
       rules: {
         password: [
@@ -123,7 +130,7 @@ export default {
           { validator: validatePass2, trigger: 'blur' }
         ],
         tos: [
-          { required: true, message: 'Acceptance of the regulations is required', trigger: 'change' }
+          { required: true, validator: validateCheckbox, message: 'Acceptance of the regulations is required', trigger: 'change', type: 'boolean' }
         ],
         type: { required: true, message: 'Choose who you are?', trigger: 'change' },
         email: [

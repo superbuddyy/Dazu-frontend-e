@@ -11,13 +11,13 @@
           <div class="subscription-header">{{ item.name }}</div>
           <div class="bottom clearfix">
             <div class="price">
-              <span>{{ item.price / 100 }} <sup>zloty</sup></span>
+              <span>{{ item.price / 100 }} <sup>£</sup></span>
             </div>
-            <b>already {{ item.duration / 24 }} days</b>
+            <b>For {{ item.duration / 24 }} days</b>
           </div>
           <div class="list">
             <div class="list-item" v-if="item.number_of_raises !== 0">
-              <i class="el-icon-star-on" /> {{ item.number_of_raises}} free raises
+              <i class="el-icon-star-on" /> {{ item.number_of_raises}} free bumps
             </div>
             <div class="list-item">
               <i class="el-icon-star-on" /> {{ item.number_of_refreshes}} free refreshes

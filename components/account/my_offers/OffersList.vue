@@ -149,7 +149,7 @@
                 :disabled="offer.status=='in_active' || offer.status=='pending'"
                 @click="openRefreshPaymentDialog(offer.slug)"
               >
-                Refresh ({{ offer.subscriptions[0].refresh_price / 100 }} pln)
+                Refresh ({{ offer.subscriptions[0].refresh_price / 100 }} £)
               </el-button>
               <div class="promo-btn">
                 <el-tooltip :content="toolTipText(offer)" placement="top">
@@ -160,7 +160,7 @@
                     icon="el-icon-upload2"
                     @click="raiseUI(offer.slug, true)"
                   >
-                    Conquer
+                    Bump up
                   </el-button>
                   <el-button
                     v-else-if="offer.raise_price === 0"
@@ -169,7 +169,7 @@
                     icon="el-icon-upload2"
                     @click="raiseUI(offer.slug, false)"
                   >
-                    Conquer
+                    Bump up
                   </el-button>
                   <el-button
                     v-else-if="offer.raise_price !== 0"
@@ -178,7 +178,7 @@
                     icon="el-icon-upload2"
                     @click="openPaymentDialog(offer.slug)"
                   >
-                    Conquer
+                    Bump up
                   </el-button>
                 </el-tooltip>
               </div>
@@ -232,7 +232,7 @@
                 icon="el-icon-refresh-right"
                 @click="refreshUI(offer.slug)"
               >
-                Odśwież ({{ offer.refresh_price / 100 }} pln)
+                Odśwież ({{ offer.refresh_price / 100 }} £)
               </el-button>
               <el-button
                 v-if="offer.is_expired && offer.refresh_price !== 0"
@@ -240,7 +240,7 @@
                 icon="el-icon-refresh-right"
                 @click="openRefreshPaymentDialog(offer.slug)"
               >
-                Odśwież ({{ offer.refresh_price / 100 }} pln)
+                Odśwież ({{ offer.refresh_price / 100 }} £)
               </el-button> -->
               <el-button
                 v-if="offer.status === 'pending' && !offer.is_expired"
@@ -419,7 +419,7 @@ export default {
       if (offer.total_raises !== 0) {
         return '(' + offer.total_raises + ' raises)'
       } else {
-        return '(' + (offer.raise_price / 100) + ' pln)'
+        return '(' + (offer.raise_price / 100) + ' £)'
       }
     },
     changeOfferList () {

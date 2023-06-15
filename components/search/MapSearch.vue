@@ -60,7 +60,7 @@
           </el-select>
         </el-form-item>
         <div class="search">
-          <el-button @click="resetFilters">Wyczyść filtry</el-button>
+          <el-button @click="resetFilters">Clear filters</el-button>
           <el-button type="primary" @click="searchResults()">
             Search
           </el-button>
@@ -88,7 +88,7 @@
             <div class="attribute-filters">
               <div class="price">
                 <div class="label">
-                  Cena
+                  Price
                 </div>
                 <el-select v-model="search.price.min" placeholder="Minimal" filterable clearable>
                   <el-option
@@ -109,7 +109,7 @@
               </div>
               <div class="meters">
                 <div class="label">
-                  Yardage
+                  Sq.m
                 </div>
                 <el-select v-model="search['meter'].min" placeholder="Minimal" filterable clearable>
                   <el-option
@@ -309,7 +309,7 @@ export default {
   data () {
     return {
       lastOpen: null,
-      excludedIds: [1, 3, 4, 14],
+      excludedIds: [1, 2, 3, 4, 14, 19, 22, 23, 46, 47, 48, 55, 21, 5, 26, 27, 28 ,24, 25],
       saveFiltersVisible: false,
       active: '',
       advancedSearch: false,

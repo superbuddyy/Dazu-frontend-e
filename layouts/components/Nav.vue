@@ -58,7 +58,7 @@
             </nuxt-link>
             <nuxt-link v-if="user.isLogged" to="/moje-ogloszenia">
               <div class="nav-menu-item">
-                My Announcements  
+                My Ads  
               </div>
             </nuxt-link>
             <!-- <nuxt-link v-if="user.roles.includes('company')" to="/agenci">
@@ -115,7 +115,7 @@
                 Favorite
               </el-dropdown-item>
               <el-dropdown-item command="ads">
-                My Announcements
+                My Ads
               </el-dropdown-item>
               <el-dropdown-item
                 v-if="user.roles.includes('company')"

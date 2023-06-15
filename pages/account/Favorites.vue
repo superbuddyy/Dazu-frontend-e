@@ -4,13 +4,13 @@
       active="favorites"
     />
     <div class="favorite-submenu">
-      <el-button
+      <!-- <el-button
         :class="[ activePage === 'search' ? 'active sub-item' : 'sub-item' ]"
         :to="'/ogloszenia/'"
         @click="activePage = 'search'"
       >
         Saved searches
-      </el-button>
+      </el-button> -->
       <el-button
         :class="[ activePage === 'offers' ? 'active sub-item' : 'sub-item' ]"
         :to="'/ogloszenia/'"

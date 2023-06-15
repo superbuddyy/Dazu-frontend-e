@@ -15,7 +15,7 @@
           />
           <el-table-column
             prop="value"
-            label="Cena"
+            label="Price"
             width="100px"
           />
         </el-table>
@@ -48,7 +48,7 @@
             <el-input v-if="$store.state.user.roles.includes('company')" v-model="form.nip" placeholder="NIP" class="input" />
           </el-form>
         </div>
-        <h3>Addition: {{ (amount / 100).toFixed(2) }} pln</h3>
+        <h3>Addition: {{ (amount / 100).toFixed(2) }} £</h3>
         <div class="buttons">
           <nuxt-link v-if="$store.state.user.isLogged" :to="'/moje-ogloszenia/edytuj-ogloszenie/' + this.$route.params.slug">
             <el-button>
@@ -62,7 +62,7 @@
             icon="el-icon-sold-out"
             @click="paymentDialog = true"
           >
-            Zamaiam i płacę
+            I order and pay
           </el-button>
         </div>
       </div>
@@ -204,7 +204,7 @@ export default {
     prepareDetails (details) {
       const preparedDetails = []
       for (const detail in details) {
-        preparedDetails.push({ name: details[detail].name, value: (details[detail].value / 100) + ' pln', key: detail, price: details[detail].value })
+        preparedDetails.push({ name: details[detail].name, value: (details[detail].value / 100) + ' £', key: detail, price: details[detail].value })
       }
 
       return preparedDetails
@@ -218,7 +218,7 @@ export default {
       let tmpDetails = []
       tmpDetails = this.details.filter(item => !('additional' in item))
       if (obj.details.price !== 0) {
-        tmpDetails.push({ name: obj.details.name, price: obj.details.price, value: (obj.details.price / 100) + ' pln', additional: true, id: Math.random().toString(16).slice(2) })
+        tmpDetails.push({ name: obj.details.name, price: obj.details.price, value: (obj.details.price / 100) + ' £', additional: true, id: Math.random().toString(16).slice(2) })
         this.details = tmpDetails
         this.additionalAmount = 0
       } else {
@@ -227,35 +227,35 @@ export default {
       }
       this.details.forEach((item, i) => {
         if (item.key === 'pilne' && this.subForm.subscriptions[obj.selectedId].is_urgent) {
-          this.details[i].value = obj.details.urgent_price / 100 + ' pln'
+          this.details[i].value = obj.details.urgent_price / 100 + ' £'
           this.details[i].price = obj.details.urgent_price
         }
         if (item.key === 'pilne' && !this.subForm.subscriptions[obj.selectedId].is_urgent) {
           this.details.splice(i, 1)
         }
         if (item.key === 'okazja' && this.subForm.subscriptions[obj.selectedId].is_bargain) {
-          this.details[i].value = obj.details.bargain_price / 100 + ' pln'
+          this.details[i].value = obj.details.bargain_price / 100 + ' £'
           this.details[i].price = obj.details.bargain_price
         }
         if (item.key === 'okazja' && !this.subForm.subscriptions[obj.selectedId].is_bargain) {
           this.details.splice(i, 1)
         }
         if (item.key === 'podbicie_1' && this.subForm.subscriptions[obj.selectedId].has_raise_one) {
-          this.details[i].value = obj.details.raise_price / 100 + ' pln'
+          this.details[i].value = obj.details.raise_price / 100 + ' £'
           this.details[i].price = obj.details.raise_price
         }
         if (item.key === 'podbicie_1' && !this.subForm.subscriptions[obj.selectedId].has_raise_one) {
           this.details.splice(i, 1)
         }
         if (item.key === 'podbicie_3' && this.subForm.subscriptions[obj.selectedId].has_raise_three) {
-          this.details[i].value = obj.details.raise_price_three / 100 + ' pln'
+          this.details[i].value = obj.details.raise_price_three / 100 + ' £'
           this.details[i].price = obj.details.raise_price_three
         }
         if (item.key === 'podbicie_3' && !this.subForm.subscriptions[obj.selectedId].has_raise_three) {
           this.details.splice(i, 1)
         }
         if (item.key === 'podbicie_10' && this.subForm.subscriptions[obj.selectedId].has_raise_ten) {
-          this.details[i].value = obj.details.raise_price_ten / 100 + ' pln'
+          this.details[i].value = obj.details.raise_price_ten / 100 + ' £'
           this.details[i].price = obj.details.raise_price_ten
         }
         if (item.key === 'podbicie_10' && !this.subForm.subscriptions[obj.selectedId].has_raise_ten) {
@@ -266,7 +266,7 @@ export default {
         const f = {
           name: 'Pilne',
           price: obj.details.urgent_price,
-          value: (obj.details.urgent_price / 100) + ' pln',
+          value: (obj.details.urgent_price / 100) + ' £',
           id: Math.random().toString(16).slice(2),
           key: 'pilne'
         }
@@ -276,7 +276,7 @@ export default {
         const f = {
           name: 'Okazja',
           price: obj.details.bargain_price,
-          value: (obj.details.bargain_price / 100) + ' pln',
+          value: (obj.details.bargain_price / 100) + ' £',
           id: Math.random().toString(16).slice(2),
           key: 'okazja'
         }
@@ -286,7 +286,7 @@ export default {
         const f = {
           name: 'Podibicie',
           price: obj.details.raise_price,
-          value: (obj.details.raise_price / 100) + ' pln',
+          value: (obj.details.raise_price / 100) + ' £',
           id: Math.random().toString(16).slice(2),
           key: 'podbicie_1'
         }
@@ -296,7 +296,7 @@ export default {
         const f = {
           name: 'Podibicie x3',
           price: obj.details.raise_price_three,
-          value: (obj.details.raise_price_three / 100) + ' pln',
+          value: (obj.details.raise_price_three / 100) + ' £',
           id: Math.random().toString(16).slice(2),
           key: 'podbicie_3'
         }
@@ -306,7 +306,7 @@ export default {
         const f = {
           name: 'Podibicie x10',
           price: obj.details.raise_price_ten,
-          value: (obj.details.raise_price_ten / 100) + ' pln',
+          value: (obj.details.raise_price_ten / 100) + ' £',
           id: Math.random().toString(16).slice(2),
           key: 'podbicie_10'
         }
