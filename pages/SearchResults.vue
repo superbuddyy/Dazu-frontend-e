@@ -70,7 +70,7 @@
       :visible="saveFiltersVisible"
       @close="saveFiltersVisible = false"
     />
-    <div v-if="filtersVisible" class="search-popup">
+    <div v-show="filtersVisible" class="search-popup">
       <div class="popup-container">
         <div class="close-btn" @click="filtersVisible = false">
           <i class="el-icon-circle-close" />
