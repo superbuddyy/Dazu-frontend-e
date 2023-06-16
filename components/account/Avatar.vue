@@ -58,12 +58,12 @@
 <!--          </div>-->
 <!--        </el-button>-->
         <el-button>
-          <div class="tpay" @click="pay('tpay')">
+          <!-- <div class="tpay" @click="pay('tpay')">
             <img src="https://tpay.com/img/banners/tpay_logo_blue.svg" alt="">
             Tpay
-          </div>
+          </div> -->
           <div class="stripe" @click="pay('stripe')">
-            <img src="~/assets/stripe.svg" alt="">
+            <img src="~/assets/stripe.svg" alt="" width="50">
             Stripe
           </div>
         </el-button>
@@ -229,5 +229,11 @@ export default {
     .img {
       margin: 14px 0;
     }
+  }
+  .stripe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 </style>
