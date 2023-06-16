@@ -3,7 +3,7 @@
     <div class="box">
       <div class="info">
         <div class="container">
-          <h2>Dazu</h2>
+          <h2>Fliq</h2>
           <p>Real Estate Ads</p>
         </div>
       </div>
@@ -40,21 +40,6 @@
             </li>
           </ul>
           <ul>
-            <!-- <li>
-              <nuxt-link to="/">
-                O nas
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/">
-                Polityka prywatności
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/">
-                Regulamin
-              </nuxt-link>
-            </li> -->
             <li>
               <nuxt-link to="/kontakt">
                 Contact
@@ -81,10 +66,10 @@
     </div>
     <div class="bottom">
       <div class="left">
-        Dazu.pl
+        Fliq.pl
       </div>
       <div class="right">
-        All Right reserved Dazu.pl 2020
+        All Right reserved Fliq.pl 2020
       </div>
     </div>
     <Login
