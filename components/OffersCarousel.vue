@@ -175,10 +175,10 @@ export default {
   }
 
   .carousel-cell {
-    height: 592px;
-    width: 450px;
+    height: 460px;
+    width: 360px;
     padding: 10px;
-    max-width: 592px;
+    max-width: 460px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -201,7 +201,7 @@ export default {
     }
     
     .img {
-      height: 367px;
+      height: 235px;
       width: 100%;
       background-size: cover;
       background-position: center;
@@ -301,6 +301,7 @@ export default {
         .user-name-company {
           display:flex;
           flex-direction: column;
+          justify-content: center;
           margin-left: 10px;
           .user-name {
             font-weight: bold;

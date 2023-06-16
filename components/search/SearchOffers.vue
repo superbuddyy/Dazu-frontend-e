@@ -6,44 +6,48 @@
       </div>
       <div v-for="offer in offers" :key="offer.id" class="offer margin-box carousel-cell urgent_l offer_l" :class="[ ( offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')) ? 'featured_l' : '' ]">
         <div class="content">
-          <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer">
-            <span class="featured_img_label" v-if="offer.subscriptions.length && (offer.subscriptions[0]['name'] === 'Srebrne' || offer.subscriptions[0]['name'] === 'Złote')">
-              <img src="~/assets/Star.svg" style="width: 24px;">
+          <nuxt-link :to="'/ogloszenia/' + offer.slug" class="offer-link">
+            <span class="featured_img_label">
+              <el-button v-if="offer.type" class="badge button_offer_type" size="mini">{{offer.type}}</el-button>
             </span>
-            <span v-if="offer.is_promoted" class="promoted-label img-label offer_label">Opportunity</span>
-            <span v-if="offer.is_urgent" class="promoted-label img-label urgent_label">Urgent</span>
             <div v-if="offer.main_photo" class="img" :style="{backgroundImage: 'url(' + $store.state.settings.assetUrl + '/' + offer.main_photo.file.path_name + ')'}">
             </div>
-            <div v-if="offer.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}" />
-            <div class="description">
-              {{ offer.title }}
+            <div v-if="offer.main_photo === null" class="img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}">
             </div>
             <div class="info">
-              <div class="price">
+              <div class="price-and-badge">
                 <Money
                   :money="offer.price"
                 />
+                <el-button v-if="offer.is_with_bills" class="badge button_bill_included" size="mini">Bills included</el-button>
+                <!-- <span v-if="offer.is_promoted" class="badge">Opportunity</span> -->
+                
+                <el-button v-if="offer.is_urgent" class="badge button_urgent" size="mini">Urgent</el-button>
               </div>
-              <div class="type">
-                {{ offer.type }}
+              <div class="description">
+                {{offer.title}}
               </div>
-              <div v-if="offer.is_with_bills" class="badge">
-                Bills included
+              <div class="location">
+                {{ offer.location_name }}
               </div>
             </div>
           </nuxt-link>
-        </div>
-        <div class="bottom">
-          <div class="location">
-            {{ offer.location_name }}
+          <div class="bottom">
+            <div class="user-info">
+              <div class="user-img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}"></div>
+              <div class="user-name-company">
+                <p class="user-name">{{offer.user_name}}</p>
+                <p class="user-company">company</p>
+              </div>
+            </div>
+            <Favorite
+              :offer-slug="offer.slug"
+              :is-favorite="offer.is_favorite"
+              @add-favorite="setFavorite"
+              @remove-favorite="removeFavorite"
+              @refresh="update"
+            />
           </div>
-          <Favorite
-            v-if="$store.state.user.isLogged"
-            :offer-slug="offer.slug"
-            :is-favorite="offer.is_favorite"
-            @add-favorite="setFavorite"
-            @remove-favorite="removeFavorite"
-          />
         </div>
       </div>
     </div>
@@ -147,7 +151,8 @@ export default {
     }
 
     .offer {
-      max-width: 320px;
+      max-width: 360px;
+      width: 360px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -155,15 +160,18 @@ export default {
       text-decoration: none;
       color: #000000;
       position: relative;
-
+      border: 1px solid #f1f1f1!important;
+      &:hover {
+        border: 2px solid #f1f1f1!important;
+      }
       .bargain {
         position: absolute;
         top: 0;
       }
 
       .img {
-        height: 200px;
-        width: 300px;
+        height: 235px;
+        width: 100%;
         background-size: cover;
         background-position: center;
         position: relative;
@@ -197,34 +205,67 @@ export default {
         margin: 4px 0;
       }
       .info {
+        color: #000000;
         display: flex;
+        flex-direction: column;
         justify-content: space-around;
-        align-items: center;
+        align-items: left;
         margin: 10px 0 0 0;
-        .type, .price {
+        .type, .price-and-badge {
           font-weight: bold;
           text-transform: uppercase;
+          display: flex;
         }
-        .badge {
-          text-align: center;
-          border-radius: 14px;
-          background: #f5f5f5;
-          padding: 4px 6px;
-          font-size: 13px;
-          text-transform: lowercase;
-        }
+      }
+      .badge {
+        color: white;
+        font-weight: 500;
+        /* font-family: sans-serif; */
+        padding: 4px 8px;
+        margin-left: 10px;
+      }
+      .button_urgent {
+        background-color: #F50000;
+        
+      }
+      .button_bill_included {
+        background-color: #000000;
+      }
+      .button_offer_type {
+        background-color: #000000;
       }
       .bottom {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-top: 10px;
+        text-align: left;
+        width: 100%;
+        .user-info {
+          display: flex;
+          .user-img {
+            width: 78px;
+            height: 78px;
+            background-size: 100% auto;
+          }
+          .user-name-company {
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 10px;
+            .user-name {
+              font-weight: bold;
+              font-family: 'Inconsolata';
+            }
+          }
+        }
         .location {
-          font-weight: bold;
-          font-size: 13px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          font-family: 'Inconsolata';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 17px;
+          line-height: 21px;
+          color: #555555;
         }
       }
     }
