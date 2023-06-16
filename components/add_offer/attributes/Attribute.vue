@@ -48,7 +48,7 @@
     <el-checkbox-group
       v-if="type === 'checkbox_group'"
       v-model="local_value"
-      :style="direction === 'row' ? {display: 'flex'}: {}"
+      :style="direction === 'row' ? {display: 'flex', width: '60%', flexWrap: 'wrap'}: {}"
     >
       <div
         v-for="option in options"

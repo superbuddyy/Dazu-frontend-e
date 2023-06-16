@@ -1956,4 +1956,7 @@ export default {
     color: #F56C6C;
   }
 }
+.energy-check-group {
+  width: 60%;
+}
 </style>
