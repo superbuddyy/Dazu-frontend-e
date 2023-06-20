@@ -36,7 +36,7 @@
             <div class="user-img" :style="{backgroundImage: 'url(https://yko.im/mpWr.png)'}"></div>
             <div class="user-name-company">
               <p class="user-name">{{offer.user_name}}</p>
-              <p class="user-company">company</p>
+              <p class="user-company">{{offer.user_company ? offer.user_comapny : ""}}</p>
             </div>
           </div>
           <Favorite
@@ -142,6 +142,7 @@ export default {
       const result = await index()
       if (result.status === 200) {
         this.offers = result.data.data
+        console.log(this.offers)
         this.loading = false
       }
     },
