@@ -239,11 +239,10 @@
           <Attribute
             :name="''"
             :slug="''"
-            :value="form.attributes[36]"
             :options="form.genderOption"
             type="radio_group"
             :direction="'row'"
-            @set-value="form.attributes[48] = $event"
+            @set-value="setAvailableGender($event)"
           />
         </div>
         <el-row>
@@ -1155,7 +1154,7 @@ export default {
     }
   },
   updated() {
-    console.log(this.form)
+    console.log(this.form.attributes[48])
   },
   computed: {
     mapStyle () {
@@ -1287,6 +1286,15 @@ export default {
 
   },
   methods: {
+    setAvailableGender(e) {
+      const gender = ['any', 'female', 'male'];
+      console.log(gender[e])
+      if( gender.includes(this.form.attributes[48][0])) {
+        this.form.attributes[48].splice(0, 1)
+        this.form.attributes[48] = [gender[e], ...this.form.attributes[48]]
+      }
+      else this.form.attributes[48] = [gender[e], ...this.form.attributes[48]]
+    },
     showExtraCheckGroup() {
       console.log(this.addOfferForm.type)
       if( this.addOfferForm.type == 'sell') {
